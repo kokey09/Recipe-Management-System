@@ -12,13 +12,13 @@
     {% block title %}Recipes display{% endblock %}
     {% block content %}
 
-      <div class="logo-link">
+    <div class="logo-link">
          <img src="{{ url_for('static', filename='img-db/recipes.png') }}" alt="Your Logo" style="width: 200px; height: 80px;" >
     </div>
 
-        <input type="text" id="searchInput" class="search-bar" placeholder="Search Recipe">
+    <input type="text" id="searchInput" class="search-bar" placeholder="Search Recipe">
 
-  <ul class="recipe-list">
+    <ul class="recipe-list">
             {% for recipe in recipes %}
             <li class="recipe-card">
                     <img src="{{ recipe.image_url }}" alt="{{ recipe.name }} Image" style="width: 298px; height: 270px;" loading="lazy">
@@ -28,7 +28,7 @@
                     </div>
             </li>
             {% endfor %}
-        </ul>
+    </ul>
 
     {% endblock %}
 </body>

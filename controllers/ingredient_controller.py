@@ -24,7 +24,13 @@ def ingredients():
 @ingredient_controller_bp.route('/ingredient_display')
 def ingredient_display():
     ingredients = Ingredient.query.all()
-    return render_template('ingredient_display.html', ingredients=ingredients)
+
+    user = None
+    if 'user_id' in session:
+        user_id = session['user_id']
+        user = Account.query.get(user_id)
+
+    return render_template('ingredient_display.html', ingredients=ingredients,user=user)
 
 @ingredient_controller_bp.route('/add-ingredient', methods=['POST'])
 def add_ingredient():
@@ -74,8 +80,11 @@ def recipe_display():
     else:
         # If no ingredient is selected, show all recipes
         recipes = Recipe.query.all()
-
-    return render_template('recipe_display.html', recipes=recipes,ingredients=ingredients)
+    user = None
+    if 'user_id' in session:
+        user_id = session['user_id']
+        user = Account.query.get(user_id)
+    return render_template('recipe_display.html', recipes=recipes,ingredients=ingredients,user=user)
 
 @ingredient_controller_bp.route('/')
 def user_page():
@@ -87,10 +96,13 @@ def user_page():
         user_id = session['user_id']
         user = Account.query.get(user_id)
 
-    accounts = Account.query.all()
-    return render_template('/user_page.html', recipes=recipes, ingredients=ingredients, accounts=accounts, user=user)
+    return render_template('/user_page.html', recipes=recipes, ingredients=ingredients,  user=user)
 
 @ingredient_controller_bp.route('/about_us')
 def about_us():
     ingredients = Ingredient.query.all()
-    return render_template('about_us.html',ingredients=ingredients)
+    user = None
+    if 'user_id' in session:
+        user_id = session['user_id']
+        user = Account.query.get(user_id)
+    return render_template('about_us.html',ingredients=ingredients, user=user)

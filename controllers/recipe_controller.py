@@ -4,6 +4,7 @@ import os
 
 from models.recipe import Recipe
 from models.ingredient import Ingredient
+from models.account import Account
 from models.recipe_ingredient import RecipeIngredient
 
 
@@ -93,11 +94,17 @@ def edit_recipe(id):
 def recipe_instruction():
     recipe_name = request.args.get('recipe_name', None)
     ingredients = Ingredient.query.all()
+    user = None
+    if 'user_id' in session:
+        user_id = session['user_id']
+        user = Account.query.get(user_id)
+
     if recipe_name:
         # Filter recipes by the selected recipe name
         recipes = Recipe.query.join(Recipe.recipe_ingredients).join(RecipeIngredient.ingredient).filter(
             Recipe.name == recipe_name).all()
+
         if recipes:
-            return render_template('recipe_instruction.html', recipes=recipes,ingredients=ingredients)
+            return render_template('recipe_instruction.html', recipes=recipes,ingredients=ingredients, user=user)
 
     return "Recipe not found", 404  # Handle the case where the recipe name is not found

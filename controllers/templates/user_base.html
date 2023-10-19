@@ -22,11 +22,11 @@
                     <a href="/ingredient_display">View All</a>
             </div>
         </div>
-
         <li><a href="about_us" id="about-us-link">About Us</a></li>
-        <li><a href="/login" id="login-link">Login</a></li>
-        <li><a href="/register" id="registration-link">Registration</a></li>
-        {% if user %}
+        {% if not user %}
+            <li><a href="/login" id="login-link">Login</a></li>
+            <li><a href="/register" id="registration-link">Registration</a></li>
+        {% else %}
             <li>Hi {{ user.username }}</li>
             <li><a href="{{ url_for('account_controller.logout') }}" onclick="return confirm('Are you sure you want to log out?')">Logout</a></li>
         {% endif %}
