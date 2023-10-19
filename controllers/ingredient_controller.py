@@ -1,7 +1,8 @@
-from flask import  render_template, request, redirect, url_for,  Blueprint
+from flask import  render_template, request, redirect, url_for,  Blueprint,session,flash
 from models.recipe_ingredient import RecipeIngredient
 from models.recipe import Recipe
 from models.ingredient import Ingredient
+from models.account import Account
 
 from models.ingredient import db
 
@@ -12,8 +13,13 @@ ingredient_controller_bp = Blueprint('ingredient_controller', __name__, template
 
 @ingredient_controller_bp.route('/ingredients')
 def ingredients():
-    ingredients_data = Ingredient.query.all()
-    return render_template('ingredients.html', ingredients=ingredients_data)
+    if 'user_id' in session:
+        ingredients_data = Ingredient.query.all()
+        return render_template('ingredients.html', ingredients=ingredients_data)
+    else:
+        flash('Please log in to access ingredients.','error')
+        return redirect(url_for('account_controller.login'))
+
 
 @ingredient_controller_bp.route('/ingredient_display')
 def ingredient_display():
@@ -75,7 +81,14 @@ def recipe_display():
 def user_page():
     ingredients = Ingredient.query.all()
     recipes = Recipe.query.all()
-    return render_template('/user_page.html', recipes = recipes,ingredients=ingredients)
+    # Check if the user is logged in
+    user = None
+    if 'user_id' in session:
+        user_id = session['user_id']
+        user = Account.query.get(user_id)
+
+    accounts = Account.query.all()
+    return render_template('/user_page.html', recipes=recipes, ingredients=ingredients, accounts=accounts, user=user)
 
 @ingredient_controller_bp.route('/about_us')
 def about_us():

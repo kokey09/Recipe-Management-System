@@ -26,6 +26,10 @@ body {
     text-align: center;
     margin-bottom: 20px;
 }
+.sidebar h3 {
+    text-align: center;
+    margin-bottom: 20px;
+}
 
 .sidebar ul {
     list-style-type: none;

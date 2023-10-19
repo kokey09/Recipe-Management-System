@@ -1,4 +1,4 @@
-from flask import  render_template, request, redirect, url_for, Blueprint,current_app
+from flask import  render_template, request, redirect, url_for, Blueprint,current_app,session,flash
 from werkzeug.utils import secure_filename
 import os
 
@@ -15,8 +15,13 @@ recipe_controller_bp = Blueprint('recipe_controller',__name__,template_folder='t
 
 @recipe_controller_bp.route('/recipes')
 def recipes():
-    recipes_data = Recipe.query.all()
-    return render_template('recipes.html', recipes=recipes_data)
+    if 'user_id' in session:
+        recipes_data = Recipe.query.all()
+        return render_template('recipes.html', recipes=recipes_data)
+    else:
+        flash('Please log in to access recipes.','error')
+        return redirect(url_for('account_controller.login'))
+
 
 @recipe_controller_bp.route('/add_recipe', methods=['POST'])
 def add_recipe():

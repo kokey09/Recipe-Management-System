@@ -9,8 +9,13 @@ bcrypt = Bcrypt()
 
 @account_controller_bp.route('/accounts')
 def accounts():
-    accounts_data = Account.query.all()
-    return render_template('accounts.html', accounts=accounts_data)
+    if 'user_id' in session:
+        accounts_data = Account.query.all()
+        return render_template('accounts.html', accounts=accounts_data)
+    else:
+        flash('Please log in to access accounts.','error')
+        return redirect(url_for('account_controller.login'))
+
 
 @account_controller_bp.route('/delete_account/<int:account_id>', methods=['POST'])
 def delete_account(account_id):
@@ -49,12 +54,12 @@ def dashboard():
         user_id = session['user_id']
         user = Account.query.get(user_id)
         if user.type == 'admin':
-            return render_template('dashboard.html')
+            return render_template('dashboard.html',user=user)
         else:
             flash('You do not have access to the dashboard')
             return redirect(url_for('user_page'))
     else:
-        flash('Please log in to access the dashboard')
+        flash('Please log in to access the dashboard','error')
         return redirect(url_for('account_controller.login'))
 
 
@@ -71,7 +76,6 @@ def login():
 
         if user and bcrypt.check_password_hash(user.password, entered_password):
             session['user_id'] = user.id
-            flash('Login successful!')
 
             if user.type == 'admin':
                 return redirect(url_for('account_controller.dashboard'))
@@ -86,27 +90,7 @@ def login():
 def logout():
     if 'user_id' in session:
         session.pop('user_id', None)  # Remove the 'user_id' key from the session
-        flash('You have been logged out', 'success')
     return redirect(url_for('ingredient_controller.user_page'))
-
-
-@account_controller_bp.before_request
-def check_user_auth():
-    if request.endpoint == 'dashboard' and 'user_id' not in session:
-        flash('You need to log in first.', 'error')
-        return redirect(url_for('login'))
-    elif request.endpoint == 'accounts' and 'user_id' not in session:
-        flash('You need to log in first to access accounts.', 'error')
-        return redirect(url_for('login'))
-    elif request.endpoint == 'ingredients' and 'user_id' not in session:
-        flash('You need to log in first to access accounts.', 'error')
-        return redirect(url_for('login'))
-    elif request.endpoint == 'recipes' and 'user_id' not in session:
-        flash('You need to log in first to access accounts.', 'error')
-        return redirect(url_for('login'))
-    elif request.endpoint == 'recipe_ingredients' and 'user_id' not in session:
-        flash('You need to log in first to access accounts.', 'error')
-        return redirect(url_for('login'))
 
 
 @account_controller_bp.after_request

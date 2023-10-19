@@ -13,6 +13,9 @@
             <img src="{{ url_for('static', filename='img-db/recipes.png') }}" alt="Your Logo" style="width: 200px; height: 80px;">
 
         <h1><a href="/dashboard" title="go back to dashboard">Dashboard</a></h1>
+        {% if user %}
+            <h3>Hi {{ user.username }}</h3>
+        {% endif %}
         <details id="ingredients-details">
             <summary>Ingredients management</summary>
             <ul>
