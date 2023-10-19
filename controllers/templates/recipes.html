@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Recipes</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='CSS/recipe.css') }}">
+    <link rel="icon" href="{{ url_for('static', filename='img-db/recipes.png') }}" type="image/x-icon">
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="{{ url_for('static', filename='js/recipes_delete.js') }}"></script>
+</head>
+<body>
+    {% extends 'base.html' %}
+
+    {% block title %}Recipes{% endblock %}
+
+    {% block content %}
+    <fieldset>
+        <legend><h1>Recipes</h1></legend>
+        <form method="POST" action="/add_recipe" enctype="multipart/form-data">
+            <!-- Form for adding a new recipe -->
+            <label for="recipe_name">Name:</label>
+            <input type="text" id="recipe_name" name="recipe_name" required>
+
+            <label for="instructions">Instructions:</label>
+            <textarea id="instructions" name="instructions" rows="4" required></textarea>
+
+             <label for="image_file">Image File:</label>
+             <input type="file" id="image_file" name="image_file" accept="image/*" required>
+
+            <button type="submit">Add Recipe</button>
+        </form>
+
+        <table class="recipes-table">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Instructions</th>
+                    <th>Image</th> <!-- Add a new column for the image -->
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for recipe in recipes %}
+                <tr>
+                    <td>{{ recipe.recipe_id }}</td>
+                    <td>{{ recipe.name }}</td>
+                    <td>{{ recipe.instructions }}</td>
+                    <td>
+                        <img src="{{ recipe.image_url }}" alt="{{ recipe.name }} Image" style="width: 100px; height: 100px;">
+                    </td>
+                    <td>
+                        <button class="btn btn-danger delete-button" title="Delete Recipe" data-recipe-id="{{ recipe.recipe_id }}">Delete</button>
+                        <a href="/edit_recipe/{{ recipe.recipe_id }}" class="btn edit-button">Edit</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </fieldset>
+    {% endblock %}
+
+</body>
+</html>
+
+
+

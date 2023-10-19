@@ -1,0 +1,54 @@
+/* Style for the "Edit Recipe" form */
+form {
+    margin: 20px auto;
+    max-width: 400px;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: #f9f9f9;
+    box-shadow: 0px 0px 10px #ccc; /* Add a subtle box shadow for better visual separation */
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+input[type="text"],
+textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+button[type="submit"] {
+    background-color: #5bc0de; /* Button background color */
+    color: #fff; /* Text color */
+    border: none;
+    padding: 10px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+button[type="submit"]:hover {
+    background-color: #46b8da; /* Darker blue on hover */
+}
+
+.button-link {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #c9302c; /* Button background color */
+    color: #fff; /* Text color */
+    text-decoration: none; /* Remove underline on the link */
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-top: 10px; /* Add a top margin for spacing */
+}
+
+.button-link:hover {
+    background-color: #ffcccb; /* Darker red on hover */
+    color: #fff; /* Text color on hover */
+}

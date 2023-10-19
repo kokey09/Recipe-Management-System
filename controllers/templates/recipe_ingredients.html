@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Recipe and Ingredients</title>
+  <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/recipe_ingredients.css') }}">
+    <link rel="icon" href="{{ url_for('static', filename='img-db/recipes.png') }}" type="image/x-icon">
+
+      <script src="{{ url_for('static', filename='js/recipe_ingredients_delete.js') }}"></script>
+
+</head>
+<body>
+  {% extends 'base.html' %}
+  {% block title %}Recipe and Ingredients{% endblock %}
+  {% block content %}
+
+  <div class="container">
+    <h1>Recipe and Ingredients</h1>
+    <table class="recipe-ingredient-table">
+      <thead>
+        <tr>
+          <th>Recipe Name</th>
+          <th>Recipe Image</th>
+          <th>Recipe ID</th>
+          <th>Ingredient Name</th>
+          <th>Ingredient ID</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+ <tbody>
+  {% for recipe_ingredient in recipe_ingredients|sort(attribute='ingredient.ingredient_id') %}
+  <tr>
+    <td>{{ recipe_ingredient.recipe.name }}</td>
+    <td><img src="{{ recipe_ingredient.recipe.image_url }}" alt="{{ recipe_ingredient.recipe.name }} Image" style="width: 100px; height: 100px;"></td>
+    <td>{{ recipe_ingredient.recipe.recipe_id }}</td>
+    <td>{{ recipe_ingredient.ingredient.name }}</td>
+    <td>{{ recipe_ingredient.ingredient.ingredient_id }}</td>
+    <td>
+      <form method="POST" action="/disconnect_recipe_ingredient/{{ recipe_ingredient.recipe.recipe_id }}/{{ recipe_ingredient.ingredient.ingredient_id }}" onsubmit="return confirmDisconnect();">
+        <input type="hidden" name="recipe_id" value="{{ recipe_ingredient.recipe.recipe_id }}">
+        <input type="hidden" name="ingredient_id" value="{{ recipe_ingredient.ingredient.ingredient_id }}">
+        <button type="submit" class="disconnect-button">Disconnect</button>
+      </form>
+    </td>
+  </tr>
+  {% endfor %}
+</tbody>
+    </table>
+
+    <fieldset class="connect-form-container">
+      <legend>Connect Recipe and Ingredient</legend>
+      <form method="POST" action="/connect_recipe_ingredient">
+        <label for="recipe_id">Select Recipe:</label>
+        <select id="recipe_id" name="recipe_id">
+          {% for recipe in recipes %}
+          <option value="{{ recipe.recipe_id }}">{{ recipe.name }}</option>
+          {% endfor %}
+        </select>
+
+        <label for="ingredient_id">Select Ingredient:</label>
+        <select id="ingredient_id" name="ingredient_id">
+          {% for ingredient in ingredients %}
+          <option value="{{ ingredient.ingredient_id }}">{{ ingredient.name }}</option>
+          {% endfor %}
+        </select>
+
+        <button type="submit">Connect</button>
+      </form>
+    </fieldset>
+  </div>
+  {% endblock %}
+</body>
+</html>
+
+

@@ -1,0 +1,145 @@
+.recipes-table { /* Correct class name here */
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+.recipes-table th,
+.recipes-table td {
+    padding: 10px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+.recipes-table th {
+    background-color: #f5f5f5;
+    font-weight: bold;
+}
+
+.recipes-table tbody tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+.recipes-table .btn { /* Correct class name here */
+    padding: 5px 10px;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.recipes-table .btn.delete-button { /* Correct class name here */
+    background-color: #ff6b6b;
+    color: #fff;
+}
+
+.recipes-table .btn.edit-button { /* Correct class name here */
+    background-color: #007bff;
+    color: #fff;
+}
+
+.recipes-table .btn:hover {
+    filter: brightness(1.2);
+}
+
+
+
+form {
+    margin: 20px auto;
+    max-width: 400px;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: #f9f9f9;
+}
+
+
+label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+input[type="text"],
+textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+button[type="submit"] {
+    background-color: #5bc0de; /* Button background color */
+    color: #fff; /* Text color */
+    border: none;
+    padding: 10px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+button[type="submit"]:hover {
+    background-color: #46b8da; /* Darker blue on hover */
+}
+/* Style table header row */
+
+/* Add your CSS links or styles here */
+/* ... */
+
+.recipes-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+.recipes-table th,
+.recipes-table td {
+    padding: 10px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+.recipes-table th {
+    background-color: #f5f5f5;
+    font-weight: bold;
+}
+
+.recipes-table tbody tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+.recipes-table .btn {
+    padding: 5px 10px;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    display: inline-block;
+}
+
+.recipes-table .btn.delete-button {
+    background-color: #ff6b6b;
+    color: #fff;
+}
+
+.recipes-table .btn.edit-button {
+    background-color: #007bff;
+    color: #fff;
+}
+
+.recipes-table .btn:hover {
+    filter: brightness(1.2);
+}
+
+/* Add some padding and max-width to the table cells containing the description */
+.recipes-table td:nth-child(3) {
+    padding-right: 20px; /* Add more padding to the right side */
+    max-width: 300px; /* Set a maximum width for the cell */
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* Adjust the ellipsis behavior for longer text */
+.recipes-table td:nth-child(3) div {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}

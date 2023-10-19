@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Account Table</title>
+    <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='css/account.css')}}">
+    <link rel="icon" href="{{ url_for('static', filename='img-db/recipes.png') }}" type="image/x-icon">
+
+    <script src="{{ url_for('static', filename='js/account_delete.js') }}"></script>
+</head>
+<body>
+{% extends 'base.html' %}
+{% block title %}Account{% endblock %}
+{% block content %}
+<fieldset>
+    <legend><h1>Account Table</h1></legend>
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Username</th>
+                <th>Password</th>
+                <th>Email</th>
+                <th>Type</th>
+                <th>Date Created</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for account in accounts %}
+            <tr>
+                <td>{{ account.id }}</td>
+                <td>{{ account.username }}</td>
+                <td>{{ account.password }}</td>
+                <td>{{ account.email }}</td>
+                <td>{{ account.type }}</td>
+                <td>{{ account.date_created.strftime('%Y-%m-%d %H:%M:%S') }}</td>
+                <td>
+                    <button type="button" class="delete-button" title="Delete Account" data-account-id="{{ account.id }}">Delete</button>
+                    <a href="/edit_account/{{ account.id }}" class="edit-button">Edit</a>
+                </td>
+
+            </tr>
+            {% endfor %}
+        </tbody>
+
+    </table>
+</fieldset>
+{% endblock %}
+
+</body>
+</html>
+
+
+

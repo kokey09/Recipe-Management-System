@@ -1,0 +1,104 @@
+/* Reset some default styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f5f5f5;
+}
+
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+  font-size: 24px;
+  color: #007bff;
+  margin-bottom: 20px;
+}
+
+.recipe-ingredient-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 20px;
+}
+
+.recipe-ingredient-table th,
+.recipe-ingredient-table td {
+  padding: 10px;
+  text-align: left;
+  border-bottom: 1px solid #ccc;
+}
+
+.recipe-ingredient-table th {
+  background-color: #f9f9f9;
+}
+
+.recipe-ingredient-table tbody tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+.disconnect-button {
+  background-color: #ff4136;
+  color: #fff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.disconnect-button:hover {
+  background-color: #d63230;
+}
+
+.connect-form-container {
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 20px;
+}
+
+.connect-form-container legend {
+  font-size: 20px;
+  font-weight: bold;
+  color: #007bff;
+}
+
+.connect-form-container form {
+  display: flex;
+  flex-direction: column;
+}
+
+.connect-form-container label {
+  margin-bottom: 10px;
+  font-weight: bold;
+}
+
+.connect-form-container select {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  margin-bottom: 15px;
+}
+
+.connect-form-container button {
+  background-color: #007bff;
+  color: #fff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.connect-form-container button:hover {
+  background-color: #0056b3;
+}

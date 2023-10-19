@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Recipe List</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/recipe_instruction.css') }}">
+    <link rel="icon" href="{{ url_for('static', filename='img-db/recipes.png') }}" type="image/x-icon">
+</head>
+<body>
+    {% extends 'user_base.html' %}
+    {% block title %}Recipe Instruction{% endblock %}
+    {% block content %}
+
+      <div class="logo-link">
+         <img src="{{ url_for('static', filename='img-db/recipes.png') }}" alt="Your Logo" style="width: 200px; height: 80px;" >
+    </div>
+    <div class="recipe-list">
+
+        <ul>
+            {% for recipe in recipes %}
+                <li class="recipe-item">
+                    <h2>{{ recipe.name }}</h2>
+                <img src="{{ recipe.image_url }}" alt="{{ recipe.name }} Image" style="width: 298px; height: 270px;">
+                <td><pre>{{ recipe.instructions }}</pre></td>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+
+    {% endblock %}
+</body>
+</html>
+
+
+
+
+
+

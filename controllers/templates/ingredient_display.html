@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Ingredients display</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/ingredient_display.css') }}">
+    <link rel="icon" href="{{ url_for('static', filename='img-db/recipes.png') }}" type="image/x-icon">
+
+    <script src="{{ url_for('static', filename='js/user_base.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/search.js') }}"></script>
+</head>
+<body>
+    {% extends 'user_base.html' %}
+    {% block title %}Ingredients user page{% endblock %}
+    {% block content %}
+        <div class="logo-link">
+            <img src="{{ url_for('static', filename='img-db/recipes.png') }}" alt="Your Logo" style="width: 200px; height: 80px;" >
+        </div>
+        <input type="text" id="searchInput" class="search-bar" placeholder="Search Recipe...">
+
+        <ul class="ingredients-list">
+            {% for ingredient in ingredients | sort(attribute='name') %}
+                <li>
+                    <a href="{{ url_for('ingredient_controller.recipe_display', ingredient=ingredient.name) }}">{{ ingredient.name }}</a>
+                </li>
+            {% endfor %}
+        </ul>
+    {% endblock %}
+</body>
+</html>
+
+

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>About Us</title>
+    <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='css/about.css')}}">
+    <link rel="icon" href="{{ url_for('static', filename='img-db/recipes.png') }}" type="image/x-icon">
+
+</head>
+<body>
+  {% extends 'user_base.html' %}
+  {% block title %}About Us{% endblock %}
+  {% block content %}
+
+    <main>
+        <h1>About Us</h1>
+        <p>Welcome to our recipe and ingredient discovery platform! We're here to help you make the most of what's in your kitchen and satisfy your culinary curiosity.</p>
+        <p>Have you ever found yourself staring at the contents of your refrigerator or pantry, unsure of what to cook with the ingredients you have on hand? That's where we come in.</p>
+        <p>Our mission is to assist you in finding delicious recipes that you can prepare using the ingredients you already have. No need for a special trip to the grocery store – simply tell us what you have, and we'll suggest recipes you can create.</p>
+        <p>Whether you're a seasoned chef or just starting in the kitchen, our platform is designed to inspire your culinary creativity and simplify meal planning. We believe that great meals can be made with what you have, and we're here to prove it.</p>
+        <p>Explore our collection of recipes, discover new flavors, and make the most of your ingredients. We're excited to be part of your culinary journey!</p>
+    </main>
+
+    <footer>
+        <p>&copy; 2023 Recipe Discovery Platform</p>
+    </footer>
+
+ {% endblock %}
+</body>
+</html>

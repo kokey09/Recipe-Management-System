@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Ingredients</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='CSS/ingredients.css') }}">
+    <link rel="icon" href="{{ url_for('static', filename='img-db/recipes.png') }}" type="image/x-icon">
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="{{ url_for('static', filename='js/ingredients_delete.js') }}"></script>
+
+
+
+</head>
+<body>
+    {% extends 'base.html' %}
+        {% block title %}Ingredients{% endblock %}
+        {% block content %}
+    <fieldset>
+    <legend><h1>Ingredients</h1></legend>
+       <form method="POST" action="add-ingredient">
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" required>
+
+        <label for="description">Description:</label>
+        <textarea id="description" name="description" rows="4" required></textarea>
+
+        <button type="submit">Add Ingredient</button>
+    </form>
+  <table class="ingredients-table">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Actions</th> <!-- Add a header for the buttons -->
+        </tr>
+    </thead>
+    <tbody>
+        {% for ingredient in ingredients %}
+        <tr>
+            <td>{{ ingredient.ingredient_id }}</td>
+            <td>{{ ingredient.name }}</td>
+            <td>{{ ingredient.description }}</td>
+            <td>
+                <button type="button" class="btn btn-danger delete-button" title="Delete Content" data-ingredient-id="{{ ingredient.ingredient_id }}">Delete</button>
+                <a href="/edit_ingredient/{{ ingredient.ingredient_id }}" class="btn edit-button">Edit</a>
+            </td>
+
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+    </fieldset>
+
+    {% endblock %}
+</body>
+</html>
+
+
+

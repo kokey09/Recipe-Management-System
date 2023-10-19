@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}HomePage{% endblock %}</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/user_page.css')}}">
+    <link rel="icon" href="{{ url_for('static', filename='img-db/recipes.png') }}" type="image/x-icon">
+    <script src="{{ url_for('static', filename='js/search.js') }}"></script>
+
+
+</head>
+<body>
+<nav>
+    <ul>
+        <a href="/" id="home-link" title="Home Page"> <img src="{{ url_for('static', filename='img-db/recipes.png') }}" alt="Your Logo" style="width: 100px; height: 40px;"></a>
+        <div class="dropdown">
+            <a href="/ingredient_display" id="ingredients-link">Ingredients</a>
+            <div class="dropdown-content">
+                {% for ingredient in ingredients[:10] %} {# Use the [:10] slice filter to limit to 10 ingredients #}
+                    <a href="{{ url_for('ingredient_controller.recipe_display', ingredient=ingredient.name) }}">{{ ingredient.name }}</a>
+
+                {% endfor %}
+                    <a href="/ingredient_display">View All</a>
+            </div>
+        </div>
+
+        <li><a href="about_us" id="about-us-link">About Us</a></li>
+        <li><a href="/login" id="login-link">Login</a></li>
+        <li><a href="/register" id="registration-link">Registration</a></li>
+    </ul>
+</nav>
+
+
+
+
+
+
+ 
+{% block content %}{% endblock %}
+</body>
+</html>
+
+

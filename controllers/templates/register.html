@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>User Registration</title>
+
+
+    <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='css/register.css')}}">
+    <link rel="icon" href="{{ url_for('static', filename='img-db/recipes.png') }}" type="image/x-icon">
+
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <script src="{{ url_for('static', filename='js/register.js') }}"></script>
+</head>
+<body>
+    <div class="container">
+        <div class="form-container">
+            <h1>User Registration</h1>
+            <form method="POST" action="/register">
+                <div class="form-group">
+                    <label for="username">Username:</label>
+                    <input type="text" id="username" name="username" required placeholder="Enter username">
+                </div>
+
+                <div class="form-group">
+                    <label for="email">Email:</label>
+                    <input type="email" id="email" name="email" required placeholder="Enter email">
+                </div>
+
+                <div class="form-group">
+                    <label for="password">Password:</label>
+                    <input type="password" id="password" name="password" required placeholder="Enter password">
+                </div>
+                 {% if error %}
+                <p class="error">{{ error }}</p>
+                {% endif %}
+                <div class="form-group">
+                    <label for="confirm_password">Confirm Password:</label>
+                    <input type="password" id="confirm_password" name="confirm_password" required placeholder="Confirm password">
+                </div>
+
+                <button type="submit">Register</button>
+
+            </form>
+        </div>
+    </div>
+</body>
+</html>
+
+
