@@ -13,9 +13,13 @@ ingredient_controller_bp = Blueprint('ingredient_controller', __name__, template
 
 @ingredient_controller_bp.route('/ingredients')
 def ingredients():
+    user = None
+
     if 'user_id' in session:
+        user_id = session['user_id']
+        user = Account.query.get(user_id)
         ingredients_data = Ingredient.query.all()
-        return render_template('ingredients.html', ingredients=ingredients_data)
+        return render_template('ingredients.html', ingredients=ingredients_data,user=user)
     else:
         flash('Please log in to access ingredients.','error')
         return redirect(url_for('account_controller.login'))

@@ -2,7 +2,7 @@ from flask import  render_template, request, redirect, url_for, Blueprint,sessio
 from models.recipe_ingredient import RecipeIngredient
 from models.recipe import Recipe
 from models.ingredient import Ingredient
-
+from models.account import Account
 
 from models.recipe_ingredient import db
 
@@ -12,7 +12,10 @@ recipe_ingredient_bp = Blueprint('recipe_ingredient',__name__,template_folder='t
 
 @recipe_ingredient_bp.route('/recipe_ingredients')
 def recipe_ingredients():
+    user = None
     if 'user_id' in session:
+        user_id = session['user_id']
+        user = Account.query.get(user_id)
         recipe_ingredients_data = RecipeIngredient.query.all()
         recipes_data = Recipe.query.all()
         ingredients_data = Ingredient.query.all()
@@ -22,6 +25,7 @@ def recipe_ingredients():
             recipe_ingredients=recipe_ingredients_data,
             recipes=recipes_data,
             ingredients=ingredients_data,
+            user=user
         )
     else:
         flash('Please log in to access recipe ingredients.','error')

@@ -16,9 +16,12 @@ recipe_controller_bp = Blueprint('recipe_controller',__name__,template_folder='t
 
 @recipe_controller_bp.route('/recipes')
 def recipes():
+    user = None
     if 'user_id' in session:
+        user_id = session['user_id']
+        user = Account.query.get(user_id)
         recipes_data = Recipe.query.all()
-        return render_template('recipes.html', recipes=recipes_data)
+        return render_template('recipes.html', recipes=recipes_data, user=user)
     else:
         flash('Please log in to access recipes.','error')
         return redirect(url_for('account_controller.login'))

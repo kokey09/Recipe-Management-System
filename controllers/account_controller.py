@@ -9,9 +9,12 @@ bcrypt = Bcrypt()
 
 @account_controller_bp.route('/accounts')
 def accounts():
+    user = None
     if 'user_id' in session:
+        user_id = session['user_id']
+        user = Account.query.get(user_id)
         accounts_data = Account.query.all()
-        return render_template('accounts.html', accounts=accounts_data)
+        return render_template('accounts.html', accounts=accounts_data, user=user)
     else:
         flash('Please log in to access accounts.','error')
         return redirect(url_for('account_controller.login'))
@@ -50,6 +53,7 @@ def edit_account(id):
 
 @account_controller_bp.route('/dashboard')
 def dashboard():
+    user = None
     if 'user_id' in session:
         user_id = session['user_id']
         user = Account.query.get(user_id)
