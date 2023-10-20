@@ -2,7 +2,6 @@ from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 app = Flask(__name__)
 db = SQLAlchemy()
-from flask_login import LoginManager
 
 def create_app():
 
@@ -29,8 +28,6 @@ def create_app():
 
     with app.app_context():
         db.create_all()
-
-
 
     return app
 

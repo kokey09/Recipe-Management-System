@@ -71,11 +71,9 @@ def dashboard():
 @account_controller_bp.route('/login', methods=['GET', 'POST'])
 def login():
     error = None
-
     if request.method == 'POST':
         username = request.form['username']
         entered_password = request.form['password']
-
         user = Account.query.filter_by(username=username).first()
 
         if user and bcrypt.check_password_hash(user.password, entered_password):

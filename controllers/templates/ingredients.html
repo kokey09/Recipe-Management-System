@@ -7,6 +7,8 @@
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="{{ url_for('static', filename='js/ingredients_delete.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/search.js') }}"></script>
+
 
 
 
@@ -27,6 +29,7 @@
         <button type="submit">Add Ingredient</button>
     </form>
   <table class="ingredients-table">
+    <input type="text" id="searchInput" class="search-bar" placeholder="Search Recipe">
     <thead>
         <tr>
             <th>ID</th>

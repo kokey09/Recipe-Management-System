@@ -5,7 +5,7 @@
     <title>Account Table</title>
     <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='css/account.css')}}">
     <link rel="icon" href="{{ url_for('static', filename='img-db/recipes.png') }}" type="image/x-icon">
-
+    <script src="{{ url_for('static', filename='js/search.js') }}"></script>
     <script src="{{ url_for('static', filename='js/account_delete.js') }}"></script>
 </head>
 <body>
@@ -15,6 +15,7 @@
 <fieldset>
     <legend><h1>Account Table</h1></legend>
     <table>
+        <input type="text" id="searchInput" class="search-bar" placeholder="Search Recipe">
         <thead>
             <tr>
                 <th>ID</th>

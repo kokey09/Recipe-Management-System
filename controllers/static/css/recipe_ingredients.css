@@ -102,3 +102,13 @@ h1 {
 .connect-form-container button:hover {
   background-color: #0056b3;
 }
+.search-bar {
+  display: block;
+  margin: 10px auto 10px; /* Decrease margin-top to 20px */
+  text-align: center;
+  width: 50%;
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}

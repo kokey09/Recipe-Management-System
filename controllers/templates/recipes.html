@@ -8,6 +8,8 @@
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="{{ url_for('static', filename='js/recipes_delete.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/search.js') }}"></script>
+
 </head>
 <body>
     {% extends 'base.html' %}
@@ -30,8 +32,10 @@
 
             <button type="submit">Add Recipe</button>
         </form>
+        
 
         <table class="recipes-table">
+            <input type="text" id="searchInput" class="search-bar" placeholder="Search Recipe">
             <thead>
                 <tr>
                     <th>ID</th>

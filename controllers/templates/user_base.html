@@ -16,7 +16,7 @@
         <div class="dropdown">
             <a href="/ingredient_display" id="ingredients-link">Ingredients</a>
             <div class="dropdown-content">
-                {% for ingredient in ingredients[:10] %} {# Use the [:10] slice filter to limit to 10 ingredients #}
+                {% for ingredient in ingredients[:7] %}
                     <a href="{{ url_for('ingredient_controller.recipe_display', ingredient=ingredient.name) }}">{{ ingredient.name }}</a>
                 {% endfor %}
                     <a href="/ingredient_display">View All</a>

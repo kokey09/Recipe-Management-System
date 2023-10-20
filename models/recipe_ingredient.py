@@ -1,7 +1,5 @@
 from controllers import db
 
-
-
 class RecipeIngredient(db.Model):
     __tablename__ = 'recipe_ingredients'
     recipe_id = db.Column(db.Integer, db.ForeignKey('recipes.recipe_id'), primary_key=True)

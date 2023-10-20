@@ -7,15 +7,12 @@
 </div>
 <input type="text" id="searchInput" class="search-bar" placeholder="Search Recipe">
 <ul class="recipe-list">
-    {% for recipe in recipes[:5] %} {# This limits to the first 5 recipes #}
+    {% for recipe in recipes[:5] %}
     <li class="recipe-card">
         <img src="{{ recipe.image_url }}" alt="{{ recipe.name }} Image" style="width: 298px; height: 270px;">
         <div class="recipe-details">
             <h2>{{ recipe.name }}</h2>
              <a href="{{ url_for('recipe_controller.recipe_instruction', recipe_name=recipe.name) }}" class="view-recipe">View Recipe</a>
-
-
-
         </div>
     </li>
     {% endfor %}

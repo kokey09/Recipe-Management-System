@@ -5,9 +5,8 @@
   <title>Recipe and Ingredients</title>
   <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/recipe_ingredients.css') }}">
     <link rel="icon" href="{{ url_for('static', filename='img-db/recipes.png') }}" type="image/x-icon">
-
-      <script src="{{ url_for('static', filename='js/recipe_ingredients_delete.js') }}"></script>
-
+    <script src="{{ url_for('static', filename='js/search.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/recipe_ingredients_delete.js') }}"></script>
 </head>
 <body>
   {% extends 'base.html' %}
@@ -16,6 +15,8 @@
 
   <div class="container">
     <h1>Recipe and Ingredients</h1>
+    <input type="text" id="searchInput" class="search-bar" placeholder="Search Recipe">
+
     <table class="recipe-ingredient-table">
       <thead>
         <tr>

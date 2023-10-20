@@ -58,3 +58,89 @@ document.addEventListener("DOMContentLoaded", function() {
         }
     });
 });
+//recipe 
+document.addEventListener("DOMContentLoaded", function() {
+    const searchInput = document.getElementById("searchInput");
+    const recipeList = document.querySelector(".recipes-table");
+    const recipeItems = recipeList.querySelectorAll("tbody tr");
+
+    searchInput.addEventListener("input", function() {
+        const searchText = searchInput.value.toLowerCase();
+
+        for (const recipeItem of recipeItems) {
+            const rowText = recipeItem.textContent.toLowerCase();
+
+            if (rowText.includes(searchText)) {
+                recipeItem.style.display = ""; // Show the table row
+            } else {
+                recipeItem.style.display = "none"; // Hide the table row
+            }
+        }
+    });
+});
+
+//recipe_ingredient
+document.addEventListener("DOMContentLoaded", function() {
+    const searchInput = document.getElementById("searchInput");
+    const recipeIngredientTable = document.querySelector(".recipe-ingredient-table");
+    const rows = recipeIngredientTable.querySelectorAll("tbody tr");
+
+    searchInput.addEventListener("input", function() {
+        const searchText = searchInput.value.toLowerCase();
+
+        rows.forEach(function(row) {
+            const rowText = row.textContent.toLowerCase();
+
+            if (rowText.includes(searchText)) {
+                row.style.display = "";
+            } else {
+                row.style.display = "none";
+            }
+        });
+    });
+});
+
+
+//ingredients
+document.addEventListener("DOMContentLoaded", function() {
+    const searchInput = document.getElementById("searchInput");
+    const ingredientsTable = document.querySelector(".ingredients-table");
+    const rows = ingredientsTable.querySelectorAll("tbody tr");
+
+    searchInput.addEventListener("input", function() {
+        const searchText = searchInput.value.toLowerCase();
+
+        rows.forEach(function(row) {
+            const ingredientName = row.querySelector("td:nth-child(2)").textContent.toLowerCase();
+
+            if (ingredientName.includes(searchText)) {
+                row.style.display = "";
+            } else {
+                row.style.display = "none";
+            }
+        });
+    });
+});
+//accounts
+document.addEventListener("DOMContentLoaded", function() {
+    const searchInput = document.getElementById("searchInput");
+    const accountTable = document.querySelector("table");
+    const rows = accountTable.querySelectorAll("tbody tr");
+
+    searchInput.addEventListener("input", function() {
+        const searchText = searchInput.value.toLowerCase();
+
+        rows.forEach(function(row) {
+            // Combine the text content of all the fields you want to search
+            const rowText = row.textContent.toLowerCase();
+
+            if (rowText.includes(searchText)) {
+                row.style.display = ""; // Show the table row
+            } else {
+                row.style.display = "none"; // Hide the table row
+            }
+        });
+    });
+});
+
+

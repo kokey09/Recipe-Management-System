@@ -16,6 +16,7 @@
         {% if user %}
             <h3>Hi {{ user.username }}</h3>
         {% endif %}
+
         <details id="ingredients-details">
             <summary>Ingredients management</summary>
             <ul>
@@ -24,11 +25,9 @@
                 <li><a href="/recipe_ingredients" class="recipeINgredients">Recipe Ingredients</a></li>
             </ul>
         </details>
-
         <ul>
             <li><a href="/accounts" class="accounts">Accounts</a></li>
         </ul>
-
         <ul class="logout-link">
             <li><a href="{{ url_for('account_controller.logout') }}" onclick="return confirm('Are you sure you want to log out?')">Logout</a></li>
         </ul>
