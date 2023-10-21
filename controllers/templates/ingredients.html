@@ -39,7 +39,7 @@
         </tr>
     </thead>
     <tbody>
-        {% for ingredient in ingredients | sort(attribute='name') %}
+        {% for ingredient in ingredients  %}
         <tr>
             <td>{{ ingredient.ingredient_id }}</td>
             <td>{{ ingredient.name }}</td>

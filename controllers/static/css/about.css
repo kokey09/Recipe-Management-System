@@ -15,7 +15,7 @@ body {
 main {
     flex: 1;
     max-width: 800px;
-    margin: 100px auto 0; /* Adjust margin-top to add space above the content */
+    margin: 100px auto 0;
     padding: 20px;
 }
 

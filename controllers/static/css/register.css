@@ -1,4 +1,3 @@
-/* Default styles for the form container */
 .container {
     display: flex;
     justify-content: center;
@@ -12,27 +11,25 @@
     border-radius: 10px;
     box-shadow: 0px 0px 5px 0px #888888;
     padding: 20px;
-    max-width: 400px; /* Limit the width for larger screens */
-    width: 100%; /* Expand to full width for smaller screens */
+    max-width: 400px;
+    width: 100%;
 }
 
-/* Fieldset and legend styles */
 fieldset {
-    border: 2px solid transparent; /* Set the border color to transparent */
-    border-radius: 5px; /* Rounded corners for the border */
-    padding: 20px; /* Add some space inside the fieldset */
-    margin: 10px 0; /* Add margin for separation */
+    border: 2px solid transparent;
+    border-radius: 5px;
+    padding: 20px;
+    margin: 10px 0;
 }
 
 legend {
-    font-size: 24px; /* Adjust the font size of the legend */
-    border: none; /* Remove the border around the legend */
-    border-radius: 5px; /* Rounded corners for the legend border */
-    padding: 5px 10px; /* Add padding to the legend */
-    margin: 0; /* Reset margin for the legend */
+    font-size: 24px;
+    border: none;
+    border-radius: 5px;
+    padding: 5px 10px;
+    margin: 0;
 }
 
-/* Input fields */
 .form-group label {
     display: block;
     margin-bottom: 5px;
@@ -48,14 +45,12 @@ legend {
     font-size: 16px;
 }
 
-/* Error message */
 .error-message {
     margin-top: 10px;
     text-align: center;
     color: red;
 }
 
-/* Register button */
 button {
     background-color: #007bff;
     color: #fff;
@@ -68,14 +63,12 @@ button {
 .error {
     color: red;
 }
-/* Media query for smaller screens (e.g., smartphones) */
 @media (max-width: 768px) {
     .form-container {
         width: 90%;
     }
 }
 
-/* Media query for larger screens (e.g., tablets and desktops) */
 @media (min-width: 769px) {
     .form-container {
         width: 70%;

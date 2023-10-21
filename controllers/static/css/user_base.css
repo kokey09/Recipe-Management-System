@@ -1,11 +1,9 @@
-/* Reset some default styles */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
-/* Global styles */
 body {
     font-family: Arial, sans-serif;
     background-color: #f2f2f2;
@@ -13,16 +11,16 @@ body {
 }
 
 nav {
-    height: 80px; /* Set a fixed height for the navbar */
+    height: 80px;
     background-color: #EE4B2B;
     color: #fff;
     padding: 20px 0;
     text-align: center;
     position: fixed;
-    top: 0; /* Set the top property to 0 to make it stick to the top */
+    top: 0;
     left: 0;
     width: 100%;
-    z-index: 1000; /* Add z-index to ensure it's above other elements */
+    z-index: 1000;
 }
 
 nav h1 {
@@ -56,7 +54,7 @@ nav a:hover {
 .logo-image {
     width: 100px;
     height: 40px;
-    /* Add any other styles you need for the image */
+
 }
 
 }
@@ -72,7 +70,6 @@ nav a:hover {
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
-/* Style each ingredient as a block element */
 .dropdown-content a {
     display: block;
     padding: 10px;
@@ -81,7 +78,6 @@ nav a:hover {
     font-weight: bold;
 }
 
-/* Add hover effect on each ingredient */
 .dropdown-content a:hover {
     background-color: #ff3300;
 }
@@ -91,7 +87,7 @@ nav a:hover {
 }
 .search-bar {
     display: block;
-    margin: 10px auto 10px; /* Decrease margin-top to 20px */
+    margin: 10px auto 10px;
     text-align: center;
     width: 50%;
     padding: 10px;

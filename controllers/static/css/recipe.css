@@ -1,4 +1,4 @@
-.recipes-table { /* Correct class name here */
+.recipes-table {
     width: 100%;
     border-collapse: collapse;
     margin-top: 20px;
@@ -20,19 +20,19 @@
     background-color: #f2f2f2;
 }
 
-.recipes-table .btn { /* Correct class name here */
+.recipes-table .btn {
     padding: 5px 10px;
     border: none;
     cursor: pointer;
     border-radius: 5px;
 }
 
-.recipes-table .btn.delete-button { /* Correct class name here */
+.recipes-table .btn.delete-button {
     background-color: #ff6b6b;
     color: #fff;
 }
 
-.recipes-table .btn.edit-button { /* Correct class name here */
+.recipes-table .btn.edit-button {
     background-color: #007bff;
     color: #fff;
 }
@@ -40,8 +40,6 @@
 .recipes-table .btn:hover {
     filter: brightness(1.2);
 }
-
-
 
 form {
     margin: 20px auto;
@@ -68,8 +66,8 @@ textarea {
 }
 
 button[type="submit"] {
-    background-color: #5bc0de; /* Button background color */
-    color: #fff; /* Text color */
+    background-color: #5bc0de;
+    color: #fff;
     border: none;
     padding: 10px 20px;
     border-radius: 4px;
@@ -77,12 +75,9 @@ button[type="submit"] {
 }
 
 button[type="submit"]:hover {
-    background-color: #46b8da; /* Darker blue on hover */
+    background-color: #46b8da;
 }
-/* Style table header row */
 
-/* Add your CSS links or styles here */
-/* ... */
 
 .recipes-table {
     width: 100%;
@@ -128,16 +123,15 @@ button[type="submit"]:hover {
     filter: brightness(1.2);
 }
 
-/* Add some padding and max-width to the table cells containing the description */
 .recipes-table td:nth-child(3) {
-    padding-right: 20px; /* Add more padding to the right side */
-    max-width: 300px; /* Set a maximum width for the cell */
+    padding-right: 20px;
+    max-width: 300px;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
 }
 
-/* Adjust the ellipsis behavior for longer text */
+
 .recipes-table td:nth-child(3) div {
     white-space: nowrap;
     overflow: hidden;
@@ -145,7 +139,7 @@ button[type="submit"]:hover {
 }
 .search-bar {
     display: block;
-    margin: 10px auto 10px; /* Decrease margin-top to 20px */
+    margin: 10px auto 10px;
     text-align: center;
     width: 50%;
     padding: 10px;

@@ -22,13 +22,45 @@
                     <a href="{{ url_for('recipe_controller.recipe_instruction', recipe_name=recipe.name) }}" class="view-recipe">View Recipe</a>
                 </div>
             </div>
-            {% if loop.index % 2 == 0 %}
+        {% if loop.index % 2 == 0 %}
             </div>
             <div class="recipe-row">
-            {% endif %}
-        {% endfor %}
-    </div>
+                    {% endif %}
+                {% endfor %}
+            </div>
 </div>
+
+<h1 class="new">What's New?</h1>
+
+<div class="recipe-new-list">
+    {% set sorted_recipes = recipes | sort(attribute='recipe_id', reverse=True) %}
+    {% for recipe in sorted_recipes[:6] %}
+    <div class="recipe-new-card">
+        <img src="{{ recipe.image_url }}" alt="{{ recipe.name }} Image" style="width: 298px; height: 270px;" loading="lazy">
+        <div class="recipe-new-details">
+            <h2>{{ recipe.name }}</h2>
+            <a href="{{ url_for('recipe_controller.recipe_instruction', recipe_id=recipe.recipe_id, recipe_name=recipe.name) }}" class="view-new-recipe">View Recipe</a>
+        </div>
+    </div>
+    {% if loop.index % 3 == 0  %}
+    </div>
+    <div class="recipe-new-list">
+    {% endif %}
+    {% endfor %}
+</div>
+
+
+<footer class="site-footer">
+    <div class="container">
+        <p>&copy; 2023 Recipe Discovery Platform</p>
+        <ul class="footer-links">
+            <li><a href="/about_us">About us</a></li>
+            <li><a href="/ingredient_display">Ingredients</a></li>
+            <li><a href="/recipe_display">Recipes</a></li>
+            <li><a href="/contact_us">Contact us</a></li>
+        </ul>
+    </div>
+</footer>
 
 {% endblock %}
 

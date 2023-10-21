@@ -43,23 +43,20 @@
 
 
 
-/* Style for the "Edit" and "Delete" buttons */
 .delete-button, .edit-button {
     padding: 5px 10px;
-    background-color: #d9534f; /* Button background color */
-    color: #fff; /* Text color */
+    background-color: #d9534f;
+    color: #fff;
     border: none;
     cursor: pointer;
     border-radius: 4px;
-    margin-right: 5px; /* Margin between buttons */
+    margin-right: 5px;
 }
 
-/* Add hover effect to buttons */
 .delete-button:hover, .edit-button:hover {
-    background-color: #c9302c; /* Darker red on hover */
+    background-color: #c9302c;
 }
 
-/* Style for the "Add Ingredient" form */
 form {
     margin: 20px auto;
     max-width: 400px;
@@ -84,8 +81,8 @@ textarea {
 }
 
 button[type="submit"] {
-    background-color: #5bc0de; /* Button background color */
-    color: #fff; /* Text color */
+    background-color: #5bc0de;
+    color: #fff;
     border: none;
     padding: 10px 20px;
     border-radius: 4px;
@@ -93,12 +90,11 @@ button[type="submit"] {
 }
 
 button[type="submit"]:hover {
-    background-color: #46b8da; /* Darker blue on hover */
+    background-color: #46b8da;
 }
-/* Style table header row */
 .search-bar {
     display: block;
-    margin: 10px auto 10px; /* Decrease margin-top to 20px */
+    margin: 10px auto 10px;
     text-align: center;
     width: 50%;
     padding: 10px;
