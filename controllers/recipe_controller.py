@@ -37,14 +37,14 @@ def add_recipe():
         if image_file:
             # Save the uploaded image to a directory
             filename = secure_filename(image_file.filename)
-            image_directory = os.path.join(current_app.config['STATIC_FOLDER'], 'img-db')
+            image_directory = os.path.join(current_app.root_path, 'static', 'img-db')
             os.makedirs(image_directory, exist_ok=True)  # Create the directory if it doesn't exist
             image_path = os.path.join(image_directory, filename)
             image_file.save(image_path)
 
             try:
-                # Create a new Recipe object and save it to the database with the image_path
-                new_recipe = Recipe(name=recipe_name, instructions=instructions, image_url=image_path)
+                # Create a new Recipe object and save it to the database with the image path
+                new_recipe = Recipe(name=recipe_name, instructions=instructions, image_url=f'static/img-db/{filename}')
                 db.session.add(new_recipe)
                 db.session.commit()
 
