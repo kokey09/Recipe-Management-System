@@ -1,7 +1,4 @@
-
-
-/* Recipe cards styles */
-/* Recipe cards styles */
+/* Default styles for larger screens */
 .recipe-list {
     list-style-type: none;
     display: flex;
@@ -11,7 +8,7 @@
 
 .recipe-card {
     width: 300px;
-    height: 400px; /* Set a fixed height here */
+    height: 400px;
     margin: 20px;
     background-color: #333;
     border: 1px solid #ddd;
@@ -27,14 +24,14 @@
 }
 
 .recipe-card img {
-    width: 298px;
+    width: 100%; /* Make sure the image scales to the container width */
     border-top-left-radius: 5px;
     border-top-right-radius: 5px;
 }
 
 .recipe-card .recipe-details {
     padding: 10px;
-    flex: 1; /* Allow the details section to expand to fill the card height */
+    flex: 1;
 }
 
 .recipe-card h2 {
@@ -46,6 +43,23 @@
 .recipe-card p {
     font-size: 16px;
     color: #555;
+}
+.logo-link {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    text-align: center;
+    width: 100%;
+    height: 80px;
+    margin-top: 260px;
+}
+
+
+.welcome {
+    margin-top: 10px;
+    font-size: 24px; /* Smaller font for responsiveness */
+    text-align: center; /* Center align the text */
 }
 
 .view-recipe {
@@ -59,40 +73,52 @@
     border-radius: 0 0 5px 5px;
 }
 
-
-
 .recipe-card a:hover {
     background-color: #ff3300;
 }
 
-
-
 .content {
-    margin-top: 40px; /* Add margin-top to create space below the fixed navigation bar */
-    padding: 20px; /* Add padding for content */
+    margin-top: 40px;
+    padding: 20px;
 }
-.recipe-card .recipe-details {
-    padding: 10px;
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-end; /* Align the content to the bottom of the card */
-}
-.logo-link {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    text-align: center;
-    width: 100%;
-    height: 80px;
-    margin-top: 260px;
+/* CSS for the Explore button */
+.explore {
+    display: inline-block;
+    padding: 10px 20px; /* Adjust padding as needed */
+    background-color: #ff5733; /* Background color */
+    color: #fff; /* Text color */
+    border: none; /* Remove button border */
+    border-radius: 5px; /* Rounded corners */
+    font-size: 16px; /* Font size */
+    cursor: pointer; /* Add a pointer cursor on hover */
+    transition: background-color 0.3s; /* Smooth background color transition */
+
+    /* You can add more styles, such as box-shadow, to enhance the button's appearance */
 }
 
-.welcome {
-    margin-top: 10px; /* I-adjust ang margin-top kung kinakailangan */
-    font-size:30px;
-    margin-right:40px;
+.explore:hover {
+    background-color: #ff3300; /* Change background color on hover */
+}
+/* Responsive styles for smaller screens */
+@media (max-width: 768px) {
+    .recipe-list {
+        flex-direction: column;
+        padding: 20px;
+    }
+
+    .recipe-card {
+        width: 100%;
+        margin: 10px 0;
+        height: auto;
+    }
+
+    .logo-link {
+        margin-top: 20px;
+    }
+
+    .welcome {
+        font-size: 20px; /* Smaller font for smaller screens */
+    }
 }
 
 

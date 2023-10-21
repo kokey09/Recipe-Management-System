@@ -46,7 +46,7 @@
                 </tr>
             </thead>
             <tbody>
-                {% for recipe in recipes  | sort(attribute='name')%}
+                {% for recipe in recipes %}
                 <tr>
                     <td>{{ recipe.recipe_id }}</td>
                     <td>{{ recipe.name }}</td>
