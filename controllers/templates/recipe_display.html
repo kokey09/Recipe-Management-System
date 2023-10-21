@@ -24,7 +24,7 @@
                     <img src="{{ recipe.image_url }}" alt="{{ recipe.name }} Image" style="width: 298px; height: 270px;" loading="lazy">
                     <div class="recipe-details">
                         <h2>{{ recipe.name }}</h2>
-                         <a href="{{ url_for('recipe_controller.recipe_instruction', recipe_id=recipe.recipe_id, recipe_name=recipe.name) }}">View Recipe</a>
+                         <a href="{{ url_for('recipe_controller.recipe_instruction', recipe_id=recipe.recipe_id, recipe_name=recipe.name) }}" class="view-recipe">View Recipe</a>
                     </div>
             </li>
             {% endfor %}

@@ -35,16 +35,18 @@ ul.ingredients-list li a {
 ul.ingredients-list li a:hover {
     color: #555;
 }
-.logo-link {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-    height: 100%;
-}
+
 
 .logo-image {
     width: 100px;
     height: 40px;
     /* Add any other styles you need for the image */
+}
+.logo-link {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 80px; /* Adjust the height as needed */
+    margin-top: 80px; /* Keep the margin-top as it is */
 }

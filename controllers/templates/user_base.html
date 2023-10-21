@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>{% block title %}HomePage{% endblock %}</title>
-    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/user_page.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/user_base.css')}}">
     <link rel="icon" href="{{ url_for('static', filename='img-db/recipes.png') }}" type="image/x-icon">
     <script src="{{ url_for('static', filename='js/search.js') }}"></script>
 
@@ -13,6 +13,7 @@
 <nav>
     <ul>
         <a href="/" id="home-link" title="Home Page"> <img src="{{ url_for('static', filename='img-db/recipes.png') }}" alt="Your Logo" style="width: 100px; height: 40px;"></a>
+
         <div class="dropdown">
             <a href="/ingredient_display" id="ingredients-link">Ingredients</a>
             <div class="dropdown-content">
@@ -30,6 +31,10 @@
             <li>Hi {{ user.username }}</li>
             <li><a href="{{ url_for('account_controller.logout') }}" onclick="return confirm('Are you sure you want to log out?')">Logout</a></li>
         {% endif %}
+        {% if user and user.type == 'admin' %}
+            <li><a href="{{ url_for('account_controller.dashboard') }}" id="admin-dashboard-link">Go Back to Admin Dashboard</a></li>
+        {% endif %}
+
     </ul>
 </nav>
 

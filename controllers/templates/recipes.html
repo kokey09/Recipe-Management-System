@@ -46,13 +46,14 @@
                 </tr>
             </thead>
             <tbody>
-                {% for recipe in recipes %}
+                {% for recipe in recipes  | sort(attribute='name')%}
                 <tr>
                     <td>{{ recipe.recipe_id }}</td>
                     <td>{{ recipe.name }}</td>
                     <td>{{ recipe.instructions }}</td>
                     <td>
                         <img src="{{ recipe.image_url }}" alt="{{ recipe.name }} Image" style="width: 100px; height: 100px;">
+
                     </td>
                     <td>
                         <button class="btn btn-danger delete-button" title="Delete Recipe" data-recipe-id="{{ recipe.recipe_id }}">Delete</button>

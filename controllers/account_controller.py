@@ -71,6 +71,7 @@ def dashboard():
 @account_controller_bp.route('/login', methods=['GET', 'POST'])
 def login():
     error = None
+
     if request.method == 'POST':
         username = request.form['username']
         entered_password = request.form['password']

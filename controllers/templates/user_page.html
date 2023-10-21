@@ -1,23 +1,31 @@
 {% extends 'user_base.html' %}
 {% block title %}Recipes with{% endblock %}
 {% block content %}
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/user_page.css')}}">
 
-<div class="logo-link">
-    <img src="{{ url_for('static', filename='img-db/recipes.png') }}" alt="Your Logo" style="width: 200px; height: 80px;">
+<div class="recipe-list">
+
+    <div class="logo-link">
+        <img src="{{ url_for('static', filename='img-db/recipes.png') }}" alt="Your Logo" style="width: 600px; height: 240px;">
+        <p class="welcome">Welcome to our recipe and ingredient discovery platform! We're here to help you make the most of what's in your kitchen and satisfy your culinary curiosity.</p>
+    </div>
+
+    <div class="recipe-row">
+        {% for recipe in recipes[:4] %}
+            <div class="recipe-card">
+                <img src="{{ recipe.image_url }}" alt="{{ recipe.name }} Image" style="width: 298px; height: 270px;">
+                <div class="recipe-details">
+                    <h2>{{ recipe.name }}</h2>
+                    <a href="{{ url_for('recipe_controller.recipe_instruction', recipe_name=recipe.name) }}" class="view-recipe">View Recipe</a>
+                </div>
+            </div>
+            {% if loop.index % 2 == 0 %}
+            </div>
+            <div class="recipe-row">
+            {% endif %}
+        {% endfor %}
+    </div>
 </div>
-<input type="text" id="searchInput" class="search-bar" placeholder="Search Recipe">
-<ul class="recipe-list">
-    {% for recipe in recipes[:5] %}
-    <li class="recipe-card">
-        <img src="{{ recipe.image_url }}" alt="{{ recipe.name }} Image" style="width: 298px; height: 270px;">
-        <div class="recipe-details">
-            <h2>{{ recipe.name }}</h2>
-             <a href="{{ url_for('recipe_controller.recipe_instruction', recipe_name=recipe.name) }}" class="view-recipe">View Recipe</a>
-        </div>
-    </li>
-    {% endfor %}
-</ul>
-
 
 {% endblock %}
 
