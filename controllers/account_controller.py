@@ -112,7 +112,14 @@ def register():
         password = request.form.get('password')
         confirm_password = request.form.get('confirm_password')
 
-        if password == confirm_password:
+        existing_email = Account.query.filter_by(email=email).first()
+        existing_username = Account.query.filter_by(username=username).first()
+        # Check account already exists
+        if existing_email:
+            error = "An account with this email already exists."
+        elif existing_username:
+            error = "An account with this username already exists."
+        elif password == confirm_password:
             hashed_password = bcrypt.generate_password_hash(password).decode('utf-8')
 
             new_account = Account(username=username, email=email, password=hashed_password)
