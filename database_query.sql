@@ -17,7 +17,8 @@ CREATE TABLE ingredients (
      ingredient_id INT(11) AUTO_INCREMENT PRIMARY KEY,
      name VARCHAR(255) NOT NULL,
      description TEXT
- )
+);
+
 CREATE TABLE account (
     id INT(11) AUTO_INCREMENT PRIMARY KEY,
     username VARCHAR(50),
@@ -32,4 +33,4 @@ CREATE TABLE recipe_ingredients (
      ingredient_id INT(11),
      FOREIGN KEY (recipe_id) REFERENCES recipes(recipe_id),
      FOREIGN KEY (ingredient_id) REFERENCES ingredients(ingredient_id)
-)
+);

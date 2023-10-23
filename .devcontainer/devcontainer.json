@@ -7,5 +7,5 @@
 		}
 	},
 	"updateContentCommand": "pip install -r requirements.txt",
-	"postStartCommand": "sudo service mysql start"
+	"postStartCommand": "sudo service mysql start && sudo mysql < database_query.sql && sudo mysql < database/account.sql && sudo mysql < database/recipes.sql && sudo mysql < database/ingredients.sql && sudo mysql < database/recipe_ingredients.sql"
 }
