@@ -9,14 +9,18 @@ bcrypt = Bcrypt()
 
 @account_controller_bp.route('/accounts')
 def accounts():
-    user = None
     if 'user_id' in session:
         user_id = session['user_id']
         user = Account.query.get(user_id)
-        accounts_data = Account.query.all()
-        return render_template('accounts.html', accounts=accounts_data, user=user)
+
+        if user and user.type == 'admin':
+            accounts_data = Account.query.all()
+            return render_template('accounts.html', accounts=accounts_data, user=user)
+        else:
+            flash('You do not have permission to access accounts.', 'error')
+            return redirect(url_for('ingredient_controller.user_page'))
     else:
-        flash('Please log in to access accounts.','error')
+        flash('Please log in to access accounts.', 'error')
         return redirect(url_for('account_controller.login'))
 
 
@@ -51,19 +55,21 @@ def edit_account(id):
 
     return render_template('edit_account.html', account=account)
 
+
 @account_controller_bp.route('/dashboard')
 def dashboard():
-    user = None
     if 'user_id' in session:
         user_id = session['user_id']
         user = Account.query.get(user_id)
-        if user.type == 'admin':
-            return render_template('dashboard.html',user=user)
+
+        if user and user.type == 'admin':
+            return render_template('dashboard.html', user=user)
         else:
-            flash('You do not have access to the dashboard')
-            return redirect(url_for('user_page'))
+            flash('You do not have access to the dashboard', 'error')
+            return redirect(url_for('ingredient_controller.user_page'))
+
     else:
-        flash('Please log in to access the dashboard','error')
+        flash('Please log in to access the dashboard', 'error')
         return redirect(url_for('account_controller.login'))
 
 
@@ -129,3 +135,5 @@ def register():
             error = "Your password and confirm password do not match."
 
     return render_template('register.html', error=error)
+
+

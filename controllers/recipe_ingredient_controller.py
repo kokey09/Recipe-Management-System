@@ -12,24 +12,29 @@ recipe_ingredient_bp = Blueprint('recipe_ingredient',__name__,template_folder='t
 
 @recipe_ingredient_bp.route('/recipe_ingredients')
 def recipe_ingredients():
-    user = None
     if 'user_id' in session:
         user_id = session['user_id']
         user = Account.query.get(user_id)
-        recipe_ingredients_data = RecipeIngredient.query.all()
-        recipes_data = Recipe.query.all()
-        ingredients_data = Ingredient.query.all()
 
-        return render_template(
-            'recipe_ingredients.html',
-            recipe_ingredients=recipe_ingredients_data,
-            recipes=recipes_data,
-            ingredients=ingredients_data,
-            user=user
-        )
+        if user and user.type == 'admin':
+            recipes_data = Recipe.query.all()
+            ingredients_data = Ingredient.query.all()
+            recipe_ingredients_data = RecipeIngredient.query.all()
+
+            return render_template(
+                'recipe_ingredients.html',
+                recipe_ingredients=recipe_ingredients_data,
+                recipes=recipes_data,
+                ingredients=ingredients_data,
+                user=user
+            )
+        else:
+            flash('You do not have access to view recipe ingredients', 'error')
+            return redirect(url_for('ingredient_controller.user_page'))
     else:
-        flash('Please log in to access recipe ingredients.','error')
+        flash('Please log in to access recipe ingredients', 'error')
         return redirect(url_for('account_controller.login'))
+
 
 
 @recipe_ingredient_bp.route('/connect_recipe_ingredient', methods=['POST'])

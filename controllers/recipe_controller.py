@@ -16,15 +16,20 @@ recipe_controller_bp = Blueprint('recipe_controller',__name__,template_folder='t
 
 @recipe_controller_bp.route('/recipes')
 def recipes():
-    user = None
     if 'user_id' in session:
         user_id = session['user_id']
         user = Account.query.get(user_id)
-        recipes_data = Recipe.query.all()
-        return render_template('recipes.html', recipes=recipes_data, user=user)
+
+        if user and user.type == 'admin':
+            recipes_data = Recipe.query.all()
+            return render_template('recipes.html', recipes=recipes_data, user=user)
+        else:
+            flash('User not found', 'error')
+            return redirect(url_for('ingredient_controller.user_page'))
     else:
-        flash('Please log in to access recipes.','error')
+        flash('Please log in to access recipes', 'error')
         return redirect(url_for('account_controller.login'))
+
 
 
 @recipe_controller_bp.route('/add_recipe', methods=['POST'])

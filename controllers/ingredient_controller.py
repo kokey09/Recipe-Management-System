@@ -18,8 +18,12 @@ def ingredients():
     if 'user_id' in session:
         user_id = session['user_id']
         user = Account.query.get(user_id)
-        ingredients_data = Ingredient.query.all()
-        return render_template('ingredients.html', ingredients=ingredients_data,user=user)
+
+        if user and user.type == 'admin':
+            ingredients_data = Ingredient.query.all()
+            return render_template('ingredients.html', ingredients=ingredients_data,user=user)
+        else:
+            return redirect(url_for('ingredient_controller.user_page'))
     else:
         flash('Please log in to access ingredients.','error')
         return redirect(url_for('account_controller.login'))
