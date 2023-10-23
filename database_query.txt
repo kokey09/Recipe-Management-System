@@ -1,3 +1,7 @@
+CREATE USER 'dashboard'@'localhost' IDENTIFIED BY 'dashboard';
+
+GRANT ALL PRIVILEGES ON recipedb.* TO 'dashboard'@'localhost';
+
 CREATE DATABASE recipedb;
 
 USE recipedb;
@@ -23,11 +27,9 @@ CREATE TABLE account (
     type VARCHAR(255)
 );
 
-
 CREATE TABLE recipe_ingredients (
      recipe_id INT(11),
      ingredient_id INT(11),
      FOREIGN KEY (recipe_id) REFERENCES recipes(recipe_id),
      FOREIGN KEY (ingredient_id) REFERENCES ingredients(ingredient_id)
- )
-
+)

@@ -7,7 +7,7 @@ def create_app():
 
     app = Flask(__name__)  # Create the Flask app instance here
 
-    app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:@localhost/recipedb'
+    app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://dashboard:dashboard@127.0.0.1/recipedb'
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
     app.config['STATIC_FOLDER'] = 'static'
     app.secret_key = 'your_secret_key'
