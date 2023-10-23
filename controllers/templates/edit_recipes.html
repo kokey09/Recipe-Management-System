@@ -17,8 +17,8 @@
     <h1>Edit Recipe</h1>
     <form method="POST" action="/edit_recipe/{{ id }}" enctype="multipart/form-data" onsubmit="return confirmEditRecipe();">
 
-        <label for="name">Name:</label>
-        <input type="text" id="name" name="name" value="{{ recipe.name }}" required>
+        <label for="recipe_name">Name:</label>
+        <input type="text" id="recipe_name" name="recipe_name" value="{{ recipe.name }}" required>
 
         <label for="instructions">Instructions:</label>
         <textarea id="instructions" name="instructions" rows="4" required>{{ recipe.instructions }}</textarea>

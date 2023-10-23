@@ -74,29 +74,38 @@ def delete_recipe(id):
 
 @recipe_controller_bp.route('/edit_recipe/<int:id>', methods=['GET', 'POST'])
 def edit_recipe(id):
-    recipe = Recipe.query.get(id)
-
     if request.method == 'POST':
-        # Update the recipe's details based on the form data
-        recipe.name = request.form['name']
-        recipe.instructions = request.form['instructions']
+        recipe_name = request.form['recipe_name']
+        instructions = request.form['instructions']
+        image_file = request.files['image_file']
 
-        # Check if a new image file is uploaded
-        if 'image_file' in request.files:
-            image_file = request.files['image_file']
-            if image_file.filename != '':
-                # Save the uploaded image file and update the image URL
-                filename = secure_filename(image_file.filename)
-                image_directory = os.path.join(current_app.config['STATIC_FOLDER'], 'img-db')
-                os.makedirs(image_directory, exist_ok=True)  # Create the directory if it doesn't exist
-                image_path = os.path.join(image_directory, filename)
-                image_file.save(image_path)
+        if image_file:
+            # Save the uploaded image to a directory
+            filename = secure_filename(image_file.filename)
+            image_directory = os.path.join(current_app.root_path, 'static', 'img-db')
+            os.makedirs(image_directory, exist_ok=True)
+            image_path = os.path.join(image_directory, filename)
+            image_file.save(image_path)
+
+            try:
+                # Update the existing Recipe object with the new data and image path
+                recipe = Recipe.query.get(id)
+                recipe.name = recipe_name
+                recipe.instructions = instructions
                 recipe.image_url = f'static/img-db/{filename}'
+                db.session.commit()
 
-        db.session.commit()
-        return redirect(url_for('recipe_controller.recipes'))
+                return redirect(url_for('recipe_controller.recipes'))
+            except Exception as e:
+                print(f"Error updating recipe: {str(e)}")
+                db.session.rollback()
 
-    return render_template('edit_recipes.html', recipe=recipe, id=id)
+    else:
+        recipe = Recipe.query.get(id)
+        return render_template('edit_recipes.html', recipe=recipe, id=id)
+
+    return redirect(url_for('recipe_controller_bp.recipes'))
+
 
 @recipe_controller_bp.route('/recipe_instruction')
 def recipe_instruction():
