@@ -110,3 +110,6 @@ def about_us():
         user_id = session['user_id']
         user = Account.query.get(user_id)
     return render_template('about_us.html',ingredients=ingredients, user=user)
+
+
+

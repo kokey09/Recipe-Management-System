@@ -86,7 +86,6 @@ def login():
                 return redirect(url_for('ingredient_controller.user_page'))
         else:
             error = "Incorrect username or password. Please try again."
-
     return render_template('login.html', error=error)
 
 @account_controller_bp.route('/logout')
