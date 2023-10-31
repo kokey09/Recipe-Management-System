@@ -25,7 +25,7 @@ CREATE TABLE account (
     email VARCHAR(120),
     password VARCHAR(60),
     date_created TIMESTAMP,
-    type VARCHAR(255)
+    type VARCHAR(255),
     is_deleted TINYINT(1)
 );
 
