@@ -5,6 +5,7 @@
     <title>Recipe List</title>
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/recipe_instruction.css') }}">
     <link rel="icon" href="{{ url_for('static', filename='img-db/recipes.png') }}" type="image/x-icon">
+
 </head>
 <body>
     {% extends 'user_base.html' %}
@@ -25,7 +26,62 @@
                 </li>
             {% endfor %}
         </ul>
+
+        <div class="add-review-box">
+            {% for recipe in recipes %}
+                <div class="review-content">
+                    {% if user %}
+                        <div class="star-icon">
+                            <img src="{{ url_for('static', filename='raw-image/star.png') }}" alt="Star Icon" width="75" height="45">
+                        </div>
+                        <div class="review-details">
+                            <p class="review-prompt">What do you think of this recipe? Share your experience to help others</p>
+                            <a href="{{ url_for('recipe_controller.recipe_review', recipe_id=recipe.recipe_id) }}" class="add-review-link">Add Rating & Review</a>
+                        </div>
+                    {% else %}
+                        <div class="star-icon">
+                            <img src="{{ url_for('static', filename='raw-image/star.png') }}" alt="Star Icon" width="75" height="45">
+                        </div>
+                        <div class="review-details">
+                            <p class="review-prompt">What do you think of this recipe? Share your experience to help others</p>
+                            <a href="{{ url_for('account_controller.login') }}" class="add-review-link">Log in to Add Rating & Review</a>
+                        </div>
+                    {% endif %}
+                </div>
+                <hr>
+                <div class="rating-info">
+                    <div class="star-icon">
+                        <img src="{{ url_for('static', filename='raw-image/5staricon.png') }}" alt="5 Stars" width="150" height="90">
+                    </div>
+                    <div class="rating-details">
+                        <p>5 out of 5</p>
+                        <p class="review-count">{{ recipe_reviews_count }} Reviews</p>
+                    </div>
+
+                </div>
+            {% endfor %}
+        </div>
+
+
+{% for review in reviews %}
+    <hr>
+    <div class="review" style="text-align: left;">
+        <p>
+            {% if review.account.is_deleted %}
+                Username: {{ review.account.username }}
+            {% else %}
+                Username: {{ review.account.username }}
+            {% endif %}
+        </p>
+        <p>Review rating: {{ review.rating }}</p>
+        <p>{{ review.timestamp }}</p>
+        <p>Review Text: {{ review.review_text }}</p>
     </div>
+{% endfor %}
+
+
+    </div>
+
 
     {% endblock %}
 </body>

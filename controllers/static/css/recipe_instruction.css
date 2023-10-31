@@ -53,3 +53,58 @@
     height: 40px;
     /* Add any other styles you need for the image */
 }
+
+.rating{
+    text-align:center;
+}
+
+.review {
+    padding:20px;
+    text-align:center;
+}
+.checked {
+  color: orange;
+}
+
+.add-review-link {
+    text-align: center;
+    display: block; /* Makes the link fill the container horizontally */
+    font-size: 24px; /* Adjust the font size as needed */
+    text-decoration: none; /* Remove underline for the link */
+    color: #007BFF; /* Change the color as needed */
+    padding: 30px;
+}
+
+.add-review-box {
+    text-align: center;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.rating-details {
+    text-align: center;
+}
+
+.rating-details p {
+    padding: 10px;
+}
+
+.review-count {
+    font-size: 16px;
+    margin: 0;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+

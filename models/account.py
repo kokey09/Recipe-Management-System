@@ -1,7 +1,7 @@
 from datetime import datetime
 from flask_bcrypt import Bcrypt
 from controllers import db  # Assuming you've defined the 'db' instance in a separate file
-
+from models.review import Review
 bcrypt = Bcrypt()  # Initialize bcrypt
 
 class Account(db.Model):
@@ -12,6 +12,10 @@ class Account(db.Model):
     password = db.Column(db.String(120), nullable=False)
     type = db.Column(db.String(20), nullable=False, default='normal')
     date_created = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
+
+    is_deleted = db.Column(db.Boolean, nullable=False, default=False)
+
+    reviews = db.relationship('Review', back_populates='account', foreign_keys=[Review.account_id])
 
 def create_default_admin(app):
     with app.app_context():
@@ -25,5 +29,8 @@ def create_default_admin(app):
             default_admin = Account(username='admin', email='admin@gmail.com', password=hashed_password, type='admin')
             db.session.add(default_admin)
             db.session.commit()
+
+
+
 
 

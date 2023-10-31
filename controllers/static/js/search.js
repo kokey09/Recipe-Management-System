@@ -58,26 +58,28 @@ document.addEventListener("DOMContentLoaded", function() {
         }
     });
 });
-//recipe 
+//recipe
 document.addEventListener("DOMContentLoaded", function() {
-    const searchInput = document.getElementById("searchInput");
-    const recipeList = document.querySelector(".recipes-table");
-    const recipeItems = recipeList.querySelectorAll("tbody tr");
+    const searchInput = document.getElementById("search-Input");
+    const recipesTable = document.querySelector(".recipes-table");
+    const rows = recipesTable.querySelectorAll("tbody tr");
 
     searchInput.addEventListener("input", function() {
         const searchText = searchInput.value.toLowerCase();
 
-        for (const recipeItem of recipeItems) {
-            const rowText = recipeItem.textContent.toLowerCase();
+        rows.forEach(function(row) {
+            const recipeId = row.querySelector("td:nth-child(1)").textContent.toLowerCase();
+            const recipeName = row.querySelector("td:nth-child(2)").textContent.toLowerCase();
 
-            if (rowText.includes(searchText)) {
-                recipeItem.style.display = ""; // Show the table row
+            if (recipeId.includes(searchText) || recipeName.includes(searchText)) {
+                row.style.display = "";
             } else {
-                recipeItem.style.display = "none"; // Hide the table row
+                row.style.display = "none";
             }
-        }
+        });
     });
 });
+
 
 //recipe_ingredient
 document.addEventListener("DOMContentLoaded", function() {
@@ -103,7 +105,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
 //ingredients
 document.addEventListener("DOMContentLoaded", function() {
-    const searchInput = document.getElementById("searchInput");
+    const searchInput = document.getElementById("searchInput-ingredients");
     const ingredientsTable = document.querySelector(".ingredients-table");
     const rows = ingredientsTable.querySelectorAll("tbody tr");
 
@@ -111,9 +113,10 @@ document.addEventListener("DOMContentLoaded", function() {
         const searchText = searchInput.value.toLowerCase();
 
         rows.forEach(function(row) {
+            const ingredientId = row.querySelector("td:nth-child(1)").textContent.toLowerCase();
             const ingredientName = row.querySelector("td:nth-child(2)").textContent.toLowerCase();
 
-            if (ingredientName.includes(searchText)) {
+            if (ingredientId.includes(searchText) || ingredientName.includes(searchText)) {
                 row.style.display = "";
             } else {
                 row.style.display = "none";
@@ -121,9 +124,10 @@ document.addEventListener("DOMContentLoaded", function() {
         });
     });
 });
-//accounts
+
+// Accounts
 document.addEventListener("DOMContentLoaded", function() {
-    const searchInput = document.getElementById("searchInput");
+    const searchInput = document.getElementById("searchInput-account");
     const accountTable = document.querySelector("table");
     const rows = accountTable.querySelectorAll("tbody tr");
 
@@ -131,10 +135,10 @@ document.addEventListener("DOMContentLoaded", function() {
         const searchText = searchInput.value.toLowerCase();
 
         rows.forEach(function(row) {
-            // Combine the text content of all the fields you want to search
-            const rowText = row.textContent.toLowerCase();
+            // Get the account ID from the first column (td:nth-child(1))
+            const accountId = row.querySelector("td:nth-child(1)").textContent.toLowerCase();
 
-            if (rowText.includes(searchText)) {
+            if (accountId.includes(searchText)) {
                 row.style.display = ""; // Show the table row
             } else {
                 row.style.display = "none"; // Hide the table row
@@ -142,5 +146,7 @@ document.addEventListener("DOMContentLoaded", function() {
         });
     });
 });
+
+
 
 

@@ -12,13 +12,13 @@
 <body>
 <nav>
     <ul>
-        <a href="/" id="home-link" title="Home Page"> <img src="{{ url_for('static', filename='img-db/recipes.png') }}" alt="Your Logo" style="width: 100px; height: 40px;"></a>
+        <a href="/" id="home-link" title="Home Page"> <img src="{{ url_for('static', filename='recipes-img-table/recipes.png') }}" alt="Your Logo" style="width: 100px; height: 40px;"></a>
 
         <div class="dropdown">
             <a href="/ingredient_display" id="ingredients-link">Ingredients</a>
             <div class="dropdown-content">
                 {% for ingredient in ingredients[:7] %}
-                    <a href="{{ url_for('ingredient_controller.recipe_display', ingredient=ingredient.name) }}">{{ ingredient.name }}</a>
+                    <a href="{{ url_for('recipe_controller.recipe_display', ingredient_id=ingredient.ingredient_id) }}">{{ ingredient.name }}</a>
                 {% endfor %}
                     <a href="/ingredient_display">View All</a>
             </div>

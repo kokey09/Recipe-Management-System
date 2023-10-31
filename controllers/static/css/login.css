@@ -93,7 +93,7 @@ button {
     background-color: #258cd1;
     border: 2px solid #258cd1;
 }
-.error {
+.error-message {
   color: red;
   font-weight: bold;
 }

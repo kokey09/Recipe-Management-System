@@ -6,7 +6,6 @@
   <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/recipe_ingredients.css') }}">
     <link rel="icon" href="{{ url_for('static', filename='img-db/recipes.png') }}" type="image/x-icon">
     <script src="{{ url_for('static', filename='js/search.js') }}"></script>
-    <script src="{{ url_for('static', filename='js/recipe_ingredients_delete.js') }}"></script>
 </head>
 <body>
   {% extends 'base.html' %}
@@ -29,10 +28,10 @@
         </tr>
       </thead>
  <tbody>
-  {% for recipe_ingredient in recipe_ingredients|sort(attribute='ingredient.ingredient_id') %}
+  {% for recipe_ingredient in recipe_ingredients|sort(attribute='recipe.recipe_id') %}
   <tr>
     <td>{{ recipe_ingredient.recipe.name }}</td>
-    <td><img src="{{ recipe_ingredient.recipe.image_url }}" alt="{{ recipe_ingredient.recipe.name }} Image" style="width: 100px; height: 100px;"></td>
+    <td><img src="{{ recipe_ingredient.recipe.image_url }}" alt="{{ recipe_ingredient.recipe.name }} Image" style="width: 100px; height: 100px;" loading="lazy"></td>
     <td>{{ recipe_ingredient.recipe.recipe_id }}</td>
     <td>{{ recipe_ingredient.ingredient.name }}</td>
     <td>{{ recipe_ingredient.ingredient.ingredient_id }}</td>
@@ -40,7 +39,7 @@
       <form method="POST" action="/disconnect_recipe_ingredient/{{ recipe_ingredient.recipe.recipe_id }}/{{ recipe_ingredient.ingredient.ingredient_id }}" onsubmit="return confirmDisconnect();">
         <input type="hidden" name="recipe_id" value="{{ recipe_ingredient.recipe.recipe_id }}">
         <input type="hidden" name="ingredient_id" value="{{ recipe_ingredient.ingredient.ingredient_id }}">
-        <button type="submit" class="disconnect-button">Disconnect</button>
+        <button type="submit" class="disconnect-button" onclick="return confirm('Are you sure you want to disconnect?')">Disconnect</button>
       </form>
     </td>
   </tr>

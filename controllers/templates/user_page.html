@@ -6,7 +6,7 @@
 <div class="recipe-list">
 
     <div class="logo-link">
-        <img src="{{ url_for('static', filename='img-db/recipes.png') }}" alt="Your Logo" style="width: 600px; height: 240px;">
+        <img src="{{ url_for('static', filename='recipes-img-table/recipes.png') }}" alt="Your Logo" style="width: 600px; height: 240px;">
         <p class="welcome">Welcome to our recipe and ingredient discovery platform! We're here to help you make the most of what's in your kitchen and satisfy your culinary curiosity.</p>
         <a href="/ingredient_display" class="explore-button">
             <button class="explore">Explore</button>
@@ -16,10 +16,14 @@
     <div class="recipe-row">
         {% for recipe in recipes[:4] %}
             <div class="recipe-card">
-                <img src="{{ recipe.image_url }}" alt="{{ recipe.name }} Image" style="width: 298px; height: 270px;">
+                <img src="{{ recipe.image_url }}" alt="{{ recipe.name }} Image" style="width: 298px; height: 270px;" loading="lazy">
                 <div class="recipe-details">
                     <h2>{{ recipe.name }}</h2>
-                    <a href="{{ url_for('recipe_controller.recipe_instruction', recipe_name=recipe.name) }}" class="view-recipe">View Recipe</a>
+                        <a href="{{ url_for('recipe_controller.recipe_instruction', recipe_id=recipe.recipe_id) }}" class="view-recipe">View Recipe</a>
+                        <a href="{{ url_for('recipe_controller.recipe_instruction', recipe_id=recipe.recipe_id) }}" class="star-rating">Reviews | {{ recipe_reviews_count[recipe.recipe_id] }} Reviews</a>
+
+
+
                 </div>
             </div>
         {% if loop.index % 2 == 0 %}
@@ -39,7 +43,10 @@
         <img src="{{ recipe.image_url }}" alt="{{ recipe.name }} Image" style="width: 298px; height: 270px;" loading="lazy">
         <div class="recipe-new-details">
             <h2>{{ recipe.name }}</h2>
-            <a href="{{ url_for('recipe_controller.recipe_instruction', recipe_id=recipe.recipe_id, recipe_name=recipe.name) }}" class="view-new-recipe">View Recipe</a>
+            <a href="{{ url_for('recipe_controller.recipe_instruction', recipe_id=recipe.recipe_id) }}" class="view-new-recipe">View Recipe</a>
+            <a href="{{ url_for('recipe_controller.recipe_instruction', recipe_id=recipe.recipe_id) }}" class="star-new-rating">Reviews | {{ recipe_reviews_count[recipe.recipe_id] }} Reviews</a>
+
+
         </div>
     </div>
     {% if loop.index % 3 == 0  %}

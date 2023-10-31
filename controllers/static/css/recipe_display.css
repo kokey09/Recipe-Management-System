@@ -50,7 +50,7 @@ ul.recipe-list {
     color: #555;
 }
 
-.recipe-card a {
+.recipe-card a view-recipe  {
     display: block;
     text-align: center;
     padding: 10px;
@@ -98,6 +98,16 @@ ul.recipe-list {
     text-align: center;
     padding: 10px;
     background-color: #ff5733;
+    color: #fff;
+    text-decoration: none;
+    font-weight: bold;
+    border-radius: 0 0 5px 5px;
+}
+.star-rating {
+    display: block;
+    text-align: center;
+    padding: 10px;
+    background-color: #333;
     color: #fff;
     text-decoration: none;
     font-weight: bold;

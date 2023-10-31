@@ -4,33 +4,26 @@
     <meta charset="UTF-8">
     <title>{% block title %}Dashboard/base{% endblock %}</title>
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/dashboard.css') }}">
-    <link rel="icon" href="{{ url_for('static', filename='img-db/recipes.png') }}" type="image/x-icon">
+    <link rel="icon" href="{{ url_for('static', filename='recipes-img-table/recipes.png') }}" type="image/x-icon">
 
     <script src="{{ url_for('static', filename='js/base.js') }}"></script>
 </head>
 <body>
     <nav class="sidebar">
-            <img src="{{ url_for('static', filename='img-db/recipes.png') }}" alt="Your Logo" style="width: 200px; height: 80px;">
-
+            <img src="{{ url_for('static', filename='recipes-img-table/recipes.png') }}" alt="Your Logo" style="width: 200px; height: 80px;">
         <h1><a href="/dashboard" title="go back to dashboard">Dashboard</a></h1>
         {% if user %}
             <h3>Hi {{ user.username }}</h3>
         {% endif %}
-
-        <details id="ingredients-details">
-            <summary>Ingredients management</summary>
             <ul>
                 <li><a href="/ingredients" class="ingredients">Ingredients</a></li>
                 <li><a href="/recipes" class="recipes">Recipe</a></li>
                 <li><a href="/recipe_ingredients" class="recipeINgredients">Recipe Ingredients</a></li>
+                <li><a href="/accounts" class="accounts">Accounts</a></li>
             </ul>
-        </details>
-        <ul>
-            <li><a href="/accounts" class="accounts">Accounts</a></li>
-        </ul>
-        <ul class="logout-link">
-            <li><a href="{{ url_for('account_controller.logout') }}" onclick="return confirm('Are you sure you want to log out?')">Logout</a></li>
-        </ul>
+            <ul class="logout-link">
+                <li><a href="{{ url_for('account_controller.logout') }}" onclick="return confirm('Are you sure you want to log out?')">Logout</a></li>
+            </ul>
     </nav>
 
     <div class="content">

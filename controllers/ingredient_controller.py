@@ -1,9 +1,10 @@
 from flask import  render_template, request, redirect, url_for,  Blueprint,session,flash
 from models.recipe_ingredient import RecipeIngredient
+
 from models.recipe import Recipe
 from models.ingredient import Ingredient
 from models.account import Account
-
+from models.review import Review
 from models.ingredient import db
 
 
@@ -53,14 +54,21 @@ def add_ingredient():
         return redirect(url_for('ingredient_controller.ingredients'))  # Change 'ingredients' to 'ingredient_controller.ingredients'
 
 
-@ingredient_controller_bp.route('/delete_ingredient/<int:id>', methods=['GET', 'POST'])
+@ingredient_controller_bp.route('/delete_ingredient/<int:id>', methods=['POST'])
 def delete_ingredient(id):
     if request.method == 'POST':
         ingredient_to_delete = Ingredient.query.get(id)
         if ingredient_to_delete:
-            db.session.delete(ingredient_to_delete)
-            db.session.commit()
-        return redirect(url_for('ingredient_controller.ingredients'))
+            try:
+                db.session.delete(ingredient_to_delete)
+                db.session.commit()
+                flash('Ingredient deleted successfully', 'success')
+            except Exception as e:
+                flash('An error occurred while deleting the ingredient', 'error')
+        else:
+            flash('Ingredient not found', 'error')
+    return redirect(url_for('ingredient_controller.ingredients'))
+
 
 @ingredient_controller_bp.route('/edit_ingredient/<int:id>', methods=['GET', 'POST'])
 def edit_ingredient(id):
@@ -77,34 +85,24 @@ def edit_ingredient(id):
     return render_template('edit_ingredients.html', ingredient=ingredient, id=id)
 
 
-@ingredient_controller_bp.route('/recipe_display')
-def recipe_display():
-    ingredients = Ingredient.query.all()
-    ingredient = request.args.get('ingredient', None)
-    if ingredient:
-        # Filter recipes by the selected ingredient
-        recipes = Recipe.query.join(Recipe.recipe_ingredients).join(RecipeIngredient.ingredient).filter(
-            Ingredient.name == ingredient).all()
-    else:
-        # If no ingredient is selected, show all recipes
-        recipes = Recipe.query.all()
-    user = None
-    if 'user_id' in session:
-        user_id = session['user_id']
-        user = Account.query.get(user_id)
-    return render_template('recipe_display.html', recipes=recipes,ingredients=ingredients,user=user)
+
 
 @ingredient_controller_bp.route('/')
 def user_page():
     ingredients = Ingredient.query.all()
     recipes = Recipe.query.all()
+
+    recipe_reviews_count = {}  # Dictionary to store the counts
+
+    for recipe in recipes:
+        recipe_reviews_count[recipe.recipe_id] = len(Review.query.filter_by(recipe_id=recipe.recipe_id).all())
     # Check if the user is logged in
     user = None
     if 'user_id' in session:
         user_id = session['user_id']
         user = Account.query.get(user_id)
 
-    return render_template('/user_page.html', recipes=recipes, ingredients=ingredients,  user=user)
+    return render_template('/user_page.html', recipes=recipes, ingredients=ingredients,  user=user , recipe_reviews_count=recipe_reviews_count)
 
 @ingredient_controller_bp.route('/about_us')
 def about_us():

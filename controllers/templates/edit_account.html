@@ -7,7 +7,6 @@
     <link rel="icon" href="{{ url_for('static', filename='img-db/recipes.png') }}" type="image/x-icon">
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="{{ url_for('static', filename='js/edit_account.js') }}"></script>
 </head>
 <body>
     {% extends 'base.html' %}
@@ -35,8 +34,16 @@
                     <option value="normal" {% if account.type == 'normal' %}selected{% endif %}>Normal</option>
                 </select>
             </div>
+             <div class="form-group">
+                <label for="is_deleted">Is Deleted:</label>
+                <select id="is_deleted" name="is_deleted" required>
+                    <option value="1" {% if account.is_deleted %}selected{% endif %}>True</option>
+                    <option value="0" {% if not account.is_deleted %}selected{% endif %}>False</option>
+                </select>
+            </div>
+
             <!-- You can add more fields as needed -->
-            <button type="submit" class="btn-primary">Update Account</button>
+            <button type="submit" class="btn-primary" onclick="return confirm('Are you sure you want to keep changes?')">Update Account</button>
             <a href="/accounts" class="btn-secondary">Back to Accounts</a>
         </form>
     </div>
