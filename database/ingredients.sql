@@ -13,3 +13,6 @@ INSERT INTO `ingredients` (`ingredient_id`,`name`,`description`) VALUES (5,'past
 INSERT INTO `ingredients` (`ingredient_id`,`name`,`description`) VALUES (6,'Fish','asfd');
 INSERT INTO `ingredients` (`ingredient_id`,`name`,`description`) VALUES (7,'Banana','afsda');
 INSERT INTO `ingredients` (`ingredient_id`,`name`,`description`) VALUES (8,'carrot','fasdfasd');
+INSERT INTO `ingredients` (`ingredient_id`,`name`,`description`) VALUES (10,'Rice na malagkit','asfdas');
+INSERT INTO `ingredients` (`ingredient_id`,`name`,`description`) VALUES (11,'Itiks yo','yoo');
+INSERT INTO `ingredients` (`ingredient_id`,`name`,`description`) VALUES (16,'Peach','Peach');
