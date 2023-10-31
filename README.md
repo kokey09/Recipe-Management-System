@@ -6,7 +6,7 @@
 
 ### Local
 1. `pip install -r requirements.txt`
-2. `mysql < database_query.sql && mysql < database/account.sql && mysql < database/recipes.sql && mysql < database/ingredients.sql && mysql < database/recipe_ingredients.sql`
+2. `mysql < database_query.sql && mysql < database/account.sql && mysql < database/recipes.sql && mysql < database/ingredients.sql && mysql < database/recipe_ingredients.sql && mysql < database/reviews.sql`
 3. `python app.py`
 
 ## Flowchart
