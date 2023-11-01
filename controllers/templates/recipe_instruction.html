@@ -27,6 +27,18 @@
             {% endfor %}
         </ul>
 
+
+
+
+
+
+
+
+
+
+
+
+
         <div class="add-review-box">
             {% for recipe in recipes %}
                 <div class="review-content">
@@ -44,7 +56,7 @@
                         </div>
                         <div class="review-details">
                             <p class="review-prompt">What do you think of this recipe? Share your experience to help others</p>
-                            <a href="{{ url_for('account_controller.login') }}" class="add-review-link">Log in to Add Rating & Review</a>
+                            <a href="{{ url_for('account_controller.login') }}" class="add-review-link">Add Rating & Review</a>
                         </div>
                     {% endif %}
                 </div>
@@ -66,6 +78,7 @@
 {% for review in reviews %}
     <hr>
     <div class="review" style="text-align: left;">
+       
         <p>
             {% if review.account.is_deleted %}
                 Username: {{ review.account.username }}
@@ -76,6 +89,7 @@
         <p>Review rating: {{ review.rating }}</p>
         <p>{{ review.timestamp }}</p>
         <p>Review Text: {{ review.review_text }}</p>
+
     </div>
 {% endfor %}
 

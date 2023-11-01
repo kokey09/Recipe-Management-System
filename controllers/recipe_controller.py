@@ -184,8 +184,8 @@ def recipe_review():
 
 
 
-@recipe_controller_bp.route('/submit_review/<int:recipe_id>', methods=['POST'])
-def submit_review(recipe_id):
+@recipe_controller_bp.route('/add_review/<int:recipe_id>', methods=['POST'])
+def add_review(recipe_id):
     if request.method == 'POST':
         # Retrieve the review data from the form
         review_text = request.form.get('review_text')

@@ -10,7 +10,7 @@
 
 
 
-<form action="{{ url_for('recipe_controller.submit_review', recipe_id=recipe.recipe_id) }}" method="post">
+<form action="{{ url_for('recipe_controller.add_review', recipe_id=recipe.recipe_id) }}" method="post">
     <h1>Submit a Review</h1>
     <input type="hidden" name="account_id" value="{{ user.id }}">  <!-- Updated user_id to user.id -->
     <img src="{{ recipe.image_url }}" alt="{{ recipe.name }} Image" style="width: 298px; height: 270px;">
