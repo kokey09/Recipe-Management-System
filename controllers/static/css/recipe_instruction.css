@@ -96,8 +96,21 @@
     margin: 0;
 }
 
+.add-review-link{
+    display: inline-block;
+    padding: 20px 20px;
+    background-color: #ff5733;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s; /
+}
 
-
+.add-review-link:hover {
+    background-color: #ff3300; /* Change background color on hover */
+}
 
 
 
