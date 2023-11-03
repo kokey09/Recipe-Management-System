@@ -7,15 +7,17 @@ LIMIT 0, 1000
 
 USE recipedb;
 
-INSERT INTO `reviews` (`review_id`,`recipe_id`,`account_id`,`review_text`,`rating`,`timestamp`,`image_url`) VALUES (47,3,26,'mema',4,'2023-10-30 22:24:55',NULL);
-INSERT INTO `reviews` (`review_id`,`recipe_id`,`account_id`,`review_text`,`rating`,`timestamp`,`image_url`) VALUES (48,3,27,'luh',4,'2023-10-30 22:36:28',NULL);
-INSERT INTO `reviews` (`review_id`,`recipe_id`,`account_id`,`review_text`,`rating`,`timestamp`,`image_url`) VALUES (49,NULL,22,'Yummy',5,'2023-10-30 23:33:42',NULL);
-INSERT INTO `reviews` (`review_id`,`recipe_id`,`account_id`,`review_text`,`rating`,`timestamp`,`image_url`) VALUES (50,1,22,'yummy ',4,'2023-10-31 13:50:04',NULL);
-INSERT INTO `reviews` (`review_id`,`recipe_id`,`account_id`,`review_text`,`rating`,`timestamp`,`image_url`) VALUES (51,2,25,'yahalo',5,'2023-10-31 14:05:42',NULL);
-INSERT INTO `reviews` (`review_id`,`recipe_id`,`account_id`,`review_text`,`rating`,`timestamp`,`image_url`) VALUES (52,3,25,'Ahahaaha',5,'2023-10-31 14:09:11',NULL);
-INSERT INTO `reviews` (`review_id`,`recipe_id`,`account_id`,`review_text`,`rating`,`timestamp`,`image_url`) VALUES (53,14,22,'mema',4,'2023-10-31 15:02:45',NULL);
-INSERT INTO `reviews` (`review_id`,`recipe_id`,`account_id`,`review_text`,`rating`,`timestamp`,`image_url`) VALUES (54,4,22,'Mema',4,'2023-10-31 15:05:40',NULL);
-
+INSERT INTO `reviews` (`review_id`,`recipe_id`,`account_id`,`review_text`,`rating`,`timestamp`,`image_url`) VALUES (61,1,22,'yummy naman nito',4,'2023-11-03 21:25:26','static/reviews-img-table/french-apple-cake-recipe-171299-2.jpg');
+INSERT INTO `reviews` (`review_id`,`recipe_id`,`account_id`,`review_text`,`rating`,`timestamp`,`image_url`) VALUES (62,1,22,'we dinga',4,'2023-11-03 21:25:40','static/reviews-img-table/peach-prosciutto-pie.jpg');
+INSERT INTO `reviews` (`review_id`,`recipe_id`,`account_id`,`review_text`,`rating`,`timestamp`,`image_url`) VALUES (63,1,22,'mema nyo',4,'2023-11-03 21:28:02','static/reviews-img-table/french-apple-cake-recipe-171299-2.jpg');
+INSERT INTO `reviews` (`review_id`,`recipe_id`,`account_id`,`review_text`,`rating`,`timestamp`,`image_url`) VALUES (64,1,22,'og tlga tols',4,'2023-11-03 21:28:19',NULL);
+INSERT INTO `reviews` (`review_id`,`recipe_id`,`account_id`,`review_text`,`rating`,`timestamp`,`image_url`) VALUES (65,1,22,'ahaahaha',4,'2023-11-03 21:29:05','static/reviews-img-table/carrotnaluto.jpg');
+INSERT INTO `reviews` (`review_id`,`recipe_id`,`account_id`,`review_text`,`rating`,`timestamp`,`image_url`) VALUES (66,3,22,'yahol',4,'2023-11-03 21:30:20',NULL);
+INSERT INTO `reviews` (`review_id`,`recipe_id`,`account_id`,`review_text`,`rating`,`timestamp`,`image_url`) VALUES (67,3,22,'ahahaha',4,'2023-11-03 21:30:30','static/reviews-img-table/ingredients.png');
+INSERT INTO `reviews` (`review_id`,`recipe_id`,`account_id`,`review_text`,`rating`,`timestamp`,`image_url`) VALUES (68,3,1,'dmaing ebas',4,'2023-11-03 21:37:22',NULL);
+INSERT INTO `reviews` (`review_id`,`recipe_id`,`account_id`,`review_text`,`rating`,`timestamp`,`image_url`) VALUES (69,3,1,'fasdfasdfasf',4,'2023-11-03 21:37:38','static/reviews-img-table/Ireliaa.jpg');
+INSERT INTO `reviews` (`review_id`,`recipe_id`,`account_id`,`review_text`,`rating`,`timestamp`,`image_url`) VALUES (70,2,25,'meme na biko',NULL,'2023-11-03 21:40:46','static/reviews-img-table/Ireliaa.jpg');
+INSERT INTO `reviews` (`review_id`,`recipe_id`,`account_id`,`review_text`,`rating`,`timestamp`,`image_url`) VALUES (71,2,25,'dami nyong alam',1,'2023-11-03 21:40:56',NULL);
 
 
 
