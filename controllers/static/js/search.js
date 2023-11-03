@@ -124,8 +124,6 @@ document.addEventListener("DOMContentLoaded", function() {
         });
     });
 });
-
-// Accounts
 document.addEventListener("DOMContentLoaded", function() {
     const searchInput = document.getElementById("searchInput-account");
     const accountTable = document.querySelector("table");
@@ -135,10 +133,19 @@ document.addEventListener("DOMContentLoaded", function() {
         const searchText = searchInput.value.toLowerCase();
 
         rows.forEach(function(row) {
-            // Get the account ID from the first column (td:nth-child(1))
-            const accountId = row.querySelector("td:nth-child(1)").textContent.toLowerCase();
+            const cells = row.querySelectorAll("td"); // Get all td cells in the row
 
-            if (accountId.includes(searchText)) {
+            let found = false; // Initialize a flag to track if the search text is found in any cell
+
+            cells.forEach(function(cell) {
+                const cellText = cell.textContent.toLowerCase();
+
+                if (cellText.includes(searchText)) {
+                    found = true;
+                }
+            });
+
+            if (found) {
                 row.style.display = ""; // Show the table row
             } else {
                 row.style.display = "none"; // Hide the table row
@@ -146,6 +153,7 @@ document.addEventListener("DOMContentLoaded", function() {
         });
     });
 });
+
 
 
 

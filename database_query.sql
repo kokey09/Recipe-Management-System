@@ -43,6 +43,7 @@ CREATE TABLE reviews (
     review_text TEXT,
     rating INT(5),
     timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    image_url VARCHAR(512),
     FOREIGN KEY (account_id) REFERENCES account(id),
     FOREIGN KEY (recipe_id) REFERENCES recipes(recipe_id)
 );

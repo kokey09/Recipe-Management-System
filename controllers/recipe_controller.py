@@ -83,6 +83,7 @@ def edit_recipe(id):
         recipe_name = request.form['recipe_name']
         instructions = request.form['instructions']
         image_file = request.files['image_file']
+        filename = None  # Initialize filename to None
 
         if image_file:
             # Save the uploaded image to a directory
@@ -97,7 +98,7 @@ def edit_recipe(id):
             recipe = Recipe.query.get(id)
             recipe.name = recipe_name
             recipe.instructions = instructions
-            if image_file:
+            if filename:  # Check if filename is not None
                 recipe.image_url = f'static/recipes-img-table/{filename}'
             db.session.commit()
         except Exception as e:
@@ -113,7 +114,6 @@ def edit_recipe(id):
     return redirect(url_for('recipe_controller.recipes'))
 
 
-from sqlalchemy import func
 
 
 @recipe_controller_bp.route('/recipe_instruction')
@@ -190,15 +190,26 @@ def add_review(recipe_id):
         # Retrieve the review data from the form
         review_text = request.form.get('review_text')
         rating = request.form.get('rating')
+        image_file = request.files.get('image_file')  # Access the uploaded file using get()
 
         account_id = None  # Initialize account_id to None
         # Check if the user is logged in
         if 'user_id' in session:
             account_id = session['user_id']  # Update to use account_id instead of user_id
 
+        filename = None  # Initialize filename to None
+
         if account_id:
+            # Save the uploaded image to a directory if provided
+            if image_file:
+                filename = secure_filename(image_file.filename)
+                image_directory = os.path.join(current_app.root_path, 'static', 'reviews-img-table')
+                os.makedirs(image_directory, exist_ok=True)  # Create the directory if it doesn't exist
+                image_path = os.path.join(image_directory, filename)
+                image_file.save(image_path)
+
             # Create a new Review object
-            new_review = Review(recipe_id=recipe_id, account_id=account_id, review_text=review_text, rating=rating)
+            new_review = Review(recipe_id=recipe_id, account_id=account_id, review_text=review_text, rating=rating, image_url=f'static/reviews-img-table/{filename}' if filename else None)
 
             # Save the review to the database
             db.session.add(new_review)
@@ -212,6 +223,7 @@ def add_review(recipe_id):
     else:
         # Handle other HTTP methods if needed
         return redirect(url_for('some_other_route'))
+
 
 
 

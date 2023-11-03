@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Recipe List</title>
+    <title>Instruction</title>
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/recipe_instruction.css') }}">
     <link rel="icon" href="{{ url_for('static', filename='img-db/recipes.png') }}" type="image/x-icon">
 
@@ -26,17 +26,6 @@
                 </li>
             {% endfor %}
         </ul>
-
-
-
-
-
-
-
-
-
-
-
 
 
         <div class="add-review-box">
@@ -78,7 +67,6 @@
 {% for review in reviews %}
     <hr>
     <div class="review" style="text-align: left;">
-       
         <p>
             {% if review.account.is_deleted %}
                 Username: {{ review.account.username }}
@@ -90,6 +78,9 @@
         <p>{{ review.timestamp }}</p>
         <p>Review Text: {{ review.review_text }}</p>
 
+        {% if review.image_url %}
+            <img src="{{ review.image_url }}" alt="images" style="width: 100px; height: 100px;">
+        {% endif %}
     </div>
 {% endfor %}
 
