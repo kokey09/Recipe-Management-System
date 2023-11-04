@@ -124,6 +124,7 @@ document.addEventListener("DOMContentLoaded", function() {
         });
     });
 });
+//accounts
 document.addEventListener("DOMContentLoaded", function() {
     const searchInput = document.getElementById("searchInput-account");
     const accountTable = document.querySelector("table");
@@ -153,7 +154,36 @@ document.addEventListener("DOMContentLoaded", function() {
         });
     });
 });
+//reviews_dashboard
+document.addEventListener("DOMContentLoaded", function() {
+    const searchInput = document.getElementById("searchInput-account");
+    const accountTable = document.querySelector("table");
+    const rows = accountTable.querySelectorAll("tbody tr");
 
+    searchInput.addEventListener("input", function() {
+        const searchText = searchInput.value.toLowerCase();
+
+        rows.forEach(function(row) {
+            const cells = row.querySelectorAll("td"); // Get all td cells in the row
+
+            let found = false; // Initialize a flag to track if the search text is found in any cell
+
+            cells.forEach(function(cell) {
+                const cellText = cell.textContent.toLowerCase();
+
+                if (cellText.includes(searchText)) {
+                    found = true;
+                }
+            });
+
+            if (found) {
+                row.style.display = ""; // Show the table row
+            } else {
+                row.style.display = "none"; // Hide the table row
+            }
+        });
+    });
+});
 
 
 

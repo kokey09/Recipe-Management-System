@@ -47,3 +47,14 @@ CREATE TABLE reviews (
     FOREIGN KEY (account_id) REFERENCES account(id),
     FOREIGN KEY (recipe_id) REFERENCES recipes(recipe_id)
 );
+
+CREATE TABLE reply_reviews(
+    reply_reviews_id INT(11) AUTO_INCREMENT PRIMARY KEY,
+    review_id INT(11), 
+    account_id INT(11),
+    reply_reviews_text TEXT,
+    timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    image_url VARCHAR(512),
+    FOREIGN KEY (review_id) REFERENCES reviews(review_id),
+    FOREIGN KEY (account_id) REFERENCES account(id)
+);

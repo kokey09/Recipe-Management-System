@@ -226,5 +226,24 @@ def add_review(recipe_id):
 
 
 
+@recipe_controller_bp.route('/reviews_dashboard')
+def reviews_dashboard():
+    reviews = Review.query.all()
+
+    if 'user_id' in session:
+        user_id = session['user_id']
+        user = Account.query.get(user_id)
+
+        if user and user.type == 'admin':
+            return render_template('reviews_dashboard.html', user=user, reviews=reviews)
+        else:
+            return redirect(url_for('ingredient_controller.user_page'))
+
+    else:
+        flash('Please log in to access the dashboard', 'error')
+        return redirect(url_for('account_controller.login'))
+
+
+
 
 

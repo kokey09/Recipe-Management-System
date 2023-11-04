@@ -9,12 +9,13 @@ bcrypt = Bcrypt()
 
 @account_controller_bp.route('/accounts')
 def accounts():
+    accounts_data = Account.query.all()
+
     if 'user_id' in session:
         user_id = session['user_id']
         user = Account.query.get(user_id)
 
         if user and user.type == 'admin':
-            accounts_data = Account.query.all()
             return render_template('accounts.html', accounts=accounts_data, user=user)
         else:
             flash('You do not have permission to access accounts.', 'error')
