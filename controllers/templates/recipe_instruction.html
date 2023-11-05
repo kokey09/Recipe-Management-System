@@ -38,7 +38,11 @@
                     <div class="review-details">
                         <h3 class="review-prompt">What do you think of this recipe?</h3>
                         <p class="review-subtitle">Share your experience to help others</p>
+                        {% if user %}
                         <a href="{{ url_for('recipe_controller.recipe_review', recipe_id=recipe.recipe_id) }}" class="add-review-link">Add Rating & Review</a>
+                        {% else %}
+                        <a href="{{ url_for('account_controller.login') }}" class="add-review-link">Add Rating & Review</a>
+                        {% endif %}
                     </div>
                 </div>
                 <div class="rating-info">
