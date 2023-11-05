@@ -5,91 +5,93 @@
     <title>Instruction</title>
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/recipe_instruction.css') }}">
     <link rel="icon" href="{{ url_for('static', filename='img-db/recipes.png') }}" type="image/x-icon">
-
 </head>
 <body>
     {% extends 'user_base.html' %}
     {% block title %}Recipe Instruction{% endblock %}
     {% block content %}
-
     <div class="logo-link">
-         <img src="{{ url_for('static', filename='img-db/recipes.png') }}" alt="Your Logo" style="width: 200px; height: 80px;" >
+        <img src="{{ url_for('static', filename='img-db/recipes.png') }}" alt="Your Logo" style="width: 200px; height: 80px;">
     </div>
+<div class="recipe-list">
+    {% for recipe in recipes %}
+        <div class="recipe-item">
+            <h2>{{ recipe.name }}</h2>
+            <div class="recipe-image">
+                <img src="{{ recipe.image_url }}" alt="{{ recipe.name }} Image">
+            </div>
+            <div class="recipe-instructions">
+                <pre>{{ recipe.instructions }}</pre>
+            </div>
+        </div>
+    {% endfor %}
+</div>
 
-    <div class="recipe-list">
-        <ul>
-            {% for recipe in recipes %}
-                <li class="recipe-item">
-                    <h2>{{ recipe.name }}</h2>
-                    <img src="{{ recipe.image_url }}" alt="{{ recipe.name }} Image" style="width: 298px; height: 270px;">
-                    <td><pre>{{ recipe.instructions }}</pre></td>
-                </li>
-            {% endfor %}
-        </ul>
 
-
+    <div class="add-review-container">
         <div class="add-review-box">
             {% for recipe in recipes %}
                 <div class="review-content">
-                    {% if user %}
-                        <div class="star-icon">
-                            <img src="{{ url_for('static', filename='raw-image/star.png') }}" alt="Star Icon" width="75" height="45">
-                        </div>
-                        <div class="review-details">
-                            <p class="review-prompt">What do you think of this recipe? Share your experience to help others</p>
-                            <a href="{{ url_for('recipe_controller.recipe_review', recipe_id=recipe.recipe_id) }}" class="add-review-link">Add Rating & Review</a>
-                        </div>
-                    {% else %}
-                        <div class="star-icon">
-                            <img src="{{ url_for('static', filename='raw-image/star.png') }}" alt="Star Icon" width="75" height="45">
-                        </div>
-                        <div class="review-details">
-                            <p class="review-prompt">What do you think of this recipe? Share your experience to help others</p>
-                            <a href="{{ url_for('account_controller.login') }}" class="add-review-link">Add Rating & Review</a>
-                        </div>
-                    {% endif %}
+                    <div class="star-icon">
+                        <img src="{{ url_for('static', filename='raw-image/star.png') }}" alt="Star Icon" width="75" height="45">
+                    </div>
+                    <div class="review-details">
+                        <h3 class="review-prompt">What do you think of this recipe?</h3>
+                        <p class="review-subtitle">Share your experience to help others</p>
+                        <a href="{{ url_for('recipe_controller.recipe_review', recipe_id=recipe.recipe_id) }}" class="add-review-link">Add Rating & Review</a>
+                    </div>
                 </div>
-                <hr>
                 <div class="rating-info">
                     <div class="star-icon">
                         <img src="{{ url_for('static', filename='raw-image/5staricon.png') }}" alt="5 Stars" width="150" height="90">
                     </div>
                     <div class="rating-details">
-                        <p>5 out of 5</p>
+                        <p class="overall-rating">5 out of 5</p>
                         <p class="review-count">{{ recipe_reviews_count }} Reviews</p>
                     </div>
-
                 </div>
             {% endfor %}
         </div>
-
-
-{% for review in reviews %}
-    <hr>
-    <div class="review" style="text-align: left;">
-        <p>
-            {% if review.account.is_deleted %}
-                Username: {{ review.account.username }}
-            {% else %}
-                Username: {{ review.account.username }}
-            {% endif %}
-        </p>
-        <p>Review rating: {{ review.rating }}</p>
-        <p>{{ review.timestamp }}</p>
-        <p>Review Text: {{ review.review_text }}</p>
-
-        {% if review.image_url %}
-            <img src="{{ review.image_url }}" alt="images" style="width: 100px; height: 100px;">
-        {% endif %}
-    </div>
-{% endfor %}
-
-
     </div>
 
+<div class="reviews-section">
+    {% for review in reviews %}
+        <div class="review">
+            <div class="review-header">
+                <div class="user-info">
+                    {% if review.account.is_deleted %}
+                    {{ review.account.username }}
+                    {% else %}
+                    {{ review.account.username }}
+                    {% endif %}
+                </div>
+                <div class="review-details">
+                    <div class="review-rating">
+                        <div class="star-rating">
+                            <div class="stars" style="width: {{ review.rating * 20 }}%;">★★★★★</div>
+                        </div>
+                    </div>
+                    <div class="review-timestamp">
+                        {{ review.timestamp }}
+                    </div>
+                </div>
+            </div>
+            <div class="review-content">
+                {% if review.image_url %}
+                    <div class="review-image">
+                        <img src="{{ review.image_url }}" alt="images" style="width: 100px; height: 100px;" loading="lazy">
+                    </div>
+                {% endif %}
+                <div class="review-text">
+                    {{ review.review_text }}
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+</div>
 
     {% endblock %}
-</body>
+  </body>
 </html>
 
 
