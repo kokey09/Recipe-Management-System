@@ -5,16 +5,29 @@
   <title>Recipe and Ingredients</title>
   <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/recipe_ingredients.css') }}">
     <link rel="icon" href="{{ url_for('static', filename='img-db/recipes.png') }}" type="image/x-icon">
-    <script src="{{ url_for('static', filename='js/search.js') }}"></script>
+      <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="{{ url_for('static', filename='js/search_recipe_ingredient.js') }}"></script>
 </head>
 <body>
   {% extends 'base.html' %}
   {% block title %}Recipe and Ingredients{% endblock %}
   {% block content %}
 
-  <div class="container">
-    <h1>Recipe and Ingredients</h1>
-    <input type="text" id="searchInput" class="search-bar" placeholder="Search Recipe">
+<fieldset>
+<legend><h1>Recipe Ingredient Connection</h1></legend>
+
+<div class="search-container">
+    <select id="columnSelector">
+        <option value="all">Search All</option>
+        <option value="recipe_id">Recipe ID</option>
+        <option value="recipe_name">Recipe Name</option>
+        <option value="ingredient_id">Ingredient ID</option>
+        <option value="ingredient_name">Ingredient Name</option>
+    </select>
+    <input type="text" id="searchInput" class="search-bar" placeholder="Search Recipe and Ingredients">
+    <button id="searchButton">Search</button>
+</div>
+
 
     <table class="recipe-ingredient-table">
       <thead>
@@ -68,6 +81,7 @@
       </form>
     </fieldset>
   </div>
+</fieldset>
   {% endblock %}
 </body>
 </html>

@@ -7,7 +7,7 @@
     <link rel="icon" href="{{ url_for('static', filename='img-db/recipes.png') }}" type="image/x-icon">
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="{{ url_for('static', filename='js/search.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/search_recipe.js') }}"></script>
 
 </head>
 <body>
@@ -21,20 +21,29 @@
         <form method="POST" action="/add_recipe" enctype="multipart/form-data" class="form-recipe">
             <!-- Form for adding a new recipe -->
             <label for="recipe_name">Name:</label>
-            <input type="text" id="recipe_name" name="recipe_name" required>
+            <input type="text" id="recipe_name" name="recipe_name" class="name-form" required>
 
             <label for="instructions">Instructions:</label>
-            <textarea id="instructions" name="instructions" rows="4" required></textarea>
+            <textarea id="instructions" name="instructions" rows="4" class="text-area-form" required></textarea>
 
-             <label for="image_file">Image File:</label>
-             <input type="file" id="image_file" name="image_file" accept="image/*" required>
+            <label for="image_file">Image File:</label>
+            <input type="file" id="image_file" name="image_file" accept="image/*" required>
 
             <button type="submit">Add Recipe</button>
         </form>
-        
+
+        <div class="search-container">
+            <select id="columnSelector">
+                <option value="all">Search All</option>
+                <option value="recipe_id">Recipe ID</option>
+                <option value="name">Name</option>
+                <option value="instructions">Instructions</option>
+            </select>
+            <input type="text" id="search-Input-recipe" class="search-bar" placeholder="Search Recipe">
+            <button id="searchButton">Search</button>
+        </div>
 
         <table class="recipes-table">
-            <input type="text" id="search-Input" class="search-bar" placeholder="Search Recipe">
             <thead>
                 <tr>
                     <th>ID</th>
@@ -52,15 +61,12 @@
                     <td>{{ recipe.instructions }}</td>
                     <td>
                         <img src="{{ recipe.image_url }}" alt="{{ recipe.name }} Image" style="width: 100px; height: 100px;" loading="lazy">
-
                     </td>
                     <td>
                         <form method="POST" action="{{ url_for('recipe_controller.delete_recipe', id=recipe.recipe_id) }}" >
                              <button class="btn btn-danger" title="Delete Recipe" type="submit" onclick="return confirm('Are you sure you want to delete this Recipe?')">Delete</button>
                             <a href="/edit_recipe/{{ recipe.recipe_id }}" class="btn edit-button">Edit</a>
                         </form>
-
-
                     </td>
                 </tr>
                 {% endfor %}
