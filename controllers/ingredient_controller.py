@@ -90,7 +90,7 @@ def edit_ingredient(id):
 @ingredient_controller_bp.route('/')
 def user_page():
     ingredients = Ingredient.query.all()
-    recipes = Recipe.query.all()
+    recipes = Recipe.query.filter_by(is_deleted=False).order_by(Recipe.recipe_id.desc()).all()
 
     recipe_reviews_count = {}  # Dictionary to store the counts
 
