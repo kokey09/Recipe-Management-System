@@ -85,7 +85,7 @@ def edit_recipe(id):
         recipe_name = request.form['recipe_name']
         instructions = request.form['instructions']
         image_file = request.files['image_file']
-        is_deleted = bool(request.form['is_deleted'])  # Get the is_deleted value as an integer
+        is_deleted = request.form.get('is_deleted', '0') == '1'  # Get the is_deleted value as an integer
         filename = None  # Initialize filename to None
 
         if image_file:
