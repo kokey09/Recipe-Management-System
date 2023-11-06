@@ -1,6 +1,7 @@
 from flask import  render_template, request, redirect, url_for, Blueprint,current_app,session,flash
 from werkzeug.utils import secure_filename
 import os
+import logging
 
 from models.recipe import Recipe
 from models.ingredient import Ingredient
@@ -53,13 +54,13 @@ def add_recipe():
                 db.session.add(new_recipe)
                 db.session.commit()
 
-                return redirect(url_for('recipe_controller_bp.recipes'))
+                logging.info("Recipe added successfully")
+                return redirect(url_for('recipe_controller.recipes'))
             except Exception as e:
-                print(f"Error adding recipe: {str(e)}")
+                logging.error(f"Error adding recipe: {str(e)}")
                 db.session.rollback()
 
-    return redirect(url_for('recipe_controller.recipes'))
-
+    return redirect(url_for('recipe_controller_bp.recipes'))
 
 @recipe_controller_bp.route('/delete_recipe/<int:id>', methods=['POST'])
 def delete_recipe(id):
@@ -81,29 +82,23 @@ def delete_recipe(id):
 
 @recipe_controller_bp.route('/edit_recipe/<int:id>', methods=['GET', 'POST'])
 def edit_recipe(id):
+    recipe = Recipe.query.get(id)
+
     if request.method == 'POST':
-        recipe_name = request.form['recipe_name']
-        instructions = request.form['instructions']
-        image_file = request.files['image_file']
+        recipe.name = request.form['recipe_name']
+        recipe.instructions = request.form['instructions']
         is_deleted = request.form.get('is_deleted', '0') == '1'  # Get the is_deleted value as an integer
         filename = None  # Initialize filename to None
 
+        image_file = request.files.get('image_file')
         if image_file:
-            # Save the uploaded image to a directory
             filename = secure_filename(image_file.filename)
-            image_directory = os.path.join(current_app.root_path, 'static', 'recipes-img-table')
-            os.makedirs(image_directory, exist_ok=True)
-            image_path = os.path.join(image_directory, filename)
+            image_path = os.path.join(current_app.root_path, 'static', 'recipes-img-table', filename)
             image_file.save(image_path)
+            recipe.image_url = f'static/recipes-img-table/{filename}'
 
         try:
-            # Update the existing Recipe object with the new data and image path
-            recipe = Recipe.query.get(id)
-            recipe.name = recipe_name
-            recipe.instructions = instructions
-            if filename:  # Check if filename is not None
-                recipe.image_url = f'static/recipes-img-table/{filename}'
-            recipe.is_deleted = bool(is_deleted)  # Update the is_deleted flag
+            recipe.is_deleted = bool(is_deleted)
             db.session.commit()
         except Exception as e:
             print(f"Error updating recipe: {str(e)}")
@@ -111,14 +106,7 @@ def edit_recipe(id):
 
         return redirect(url_for('recipe_controller.recipes'))
 
-    else:
-        recipe = Recipe.query.get(id)
-        return render_template('edit_recipes.html', recipe=recipe, id=id)
-
-    return redirect(url_for('recipe_controller.recipes'))
-
-
-
+    return render_template('edit_recipes.html', recipe=recipe, id=id)
 
 
 @recipe_controller_bp.route('/recipe_instruction')
