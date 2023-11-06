@@ -44,6 +44,7 @@ CREATE TABLE reviews (
     rating INT(5),
     timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     image_url VARCHAR(512),
+    is_deleted TINYINT(1),
     FOREIGN KEY (account_id) REFERENCES account(id),
     FOREIGN KEY (recipe_id) REFERENCES recipes(recipe_id)
 );
