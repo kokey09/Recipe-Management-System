@@ -14,7 +14,7 @@
     </div>
 
     <div class="recipe-row">
-        {% for recipe in recipes[:4] %}
+        {% for recipe in recipes [:4]  if not recipe.is_deleted %}
             <div class="recipe-card">
                 <img src="{{ recipe.image_url }}" alt="{{ recipe.name }} Image" style="width: 298px; height: 270px;" loading="lazy">
                 <div class="recipe-details">
@@ -36,25 +36,26 @@
 
 <h1 class="new">What's New?</h1>
 
+
 <div class="recipe-new-list">
-    {% set sorted_recipes = recipes | sort(attribute='recipe_id', reverse=True) %}
-    {% for recipe in sorted_recipes[:6] %}
-    <div class="recipe-new-card">
-        <img src="{{ recipe.image_url }}" alt="{{ recipe.name }} Image" style="width: 298px; height: 270px;" loading="lazy">
-        <div class="recipe-new-details">
-            <h2>{{ recipe.name }}</h2>
-            <a href="{{ url_for('recipe_controller.recipe_instruction', recipe_id=recipe.recipe_id) }}" class="view-new-recipe">View Recipe</a>
-            <a href="{{ url_for('recipe_controller.recipe_instruction', recipe_id=recipe.recipe_id) }}" class="star-new-rating">Reviews | {{ recipe_reviews_count[recipe.recipe_id] }} Reviews</a>
-
-
+    {% for recipe in recipes [:6] %}
+        <div class="recipe-new-card">
+            <img src="{{ recipe.image_url }}" alt="{{ recipe.name }} Image" style="width: 298px; height: 270px;" loading="lazy">
+            <div class="recipe-new-details">
+                <h2>{{ recipe.name }}</h2>
+                <a href="{{ url_for('recipe_controller.recipe_instruction', recipe_id=recipe.recipe_id) }}" class="view-new-recipe">View Recipe</a>
+                <a href="{{ url_for('recipe_controller.recipe_instruction', recipe_id=recipe.recipe_id) }}" class="star-new-rating">Reviews | {{ recipe_reviews_count[recipe.recipe_id] }} Reviews</a>
+            </div>
         </div>
-    </div>
-    {% if loop.index % 3 == 0  %}
-    </div>
-    <div class="recipe-new-list">
-    {% endif %}
+        {% if loop.index % 3 == 0 %}
+            </div>
+            <div class="recipe-new-list">
+        {% endif %}
     {% endfor %}
 </div>
+
+
+
 
 
 <footer class="site-footer">

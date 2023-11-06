@@ -67,7 +67,8 @@ def delete_recipe(id):
         recipe_to_delete = Recipe.query.get(id)
         if recipe_to_delete:
             try:
-                db.session.delete(recipe_to_delete)
+                # Instead of physically deleting the recipe, set a flag to mark it as deleted
+                recipe_to_delete.is_deleted = True
                 db.session.commit()
                 flash('Recipe deleted successfully', 'success')
             except Exception as e:
@@ -77,12 +78,14 @@ def delete_recipe(id):
     return redirect(url_for('recipe_controller.recipes'))
 
 
+
 @recipe_controller_bp.route('/edit_recipe/<int:id>', methods=['GET', 'POST'])
 def edit_recipe(id):
     if request.method == 'POST':
         recipe_name = request.form['recipe_name']
         instructions = request.form['instructions']
         image_file = request.files['image_file']
+        is_deleted = int(request.form['is_deleted'])  # Get the is_deleted value as an integer
         filename = None  # Initialize filename to None
 
         if image_file:
@@ -100,6 +103,7 @@ def edit_recipe(id):
             recipe.instructions = instructions
             if filename:  # Check if filename is not None
                 recipe.image_url = f'static/recipes-img-table/{filename}'
+            recipe.is_deleted = bool(is_deleted)  # Update the is_deleted flag
             db.session.commit()
         except Exception as e:
             print(f"Error updating recipe: {str(e)}")
@@ -112,6 +116,7 @@ def edit_recipe(id):
         return render_template('edit_recipes.html', recipe=recipe, id=id)
 
     return redirect(url_for('recipe_controller.recipes'))
+
 
 
 
@@ -184,45 +189,43 @@ def recipe_review():
 
 
 
-@recipe_controller_bp.route('/add_review/<int:recipe_id>', methods=['POST'])
-def add_review(recipe_id):
+@recipe_controller_bp.route('/add_review', methods=['POST'])
+def add_review():
     if request.method == 'POST':
         # Retrieve the review data from the form
         review_text = request.form.get('review_text')
         rating = request.form.get('rating')
-        image_file = request.files.get('image_file')  # Access the uploaded file using get()
+        image_file = request.files.get('image_file')
 
-        account_id = None  # Initialize account_id to None
-        # Check if the user is logged in
+        account_id = None
         if 'user_id' in session:
-            account_id = session['user_id']  # Update to use account_id instead of user_id
+            account_id = session['user_id']
 
-        filename = None  # Initialize filename to None
+        filename = None
 
-        if account_id:
-            # Save the uploaded image to a directory if provided
+        # Retrieve recipe_id from the query parameters
+        recipe_id = request.args.get('recipe_id')
+
+        if account_id and recipe_id:
             if image_file:
                 filename = secure_filename(image_file.filename)
                 image_directory = os.path.join(current_app.root_path, 'static', 'reviews-img-table')
-                os.makedirs(image_directory, exist_ok=True)  # Create the directory if it doesn't exist
+                os.makedirs(image_directory, exist_ok=True)
                 image_path = os.path.join(image_directory, filename)
                 image_file.save(image_path)
 
-            # Create a new Review object
             new_review = Review(recipe_id=recipe_id, account_id=account_id, review_text=review_text, rating=rating, image_url=f'static/reviews-img-table/{filename}' if filename else None)
 
-            # Save the review to the database
             db.session.add(new_review)
             db.session.commit()
 
             return redirect(url_for('recipe_controller.recipe_instruction', recipe_id=recipe_id))
         else:
-            # Handle the case where the user is not logged in
-            flash('You must be logged in to submit a review.', 'error')
+            flash('You must be logged in to submit a review or provide a valid recipe_id.', 'error')
             return redirect(url_for('account_controller.login'))
     else:
-        # Handle other HTTP methods if needed
         return redirect(url_for('some_other_route'))
+
 
 
 
@@ -242,6 +245,7 @@ def reviews_dashboard():
     else:
         flash('Please log in to access the dashboard', 'error')
         return redirect(url_for('account_controller.login'))
+
 
 
 

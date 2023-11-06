@@ -23,6 +23,15 @@
         <label for="instructions">Instructions:</label>
         <textarea id="instructions" name="instructions" rows="4" required>{{ recipe.instructions }}</textarea>
 
+        <div class="form-group">
+            <label for="is_deleted">Is Deleted:</label>
+            <select id="is_deleted" name="is_deleted" required class="is_deleted">
+                <option value="1" {% if recipe.is_deleted %}selected{% endif %}>True</option>
+                <option value="0" {% if not recipe.is_deleted %}selected{% endif %}>False</option>
+            </select>
+        </div>
+
+
         <label for="image_file">Image File:</label>
         <input type="file" id="image_file" name="image_file" accept="image/*">  <!-- Use this input field for uploading an image file -->
 

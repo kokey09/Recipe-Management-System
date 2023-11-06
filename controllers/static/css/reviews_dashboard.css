@@ -48,3 +48,10 @@ tr:nth-child(even) {
     border-radius: 3px;
     cursor: pointer;
 }
+/* Add this to your CSS file or within <style> tags in your HTML */
+.ellipsis-text {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 200px; /* Adjust the max-width as needed */
+}

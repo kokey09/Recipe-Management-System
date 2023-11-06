@@ -48,8 +48,9 @@
                     <td>{{ review.review_id }}</td>
                     <td>{{ review.recipe_id }}</td>
                     <td>{{ review.account_id }}</td>
-                    <td>{{ review.review_text }}</td>
-                    <td>{{ review.rating }}</td>
+                    <td>
+                        <div class="ellipsis-text">{{ review.review_text }}</div>
+                    </td>                    <td>{{ review.rating }}</td>
                     <td>{{ review.timestamp }}</td>
                     <td>
                         <img src="{{ review.image_url }}" alt="NULL Image" style="width: 100px; height: 100px;" loading="lazy">

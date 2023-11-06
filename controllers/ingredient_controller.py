@@ -90,19 +90,21 @@ def edit_ingredient(id):
 @ingredient_controller_bp.route('/')
 def user_page():
     ingredients = Ingredient.query.all()
-    recipes = Recipe.query.all()
+    recipes = Recipe.query.filter_by(is_deleted=False).order_by(Recipe.recipe_id.desc()).all()
 
     recipe_reviews_count = {}  # Dictionary to store the counts
 
     for recipe in recipes:
         recipe_reviews_count[recipe.recipe_id] = len(Review.query.filter_by(recipe_id=recipe.recipe_id).all())
+
     # Check if the user is logged in
     user = None
     if 'user_id' in session:
         user_id = session['user_id']
         user = Account.query.get(user_id)
 
-    return render_template('/user_page.html', recipes=recipes, ingredients=ingredients,  user=user , recipe_reviews_count=recipe_reviews_count)
+    return render_template('/user_page.html', recipes=recipes, ingredients=ingredients, user=user, recipe_reviews_count=recipe_reviews_count)
+
 
 @ingredient_controller_bp.route('/about_us')
 def about_us():

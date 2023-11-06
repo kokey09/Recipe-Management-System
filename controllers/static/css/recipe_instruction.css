@@ -2,7 +2,7 @@
 .recipe-list {
   max-width: 800px;
   margin: 0 auto;
-  padding: 30px;
+  padding: 60px;
 }
 
 /* Style for each individual recipe item */
@@ -216,9 +216,7 @@
   overflow: hidden;
   white-space: nowrap;
 }
-
-
-
+/* ________________________________________________ */
 
 
 
