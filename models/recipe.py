@@ -7,4 +7,5 @@ class Recipe(db.Model):
     name = db.Column(db.String(255), nullable=False)
     instructions = db.Column(db.Text)
     image_url = db.Column(db.String(512))
-    is_deleted = db.Column(db.Boolean, default=False)
+    is_deleted = db.Column(db.Boolean, nullable=False, default=False)
+
