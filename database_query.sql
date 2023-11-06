@@ -10,7 +10,8 @@ CREATE TABLE recipes (
     recipe_id INT(11) AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(255) NOT NULL,
     instructions TEXT NOT NULL,
-    image_url VARCHAR(512)
+    image_url VARCHAR(512),
+    is_deleted TINYINT(1)
 );
 
 CREATE TABLE ingredients (
@@ -44,7 +45,6 @@ CREATE TABLE reviews (
     rating INT(5),
     timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     image_url VARCHAR(512),
-    is_deleted TINYINT(1),
     FOREIGN KEY (account_id) REFERENCES account(id),
     FOREIGN KEY (recipe_id) REFERENCES recipes(recipe_id)
 );
