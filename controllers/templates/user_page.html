@@ -38,7 +38,14 @@
 
 
 <div class="recipe-new-list">
-    {% for recipe in recipes [:6] %}
+    {% set filtered_recipes = [] %}
+    {% for recipe in recipes | sort(attribute='recipe_id', reverse=True) %}
+        {% if not recipe.is_deleted %}
+            {% set _ = filtered_recipes.append(recipe) %}
+        {% endif %}
+    {% endfor %}
+
+    {% for recipe in filtered_recipes[:6] %}
         <div class="recipe-new-card">
             <img src="{{ recipe.image_url }}" alt="{{ recipe.name }} Image" style="width: 298px; height: 270px;" loading="lazy">
             <div class="recipe-new-details">
@@ -53,6 +60,7 @@
         {% endif %}
     {% endfor %}
 </div>
+
 
 
 
