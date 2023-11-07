@@ -12,10 +12,14 @@
 }
 
 .ingredients-table th {
-    background-color: #f5f5f5;
+    background-color: #333;
     font-weight: bold;
 }
-
+thead {
+    color: #fff	;
+    position: sticky;
+    top: 0;
+}
 .ingredients-table tbody tr:nth-child(even) {
     background-color: #f2f2f2;
 }
