@@ -11,7 +11,7 @@ class Review(db.Model):
     timestamp = db.Column(db.TIMESTAMP, server_default=db.text('CURRENT_TIMESTAMP'), nullable=False)
 
     # Define a relationship to the Recipe model
-    recipe = db.relationship('Recipe', backref=db.backref('reviews', lazy=True))
-    account = db.relationship('Account', back_populates='reviews', foreign_keys=[account_id])
+    recipe = db.relationship('Recipe', backref='reviews')
+    account = db.relationship('Account', backref='reviews')
 
 

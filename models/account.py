@@ -12,10 +12,8 @@ class Account(db.Model):
     password = db.Column(db.String(120), nullable=False)
     type = db.Column(db.String(20), nullable=False, default='normal')
     date_created = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
-
     is_deleted = db.Column(db.Boolean, nullable=False, default=False)
 
-    reviews = db.relationship('Review', back_populates='account', foreign_keys=[Review.account_id])
 
 def create_default_admin(app):
     with app.app_context():
