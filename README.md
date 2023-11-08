@@ -9,6 +9,10 @@
 2. `mysql < database_query.sql && mysql < database/account.sql && mysql < database/recipes.sql && mysql < database/ingredients.sql && mysql < database/recipe_ingredients.sql && mysql < database/reviews.sql`
 3. `python app.py`
 
+### automated git pull and push
+1. the path for pulling and pushing must be in "D:\Desktop\ongoing_projects\Recipe-Management-System"
+
+
 ## Flowchart
 ### Implemented
 ```mermaid
