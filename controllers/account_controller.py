@@ -104,8 +104,8 @@ def login():
                     # Query records excluding those with a specific account_id value
                     reviews = Review.query.filter(Review.account_id != -1).all()
                     return redirect(url_for('ingredient_controller.user_page'))
-
-            error = "Account has been soft deleted."
+            else:
+                error = "Account has been soft deleted."
         else:
             error = "Incorrect username or password. Please try again."
 
