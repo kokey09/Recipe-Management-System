@@ -1,0 +1,78 @@
+{% extends 'user_base.html' %}
+{% block title %}Home Page{% endblock %}
+{% block content %}
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/user_page.css')}}">
+
+<div class="recipe-list">
+
+    <div class="logo-link">
+        <img src="{{ url_for('static', filename='recipes-img-table/recipes.png') }}" alt="Your Logo" style="width: 600px; height: 240px;">
+        <p class="welcome">Welcome to our recipe and ingredient discovery platform! We're here to help you make the most of what's in your kitchen and satisfy your culinary curiosity.</p>
+        <a href="/ingredient_display" class="explore-button">
+            <button class="explore">Explore</button>
+        </a>
+    </div>
+
+    <div class="recipe-row">
+        {% for recipe in recipes [:4]  if not recipe.is_deleted %}
+            <div class="recipe-card">
+                <img src="{{ recipe.image_url }}" alt="{{ recipe.name }} Image" style="width: 298px; height: 270px;" loading="lazy">
+                <div class="recipe-details">
+                    <h2>{{ recipe.name }}</h2>
+                        <a href="{{ url_for('recipe_controller.recipe_instruction', recipe_id=recipe.recipe_id) }}" class="view-recipe">View Recipe</a>
+                        <a href="{{ url_for('recipe_controller.recipe_instruction', recipe_id=recipe.recipe_id) }}" class="star-rating">Reviews | {{ recipe_reviews_count[recipe.recipe_id] }} Reviews</a>
+
+
+
+                </div>
+            </div>
+        {% if loop.index % 2 == 0 %}
+            </div>
+            <div class="recipe-row">
+                    {% endif %}
+                {% endfor %}
+            </div>
+</div>
+
+<h1 class="new">What's New?</h1>
+
+
+<div class="recipe-new-list">
+    {% for recipe in recipes [:6]%}
+        <div class="recipe-new-card">
+            <img src="{{ recipe.image_url }}" alt="{{ recipe.name }} Image" style="width: 298px; height: 270px;" loading="lazy">
+            <div class="recipe-new-details">
+                <h2>{{ recipe.name }}</h2>
+                <a href="{{ url_for('recipe_controller.recipe_instruction', recipe_id=recipe.recipe_id) }}" class="view-new-recipe">View Recipe</a>
+                <a href="{{ url_for('recipe_controller.recipe_instruction', recipe_id=recipe.recipe_id) }}" class="star-new-rating">Reviews | {{ recipe_reviews_count[recipe.recipe_id] }} Reviews</a>
+            </div>
+        </div>
+        {% if loop.index % 3 == 0 %}
+            </div>
+            <div class="recipe-new-list">
+        {% endif %}
+    {% endfor %}
+</div>
+
+
+
+
+
+
+
+<footer class="site-footer">
+    <div class="container">
+        <p>&copy; 2023 Recipe Discovery Platform</p>
+        <ul class="footer-links">
+            <li><a href="/about_us">About us</a></li>
+            <li><a href="/ingredient_display">Ingredients</a></li>
+            <li><a href="/recipe_display">Recipes</a></li>
+            <li><a href="/contact_us">Contact us</a></li>
+            <li><a href="#">back on top </a></li>
+
+        </ul>
+    </div>
+</footer>
+
+{% endblock %}
+

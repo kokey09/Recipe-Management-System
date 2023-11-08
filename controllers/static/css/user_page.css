@@ -1,0 +1,270 @@
+.recipe-list {
+    list-style-type: none;
+    display: flex;
+    justify-content: right;
+    padding: 100px;
+}
+
+
+
+.recipe-card {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; /* Push the title to the top and "View Recipe" link to the bottom */
+    width: 300px;
+    margin: 20px;
+    background-color: #333;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s;
+    height: 433px; /* Set a fixed height */
+}
+
+
+.recipe-card:hover {
+    transform: translateY(-5px);
+}
+
+.recipe-card img {
+    width: 298%;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+}
+
+.recipe-card .recipe-details {
+    padding: 10px;
+}
+
+.recipe-card h2 {
+    font-size: 24px;
+    color: #FFFFFF;
+    margin-bottom: 10px;
+    text-align: center
+}
+
+.recipe-card p {
+    font-size: 16px;
+    color: #555;
+}
+.logo-link {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    text-align: center;
+    width: 100%;
+    height: 80px;
+    margin-top: 260px;
+}
+
+
+.welcome {
+    margin-top: 10px;
+    font-size: 24px; /* Smaller font for responsiveness */
+    text-align: center; /* Center align the text */
+}
+
+.view-recipe {
+    display: block;
+    text-align: center;
+    padding: 10px;
+    background-color: #ff5733;
+    color: #fff;
+    text-decoration: none;
+    font-weight: bold;
+    border-radius: 0 0 5px 5px;
+}
+
+.recipe-card a:hover {
+    background-color: #ff3300;
+}
+
+.content {
+    margin-top: 40px;
+    padding: 20px;
+}
+
+.explore {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #ff5733;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s; /
+
+}
+
+.explore:hover {
+    background-color: #ff3300; /* Change background color on hover */
+}
+/* Responsive styles for smaller screens */
+@media (max-width: 768px) {
+    .recipe-list {
+        flex-direction: column;
+        padding: 20px;
+    }
+
+    .recipe-card {
+        width: 100%;
+        margin: 10px 0;
+        height: auto;
+    }
+
+    .logo-link {
+        margin-top: 20px;
+    }
+
+    .welcome {
+        font-size: 20px; /* Smaller font for smaller screens */
+    }
+}
+
+.recipe-new-list {
+   list-style-type: none;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding: 10px;
+    height: 450px; /* Set a fixed height */
+
+}
+
+.recipe-new-card {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; /* Push the title to the top and "View Recipe" link to the bottom */
+    width: 300px;
+    margin: 20px;
+    background-color: #333;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s;
+
+}
+
+
+.recipe-new-card:hover {
+    transform: translateY(-5px);
+}
+
+.recipe-new-card img {
+    width: 298px;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+}
+
+.recipe-new-card .recipe-new-details {
+    padding: 10px;
+}
+
+.recipe-new-card h2 {
+    font-size: 24px;
+    color: #FFFFFF;
+    margin-bottom: 10px;
+    text-align:center;
+}
+
+.recipe-new-card p {
+    font-size: 16px;
+    color: #555;
+}
+
+.recipe-new-card a view-new-recipe  {
+    display: block;
+    text-align: center;
+    padding: 10px;
+    background-color: #ff5733;
+    color: #fff;
+    text-decoration: none;
+    font-weight: bold;
+    border-radius: 0 0 5px 5px;
+}
+
+
+.recipe-new-card a:hover {
+    background-color: #ff3300;
+}
+
+
+
+.site-footer {
+    background-color: #333;
+    color: #fff;
+    padding: 20px 0;
+    text-align: center;
+    font-family: Arial, sans-serif;
+}
+
+.site-footer p {
+    margin: 0;
+}
+
+.footer-links ul {
+    list-style: none;
+    padding: 0;
+}
+
+.footer-links li {
+    margin-bottom: 10px;
+}
+
+.footer-links a {
+    color: #fff;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.footer-links a:hover {
+    color: #ff5733;
+}
+
+.new{
+    text-align: center;
+
+}
+
+.star-rating{
+    text-align: center;
+
+}
+
+
+
+.star-rating {
+    display: block;
+    text-align: center;
+    padding: 10px;
+    background-color: #333;
+    color: #fff;
+    text-decoration: none;
+    font-weight: bold;
+    border-radius: 0 0 5px 5px;
+}
+
+
+
+.view-new-recipe{
+    display: block;
+    text-align: center;
+    padding: 10px;
+    background-color: #ff5733;
+    color: #fff;
+    text-decoration: none;
+    font-weight: bold;
+    border-radius: 0 0 5px 5px;
+}
+.star-new-rating{
+    display: block;
+    text-align: center;
+    padding: 10px;
+    background-color: #333;
+    color: #fff;
+    text-decoration: none;
+    font-weight: bold;
+    border-radius: 0 0 5px 5px;
+}

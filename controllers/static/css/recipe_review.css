@@ -1,0 +1,83 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+h1 {
+    font-size: 24px;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+form {
+    text-align: center;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+label, textarea {
+    display: block;
+    width: 100%;
+    text-align: left;
+    margin-bottom: 20px;
+}
+
+textarea {
+    width: 94%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    resize: vertical;
+}
+
+button {
+    display: block;
+    background-color: #007BFF;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    margin: 0 auto;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+
+
+.rating {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row-reverse; /* Set the flex direction to reverse the order */
+}
+
+.rating input {
+    display: none;
+}
+
+.rating label {
+    cursor: pointer;
+    font-size: 24px;
+    color: #ccc;
+    margin: 0 5px;
+}
+
+.rating label::before {
+    content: '\2605'; /* Unicode character for a star (★) */
+    display: block;
+    font-size: 24px;
+}
+
+.rating input:checked ~ label {
+    color: #ffc107;
+}

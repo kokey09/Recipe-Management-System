@@ -1,0 +1,134 @@
+.form-recipe{
+    margin: 20px auto;
+    max-width: 400px;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: #f9f9f9;
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+.text-area-form {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+.name-form {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+button[type="submit"] {
+    background-color: #5bc0de;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+button[type="submit"]:hover {
+    background-color: #46b8da;
+}
+
+
+.recipes-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+.recipes-table th,
+.recipes-table td {
+    padding: 10px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+.recipes-table th {
+    background-color: #333;
+    font-weight: bold;
+}
+thead {
+    color: #fff	;
+    position: sticky;
+    top: 0;
+}
+.recipes-table tbody tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+.recipes-table .btn {
+    padding: 5px 10px;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    display: inline-block;
+}
+
+.recipes-table .btn.delete-button {
+    background-color: #ff6b6b;
+    color: #fff;
+}
+
+.recipes-table .btn.edit-button {
+    background-color: #007bff;
+    color: #fff;
+}
+
+.recipes-table .btn:hover {
+    filter: brightness(1.2);
+}
+
+.recipes-table td:nth-child(3) {
+    padding-right: 20px;
+    max-width: 300px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+
+.recipes-table td:nth-child(3) div {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.search-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 10px;
+}
+
+.search-bar {
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    width: 500px;
+}
+
+#columnSelector {
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    margin-right: 10px;
+}
+
+#searchButton {
+    padding: 5px 10px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+}

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit Account</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/edit_account.css') }}">
+    <link rel="icon" href="{{ url_for('static', filename='img-db/recipes.png') }}" type="image/x-icon">
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+    {% extends 'base.html' %}
+    {% block title %}Edit Account{% endblock %}
+    {% block content %}
+    <div class="container">
+        <h1>Edit Account</h1>
+        <form method="POST" action="/edit_account/{{ account.id }}" onsubmit="return confirmUpdate();">
+            <div class="form-group">
+                <label for="username">Username:</label>
+                <input type="text" id="username" name="username" value="{{ account.username }}" required>
+            </div>
+            <div class="form-group">
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" value="{{ account.email }}" required>
+            </div>
+            <div class="form-group">
+                <label for="password">Password:</label>
+                <input type="password" id="password" name="password" required placeholder="Enter new password">
+            </div>
+            <div class="form-group">
+                <label for="type">Account Type:</label>
+                <select id="type" name="type" required>
+                    <option value="admin" {% if account.type == 'admin' %}selected{% endif %}>Admin</option>
+                    <option value="normal" {% if account.type == 'normal' %}selected{% endif %}>Normal</option>
+                </select>
+            </div>
+             <div class="form-group">
+                <label for="is_deleted">Is Deleted:</label>
+                <select id="is_deleted" name="is_deleted" required>
+                    <option value="1" {% if account.is_deleted %}selected{% endif %}>True</option>
+                    <option value="0" {% if not account.is_deleted %}selected{% endif %}>False</option>
+                </select>
+            </div>
+
+            <!-- You can add more fields as needed -->
+            <button type="submit" class="btn-primary" onclick="return confirm('Are you sure you want to keep changes?')">Update Account</button>
+            <a href="/accounts" class="btn-secondary">Back to Accounts</a>
+        </form>
+    </div>
+    {% endblock %}
+</body>
+</html>
+
+
+

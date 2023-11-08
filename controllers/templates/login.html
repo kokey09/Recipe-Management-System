@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Login</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/login.css') }}">
+    <link rel="icon" href="{{ url_for('static', filename='img-db/recipes.png') }}" type="image/x-icon">
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" defer></script>
+    <script src="{{ url_for('static', filename='js/login.js') }}"></script>
+</head>
+<body>
+
+<div class="container">
+    <div class="form-container">
+        <fieldset>
+            <legend><h1>Login</h1></legend>
+            <form action="/login" method="POST" id="login-form">
+                <div class="form-group">
+                    <label for="username">Username</label>
+                    <input type="text" id="username" name="username" required placeholder="Username">
+                </div>
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" name="password" required placeholder="Password">
+                </div>
+                <div class="error-message" style="color: red;">
+                    {% if error %}
+                        {{ error }}
+                    {% endif %}
+                </div>
+
+                <button type="submit" title="login">Login</button>
+                <hr>
+                   <div class="button-container">
+                        <a href="/register" class="button-link" title="create-new-account">Create new account</a>
+                   </div>
+
+                {% with messages = get_flashed_messages() %}
+                  {% if messages %}
+                    <ul>
+                      {% for message in messages %}
+                        <li class="error-message">{{ message }}</li>
+                      {% endfor %}
+                    </ul>
+                  {% endif %}
+                {% endwith %}
+
+            </form>
+        </fieldset>
+    </div>
+</div>
+
+</body>
+</html>
+
+
+
+

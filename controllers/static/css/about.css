@@ -1,0 +1,37 @@
+body, h1, p, ul, li {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: #EE4B2B;
+    color: #333;
+    font-family: Arial, sans-serif;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+main {
+    flex: 1;
+    max-width: 800px;
+    margin: 100px auto 0;
+    padding: 20px;
+}
+
+
+h1 {
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+p {
+    font-size: 16px;
+    line-height: 1.6;
+    margin-bottom: 20px;
+}
+
+footer {
+    text-align: center;
+}
+

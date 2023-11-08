@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/reviews_dashboard.css') }}">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="{{ url_for('static', filename='js/search_review_dashboard.js') }}"></script>
+
+    <link rel="icon" href="{{ url_for('static', filename='img-db/recipes.png') }}" type="image/x-icon">
+</head>
+<body>
+    {% extends 'base.html' %}
+    {% block title %}Recipes{% endblock %}
+    {% block content %}
+
+    <fieldset>
+        <legend><h1>Reviews</h1></legend>
+        <div class="search-container">
+
+            <select id="columnSelector">
+                <option value="all">Search All</option>
+                <option value="review_id">Review ID</option>
+                <option value="recipe_id">Recipe ID</option>
+                <option value="account_id">Account ID</option>
+                <option value="review_text">Review Text</option>
+                <option value="rating">Rating</option>
+                <option value="timestamp">Timestamp</option>
+            </select>
+            <input type="text" id="searchInput-reviews" class="search-bar" placeholder="Search reviews">
+            <button id="searchButton">Search</button>
+        </div>
+        <table>
+            <thead>
+                <tr>
+                    <th>review ID</th>
+                    <th>recipe ID</th>
+                    <th>account ID</th>
+                    <th>Review Text</th>
+                    <th>Rating</th>
+                    <th>Timestamp</th>
+                    <th>Image</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for review in reviews %}
+                <tr>
+                    <td>{{ review.review_id }}</td>
+                    <td>{{ review.recipe_id }}</td>
+                    <td>{{ review.account_id }}</td>
+                    <td>
+                        <div class="ellipsis-text">{{ review.review_text }}</div>
+                    </td>                    <td>{{ review.rating }}</td>
+                    <td>{{ review.timestamp }}</td>
+                    <td>
+                        <img src="{{ review.image_url }}" alt="NULL Image" style="width: 100px; height: 100px;" loading="lazy">
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </fieldset>
+    {% endblock %}
+</body>
+</html>

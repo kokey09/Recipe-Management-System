@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}HomePage{% endblock %}</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/user_base.css')}}">
+    <link rel="icon" href="{{ url_for('static', filename='img-db/recipes.png') }}" type="image/x-icon">
+    <script src="{{ url_for('static', filename='js/search.js') }}"></script>
+
+
+</head>
+<body>
+<nav>
+    <ul>
+        <a href="/" id="home-link" title="Home Page"> <img src="{{ url_for('static', filename='recipes-img-table/recipes.png') }}" alt="Your Logo" style="width: 100px; height: 40px;"></a>
+
+        <div class="dropdown">
+            <a href="/ingredient_display" id="ingredients-link">Ingredients</a>
+            <div class="dropdown-content">
+                {% for ingredient in ingredients[:7] %}
+                    <a href="{{ url_for('recipe_controller.recipe_display', ingredient_id=ingredient.ingredient_id) }}">{{ ingredient.name }}</a>
+                {% endfor %}
+                    <a href="/ingredient_display">View All</a>
+            </div>
+        </div>
+        <li><a href="about_us" id="about-us-link">About Us</a></li>
+        {% if not user %}
+            <li><a href="/login" id="login-link">Login</a></li>
+            <li><a href="/register" id="registration-link">Registration</a></li>
+        {% else %}
+            <li>Hi {{ user.username }}</li>
+            <li><a href="{{ url_for('account_controller.logout') }}" onclick="return confirm('Are you sure you want to log out?')">Logout</a></li>
+        {% endif %}
+        {% if user and user.type == 'admin' %}
+            <li><a href="{{ url_for('account_controller.dashboard') }}" id="admin-dashboard-link">Go Back to Admin Dashboard</a></li>
+        {% endif %}
+
+    </ul>
+</nav>
+
+{% block content %}
+{% endblock %}
+</body>
+</html>
+
+
