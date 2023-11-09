@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+
     <title>{% block title %}Dashboard/base{% endblock %}</title>
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/dashboard.css') }}">
     <link rel="icon" href="{{ url_for('static', filename='recipes-img-table/recipes.png') }}" type="image/x-icon">
@@ -24,7 +25,7 @@
 
             </ul>
             <ul class="logout-link">
-                <li><a href="{{ url_for('account_controller.logout') }}" onclick="return confirm('Are you sure you want to log out?')">Logout</a></li>
+                <li><a href="{{ url_for('authentication_controller.logout') }}" onclick="return confirm('Are you sure you want to log out?')">Logout</a></li>
             </ul>
     </nav>
 

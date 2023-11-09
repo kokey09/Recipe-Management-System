@@ -14,17 +14,19 @@ def create_app():
 
     db.init_app(app)
 
-    # Import blueprints within the create_app function to avoid circular imports
-    from controllers.ingredient_controller import ingredient_controller_bp
-    from controllers.recipe_controller import recipe_controller_bp
-    from controllers.account_controller import account_controller_bp
-    from controllers.recipe_ingredient_controller import recipe_ingredient_bp
+    from controllers.authentication_controller import authentication_controller_bp
+    from controllers.edit_controller import edit_controller_bp
+    from controllers.delete_controller import delete_controller_bp
+    from controllers.add_controller import add_controller_bp
+    from controllers.dashboard_controller import dashboard_controller_bp
+    from controllers.user_end_controller import user_end_controller_bp
 
-    app.register_blueprint(ingredient_controller_bp)
-    app.register_blueprint(recipe_controller_bp)
-    app.register_blueprint(account_controller_bp)
-    app.register_blueprint(recipe_ingredient_bp)
-
+    app.register_blueprint(authentication_controller_bp)
+    app.register_blueprint(edit_controller_bp)
+    app.register_blueprint(delete_controller_bp)
+    app.register_blueprint(add_controller_bp)
+    app.register_blueprint(dashboard_controller_bp)
+    app.register_blueprint(user_end_controller_bp)
 
     with app.app_context():
         db.create_all()
