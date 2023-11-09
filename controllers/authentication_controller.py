@@ -63,14 +63,13 @@ def login():
 
     return render_template('login.html', error=error)
 
+
+
 @authentication_controller_bp.route('/logout')
 def logout():
     if 'user_id' in session:
         session.pop('user_id', None)  # Remove the 'user_id' key from the session
     return redirect(url_for('user_end_controller.user_page'))
-
-
-
 
 
 @authentication_controller_bp.after_request
