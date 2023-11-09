@@ -91,7 +91,7 @@ def add_ingredient():
         db.session.add(new_ingredient)
         db.session.commit()
 
-        return redirect(url_for('user_end_controller.ingredients'))  # Change 'ingredients' to 'ingredient_controller.ingredients'
+        return redirect(url_for('dashboard_controller.ingredients'))  # Change 'ingredients' to 'ingredient_controller.ingredients'
 
 
 @add_controller_bp.route('/connect_recipe_ingredient', methods=['POST'])
