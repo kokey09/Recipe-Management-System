@@ -24,8 +24,8 @@
                 <img src="{{ recipe.image_url }}" alt="{{ recipe.name }} Image" style="width: 298px; height: 270px;" loading="lazy">
                 <div class="recipe-details">
                     <h2>{{ recipe.name }}</h2>
-                    <a href="{{ url_for('recipe_controller.recipe_instruction', recipe_id=recipe.recipe_id) }}" class="view-recipe">View Recipe</a>
-                    <a href="{{ url_for('recipe_controller.recipe_instruction', recipe_id=recipe.recipe_id) }}" class="star-rating">Reviews | {{ recipe_reviews_count[recipe.recipe_id] }} Reviews</a>
+                    <a href="{{ url_for('user_end_controller.recipe_instruction', recipe_id=recipe.recipe_id) }}" class="view-recipe">View Recipe</a>
+                    <a href="{{ url_for('user_end_controller.recipe_instruction', recipe_id=recipe.recipe_id) }}" class="star-rating">Reviews | {{ recipe_reviews_count[recipe.recipe_id] }} Reviews</a>
                 </div>
             </li>
             {% endfor %}

@@ -21,7 +21,7 @@
         <ul class="ingredients-list">
             {% for ingredient in ingredients | sort(attribute='name') %}
                 <li>
-                    <a href="{{ url_for('recipe_controller.recipe_display', ingredient_id=ingredient.ingredient_id) }}">{{ ingredient.name }}</a>
+                    <a href="{{ url_for('user_end_controller.recipe_display', ingredient_id=ingredient.ingredient_id) }}">{{ ingredient.name }}</a>
                 </li>
             {% endfor %}
         </ul>
