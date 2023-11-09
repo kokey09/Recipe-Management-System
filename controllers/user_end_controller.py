@@ -1,4 +1,4 @@
-from flask import  render_template, request, redirect, url_for, Blueprint,current_app,session,flash
+from flask import  render_template, request, redirect, url_for, Blueprint,current_app,session,flash,make_response
 
 from models.recipe import Recipe
 from models.ingredient import Ingredient
@@ -26,7 +26,9 @@ def user_page():
         user_id = session['user_id']
         user = Account.query.get(user_id)
 
-    return render_template('/user_page.html', recipes=recipes, ingredients=ingredients, user=user, recipe_reviews_count=recipe_reviews_count)
+    response = make_response(render_template('/user_page.html', recipes=recipes, ingredients=ingredients, user=user, recipe_reviews_count=recipe_reviews_count))
+    response.headers['Cache-Control'] = 'no-cache, no-store, must-revalidate'
+    return response
 
 
 @user_end_controller_bp.route('/about_us')
@@ -36,7 +38,9 @@ def about_us():
     if 'user_id' in session:
         user_id = session['user_id']
         user = Account.query.get(user_id)
-    return render_template('about_us.html',ingredients=ingredients, user=user)
+    response = make_response(render_template('about_us.html',ingredients=ingredients, user=user))
+    response.headers['Cache-Control'] = 'no-cache, no-store, must-revalidate'
+    return response
 
 
 @user_end_controller_bp.route('/ingredient_display')
@@ -48,7 +52,9 @@ def ingredient_display():
         user_id = session['user_id']
         user = Account.query.get(user_id)
 
-    return render_template('ingredient_display.html', ingredients=ingredients,user=user)
+    response = make_response (render_template('ingredient_display.html', ingredients=ingredients,user=user))
+    response.headers['Cache-Control'] = 'no-cache, no-store, must-revalidate'
+    return response
 
 @user_end_controller_bp.route('/recipe_review')
 def recipe_review():
@@ -63,7 +69,9 @@ def recipe_review():
         user_id = session['user_id']
         user = Account.query.get(user_id)
 
-    return render_template('/recipe_review.html', recipe=recipe, user=user)
+    response = make_response (render_template('/recipe_review.html', recipe=recipe, user=user))
+    response.headers['Cache-Control'] = 'no-cache, no-store, must-revalidate'
+    return response
 
 @user_end_controller_bp.route('/recipe_display')
 def recipe_display():
@@ -86,7 +94,9 @@ def recipe_display():
         user_id = session['user_id']
         user = Account.query.get(user_id)
 
-    return render_template('recipe_display.html', recipes=recipes, ingredients=ingredients, user=user, recipe_reviews_count=recipe_reviews_count)
+    response = make_response (render_template('recipe_display.html', recipes=recipes, ingredients=ingredients, user=user, recipe_reviews_count=recipe_reviews_count))
+    response.headers['Cache-Control'] = 'no-cache, no-store, must-revalidate'
+    return response
 
 
 @user_end_controller_bp.route('/recipe_instruction')
@@ -108,8 +118,10 @@ def recipe_instruction():
             # Calculate the number of reviews for the recipe
             recipe_reviews_count = len(reviews)
 
-            return render_template('recipe_instruction.html', recipes=recipes, ingredients=ingredients, user=user,
-                                   reviews=reviews, recipe_reviews_count=recipe_reviews_count)
+            response = make_response (render_template('recipe_instruction.html', recipes=recipes, ingredients=ingredients, user=user,
+                                   reviews=reviews, recipe_reviews_count=recipe_reviews_count))
+            response.headers['Cache-Control'] = 'no-cache, no-store, must-revalidate'
+            return response
 
     return "Recipe not found", 404  # Handle the case where the recipe_id is not found
 

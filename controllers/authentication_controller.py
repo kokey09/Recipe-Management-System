@@ -71,14 +71,12 @@ def logout():
 
 
 
+
+
 @authentication_controller_bp.after_request
 def add_header(response):
     response.cache_control.no_cache = True
     response.cache_control.no_store = True
-    return response
-
-@authentication_controller_bp.after_request
-def add_header(response):
     if 'Cache-Control' not in response.headers:
         response.headers['Cache-Control'] = 'no-cache, no-store, must-revalidate'
     return response

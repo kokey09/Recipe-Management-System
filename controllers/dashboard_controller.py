@@ -16,7 +16,9 @@ def recipes():
 
         if user and user.type == 'admin':
             recipes_data = Recipe.query.all()
-            return render_template('recipes.html', recipes=recipes_data, user=user)
+            response = make_response(render_template('recipes.html', recipes=recipes_data, user=user))
+            response.headers['Cache-Control'] = 'no-cache, no-store, must-revalidate'
+            return response
         else:
             flash('User not found', 'error')
             return redirect(url_for('user_end_controller.user_page'))
@@ -34,7 +36,9 @@ def ingredients():
 
         if user and user.type == 'admin':
             ingredients_data = Ingredient.query.all()
-            return render_template('ingredients.html', ingredients=ingredients_data,user=user)
+            response = make_response(render_template('ingredients.html', ingredients=ingredients_data,user=user))
+            response.headers['Cache-Control'] = 'no-cache, no-store, must-revalidate'
+            return response
         else:
             return redirect(url_for('user_end_controller.user_page'))
     else:
@@ -52,13 +56,15 @@ def recipe_ingredients():
             ingredients_data = Ingredient.query.all()
             recipe_ingredients_data = RecipeIngredient.query.all()
 
-            return render_template(
+            response = make_response(render_template(
                 'recipe_ingredients.html',
                 recipe_ingredients=recipe_ingredients_data,
                 recipes=recipes_data,
                 ingredients=ingredients_data,
                 user=user
-            )
+            ))
+            response.headers['Cache-Control'] = 'no-cache, no-store, must-revalidate'
+            return response
         else:
             flash('You do not have access to view recipe ingredients', 'error')
             return redirect(url_for('user_end_controller.user_page'))
@@ -75,7 +81,9 @@ def reviews_dashboard():
         user = Account.query.get(user_id)
 
         if user and user.type == 'admin':
-            return render_template('reviews_dashboard.html', user=user, reviews=reviews)
+            response = make_response(render_template('reviews_dashboard.html', user=user, reviews=reviews))
+            response.headers['Cache-Control'] = 'no-cache, no-store, must-revalidate'
+            return response
         else:
             return redirect(url_for('user_end_controller.user_page'))
 
@@ -92,7 +100,9 @@ def accounts():
         user = Account.query.get(user_id)
 
         if user and user.type == 'admin':
-            return render_template('accounts.html', accounts=accounts_data, user=user)
+            response = make_response(render_template('accounts.html', accounts=accounts_data, user=user))
+            response.headers['Cache-Control'] = 'no-cache, no-store, must-revalidate'
+            return response
         else:
             flash('You do not have permission to access accounts.', 'error')
             return redirect(url_for('user_end_controller.user_page'))
@@ -107,7 +117,9 @@ def dashboard():
         user = Account.query.get(user_id)
 
         if user and user.type == 'admin':
-            return render_template('dashboard.html', user=user)
+            response = make_response(render_template('dashboard.html', user=user))
+            response.headers['Cache-Control'] = 'no-cache, no-store, must-revalidate'
+            return response
         else:
             return redirect(url_for('user_end_controller.user_page'))
 
