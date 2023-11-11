@@ -42,8 +42,8 @@ def login():
     error = None
 
     if request.method == 'POST':
-        username = request.form['username']
-        entered_password = request.form['password']
+        username = request.form.get('username')
+        entered_password = request.form.get('password')
         user = Account.query.filter_by(username=username).first()
 
         if user and bcrypt.check_password_hash(user.password, entered_password):
