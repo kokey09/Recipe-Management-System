@@ -13,9 +13,10 @@ th {
 }
 thead {
     background-color: #333;
-    color: #fff	;
+    color: #fff;
     position: sticky;
     top: 0;
+
 }
 .delete-button {
     display: inline-block;
@@ -56,18 +57,20 @@ thead {
     background-color: #ADD8E6;
     text-decoration: none;
 }
+
 .search-container {
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-top: 10px;
-}
+    margin-top: 5px; /* Adjust the margin as needed */
 
+}
 .search-bar {
     padding: 5px;
     border: 1px solid #ccc;
     border-radius: 3px;
     width: 500px;
+
 }
 
 #columnSelector {
@@ -85,32 +88,5 @@ thead {
     border-radius: 3px;
     cursor: pointer;
 }
-.search-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-top: 10px;
-}
 
-.search-bar {
-    padding: 5px;
-    border: 1px solid #ccc;
-    border-radius: 3px;
-    width: 500px;
-}
 
-#columnSelector {
-    padding: 5px;
-    border: 1px solid #ccc;
-    border-radius: 3px;
-    margin-right: 10px;
-}
-
-#searchButton {
-    padding: 5px 10px;
-    background-color: #4CAF50;
-    color: white;
-    border: none;
-    border-radius: 3px;
-    cursor: pointer;
-}
