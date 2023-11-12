@@ -22,10 +22,10 @@ def edit_account(id):
         return jsonify({"error": "Account not found"}), 404
 
     if request.method == 'POST':
-        for field in ['username', 'email', 'type', 'is_deleted']:
-            if field in request.form:
-                setattr(account, field, request.form[field])
-
+        account.username = request.form.get('username')
+        account.email = request.form.get('email')
+        account.type = request.form.get('type')
+        account.is_deleted = request.form.get('is_deleted')
         is_deleted = request.form.get('is_deleted', '0') == '1'
         account.is_deleted = is_deleted
 
@@ -45,8 +45,8 @@ def edit_recipe(id):
     recipe = Recipe.query.get(id)
 
     if request.method == 'POST':
-        recipe.name = request.form['recipe_name']
-        recipe.instructions = request.form['instructions']
+        recipe.name = request.form.get('recipe_name')
+        recipe.instructions = request.form.get('instructions')
         is_deleted = request.form.get('is_deleted', '0') == '1'  # Get the is_deleted value as an integer
         filename = None  # Initialize filename to None
 
@@ -74,8 +74,8 @@ def edit_ingredient(id):
 
     if request.method == 'POST':
         # Update the ingredient's details based on the form data
-        ingredient.name = request.form['name']
-        ingredient.description = request.form['description']
+        ingredient.name = request.form.get('name')
+        ingredient.description = request.form.get('description')
 
         db.session.commit()
         return redirect(url_for('dashboard_controller.ingredients'))
