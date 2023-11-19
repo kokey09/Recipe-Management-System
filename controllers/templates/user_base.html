@@ -5,6 +5,8 @@
     <title>{% block title %}HomePage{% endblock %}</title>
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/user_base.css')}}">
     <link rel="icon" href="{{ url_for('static', filename='img-db/recipes.png') }}" type="image/x-icon">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+
     <script src="{{ url_for('static', filename='js/search.js') }}"></script>
 
 
@@ -23,19 +25,19 @@
                     <a href="/ingredient_display">View All</a>
             </div>
         </div>
-        <li><a href="about_us" id="about-us-link">About Us</a></li>
+        <li><a href="about_us" id="about-us-link" title="about us">About Us</a></li>
         <li>|</li>
         {% if not user %}
-            <li><a href="/login" id="login-link">Login</a></li>
-            <li><a href="/register" id="registration-link">Registration</a></li>
+            <li><a href="/login" id="login-link" title="Login">Login</a></li>
+            <li><a href="/register" id="registration-link" title="Register">Registration</a></li>
         {% else %}
         <div class="dropdown">
-            <li>Hi {{ user.username }}</li>
+            <li><i class='bx bx-user-circle'></i>Hi {{ user.username }} </li>
             <div class="dropdown-content">
-                <a href="{{ url_for('authentication_controller.logout') }}" onclick="return confirm('Are you sure you want to log out?')">Logout</a>
+                <a href="{{ url_for('authentication_controller.logout') }}" onclick="return confirm('Are you sure you want to log out?')"><i class='bx bx-log-out' ></i> Logout</a>
                 <hr>
-                <a>Favorites</a>
-                <a>Add Recipe</a>
+                <a><i class='bx bxs-heart' ></i> Favorites</a>
+                <a><i class='bx bx-add-to-queue' ></i> Add Recipe</a>
                 {% endif %}
                 {% if user and user.type == 'admin' %}
                     <li><a href="{{ url_for('dashboard_controller.dashboard') }}" id="admin-dashboard-link">Go Back to Admin Dashboard</a></li>
