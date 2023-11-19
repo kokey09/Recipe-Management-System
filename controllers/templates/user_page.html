@@ -17,7 +17,9 @@
     <div class="recipe-row">
         {% for recipe in recipes [:4]  if not recipe.is_deleted %}
             <div class="recipe-card">
+                {% if user %}
                 <i class='bx bx-heart-circle' title="add favorites"></i>
+                {% endif %}
                 <img src="{{ recipe.image_url }}" alt="{{ recipe.name }} Image" style="width: 298px; height: 270px;" loading="lazy">
                 <div class="recipe-details">
                     <h2>{{ recipe.name }}</h2>
@@ -39,7 +41,9 @@
 <div class="recipe-new-list">
     {% for recipe in recipes [:6]%}
         <div class="recipe-new-card">
+            {% if user %}
             <i class='bx bx-heart-circle' title="add favorites"></i>
+            {% endif %}
             <img src="{{ recipe.image_url }}" alt="{{ recipe.name }} Image" style="width: 298px; height: 270px;" loading="lazy">
             <div class="recipe-new-details">
                 <h2>{{ recipe.name }}</h2>
