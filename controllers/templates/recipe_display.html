@@ -22,6 +22,7 @@
         <ul class="recipe-list">
             {% for recipe in recipes if not recipe.is_deleted %}
             <li class="recipe-card">
+                <i class='bx bx-heart-circle' title="add favorites" ></i>
                 <img src="{{ recipe.image_url }}" alt="{{ recipe.name }} Image" style="width: 298px; height: 270px;" loading="lazy">
                 <div class="recipe-details">
                     <h2>{{ recipe.name }}</h2>

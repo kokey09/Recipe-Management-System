@@ -8,6 +8,7 @@
 
 
 .recipe-card {
+    position: relative;
     display: flex;
     flex-direction: column;
     justify-content: space-between; /* Push the title to the top and "View Recipe" link to the bottom */
@@ -20,7 +21,18 @@
     transition: transform 0.2s;
     height: 433px; /* Set a fixed height */
 }
+.recipe-card i.bx-heart-circle {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 44px;
+    color: #000000;
+    transition: color 0.3s ease;
+}
 
+.recipe-card i.bx-heart-circle:hover {
+    color: #ff5733;
+}
 
 .recipe-card:hover {
     transform: translateY(-5px);
@@ -94,7 +106,7 @@
     border-radius: 5px;
     font-size: 16px;
     cursor: pointer;
-    transition: background-color 0.3s; /
+    transition: background-color 0.2s; /
 
 }
 
@@ -132,11 +144,11 @@
     height: 450px; /* Set a fixed height */
 
 }
-
 .recipe-new-card {
+    position: relative;
     display: flex;
     flex-direction: column;
-    justify-content: space-between; /* Push the title to the top and "View Recipe" link to the bottom */
+    justify-content: space-between;
     width: 300px;
     margin: 20px;
     background-color: #333;
@@ -144,14 +156,24 @@
     border-radius: 5px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     transition: transform 0.2s;
-
 }
-
 
 .recipe-new-card:hover {
     transform: translateY(-5px);
 }
 
+.recipe-new-card i.bx-heart-circle {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 44px;
+    color: #000000;
+    transition: color 0.2s ease;
+}
+
+.recipe-new-card i.bx-heart-circle:hover {
+    color: #ff5733; /* Adjust as needed for the hover color */
+}
 .recipe-new-card img {
     width: 298px;
     border-top-left-radius: 5px;
@@ -166,15 +188,10 @@
     font-size: 24px;
     color: #FFFFFF;
     margin-bottom: 10px;
-    text-align:center;
+    text-align: center;
 }
 
-.recipe-new-card p {
-    font-size: 16px;
-    color: #555;
-}
-
-.recipe-new-card a view-new-recipe  {
+.recipe-new-card a.view-new-recipe {
     display: block;
     text-align: center;
     padding: 10px;
@@ -185,10 +202,11 @@
     border-radius: 0 0 5px 5px;
 }
 
-
 .recipe-new-card a:hover {
     background-color: #ff3300;
 }
+
+
 
 
 

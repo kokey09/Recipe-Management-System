@@ -11,6 +11,7 @@ ul.recipe-list {
 
 
 .recipe-card {
+    position: relative;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -23,6 +24,18 @@ ul.recipe-list {
     transition: transform 0.2s;
 }
 
+.recipe-card i.bx-heart-circle {
+    position: absolute;
+    top: 10px; /* Adjust as needed */
+    right: 10px; /* Adjust as needed */
+    font-size: 44px; /* Adjust as needed */
+    color: #000000; /* Adjust as needed */
+    transition: color 0.2s ease; /* Add a smooth transition effect */
+}
+
+.recipe-card i.bx-heart-circle:hover {
+    color: #ff5733; /* Adjust as needed for the hover color */
+}
 
 .recipe-card:hover {
     transform: translateY(-5px);
