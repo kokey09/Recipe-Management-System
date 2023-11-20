@@ -29,9 +29,12 @@ function closeReview() {
 function closeAddRecipe() {
     const addRecipeOverlay = document.getElementById('addRecipeOverlay');
     const addRecipePopup = document.getElementById('addRecipePopup');
+    const recipeForm = document.getElementById('recipeForm'); // Add the ID to your form
 
     addRecipeOverlay.style.display = 'none';
     addRecipePopup.style.display = 'none';
+
+    recipeForm.reset();
 }
 
 function redirectToLogin() {

@@ -120,7 +120,9 @@ nav a:hover {
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
     z-index: 1;
     width: 40%;
-    height: 65%;
+    max-height: 65vh;
+    overflow-y: auto; /* Add a vertical scroll bar when content exceeds the height */
+
 }
 
 .form-recipe {
@@ -181,4 +183,8 @@ nav a:hover {
 }
 .add-recipe{
     text-align: center;
+}
+.text-area-form {
+    width: initial; /* Reset the width to the default size */
+    height: initial; /* Reset the height to the default size */
 }
