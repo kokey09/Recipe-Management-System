@@ -211,8 +211,57 @@ nav a:hover {
     border-radius: 5px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
     z-index: 1;
-    width: 40%;
-    max-height: 65vh;
+    width: 60%;
+    height: 65%;
+    max-height: 85vh;
     overflow-y: auto;
 
 }
+
+    .card {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: flex-start; /* Start from the left */
+        width: 55%;
+    }
+
+    .recipe-items {
+        margin: 10px;
+        padding: 15px;
+        border: 1px solid #ccc;
+        border-radius: 8px;
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        width: calc(33.33% - 20px); /* Adjust the width as needed */
+        box-sizing: border-box; /* Include padding and border in the width calculation */
+    }
+
+    .recipe-items p {
+        font-size: 16px;
+        font-weight: bold;
+        margin-bottom: 10px;
+    }
+
+    .recipe-items img {
+        width: 100%;
+        height: 150px;
+        border-radius: 5px;
+        margin-bottom: 10px;
+    }
+
+    .buttons {
+        margin-top: auto; /* Align at the bottom */
+    }
+
+    /* Media query for screens smaller than 768 pixels (adjust as needed) */
+    @media screen and (max-width: 768px) {
+        .card {
+            width: 100%; /* Make the card full width on small screens */
+        }
+
+        .recipe-item {
+            width: calc(50% - 20px); /* Adjust the width of recipe items for better stacking */
+        }
+    }
+

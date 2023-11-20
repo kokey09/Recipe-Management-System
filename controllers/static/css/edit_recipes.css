@@ -1,7 +1,7 @@
 form {
     margin: 20px auto;
     max-width: 400px;
-    padding: 20px;
+    padding: 50px;
     border: 1px solid #ccc;
     border-radius: 4px;
     background-color: #f9f9f9;
@@ -54,4 +54,7 @@ button[type="submit"]:hover {
 .button-link:hover {
     background-color: #ffcccb;
     color: #fff;
+}
+h1{
+    text-align:center;
 }

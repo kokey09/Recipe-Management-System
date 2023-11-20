@@ -43,7 +43,10 @@ def edit_account(id):
 @edit_controller_bp.route('/edit_recipe/<int:id>', methods=['GET', 'POST'])
 def edit_recipe(id):
     recipe = Recipe.query.get(id)
-
+    user = None
+    if 'user_id' in session:
+        user_id = session['user_id']
+        user = Account.query.get(user_id)
     if request.method == 'POST':
         recipe.name = request.form.get('recipe_name')
         recipe.instructions = request.form.get('instructions')
@@ -66,7 +69,7 @@ def edit_recipe(id):
 
         return redirect(url_for('dashboard_controller.recipes'))
 
-    return render_template('edit_recipes.html', recipe=recipe, id=id)
+    return render_template('edit_recipes.html', recipe=recipe, id=id, user=user)
 
 @edit_controller_bp.route('/edit_ingredient/<int:id>', methods=['GET', 'POST'])
 def edit_ingredient(id):
