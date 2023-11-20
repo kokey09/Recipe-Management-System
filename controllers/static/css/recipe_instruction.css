@@ -283,3 +283,11 @@
 .review-btn{
     text-align: center;
 }
+.close-btn{
+	position: absolute;
+	top: 0;
+	right: 10px;
+}
+.close-btn i {
+    font-size: 44px;
+}
