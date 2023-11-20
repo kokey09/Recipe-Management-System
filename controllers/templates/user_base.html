@@ -8,6 +8,7 @@
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
 
     <script src="{{ url_for('static', filename='js/search.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/popup.js') }}"></script>
 
 
 </head>
@@ -37,7 +38,7 @@
                 <a href="{{ url_for('authentication_controller.logout') }}" onclick="return confirm('Are you sure you want to log out?')"><i class='bx bx-log-out' ></i> Logout</a>
                 <hr>
                 <a><i class='bx bxs-heart' ></i> Favorites</a>
-                <a><i class='bx bx-add-to-queue' ></i> Add Recipe</a>
+                <a onclick="addRecipe()"><i class='bx bx-add-to-queue' ></i> Add Recipe</a>
                 {% endif %}
                 {% if user and user.type == 'admin' %}
                     <li><a href="{{ url_for('dashboard_controller.dashboard') }}" id="admin-dashboard-link">Go Back to Admin Dashboard</a></li>
@@ -46,6 +47,26 @@
         </div>
     </ul>
 </nav>
+<div class="addRecipeOverlay" id="addRecipeOverlay" onclick="closeAddRecipe()"></div>
+<div class="addRecipePopup" id="addRecipePopup">
+    <h1 class="add-recipe">Add Recipe</h1>
+    <form method="POST" action="/add_recipe" enctype="multipart/form-data" class="form-recipe">
+        <!-- Form for adding a new recipe -->
+        <label for="recipe_name">Name:</label>
+        <input type="text" id="recipe_name" name="recipe_name" class="name-form" required>
+
+        <label for="instructions">Instructions:</label>
+        <textarea id="instructions" name="instructions" rows="4" class="text-area-form" required></textarea>
+
+        <label for="image_file">Image File:</label>
+        <input type="file" id="image_file" name="image_file" accept="image/*" required>
+
+        <button type="submit" onclick="return confirm('Are you sure you want to add this recipe?')">Add Recipe</button>
+    </form>
+    <div onclick="closeAddRecipe()" class="close-btn">
+        <i class='bx bx-exit'></i>
+    </div>
+</div>
 
 {% block content %}
 {% endblock %}

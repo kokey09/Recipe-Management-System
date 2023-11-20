@@ -55,9 +55,9 @@ def add_review():
 @add_controller_bp.route('/add_recipe', methods=['POST'])
 def add_recipe():
     if request.method == 'POST':
-        recipe_name = request.form['recipe_name']
-        instructions = request.form['instructions']
-        image_file = request.files['image_file']  # Access the uploaded file
+        recipe_name = request.form.get('recipe_name')
+        instructions = request.form.get('instructions')
+        image_file = request.files.get('image_file')  # Access the uploaded file
 
         if image_file:
             # Save the uploaded image to a directory
@@ -84,8 +84,8 @@ def add_recipe():
 @add_controller_bp.route('/add-ingredient', methods=['POST'])
 def add_ingredient():
     if request.method == 'POST':
-        name = request.form['name']
-        description = request.form['description']
+        name = request.form.get('name')
+        description = request.form.get('description')
 
         new_ingredient = Ingredient(name=name, description=description)
         db.session.add(new_ingredient)

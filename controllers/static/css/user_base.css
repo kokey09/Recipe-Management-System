@@ -95,3 +95,90 @@ nav a:hover {
     border: 1px solid #ccc;
     border-radius: 5px;
 }
+
+/* ________________________________________________ */
+.addRecipeOverlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+}
+
+
+.addRecipePopup {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    z-index: 1;
+    width: 40%;
+    height: 65%;
+}
+
+.form-recipe {
+    width: 100%;
+    max-width: 500px;
+    margin: 5% auto; /* Adjusted margin for better positioning */
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+}
+
+.form-recipe label {
+    display: block;
+    margin-bottom: 8px;
+    font-size: 18px; /* Adjusted font size for labels */
+}
+
+.form-recipe input,
+.form-recipe textarea,
+.form-recipe select {
+    width: 100%;
+    padding: 10px; /* Adjusted padding for input elements */
+    margin-bottom: 16px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    font-size: 16px; /* Adjusted font size for input elements */
+}
+
+.form-recipe button {
+    background-color: #4CAF50;
+    color: #fff;
+    padding: 12px 24px; /* Adjusted padding for the button */
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 18px; /* Adjusted font size for the button */
+}
+
+.form-recipe button:hover {
+    background-color: #45a049;
+}
+
+/* Updated style for the close button */
+.close-btn i {
+    font-size: 24px; /* Adjusted font size for the close button */
+}
+
+.close-btn{
+	position: absolute;
+	top: 0;
+	right: 10px;
+}
+.close-btn i {
+    font-size: 44px;
+}
+.add-recipe{
+    text-align: center;
+}
