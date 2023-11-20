@@ -10,6 +10,7 @@ user_end_controller_bp = Blueprint('user_end_controller',__name__,template_folde
 
 
 
+
 @user_end_controller_bp.route('/')
 def user_page():
     ingredients = Ingredient.query.all()
@@ -26,7 +27,7 @@ def user_page():
         user_id = session['user_id']
         user = Account.query.get(user_id)
 
-    response = make_response(render_template('/user_page.html', recipes=recipes, ingredients=ingredients, user=user, recipe_reviews_count=recipe_reviews_count))
+    response = make_response(render_template('user_page.html', recipes=recipes, ingredients=ingredients, user=user, recipe_reviews_count=recipe_reviews_count))
     response.headers['Cache-Control'] = 'no-cache, no-store, must-revalidate'
     return response
 

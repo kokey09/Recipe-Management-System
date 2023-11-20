@@ -13,9 +13,21 @@ function addRecipe() {
     addRecipePopup.style.display = 'block';
 }
 
+function repository() {
+    const repositoryOverlay = document.getElementById('repositoryOverlay');
+    const repositoryPopup = document.getElementById('repositoryPopup');
 
+    repositoryOverlay.style.display = 'block';
+    repositoryPopup.style.display = 'block';
+}
 
+function closeRepository() {
+    const repositoryOverlay = document.getElementById('repositoryOverlay');
+    const repositoryPopup = document.getElementById('repositoryPopup');
 
+    repositoryOverlay.style.display = 'none';
+    repositoryPopup.style.display = 'none';
+}
 
 
 function closeReview() {
