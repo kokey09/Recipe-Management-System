@@ -5,6 +5,8 @@
     <title>Instruction</title>
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/recipe_instruction.css') }}">
     <link rel="icon" href="{{ url_for('static', filename='img-db/recipes.png') }}" type="image/x-icon">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="{{ url_for('static', filename='js/popup.js') }}"></script>
 </head>
 <body>
     {% extends 'user_base.html' %}
@@ -38,11 +40,11 @@
                     <div class="review-details">
                         <h3 class="review-prompt">What do you think of this recipe?</h3>
                         <p class="review-subtitle">Share your experience to help others</p>
-                        {% if user %}
-                        <a href="{{ url_for('user_end_controller.recipe_review', recipe_id=recipe.recipe_id) }}" class="add-review-link">Add Rating & Review</a>
-                        {% else %}
-                        <a href="{{ url_for('authentication_controller.login') }}" class="add-review-link">Add Rating & Review</a>
-                        {% endif %}
+                            {% if user %}
+                                <button onclick="addReview()">Show Pop-up</button>
+                            {% else %}
+                                <button onclick="redirectToLogin()">Show Pop-up</button>
+                            {% endif %}
                     </div>
                 </div>
                 <div class="rating-info">
@@ -92,6 +94,35 @@
             </div>
         </div>
     {% endfor %}
+</div>
+
+
+
+<div class="reviewOverlay" id="reviewOverlay" onclick="closeReview()"></div>
+<div class="reviewPopup" id="reviewPopup">
+        <form action="{{ url_for('add_controller.add_review', recipe_id=recipe.recipe_id) }}" method="post" enctype="multipart/form-data">
+            <div class="review-input">
+                <h1>Submit a Review</h1>
+                <input type="hidden" name="account_id" value="{{ user.id }}">  <!-- Updated user_id to user.id -->
+                <img src="{{ recipe.image_url }}" alt="{{ recipe.name }} Image" style="width: 298px; height: 270px;">
+                <h2 for="review_text"> {{ recipe.name }}</h2>
+                <textarea name="review_text" id="review_text" rows="4" cols="50" required></textarea>
+            </div>
+            <div class="rating">
+                <input type="radio" id="star5" name="rating" value="5"><label for="star5"></label>
+                <input type="radio" id="star4" name="rating" value="4"><label for="star4"></label>
+                <input type="radio" id="star3" name="rating" value="3"><label for="star3"></label>
+                <input type="radio" id="star2" name="rating" value="2"><label for="star2"></label>
+                <input type="radio" id="star1" name="rating" value="1"><label for="star1"></label>
+            </div>
+
+            <div class="review-btn">
+                <input type="file" id="image_file" name="image_file" accept="image/*">
+                <button type="submit" onclick="return confirm('Are you sure you want to submit this review?')">Submit Review</button>
+            </div>
+        </form>
+
+                <div class="close-btn"><button onclick="closeReview()">Close</button></div>
 </div>
 
     {% endblock %}

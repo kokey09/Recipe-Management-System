@@ -218,5 +218,68 @@
 }
 /* ________________________________________________ */
 
+.reviewOverlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+}
 
 
+.reviewPopup {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    z-index: 1;
+    width: 40%;
+    height: 65%;
+}
+
+/* ________________________________________________ */
+
+
+.rating {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row-reverse; /* Set the flex direction to reverse the order */
+}
+
+.rating input {
+    display: none;
+}
+
+.rating label {
+    cursor: pointer;
+    font-size: 24px;
+    color: #ccc;
+    margin: 0 5px;
+}
+
+.rating label::before {
+    content: '\2605'; /* Unicode character for a star (★) */
+    display: block;
+    font-size: 24px;
+}
+
+.rating input:checked ~ label {
+    color: #ffc107;
+}
+
+
+.review-input{
+    text-align: center;
+}
+
+.review-btn{
+    text-align: center;
+}

@@ -56,22 +56,6 @@ def ingredient_display():
     response.headers['Cache-Control'] = 'no-cache, no-store, must-revalidate'
     return response
 
-@user_end_controller_bp.route('/recipe_review')
-def recipe_review():
-    recipe_id = request.args.get('recipe_id', type=int)  # Get the recipe_id from the query parameter
-    if recipe_id is None:
-        return "Recipe not found", 404
-
-    recipe = Recipe.query.get(recipe_id)  # Retrieve the recipe based on recipe_id
-
-    user = None
-    if 'user_id' in session:
-        user_id = session['user_id']
-        user = Account.query.get(user_id)
-
-    response = make_response (render_template('/recipe_review.html', recipe=recipe, user=user))
-    response.headers['Cache-Control'] = 'no-cache, no-store, must-revalidate'
-    return response
 
 @user_end_controller_bp.route('/recipe_display')
 def recipe_display():
@@ -99,29 +83,25 @@ def recipe_display():
     return response
 
 
+
 @user_end_controller_bp.route('/recipe_instruction')
 def recipe_instruction():
-    recipe_id = request.args.get('recipe_id', None)  # Get the recipe_id from the query parameter
+    recipe_id = request.args.get('recipe_id', None, type=int)
     user = None
+
+    recipe = Recipe.query.get_or_404(recipe_id)
 
     if 'user_id' in session:
         user_id = session['user_id']
         user = Account.query.get(user_id)
 
-    if recipe_id:
-        # Filter recipes by the selected recipe_id
-        recipes = Recipe.query.filter_by(recipe_id=recipe_id).all()
-        if recipes:
-            # Filter reviews by the selected recipe_id
-            reviews = Review.query.filter_by(recipe_id=recipe_id).all()
-            ingredients = Ingredient.query.all()
-            # Calculate the number of reviews for the recipe
-            recipe_reviews_count = len(reviews)
+    recipes = Recipe.query.filter_by(recipe_id=recipe_id).all()
+    reviews = Review.query.filter_by(recipe_id=recipe_id).all()
+    ingredients = Ingredient.query.all()
+    recipe_reviews_count = len(reviews)
 
-            response = make_response (render_template('recipe_instruction.html', recipes=recipes, ingredients=ingredients, user=user,
-                                   reviews=reviews, recipe_reviews_count=recipe_reviews_count))
-            response.headers['Cache-Control'] = 'no-cache, no-store, must-revalidate'
-            return response
-
-    return "Recipe not found", 404  # Handle the case where the recipe_id is not found
+    response = make_response(render_template('recipe_instruction.html', recipes=recipes, ingredients=ingredients, user=user,
+                             reviews=reviews, recipe_reviews_count=recipe_reviews_count, recipe=recipe))
+    response.headers['Cache-Control'] = 'no-cache, no-store, must-revalidate'
+    return response
 
