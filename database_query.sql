@@ -14,9 +14,9 @@ CREATE TABLE recipes (
     name VARCHAR(255) NOT NULL,
     instructions TEXT NOT NULL,
     image_url VARCHAR(512),
-    is_deleted TINYINT(1)
+    is_deleted TINYINT(1),
     account_id INT(11),
-    FOREIGN KEY (account_id) REFERENCES account(id),
+    FOREIGN KEY (account_id) REFERENCES account(id)
 );
 
 CREATE TABLE ingredients (
