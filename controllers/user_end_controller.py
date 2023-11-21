@@ -144,6 +144,7 @@ def shared_recipe():
         recipe_reviews_count[recipe.recipe_id] = len(Review.query.filter_by(recipe_id=recipe.recipe_id).all())
 
     # Check if the user is logged in
+    user = None
     if 'user_id' in session:
         user_id = session['user_id']
         user = Account.query.get(user_id)

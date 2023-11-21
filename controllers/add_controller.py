@@ -52,41 +52,51 @@ def add_review():
     else:
         return redirect(url_for('some_other_route'))
 
+
 @add_controller_bp.route('/add_recipe', methods=['POST'])
 def add_recipe():
     if request.method == 'POST':
-        recipe_name = request.form.get('recipe_name')
-        instructions = request.form.get('instructions')
-        image_file = request.files.get('image_file')  # Access the uploaded file
-
-        # Retrieve account_id from the session
+        # Retrieve account_id and user type from the session
         account_id = session.get('user_id')
 
         if account_id:
-            if image_file:
-                # Save the uploaded image to a directory
-                filename = secure_filename(image_file.filename)
-                image_directory = os.path.join(current_app.root_path, 'static', 'recipes-img-table')
-                os.makedirs(image_directory, exist_ok=True)  # Create the directory if it doesn't exist
-                image_path = os.path.join(image_directory, filename)
-                image_file.save(image_path)
+            # Access form data
+            recipe_name = request.form.get('recipe_name')
+            instructions = request.form.get('instructions')
+            image_file = request.files.get('image_file')
 
-            try:
-                # Create a new Recipe object and save it to the database with the image path and account_id
-                new_recipe = Recipe(
-                    name=recipe_name,
-                    instructions=instructions,
-                    image_url=f'static/recipes-img-table/{filename}' if image_file else None,
-                    account_id=account_id
-                )
-                db.session.add(new_recipe)
-                db.session.commit()
+            # Retrieve user based on user_id from the session
+            user = Account.query.get(account_id)
 
-                logging.info("Recipe added successfully")
-                return redirect(url_for('user_end_controller.recipes'))
-            except Exception as e:
-                logging.error(f"Error adding recipe: {str(e)}")
-                db.session.rollback()
+            if user:
+                if image_file:
+                    # Save the uploaded image to a directory
+                    filename = secure_filename(image_file.filename)
+                    image_directory = os.path.join(current_app.root_path, 'static', 'recipes-img-table')
+                    os.makedirs(image_directory, exist_ok=True)  # Create the directory if it doesn't exist
+                    image_path = os.path.join(image_directory, filename)
+                    image_file.save(image_path)
+
+                try:
+                    # Create a new Recipe object and save it to the database with the image path and account_id
+                    new_recipe = Recipe(
+                        name=recipe_name,
+                        instructions=instructions,
+                        image_url=f'static/recipes-img-table/{filename}' if image_file else None,
+                        account_id=account_id
+                    )
+                    db.session.add(new_recipe)
+                    db.session.commit()
+
+                    logging.info("Recipe added successfully")
+
+                    # Redirect based on user type
+                    if user.type == 'normal':
+                        return redirect(url_for('user_end_controller.shared_recipe'))
+
+                except Exception as e:
+                    logging.error(f"Error adding recipe: {str(e)}")
+                    db.session.rollback()
 
     return redirect(url_for('dashboard_controller.recipes'))
 
