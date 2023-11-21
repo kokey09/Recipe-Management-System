@@ -33,6 +33,11 @@ def delete_account(account_id):
 
 @delete_controller_bp.route('/delete_recipe/<int:id>', methods=['POST'])
 def delete_recipe(id):
+    if 'user_id' in session:
+        user_id = session['user_id']
+        user = Account.query.get(user_id)
+    else:
+        flash('you need to login first', 'error')
     if request.method == 'POST':
         recipe_to_delete = Recipe.query.get(id)
         if recipe_to_delete:
@@ -41,11 +46,15 @@ def delete_recipe(id):
                 recipe_to_delete.is_deleted = True
                 db.session.commit()
                 flash('Recipe deleted successfully', 'success')
+
+                if user and user.type == 'normal':
+                    return redirect(url_for('user_end_controller.shared_recipe'))
+
             except Exception as e:
                 flash('An error occurred while deleting the recipe', 'error')
         else:
             flash('Recipe not found', 'error')
-    return redirect(url_for('dashboard_controller.recipes'))
+    return redirect(url_for('dashboard_controller.recipes',user=user))
 
 @delete_controller_bp.route('/delete_ingredient/<int:id>', methods=['POST'])
 def delete_ingredient(id):

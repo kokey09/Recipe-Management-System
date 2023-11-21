@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="icon" href="{{ url_for('static', filename='recipes-img-table/recipes.png') }}" type="image/x-icon">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="{{ url_for('static', filename='js/edit_recipe.js') }}"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</head>
+<body>
+{% extends 'user_profile_dashboard.html' %}
+{% block title %}Home Page{% endblock %}
+{% block content %}
+<div class="container mt-5">
+    <h1 class="mb-4">Edit Recipe</h1>
+
+    <form method="POST" action="/user_edit_recipe/{{ id }}" enctype="multipart/form-data" onsubmit="return confirmEditRecipe();">
+
+        <div class="form-group">
+            <label for="recipe_name">Name:</label>
+            <input type="text" class="form-control" id="recipe_name" name="recipe_name" value="{{ recipe.name }}" required>
+        </div>
+
+        <div class="form-group">
+            <label for="instructions">Instructions:</label>
+            <textarea class="form-control" id="instructions" name="instructions" rows="4" required>{{ recipe.instructions }}</textarea>
+        </div>
+
+        <div class="form-group">
+            <label for="image_file">Image File:</label>
+            <input type="file" class="form-control-file" id="image_file" name="image_file" accept="image/*">
+        </div>
+
+        <button type="submit" class="btn btn-primary" onclick="return confirm('Are you sure you want to keep changes?')">Update Recipe</button>
+
+        <a href="/shared_recipe" class="btn btn-secondary">Back</a>
+    </form>
+</div>
+
+{% endblock %}
+</body>
+</html>

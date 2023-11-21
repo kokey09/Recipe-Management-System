@@ -50,15 +50,39 @@ def edit_recipe(id):
         user_id = session['user_id']
         user = Account.query.get(user_id)
 
-        # Check if the user has permission to edit this recipe
-        if user.type == 'normal' and recipe.account_id != user_id:
-            flash("You do not have permission to edit this recipe.", "error")
+    if request.method == 'POST':
+        is_deleted = request.form.get('is_deleted', '0') == '1'  # Get the is_deleted value as an integer
+        try:
+            recipe.is_deleted = bool(is_deleted)
+            db.session.commit()
+            flash("Recipe updated successfully.", "success")
             return redirect(url_for('dashboard_controller.recipes'))
+
+        except Exception as e:
+            print(f"Error updating recipe: {str(e)}")
+            db.session.rollback()
+            flash("Error updating recipe. Please try again.", "error")
+
+    return render_template('edit_recipes.html', recipe=recipe, id=id, user=user)
+
+@edit_controller_bp.route('/user_edit_recipe/<int:id>', methods=['GET', 'POST'])
+def user_edit_recipe(id):
+    recipe = Recipe.query.get(id)
+    user = None
+
+
+    # Check if the user is logged in
+    if 'user_id' in session:
+        user_id = session['user_id']
+        user = Account.query.get(user_id)
+
+        if user and recipe.account_id != user_id or recipe.is_deleted:
+            flash("You do not have permission to edit this recipe.", "error")
+            return redirect(url_for('user_end_controller.shared_recipe'))
 
     if request.method == 'POST':
         recipe.name = request.form.get('recipe_name')
         recipe.instructions = request.form.get('instructions')
-        is_deleted = request.form.get('is_deleted', '0') == '1'  # Get the is_deleted value as an integer
         filename = None  # Initialize filename to None
 
         image_file = request.files.get('image_file')
@@ -69,21 +93,14 @@ def edit_recipe(id):
             recipe.image_url = f'static/recipes-img-table/{filename}'
 
         try:
-            recipe.is_deleted = bool(is_deleted)
             db.session.commit()
             flash("Recipe updated successfully.", "success")
+            return redirect(url_for('user_end_controller.shared_recipe'))
         except Exception as e:
             print(f"Error updating recipe: {str(e)}")
             db.session.rollback()
             flash("Error updating recipe. Please try again.", "error")
-
-        if user.type == 'normal':
-            return redirect(url_for('user_end_controller.shared_recipe'))
-        else:
-            return redirect(url_for('dashboard_controller.recipes'))
-    
-
-    return render_template('edit_recipes.html', recipe=recipe, id=id, user=user,)
+    return render_template('user_edit_recipe.html', recipe=recipe, id=id, user=user)
 
 
 @edit_controller_bp.route('/edit_ingredient/<int:id>', methods=['GET', 'POST'])
