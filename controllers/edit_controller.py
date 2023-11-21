@@ -44,9 +44,17 @@ def edit_account(id):
 def edit_recipe(id):
     recipe = Recipe.query.get(id)
     user = None
+
+    # Check if the user is logged in
     if 'user_id' in session:
         user_id = session['user_id']
         user = Account.query.get(user_id)
+
+        # Check if the user has permission to edit this recipe
+        if user.type == 'normal' and recipe.account_id != user_id:
+            flash("You do not have permission to edit this recipe.", "error")
+            return redirect(url_for('dashboard_controller.recipes'))
+
     if request.method == 'POST':
         recipe.name = request.form.get('recipe_name')
         recipe.instructions = request.form.get('instructions')
@@ -63,16 +71,20 @@ def edit_recipe(id):
         try:
             recipe.is_deleted = bool(is_deleted)
             db.session.commit()
+            flash("Recipe updated successfully.", "success")
         except Exception as e:
             print(f"Error updating recipe: {str(e)}")
             db.session.rollback()
+            flash("Error updating recipe. Please try again.", "error")
 
         if user.type == 'normal':
             return redirect(url_for('user_end_controller.shared_recipe'))
+        else:
+            return redirect(url_for('dashboard_controller.recipes'))
+    
 
-        return redirect(url_for('dashboard_controller.recipes'))
+    return render_template('edit_recipes.html', recipe=recipe, id=id, user=user,)
 
-    return render_template('edit_recipes.html', recipe=recipe, id=id, user=user)
 
 @edit_controller_bp.route('/edit_ingredient/<int:id>', methods=['GET', 'POST'])
 def edit_ingredient(id):
