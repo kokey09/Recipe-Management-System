@@ -67,6 +67,9 @@ def edit_recipe(id):
             print(f"Error updating recipe: {str(e)}")
             db.session.rollback()
 
+        if user.type == 'normal':
+            return redirect(url_for('user_end_controller.shared_recipe'))
+
         return redirect(url_for('dashboard_controller.recipes'))
 
     return render_template('edit_recipes.html', recipe=recipe, id=id, user=user)

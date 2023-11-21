@@ -20,7 +20,6 @@ def recipes():
             response.headers['Cache-Control'] = 'no-cache, no-store, must-revalidate'
             return response
         else:
-            flash('User not found', 'error')
             return redirect(url_for('user_end_controller.user_page'))
     else:
         flash('Please log in to access recipes', 'error')

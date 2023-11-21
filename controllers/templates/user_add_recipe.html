@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+
+</head>
+<body>
+{% extends 'user_profile_dashboard.html' %}
+{% block title %}Home Page{% endblock %}
+{% block content %}
+
+<div class="container mt-5">
+    <h1 class="display-4 text-center mb-4">Add Recipe</h1>
+
+    <form method="POST" action="/add_recipe" enctype="multipart/form-data" id="recipeForm">
+        <div class="form-group">
+            <label for="recipe_name">Name:</label>
+            <input type="text" class="form-control" id="recipe_name" name="recipe_name" required>
+        </div>
+
+        <div class="form-group">
+            <label for="instructions">Instructions:</label>
+            <textarea class="form-control" id="instructions" name="instructions" rows="4" required></textarea>
+        </div>
+
+        <div class="form-group">
+            <label for="image_file">Image File:</label>
+            <input type="file" class="form-control-file" id="image_file" name="image_file" accept="image/*" required>
+        </div>
+
+        <button type="submit" class="btn btn-primary" onclick="return confirm('Are you sure you want to add this recipe?')">Add Recipe</button>
+    </form>
+</div>
+
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+{% endblock %}
+</body>
+</html>

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+      <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/shared_recipe.css') }}">
+      <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@iconify/all.css">
+
+</head>
+<body>
+{% extends 'user_profile_dashboard.html' %}
+{% block title %}Home Page{% endblock %}
+{% block content %}
+
+<div class="container mt-5">
+    <h2 class="mb-4">Shared Recipe</h2>
+    <div class="row">
+        {% for recipe in recipes %}
+            {% if user and recipe.account_id == user.id %}
+                <div class="col-md-4">
+                    <div class="card recipe-card">
+                        <img src="{{ recipe.image_url }}" alt="{{ recipe.name }} Image"  style="width: 100%; height: 200px;" loading="lazy">
+                        <div class="recipe-card-body">
+                            <p class="card-title">{{ recipe.name }}</p>
+                            <div class="buttons">
+                                <form method="POST" action="{{ url_for('delete_controller.delete_recipe', id=recipe.recipe_id) }}">
+                                    <button class="btn btn-danger" title="Delete Recipe" type="submit" onclick="return confirm('Are you sure you want to delete this Recipe?')">Delete</button>
+                                    <a href="/edit_recipe/{{ recipe.recipe_id }}" class="btn btn-secondary">Edit</a>
+                                    <a href="{{ url_for('user_end_controller.recipe_instruction', recipe_id=recipe.recipe_id) }}" class="btn btn-info">View Recipe</a>
+                                </form>
+
+                                <a href="{{ url_for('user_end_controller.recipe_instruction', recipe_id=recipe.recipe_id) }}" class="star-new-rating"><i class='bx bxs-star' ></i> Reviews | {{ recipe_reviews_count[recipe.recipe_id] }} Reviews</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% elif not user %}
+                <p>User not logged in Popup</p>
+            {% endif %}
+        {% endfor %}
+    </div>
+</div>
+
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+{% endblock %}
+</body>
+</html>

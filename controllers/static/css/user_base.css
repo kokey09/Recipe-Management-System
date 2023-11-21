@@ -120,7 +120,8 @@ nav a:hover {
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
     z-index: 1;
     width: 40%;
-    max-height: 65vh;
+    height: 80%;
+    max-height: 85vh;
     overflow-y: auto; /* Add a vertical scroll bar when content exceeds the height */
 }
 

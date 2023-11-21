@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>{% block title %}Dashboard/base{% endblock %}</title>
+  <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/user_profile_dashboard.css') }}">
+
+</head>
+<body>
+    <nav class="sidebar">
+        <img src="{{ url_for('static', filename='recipes-img-table/recipes.png') }}" alt="Your Logo" style="width: 200px; height: 80px;">
+        <h1><a href="/dashboard" title="go back to dashboard"><i class='bx bxs-dashboard' ></i> Hi {{ user.username }}</a></h1>
+            <ul>
+                <li><a href="" class="ingredients"> Favorites</a></li>
+                <li><a href="{{url_for('user_end_controller.user_add_recipe') }}" class="ingredients"> Add Recipe</a></li>
+                <li><a href="{{url_for('user_end_controller.shared_recipe') }}" class="ingredients"> Shared Recipe</a></li>
+                <li><a href="/" class="ingredients"> Back</a></li>
+            </ul>
+            <ul class="logout-link">
+                <li><a href="{{ url_for('authentication_controller.logout') }}" onclick="return confirm('Are you sure you want to log out?')"><i class='bx bx-log-out' ></i> Logout</a></li>
+            </ul>
+    </nav>
+
+    <div class="content">
+        {% block content %}{% endblock %}
+    </div>
+</body>
+</html>
