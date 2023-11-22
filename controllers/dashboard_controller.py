@@ -10,11 +10,10 @@ dashboard_controller_bp = Blueprint('dashboard_controller',__name__,template_fol
 
 @dashboard_controller_bp.route('/recipes')
 def recipes():
-    if 'user_id' in session:
-        user_id = session['user_id']
-        user = Account.query.get(user_id)
+    user = get_authenticated_user()
 
-        if user and user.type == 'admin':
+    if user:
+        if user.type == 'admin':
             recipes_data = Recipe.query.all()
             response = make_response(render_template('recipes.html', recipes=recipes_data, user=user))
             response.headers['Cache-Control'] = 'no-cache, no-store, must-revalidate'
@@ -27,13 +26,10 @@ def recipes():
 
 @dashboard_controller_bp.route('/ingredients')
 def ingredients():
-    user = None
+    user = get_authenticated_user()
 
-    if 'user_id' in session:
-        user_id = session['user_id']
-        user = Account.query.get(user_id)
-
-        if user and user.type == 'admin':
+    if user:
+        if user.type == 'admin':
             ingredients_data = Ingredient.query.all()
             response = make_response(render_template('ingredients.html', ingredients=ingredients_data,user=user))
             response.headers['Cache-Control'] = 'no-cache, no-store, must-revalidate'
@@ -46,11 +42,10 @@ def ingredients():
 
 @dashboard_controller_bp.route('/recipe_ingredients')
 def recipe_ingredients():
-    if 'user_id' in session:
-        user_id = session['user_id']
-        user = Account.query.get(user_id)
+    user = get_authenticated_user()
 
-        if user and user.type == 'admin':
+    if user:
+        if user.type == 'admin':
             recipes_data = Recipe.query.all()
             ingredients_data = Ingredient.query.all()
             recipe_ingredients_data = RecipeIngredient.query.all()
@@ -75,11 +70,10 @@ def recipe_ingredients():
 def reviews_dashboard():
     reviews = Review.query.all()
 
-    if 'user_id' in session:
-        user_id = session['user_id']
-        user = Account.query.get(user_id)
+    user = get_authenticated_user()
 
-        if user and user.type == 'admin':
+    if user:
+        if user.type == 'admin':
             response = make_response(render_template('reviews_dashboard.html', user=user, reviews=reviews))
             response.headers['Cache-Control'] = 'no-cache, no-store, must-revalidate'
             return response
@@ -94,11 +88,10 @@ def reviews_dashboard():
 def accounts():
     accounts_data = Account.query.all()
 
-    if 'user_id' in session:
-        user_id = session['user_id']
-        user = Account.query.get(user_id)
+    user = get_authenticated_user()
 
-        if user and user.type == 'admin':
+    if user:
+        if user.type == 'admin':
             response = make_response(render_template('accounts.html', accounts=accounts_data, user=user))
             response.headers['Cache-Control'] = 'no-cache, no-store, must-revalidate'
             return response
@@ -111,11 +104,10 @@ def accounts():
 
 @dashboard_controller_bp.route('/dashboard')
 def dashboard():
-    if 'user_id' in session:
-        user_id = session['user_id']
-        user = Account.query.get(user_id)
+    user = get_authenticated_user()
 
-        if user and user.type == 'admin':
+    if user:
+        if user.type == 'admin':
             response = make_response(render_template('dashboard.html', user=user))
             response.headers['Cache-Control'] = 'no-cache, no-store, must-revalidate'
             return response
@@ -125,3 +117,8 @@ def dashboard():
     else:
         flash('Please log in to access the dashboard', 'error')
         return redirect(url_for('authentication_controller.login'))
+
+def get_authenticated_user():
+    if 'user_id' in session:
+        user_id = session['user_id']
+        return Account.query.get(user_id)

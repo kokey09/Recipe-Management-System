@@ -74,10 +74,7 @@ def recipe_display():
     for recipe in recipes:
         recipe_reviews_count[recipe.recipe_id] = len(Review.query.filter_by(recipe_id=recipe.recipe_id).all())
 
-    user = None
-    if 'user_id' in session:
-        user_id = session['user_id']
-        user = Account.query.get(user_id)
+    user = get_authenticated_user()
 
     response = make_response (render_template('recipe_display.html', recipes=recipes, ingredients=ingredients, user=user, recipe_reviews_count=recipe_reviews_count))
     response.headers['Cache-Control'] = 'no-cache, no-store, must-revalidate'
@@ -88,13 +85,10 @@ def recipe_display():
 @user_end_controller_bp.route('/recipe_instruction')
 def recipe_instruction():
     recipe_id = request.args.get('recipe_id', None, type=int)
-    user = None
 
     recipe = Recipe.query.get_or_404(recipe_id)
 
-    if 'user_id' in session:
-        user_id = session['user_id']
-        user = Account.query.get(user_id)
+    user = get_authenticated_user()
 
     recipes = Recipe.query.filter_by(recipe_id=recipe_id).all()
     reviews = Review.query.filter_by(recipe_id=recipe_id).all()
@@ -109,12 +103,9 @@ def recipe_instruction():
 
 @user_end_controller_bp.route('/user_profile_dashboard')
 def user_profile_dashboard():
-    user = None
-    if 'user_id' in session:
-        user_id = session['user_id']
-        user = Account.query.get(user_id)
-    else:
-        flash('Please log in to access profile dashboard.', 'error')
+    user = get_authenticated_user()
+
+    if not user:
         return redirect(url_for('authentication_controller.login'))
     response = make_response(render_template('user_profile_dashboard.html', user=user))
     response.headers['Cache-Control'] = 'no-cache, no-store, must-revalidate'
@@ -122,12 +113,9 @@ def user_profile_dashboard():
 
 @user_end_controller_bp.route('/user_add_recipe')
 def user_add_recipe():
-    user = None
-    if 'user_id' in session:
-        user_id = session['user_id']
-        user = Account.query.get(user_id)
-    else:
-        flash('Please log in to access profile dashboard.', 'error')
+    user = get_authenticated_user()
+
+    if not user:
         return redirect(url_for('authentication_controller.login'))
 
     response = make_response(render_template('user_add_recipe.html', user=user))
@@ -144,14 +132,17 @@ def shared_recipe():
         recipe_reviews_count[recipe.recipe_id] = len(Review.query.filter_by(recipe_id=recipe.recipe_id).all())
 
     # Check if the user is logged in
-    user = None
-    if 'user_id' in session:
-        user_id = session['user_id']
-        user = Account.query.get(user_id)
-    else:
-        flash('Please log in to access profile dashboard.', 'error')
+    user = get_authenticated_user()
+
+    if not user:
         return redirect(url_for('authentication_controller.login'))
 
     response = make_response (render_template('shared_recipe.html', recipes=recipes, user=user, recipe_reviews_count=recipe_reviews_count))
     response.headers['Cache-Control'] = 'no-cache, no-store, must-revalidate'
     return response
+
+
+def get_authenticated_user():
+    if 'user_id' in session:
+        user_id = session['user_id']
+        return Account.query.get(user_id)
