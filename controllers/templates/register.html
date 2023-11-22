@@ -16,6 +16,7 @@
         <div class="form-container">
             <h1>User Registration</h1>
             <form method="POST" action="/register">
+
                 <div class="form-group">
                     <label for="username">Username:</label>
                     <input type="text" id="username" name="username" required placeholder="Enter username">
@@ -30,15 +31,18 @@
                     <label for="password">Password:</label>
                     <input type="password" id="password" name="password" required placeholder="Enter password">
                 </div>
-                 {% if error %}
+
+                {% if error %}
                 <p class="error">{{ error }}</p>
                 {% endif %}
+
                 <div class="form-group">
                     <label for="confirm_password">Confirm Password:</label>
                     <input type="password" id="confirm_password" name="confirm_password" required placeholder="Confirm password">
                 </div>
 
                 <button type="submit">Register</button>
+                <a href="/login">Login</a>
 
             </form>
         </div>

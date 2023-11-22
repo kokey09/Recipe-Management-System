@@ -2,38 +2,51 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Login</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/login.css') }}">
-    <link rel="icon" href="{{ url_for('static', filename='recipes-img-table/recipes.png') }}" type="image/x-icon">
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js" defer></script>
-    <script src="{{ url_for('static', filename='js/login.js') }}"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+
+    <title>Your Page Title</title>
+
 </head>
 <body>
 
 <div class="container">
     <div class="form-container">
+        <div class="back-btn">
+            <a href="/" title="back to home page"><i class='bx bx-arrow-back' ></i></a>
+        </div>
+
         <fieldset>
-            <legend><h1>Login</h1></legend>
+            <legend><h1><i class='bx bxs-user-circle' ></i> Login</h1></legend>
             <form action="/login" method="POST" id="login-form">
+
                 <div class="form-group">
                     <label for="username">Username</label>
-                    <input type="text" id="username" name="username" required placeholder="Username">
+                    <input type="text" id="username" name="username" class="form-control" required placeholder="Username">
                 </div>
+
                 <div class="form-group">
                     <label for="password">Password</label>
-                    <input type="password" id="password" name="password" required placeholder="Password">
+                    <input type="password" id="password" name="password" class="form-control" required placeholder="Password">
                 </div>
-                <div class="error-message" style="color: red;">
+
+                <div class="error-message">
                     {% if error %}
                         {{ error }}
                     {% endif %}
                 </div>
 
-                <button type="submit" title="login">Login</button>
+                <button type="submit" class="btn btn-primary btn-block" title="login">
+                    <i class='bx bx-log-in'></i> Login
+                </button>
+
                 <hr>
-                   <div class="button-container">
-                        <a href="/register" class="button-link" title="create-new-account">Create new account</a>
-                   </div>
+
+                <div class="button-container">
+                    <a href="/register" class="button-link" title="create-new-account">Create new account</a>
+                </div>
 
                 {% with messages = get_flashed_messages() %}
                   {% if messages %}
@@ -50,8 +63,13 @@
     </div>
 </div>
 
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.0.7/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>
+
+
 
 
 
