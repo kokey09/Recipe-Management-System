@@ -26,24 +26,23 @@
                     <a href="/ingredient_display">View All</a>
             </div>
         </div>
+        <li><a href="recipe_display" id="recipes-link" title="about us">Recipes</a></li>
         <li><a href="about_us" id="about-us-link" title="about us">About Us</a></li>
         <li>|</li>
-        {% if not user %}
-            <li><a href="/login" id="login-link" title="Login">Login</a></li>
-            <li><a href="/register" id="registration-link" title="Register">Registration</a></li>
-        {% else %}
-        <div class="dropdown">
-            
-            <li><i class='bx bx-user-circle'></i> Hi {{ user.username }}</li>
+            {% if not user %}
+                <li><a href="/login" id="login-link" title="Login">Login</a></li>
+                <li><a href="/register" id="registration-link" title="Register">Registration</a></li>
+            {% elif user %}
+            <div class="dropdown">
+                <li><i class='bx bx-user-circle'></i> Hi {{ user.username }}</li>
             <div class="dropdown-content">
-                <a href="{{ url_for('authentication_controller.logout') }}" onclick="return confirm('Are you sure you want to log out?')"><i class='bx bx-log-out' ></i> Logout</a>
-                <hr>
-                <a><i class='bx bxs-heart' ></i> Favorites</a>
-                <a href="{{url_for('user_end_controller.user_add_recipe') }}" ><i class='bx bx-add-to-queue' ></i> Add Recipe</a>
                 <a href="{{url_for('user_end_controller.shared_recipe') }}"><i class='bx bx-add-to-queue' ></i> Personal Recipe </a>
-                {% endif %}
+                <a href="{{url_for('user_end_controller.user_add_recipe') }}" ><i class='bx bx-add-to-queue' ></i> Add Recipe</a>
+                <a><i class='bx bxs-heart' ></i> Favorites</a>
                 {% if user and user.type == 'admin' %}
-                    <li><a href="{{ url_for('dashboard_controller.dashboard') }}" id="admin-dashboard-link"><i class='bx bxs-dashboard'></i> Admin Dashboard</a></li>
+                    <a href="{{ url_for('dashboard_controller.dashboard') }}" id="admin-dashboard-link"><i class='bx bxs-dashboard'></i> Admin Dashboard</a>
+                {% endif %}
+                <a href="{{ url_for('authentication_controller.logout') }}" onclick="return confirm('Are you sure you want to log out?')"><i class='bx bx-log-out' ></i> Logout</a>
                 {% endif %}
             </div>
         </div>
