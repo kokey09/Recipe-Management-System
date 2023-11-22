@@ -16,6 +16,9 @@
                 <li><a href="" class="ingredients"><i class='bx bxs-heart' ></i> Favorites</a></li>
                 <li><a href="{{url_for('user_end_controller.shared_recipe') }}" class="ingredients"><i class='bx bxs-share' ></i> Shared Recipe</a></li>
                 <li><a href="/" class="ingredients" title="back to home page"><i class='bx bxs-home-alt-2'></i> Homepage</a></li>
+                {% if user and user.type == 'admin' %}
+                <li><a href="{{ url_for('dashboard_controller.dashboard') }}" class="ingredients" title="back to home page"><i class='bx bxs-home-alt-2'></i> admin dashboard</a></li>
+                {% endif %}
             </ul>
             <ul class="logout-link">
                 <li><a href="{{ url_for('authentication_controller.logout') }}" onclick="return confirm('Are you sure you want to log out?')" title="signout"><i class='bx bx-log-out' ></i> Logout</a></li>

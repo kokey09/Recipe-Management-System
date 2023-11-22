@@ -5,6 +5,9 @@
   <title>Recipe and Ingredients</title>
   <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/recipe_ingredients.css') }}">
         <link rel="icon" href="{{ url_for('static', filename='recipes-img-table/recipes.png') }}" type="image/x-icon">
+        <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <script src="{{ url_for('static', filename='js/popup.js') }}"></script>
+
       <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="{{ url_for('static', filename='js/search_recipe_ingredient.js') }}"></script>
 </head>
@@ -15,20 +18,21 @@
 
 <fieldset>
 <legend><h1>Recipe Ingredient Connection</h1></legend>
+    <!-- search bard -->
+    <div class="search-container">
+        <select id="columnSelector">
+            <option value="all">Search All</option>
+            <option value="recipe_id">Recipe ID</option>
+            <option value="recipe_name">Recipe Name</option>
+            <option value="ingredient_id">Ingredient ID</option>
+            <option value="ingredient_name">Ingredient Name</option>
+        </select>
+        <input type="text" id="searchInput" class="search-bar" placeholder="Search Recipe and Ingredients">
+        <button id="searchButton">Search</button>
+        <button class="openPopup-btn" onclick="openPopup()">Add connection</button>
+    </div>
 
-<div class="search-container">
-    <select id="columnSelector">
-        <option value="all">Search All</option>
-        <option value="recipe_id">Recipe ID</option>
-        <option value="recipe_name">Recipe Name</option>
-        <option value="ingredient_id">Ingredient ID</option>
-        <option value="ingredient_name">Ingredient Name</option>
-    </select>
-    <input type="text" id="searchInput" class="search-bar" placeholder="Search Recipe and Ingredients">
-    <button id="searchButton">Search</button>
-</div>
-
-
+    <!--tables-->
     <table class="recipe-ingredient-table">
       <thead>
         <tr>
@@ -40,26 +44,31 @@
           <th>Action</th>
         </tr>
       </thead>
- <tbody>
-  {% for recipe_ingredient in recipe_ingredients|sort(attribute='recipe.recipe_id') %}
-  <tr>
-    <td>{{ recipe_ingredient.recipe.name }}</td>
-    <td><img src="{{ recipe_ingredient.recipe.image_url }}" alt="{{ recipe_ingredient.recipe.name }} Image" style="width: 100px; height: 100px;" loading="lazy"></td>
-    <td>{{ recipe_ingredient.recipe.recipe_id }}</td>
-    <td>{{ recipe_ingredient.ingredient.name }}</td>
-    <td>{{ recipe_ingredient.ingredient.ingredient_id }}</td>
-    <td>
-      <form method="POST" action="/disconnect_recipe_ingredient/{{ recipe_ingredient.recipe.recipe_id }}/{{ recipe_ingredient.ingredient.ingredient_id }}" onsubmit="return confirmDisconnect();">
-        <input type="hidden" name="recipe_id" value="{{ recipe_ingredient.recipe.recipe_id }}">
-        <input type="hidden" name="ingredient_id" value="{{ recipe_ingredient.ingredient.ingredient_id }}">
-        <button type="submit" class="disconnect-button" onclick="return confirm('Are you sure you want to disconnect?')">Disconnect</button>
-      </form>
-    </td>
-  </tr>
-  {% endfor %}
-</tbody>
+     <tbody>
+      {% for recipe_ingredient in recipe_ingredients|sort(attribute='recipe.recipe_id') %}
+      <tr>
+        <td>{{ recipe_ingredient.recipe.name }}</td>
+        <td><img src="{{ recipe_ingredient.recipe.image_url }}" alt="{{ recipe_ingredient.recipe.name }} Image" style="width: 100px; height: 100px;" loading="lazy"></td>
+        <td>{{ recipe_ingredient.recipe.recipe_id }}</td>
+        <td>{{ recipe_ingredient.ingredient.name }}</td>
+        <td>{{ recipe_ingredient.ingredient.ingredient_id }}</td>
+        <td>
+          <form method="POST" action="/disconnect_recipe_ingredient/{{ recipe_ingredient.recipe.recipe_id }}/{{ recipe_ingredient.ingredient.ingredient_id }}" onsubmit="return confirmDisconnect();">
+            <input type="hidden" name="recipe_id" value="{{ recipe_ingredient.recipe.recipe_id }}">
+            <input type="hidden" name="ingredient_id" value="{{ recipe_ingredient.ingredient.ingredient_id }}">
+            <button type="submit" class="disconnect-button" onclick="return confirm('Are you sure you want to disconnect?')">Disconnect</button>
+          </form>
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
     </table>
+  </div>
+</fieldset>
 
+<!-- add connection popup -->
+<div class="Overlay" id="Overlay" onclick="closePopup()"></div>
+<div class="Popup" id="Popup">
     <fieldset class="connect-form-container">
       <legend>Connect Recipe and Ingredient</legend>
       <form method="POST" action="/connect_recipe_ingredient">
@@ -76,12 +85,16 @@
           <option value="{{ ingredient.ingredient_id }}">{{ ingredient.name }}</option>
           {% endfor %}
         </select>
-
         <button type="submit">Connect</button>
+
       </form>
     </fieldset>
-  </div>
-</fieldset>
+    <div onclick="closePopup()" class="close-btn">
+        <i class='bx bx-arrow-back'></i>
+    </div>
+</div>
+
+
   {% endblock %}
 </body>
 </html>

@@ -4,6 +4,8 @@
     <title>Ingredients</title>
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/ingredients.css') }}">
     <link rel="icon" href="{{ url_for('static', filename='recipes-img-table/recipes.png') }}" type="image/x-icon">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <script src="{{ url_for('static', filename='js/popup.js') }}"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="{{ url_for('static', filename='js/search_ingredient.js') }}"></script>
 </head>
@@ -13,15 +15,22 @@
         {% block content %}
 <fieldset>
     <legend><h1>Ingredients</h1></legend>
-    <form method="POST" action="add-ingredient" class="form-ingredients">
-        <label for="name">Name:</label>
-        <input type="text" id="name" name="name" class="name-form" required>
 
-        <label for="description" >Description:</label>
-        <textarea id="description" name="description" rows="4" class="text-area-form" required></textarea>
+    <div class="Overlay" id="Overlay" onclick="closePopup()"></div>
+    <div class="Popup" id="Popup">
+        <form method="POST" action="add-ingredient" class="form-ingredients">
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name" class="name-form" required>
 
-        <button type="submit">Add Ingredient</button>
-    </form>
+            <label for="description" >Description:</label>
+            <textarea id="description" name="description" rows="4" class="text-area-form" required></textarea>
+
+            <button type="submit">Add Ingredient</button>
+        </form>
+        <div onclick="closePopup()" class="close-btn">
+            <i class='bx bx-arrow-back'></i>
+        </div>
+    </div>
 
     <div class="search-container">
         <select id="columnSelector">
@@ -32,6 +41,8 @@
         </select>
         <input type="text" id="searchInput-ingredients" class="search-bar" placeholder="Search Ingredients">
         <button id="searchButton">Search</button>
+        <button class="openPopup-btn" onclick="openPopup()">Add connection</button>
+
     </div>
 
     <table class="ingredients-table">

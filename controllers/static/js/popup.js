@@ -1,3 +1,5 @@
+
+// recipe instruction
 function addReview() {
     const reviewOverlay = document.getElementById('reviewOverlay');
     const reviewPopup = document.getElementById('reviewPopup');
@@ -19,3 +21,29 @@ function redirectToLogin() {
 
     window.location.href = loginUrl;
 }
+
+
+
+
+
+//ingredient dashboard
+function openPopup(){
+    const Overlay = document.getElementById('Overlay');
+    const Popup = document.getElementById('Popup');
+
+    Overlay.style.display = 'block';
+    Popup.style.display = 'block';
+}
+
+function closePopup(){
+    const Overlay = document.getElementById('Overlay');
+    const Popup = document.getElementById('Popup');
+
+    Overlay.style.display = 'none';
+    Popup.style.display = 'none';
+}
+
+
+
+
+

@@ -132,3 +132,46 @@ button[type="submit"]:hover {
     cursor: pointer;
 }
 
+
+.Overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+}
+
+
+.Popup {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    z-index: 1;
+    width: 28%;
+    height: 65%;
+}
+.close-btn{
+	position: absolute;
+	top: 0;
+	right: 10px;
+}
+
+.close-btn i {
+    font-size: 44px;
+}
+.openPopup-btn {
+    padding: 5px 10px;
+    background-color: #2F539B;
+    color: white;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+}

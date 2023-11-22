@@ -14,7 +14,7 @@ import logging
 
 delete_controller_bp = Blueprint('delete_controller',__name__,template_folder='templates',static_folder='static')
 bcrypt = Bcrypt()
-
+# delete account
 @delete_controller_bp.route('/delete_account/<int:account_id>', methods=['POST'])
 def delete_account(account_id):
     if request.method == 'POST':
@@ -31,30 +31,47 @@ def delete_account(account_id):
             flash('Account not found', 'error')
     return redirect(url_for('dashboard_controller.accounts'))
 
-@delete_controller_bp.route('/delete_recipe/<int:id>', methods=['POST'])
-def delete_recipe(id):
-    if 'user_id' in session:
-        user_id = session['user_id']
-        user = Account.query.get(user_id)
-    else:
-        flash('you need to login first', 'error')
-    if request.method == 'POST':
-        recipe_to_delete = Recipe.query.get(id)
-        if recipe_to_delete:
-            try:
-                # Instead of physically deleting the recipe, set a flag to mark it as deleted
-                recipe_to_delete.is_deleted = True
-                db.session.commit()
-                flash('Recipe deleted successfully', 'success')
+# delete main function
+def delete_recipe_base(model, id, redirect_page):
+    user = get_authenticated_user()
 
-                if user and user.type == 'normal':
-                    return redirect(url_for('user_end_controller.shared_recipe'))
+    if request.method == 'POST' and user:
+        # Include the logic for retrieving the entity based on the model type
+        if model == 'recipe':
+            entity_to_delete = Recipe.query.get(id)
+        else:
+            entity_to_delete = None
+
+        if entity_to_delete:
+            try:
+                entity_to_delete.is_deleted = True
+                db.session.commit()
+                flash(f'{model.capitalize()} deleted successfully', 'success')
+
+                return redirect(url_for(redirect_page))
 
             except Exception as e:
-                flash('An error occurred while deleting the recipe', 'error')
+                flash(f'An error occurred while deleting the {model}', 'error')
         else:
-            flash('Recipe not found', 'error')
-    return redirect(url_for('dashboard_controller.recipes',user=user))
+            flash(f'{model.capitalize()} not found', 'error')
+
+    return redirect(url_for('dashboard_controller.recipes', user=user))
+# delete main function extension for admin
+@delete_controller_bp.route('/delete_recipe_admin/<int:id>', methods=['POST'])
+def delete_recipe_admin(id):
+    return delete_recipe_base('recipe', id, 'dashboard_controller.recipes')
+# delete main function extension for user end
+@delete_controller_bp.route('/delete_shared_recipe/<int:id>', methods=['POST'])
+def delete_shared_recipe(id):
+    return delete_recipe_base('recipe', id, 'user_end_controller.shared_recipe')
+
+def get_authenticated_user():
+    if 'user_id' in session:
+        user_id = session['user_id']
+        return Account.query.get(user_id)
+    else:
+        flash('You need to log in first', 'error')
+        return None
 
 @delete_controller_bp.route('/delete_ingredient/<int:id>', methods=['POST'])
 def delete_ingredient(id):
