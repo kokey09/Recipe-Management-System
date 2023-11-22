@@ -56,22 +56,18 @@ def delete_recipe_base(model, id, redirect_page):
             flash(f'{model.capitalize()} not found', 'error')
 
     return redirect(url_for('dashboard_controller.recipes', user=user))
+
+
 # delete main function extension for admin
 @delete_controller_bp.route('/delete_recipe_admin/<int:id>', methods=['POST'])
 def delete_recipe_admin(id):
     return delete_recipe_base('recipe', id, 'dashboard_controller.recipes')
+
+
 # delete main function extension for user end
 @delete_controller_bp.route('/delete_shared_recipe/<int:id>', methods=['POST'])
 def delete_shared_recipe(id):
     return delete_recipe_base('recipe', id, 'user_end_controller.shared_recipe')
-
-def get_authenticated_user():
-    if 'user_id' in session:
-        user_id = session['user_id']
-        return Account.query.get(user_id)
-    else:
-        flash('You need to log in first', 'error')
-        return None
 
 @delete_controller_bp.route('/delete_ingredient/<int:id>', methods=['POST'])
 def delete_ingredient(id):
@@ -100,3 +96,10 @@ def disconnect_recipe_ingredient(recipe_id, ingredient_id):
 
     return render_template('disconnect_confirmation.html', recipe_id=recipe_id, ingredient_id=ingredient_id)
 
+def get_authenticated_user():
+    if 'user_id' in session:
+        user_id = session['user_id']
+        return Account.query.get(user_id)
+    else:
+        flash('You need to log in first', 'error')
+        return None

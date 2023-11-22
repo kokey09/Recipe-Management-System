@@ -40,10 +40,10 @@
                 <hr>
                 <a><i class='bx bxs-heart' ></i> Favorites</a>
                 <a href="{{url_for('user_end_controller.user_add_recipe') }}" ><i class='bx bx-add-to-queue' ></i> Add Recipe</a>
-                <a href="{{url_for('user_end_controller.shared_recipe') }}"><i class='bx bx-add-to-queue' ></i> View Shared Recipe </a>
+                <a href="{{url_for('user_end_controller.shared_recipe') }}"><i class='bx bx-add-to-queue' ></i> Personal Recipe </a>
                 {% endif %}
                 {% if user and user.type == 'admin' %}
-                    <li><a href="{{ url_for('dashboard_controller.dashboard') }}" id="admin-dashboard-link">Go Back to Admin Dashboard</a></li>
+                    <li><a href="{{ url_for('dashboard_controller.dashboard') }}" id="admin-dashboard-link"><i class='bx bxs-dashboard'></i> Admin Dashboard</a></li>
                 {% endif %}
             </div>
         </div>
