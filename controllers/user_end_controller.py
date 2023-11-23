@@ -91,6 +91,10 @@ def recipe_instruction():
 
     user = get_authenticated_user()
 
+    if recipe.is_deleted:
+        flash("You do not have permission to edit this recipe.", "error")
+        return redirect(url_for('user_end_controller.shared_recipe'))
+
     recipes = Recipe.query.filter_by(recipe_id=recipe_id).all()
     reviews = Review.query.filter_by(recipe_id=recipe_id).all()
     ingredients = Ingredient.query.all()
@@ -125,18 +129,16 @@ def user_add_recipe():
 
 @user_end_controller_bp.route('/shared_recipe')
 def shared_recipe():
-    recipes = Recipe.query.filter_by(is_deleted=False).order_by(Recipe.recipe_id.desc()).all()
-
-    recipe_reviews_count = {}  # Dictionary to store the counts
-
-    for recipe in recipes:
-        recipe_reviews_count[recipe.recipe_id] = len(Review.query.filter_by(recipe_id=recipe.recipe_id).all())
-
     # Check if the user is logged in
     user = get_authenticated_user()
 
     if not user:
         return redirect(url_for('authentication_controller.login'))
+
+    recipes = Recipe.query.filter_by(is_deleted=False).order_by(Recipe.recipe_id.desc()).all()
+    recipe_reviews_count = {}  # Dictionary to store the counts
+    for recipe in recipes:
+        recipe_reviews_count[recipe.recipe_id] = len(Review.query.filter_by(recipe_id=recipe.recipe_id).all())
 
     response = make_response (render_template('shared_recipe.html', recipes=recipes, user=user, recipe_reviews_count=recipe_reviews_count))
     response.headers['Cache-Control'] = 'no-cache, no-store, must-revalidate'
@@ -148,6 +150,7 @@ def favorites():
 
     if not user:
         return redirect(url_for('authentication_controller.login'))
+
 
     # Get favorites associated with non-deleted recipes
     favorites = Favorite.query.join(Recipe).filter(

@@ -1,31 +1,51 @@
-<!-- favorites.html -->
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Favorites</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/favorites.css') }}">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@iconify/all.css">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="icon" href="{{ url_for('static', filename='recipes-img-table/recipes.png') }}" type="image/x-icon">
 </head>
 <body>
     {% extends 'user_profile_dashboard.html' %}
     {% block title %}Favorites{% endblock %}
     {% block content %}
 
+<div class="container mt-5">
     <h1>Favorites</h1>
 
-  <ul>
-
+    <div class="row">
         {% for favorite in favorites %}
-            <li>
-                <h2>{{ favorite.recipe.name }}</h2>
-                <img src="{{ favorite.recipe.image_url }}" alt="{{ favorite.recipe.name }} Image" style="width: 200px; height: 150px;">
-            </li>
+        <div class="col-md-4">
+            <div class="card recipe-card">
+                <img src="{{ favorite.recipe.image_url }}" alt="{{ favorite.recipe.name }} Image" style="width: 100%; height: 200px;">
+                <div class="recipe-card-body">
+                    <p class="card-title">{{ favorite.recipe.name }}</p>
+                    <div class="buttons">
+                        <a href="{{ url_for('user_end_controller.recipe_instruction', recipe_id=favorite.recipe.recipe_id) }}" class="btn btn-info">View Recipe</a>
+                    </div>
+                </div>
+            </div>
+        </div>
         {% endfor %}
-    </ul>
-        {% if not favorites %}
-            <p>No favorites available.</p>
-        {% endif %}
+    </div>
+</div>
+
+
+    {% if not favorites %}
+        <p>No favorites available.</p>
+    {% endif %}
+
     {% endblock %}
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
 </body>
 </html>
+

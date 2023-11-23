@@ -1,0 +1,19 @@
+.recipe-card {
+    margin: 10px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+}
+
+.recipe-card img {
+    width: 100%;
+    height: auto;
+    border-radius: 8px 8px 0 0;
+}
+
+.recipe-card-body {
+    padding: 15px;
+}
+
+.buttons {
+    margin-top: 10px;
+}

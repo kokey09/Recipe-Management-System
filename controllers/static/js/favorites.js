@@ -4,7 +4,7 @@ $(document).ready(function() {
         const recipeId = $(this).data("recipe-id");
 
         // Ask for confirmation
-        if (confirm("Add this recipe to your favorites?")) {
+        if (confirm("Do you want to Add this recipe to your favorites?")) {
             addFavorite(recipeId);
         }
     });
