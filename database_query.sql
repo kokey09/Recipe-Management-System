@@ -54,16 +54,6 @@ CREATE TABLE reviews (
     FOREIGN KEY (recipe_id) REFERENCES recipes(recipe_id)
 );
 
-CREATE TABLE replies (
-    reply_id INT(11) AUTO_INCREMENT PRIMARY KEY,
-    review_id INT(11),
-    account_id INT(11),
-    reply_text TEXT,
-    timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    FOREIGN KEY (account_id) REFERENCES account(id),
-    FOREIGN KEY (review_id) REFERENCES reviews(review_id)
-);
-
 CREATE TABLE favorites (
     favorite_id INT(11) AUTO_INCREMENT PRIMARY KEY,
     recipe_id INT(11),
