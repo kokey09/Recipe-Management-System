@@ -4,6 +4,8 @@
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/user_page.css')}}">
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <link rel="icon" href="{{ url_for('static', filename='recipes-img-table/recipes.png') }}" type="image/x-icon">
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script src="{{ url_for('static', filename='js/favorites.js') }}"></script>
 <div class="recipe-list">
     <div class="logo-link">
         <img src="{{ url_for('static', filename='recipes-img-table/recipes.png') }}" alt="Your Logo" style="width: 600px; height: 240px;" loading="lazy">
@@ -17,7 +19,9 @@
         {% for recipe in recipes [:4]  if not recipe.is_deleted %}
             <div class="recipe-card">
                 {% if user %}
-                <i class='bx bx-heart-circle' title="add favorites"></i>
+                <i class='bx bx-heart-circle favorite-btn' title="add favorites" data-recipe-id="{{ recipe.recipe_id }}"></i>
+                {% else %}
+                <i class='bx bx-heart-circle favorite-btn' title="add favorites" onclick="redirectToLogin()"></i>
                 {% endif %}
                 <img src="{{ recipe.image_url }}" alt="{{ recipe.name }} Image" style="width: 298px; height: 270px;" loading="lazy">
                 <div class="recipe-details">
@@ -41,7 +45,9 @@
     {% for recipe in recipes [:6]%}
         <div class="recipe-new-card">
             {% if user %}
-            <i class='bx bx-heart-circle' title="add favorites"></i>
+            <i class='bx bx-heart-circle favorite-btn' title="add favorites" data-recipe-id="{{ recipe.recipe_id }}"></i>
+            {% else %}
+            <i class='bx bx-heart-circle favorite-btn' title="add favorites" onclick="redirectToLogin()"></i>
             {% endif %}
             <img src="{{ recipe.image_url }}" alt="{{ recipe.name }} Image" style="width: 298px; height: 270px;" loading="lazy">
             <div class="recipe-new-details">

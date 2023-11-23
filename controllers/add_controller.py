@@ -8,6 +8,9 @@ from models.account import db
 from models.recipe import Recipe
 from models.review import Review
 from models.recipe_ingredient import RecipeIngredient
+from models.favorites import Favorite
+from datetime import datetime  # Import datetime
+
 from flask_bcrypt import Bcrypt
 import os
 import logging
@@ -132,3 +135,39 @@ def connect_recipe_ingredient():
             db.session.rollback()
 
     return redirect(url_for('dashboard_controller.recipe_ingredients'))
+
+
+
+
+
+@add_controller_bp.route('/add_favorite', methods=['POST'])
+def add_favorite():
+    # Get the recipe_id from the form submission
+    recipe_id = request.form.get('recipe_id')
+
+    # Get the currently authenticated user
+    user = get_authenticated_user()
+
+    if not user:
+        return redirect(url_for('authentication_controller.login'))
+
+    # Check if the user has already favorited this recipe
+    existing_favorite = Favorite.query.filter_by(recipe_id=recipe_id, account_id=user.id).first()
+
+    if existing_favorite:
+        return "you already have this recipe as your favorite"
+
+    # Create a new Favorite record with the current timestamp
+    favorite = Favorite(recipe_id=recipe_id, account_id=user.id, timestamp=datetime.utcnow())
+
+    # Add the new Favorite record to the database
+    db.session.add(favorite)
+    db.session.commit()
+
+    return "Favorite added successfully"
+
+
+def get_authenticated_user():
+    if 'user_id' in session:
+        user_id = session['user_id']
+        return Account.query.get(user_id)

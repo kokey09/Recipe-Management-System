@@ -5,6 +5,7 @@ from models.ingredient import Ingredient
 from models.account import Account
 from models.recipe_ingredient import RecipeIngredient
 from models.review import Review
+from models.favorites import Favorite
 
 user_end_controller_bp = Blueprint('user_end_controller',__name__,template_folder='templates',static_folder='static')
 
@@ -141,6 +142,22 @@ def shared_recipe():
     response.headers['Cache-Control'] = 'no-cache, no-store, must-revalidate'
     return response
 
+@user_end_controller_bp.route('/favorites')
+def favorites():
+    user = get_authenticated_user()
+
+    if not user:
+        return redirect(url_for('authentication_controller.login'))
+
+    # Get favorites associated with non-deleted recipes
+    favorites = Favorite.query.join(Recipe).filter(
+        Favorite.account_id == user.id,
+        Recipe.is_deleted == False
+    ).all()
+
+    response = make_response (render_template('favorites.html', user=user, favorites=favorites))
+    response.headers['Cache-Control'] = 'no-cache, no-store, must-revalidate'
+    return response
 
 def get_authenticated_user():
     if 'user_id' in session:

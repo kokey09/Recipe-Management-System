@@ -70,7 +70,6 @@ def user_edit_recipe(id):
     recipe = Recipe.query.get(id)
     user = None
 
-
     # Check if the user is logged in
     if 'user_id' in session:
         user_id = session['user_id']

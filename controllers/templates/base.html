@@ -26,6 +26,7 @@
 
             </ul>
             <ul class="logout-link">
+                <li><a href="/favorites"><i class='bx bxs-heart' ></i> Favorites</a></li>
                 <li><a href="/shared_recipe"><i class='bx bxs-share' ></i> Shared recipe</a></li>
                 <li><a href="/"><i class='bx bxs-home-alt-2'></i> Homepage</a></li>
                 <li><a href="{{ url_for('authentication_controller.logout') }}" onclick="return confirm('Are you sure you want to log out?')"><i class='bx bx-log-out' ></i> Logout</a></li>
