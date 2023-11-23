@@ -1,24 +1,11 @@
 {
-	"name": "Recipe Management System",
-	"image": "mcr.microsoft.com/devcontainers/universal:2",
-	"features": {
-		"ghcr.io/devcontainers-contrib/features/apt-get-packages:1": {
-			"packages": "mysql-server"
-		}
-	},
-	"updateContentCommand": "pip install -r requirements.txt",
-	"postStartCommand": [
-		"sudo service mysql start",
-		"sudo mysql < database_query.sql",
-		"sudo mysql < database/account.sql",
-		"sudo mysql < database/recipes.sql",
-		"sudo mysql < database/ingredients.sql",
-		"sudo mysql < database/recipe_ingredients.sql",
-		"sudo mysql < database/reviews.sql",
-		"sudo mysql < database/replies.sql",
-		"sudo mysql < database/favorites.sql"
-	]
+  "name": "Recipe Management System",
+  "image": "mcr.microsoft.com/devcontainers/universal:2",
+  "features": {
+    "ghcr.io/devcontainers-contrib/features/apt-get-packages:1": {
+      "packages": "mysql-server"
+    }
+  },
+  "updateContentCommand": "pip install -r requirements.txt",
+  "postStartCommand": "sudo service mysql start && sudo mysql < database_query.sql && sudo mysql < database/account.sql && sudo mysql < database/recipes.sql && sudo mysql < database/ingredients.sql && sudo mysql < database/recipe_ingredients.sql && sudo mysql < database/reviews.sql && sudo mysql < database/favorites.sql"
 }
-
-
-
