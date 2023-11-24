@@ -6,7 +6,6 @@
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/recipe_instruction.css') }}">
         <link rel="icon" href="{{ url_for('static', filename='recipes-img-table/recipes.png') }}" type="image/x-icon">
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
-
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="{{ url_for('static', filename='js/popup.js') }}"></script>
 </head>
@@ -14,55 +13,28 @@
     {% extends 'user_base.html' %}
     {% block title %}Recipe Instruction{% endblock %}
     {% block content %}
-
-    <!--  recipes instruction  -->
-    <div class="logo-link">
-        <img src="{{ url_for('static', filename='img-db/recipes.png') }}" alt="Your Logo" style="width: 200px; height: 80px;">
-    </div>
-    <div class="recipe-list">
-        {% for recipe in recipes %}
-            <div class="recipe-item">
-                <h2>{{ recipe.name }}</h2>
-                <div class="recipe-image">
-                    <img src="{{ recipe.image_url }}" alt="{{ recipe.name }} Image">
-                </div>
-                <div class="recipe-instructions">
-                    <pre>{{ recipe.instructions }}</pre>
-                </div>
+  <div class="container mt-4">
+        <!-- Recipe Details -->
+        <div class="recipe-details">
+            <h2 class="text-center">{{ recipe.name }}</h2>
+            <img src="{{ recipe.image_url }}" class="img-fluid mx-auto d-block" alt="{{ recipe.name }} Image">
+            <div class="recipe-instructions">
+                <pre class="lead">{{ recipe.instructions }}</pre>
             </div>
-        {% endfor %}
-    </div>
-
-    <!--  add review container  -->
-    <div class="add-review-container">
-        <div class="add-review-box">
-            {% for recipe in recipes %}
-                <div class="review-content">
-                    <div class="star-icon">
-                        <img src="{{ url_for('static', filename='raw-image/star.png') }}" alt="Star Icon" width="75" height="45">
-                    </div>
-                    <div class="review-details">
-                        <h3 class="review-prompt">What do you think of this recipe?</h3>
-                        <p class="review-subtitle">Share your experience to help others</p>
-                            {% if user %}
-                                <button onclick="addReview()">Add review and ratings</button>
-                            {% else %}
-                                <button onclick="redirectToLogin()">Add review and ratings</button>
-                            {% endif %}
-                    </div>
-                </div>
-                <div class="rating-info">
-                    <div class="star-icon">
-                        <img src="{{ url_for('static', filename='raw-image/5staricon.png') }}" alt="5 Stars" width="150" height="90">
-                    </div>
-                    <div class="rating-details">
-                        <p class="overall-rating">5 out of 5</p>
-                        <p class="review-count">{{ recipe_reviews_count }} Reviews</p>
-                    </div>
-                </div>
-            {% endfor %}
         </div>
     </div>
+
+    <!--  add reviews  -->
+    <div class="review-section">
+        {% if user %}
+            <label for="reviewBtn">Add review and ratings:</label>
+            <button id="reviewBtn" onclick="addReview()">Add Review</button>
+        {% else %}
+            <label for="loginBtn">Add review and ratings:</label>
+            <button id="loginBtn" onclick="redirectToLogin()">Login to Add Review</button>
+        {% endif %}
+    </div>
+
 
     <!--  reviews  -->
     <div class="reviews-section">
@@ -71,9 +43,13 @@
                 <div class="review-header">
                     <div class="user-info">
                         {% if review.account.is_deleted %}
-                            {{ review.account.username }}
+                        <div class="user-info deleted-user">
+                            <i class='bx bxs-user-circle'></i> {{ review.account.username }}
+                        </div>
                         {% else %}
-                            {{ review.account.username }}
+                            <div class="user-info">
+                                <i class='bx bxs-user-circle'></i> {{ review.account.username }}
+                            </div>
                         {% endif %}
                     </div>
                     <div class="review-details">
@@ -101,10 +77,10 @@
         {% endfor %}
     </div>
 
-
     <!-- popup add review -->
     <div class="reviewOverlay" id="reviewOverlay" onclick="closeReview()"></div>
     <div class="reviewPopup" id="reviewPopup">
+
             <form action="{{ url_for('add_controller.add_review', recipe_id=recipe.recipe_id) }}" method="post" enctype="multipart/form-data">
 
                 <div class="review-input">
@@ -116,7 +92,7 @@
                 </div>
 
                 <div class="rating">
-                    <input type="radio" id="star5" name="rating" value="5"><label for="star5"></label>
+                    <input type="radio" id="star5" name="rating" value="5" required><label for="star5"></label>
                     <input type="radio" id="star4" name="rating" value="4"><label for="star4"></label>
                     <input type="radio" id="star3" name="rating" value="3"><label for="star3"></label>
                     <input type="radio" id="star2" name="rating" value="2"><label for="star2"></label>

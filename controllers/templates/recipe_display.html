@@ -22,6 +22,7 @@
     </div>
 
     <input type="text" id="searchInput" class="search-bar" placeholder="Search Recipe">
+
 <ul class="recipe-list">
     {% for recipe in recipes if not recipe.is_deleted %}
     <li class="recipe-card">

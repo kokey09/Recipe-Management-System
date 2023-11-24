@@ -1,268 +1,150 @@
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-body {
-    font-family: Arial, sans-serif;
-    background-color: #f2f2f2;
-    margin: 0;
-}
-
-nav {
-    height: 80px;
-    background-color: #EE4B2B;
-    color: #fff;
-    padding: 20px 0;
-    text-align: center;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    z-index: 1000;
-}
-
-nav h1 {
-    font-size: 28px;
-    margin-bottom: 10px;
-
-}
-
-nav ul {
-    list-style: none;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-nav li {
-    margin: 0 20px;
-}
-
-nav a {
-    color: #fff;
-    text-decoration: none;
-    font-size: 18px;
-    transition: color 0.3s;
-}
-
-nav a:hover {
-    color: #ff5733;
-}
-
-.logo-image {
-    width: 100px;
-    height: 40px;
-
-}
-
-}
-.dropdown {
-    position: relative;
-}
-
-.dropdown-content {
-    display: none;
-    position: absolute;
-    background-color: #ff5733;
-    min-width: 160px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-}
-
-.dropdown-content a {
-    display: block;
-    padding: 10px;
-    text-decoration: none;
-    color: #fff;
-    font-weight: bold;
-}
-
-.dropdown-content a:hover {
-    background-color: #ff3300;
-}
-
-.dropdown:hover .dropdown-content {
-    display: block;
-}
-.search-bar {
-    display: block;
-    margin: 10px auto 10px;
-    text-align: center;
-    width: 50%;
-    padding: 10px;
-    font-size: 16px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-}
-
-/* ________________________________________________ */
-.addRecipeOverlay {
-    display: none;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.7);
-}
-
-
-.addRecipePopup {
-    display: none;
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    padding: 20px;
-    background-color: #fff;
-    border-radius: 5px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
-    z-index: 1;
-    width: 40%;
-    height: 80%;
-    max-height: 85vh;
-    overflow-y: auto; /* Add a vertical scroll bar when content exceeds the height */
-}
-
-.form-recipe {
-    width: 100%;
-    max-width: 500px;
-    margin: 5% auto; /* Adjusted margin for better positioning */
-    padding: 20px;
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    background-color: #fff;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
-}
-
-.form-recipe label {
-    display: block;
-    margin-bottom: 8px;
-    font-size: 18px; /* Adjusted font size for labels */
-}
-
-.form-recipe input,
-.form-recipe textarea,
-.form-recipe select {
-    width: 100%;
-    padding: 10px; /* Adjusted padding for input elements */
-    margin-bottom: 16px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    box-sizing: border-box;
-    font-size: 16px; /* Adjusted font size for input elements */
-}
-
-.form-recipe button {
-    background-color: #4CAF50;
-    color: #fff;
-    padding: 12px 24px; /* Adjusted padding for the button */
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    font-size: 18px; /* Adjusted font size for the button */
-}
-
-.form-recipe button:hover {
-    background-color: #45a049;
-}
-
-/* Updated style for the close button */
-.close-btn i {
-    font-size: 24px; /* Adjusted font size for the close button */
-}
-
-.close-btn{
-	position: absolute;
-	top: 0;
-	right: 10px;
-}
-.close-btn i {
-    font-size: 44px;
-}
-.add-recipe{
-    text-align: center;
-}
-.text-area-form {
-    width: initial; /* Reset the width to the default size */
-    height: initial; /* Reset the height to the default size */
-}
-/* ________________________________________________ */
-
-.repositoryOverlay {
-    display: none;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.7);
-}
-
-
-.repositoryPopup {
-    display: none;
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    padding: 20px;
-    background-color: #fff;
-    border-radius: 5px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
-    z-index: 1;
-    width: 60%;
-    height: 65%;
-    max-height: 85vh;
-    overflow-y: auto;
-
-}
-
-    .card {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: flex-start; /* Start from the left */
-        width: 55%;
+    body {
+      margin: 0;
+      padding: 0;
     }
 
-    .recipe-items {
-        margin: 10px;
-        padding: 15px;
-        border: 1px solid #ccc;
-        border-radius: 8px;
-        text-align: center;
-        display: flex;
+    ul {
+      list-style-type: none;
+      margin: 0;
+      padding: 0;
+    }
+
+    /* Styles for the navigation bar */
+    nav {
+      background-color: #EE4B2B;
+      padding: 10px 0;
+      text-align: center;
+    }
+
+    ul {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    /* Styles for the navigation links */
+    ul a {
+      text-decoration: none;
+      color: white;
+      padding: 10px 15px;
+      display: inline-block;
+    }
+
+    #home-link img {
+      vertical-align: middle;
+    }
+
+    /* Styles for the dropdown */
+    .dropdown {
+      position: relative;
+      display: inline-block;
+    }
+
+    .dropdown-content {
+      display: none;
+      position: absolute;
+      background-color: #EE4B2B;
+      min-width: 160px;
+      z-index: 1;
+    }
+
+    .dropdown-content a {
+      color: white;
+      padding: 12px 16px;
+      display: block;
+      text-align: left;
+    }
+
+    .dropdown:hover .dropdown-content {
+      display: block;
+    }
+
+    /* Styles for user-related links */
+    .dropdown li {
+      display: inline-block;
+      margin-right: 10px;
+      position: relative; /* Add relative positioning */
+    }
+
+    .dropdown-content i {
+      margin-right: 5px;
+      position: absolute;
+      left: -5px; /* Adjust the left positioning to eliminate space */
+    }
+
+    /* Add some spacing between links */
+    ul li {
+      margin: 0 5px;
+    }
+
+    .user-dropdown {
+      display: inline-block;
+      position: relative;
+    }
+
+    .user-dropdown a {
+      text-decoration: none;
+      color: white;
+      padding: 10px 15px;
+      display: inline-block;
+    }
+
+    .user-dropdown .dropdown-content {
+      display: none;
+      position: absolute;
+      background-color: #EE4B2B;
+      min-width: 160px;
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+      z-index: 1;
+    }
+
+    .user-dropdown .dropdown-content a {
+      color: white;
+      padding: 12px 16px;
+      display: block;
+      text-align: left;
+    }
+
+    .user-dropdown:hover .dropdown-content {
+      display: block;
+    }
+
+    /* Styles for the burger menu */
+    .burger-menu {
+      display: none;
+      cursor: pointer;
+    }
+
+    .burger-menu div {
+      width: 30px;
+      height: 3px;
+      background-color: #fff;
+      margin: 6px 0;
+      transition: 0.4s;
+    }
+
+    @media screen and (max-width: 600px) {
+      .burger-menu {
+        display: block;
+      }
+
+      ul {
+        display: none;
         flex-direction: column;
-        width: calc(33.33% - 20px); /* Adjust the width as needed */
-        box-sizing: border-box; /* Include padding and border in the width calculation */
-    }
-
-    .recipe-items p {
-        font-size: 16px;
-        font-weight: bold;
-        margin-bottom: 10px;
-    }
-
-    .recipe-items img {
+        text-align: center;
+        background-color: #EE4B2B;
+        position: absolute;
+        top: 60px;
+        left: 0;
         width: 100%;
-        height: 150px;
-        border-radius: 5px;
-        margin-bottom: 10px;
+        z-index: 1;
+      }
+
+      ul.show {
+        display: flex;
+      }
+
+      ul li {
+        margin: 0;
+      }
     }
-
-    .buttons {
-        margin-top: auto; /* Align at the bottom */
-    }
-
-    /* Media query for screens smaller than 768 pixels (adjust as needed) */
-    @media screen and (max-width: 768px) {
-        .card {
-            width: 100%; /* Make the card full width on small screens */
-        }
-
-        .recipe-item {
-            width: calc(50% - 20px); /* Adjust the width of recipe items for better stacking */
-        }
-    }
-

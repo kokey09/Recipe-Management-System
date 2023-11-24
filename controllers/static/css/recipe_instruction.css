@@ -1,251 +1,209 @@
-/* Style for the main recipe list container */
-.recipe-list {
-  max-width: 800px;
-  margin: 0 auto;
-  padding: 60px;
+/* instruction section */
+
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f8f9fa;
+    margin: 0;
+    padding: 0;
 }
 
-/* Style for each individual recipe item */
-.recipe-item {
-  background-color: #fff;
-  border: 1px solid #ddd;
-  border-radius: 5px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  margin: 20px 0;
-  padding: 20px;
-  text-align: left;
-}
-
-/* Style for recipe images */
-.recipe-image img {
-  width: 100%;
-  max-height: 400px;
-  display: block;
-  margin: 20px auto;
-}
-
-/* Style for recipe names */
-.recipe-item h2 {
-  font-size: 24px;
-  color: #333;
-  margin: 20px 0;
-  text-align: center;
-}
-
-/* Style for recipe instructions */
-.recipe-instructions pre {
-  font-size: 18px;
-  white-space: pre-wrap;
-  max-width: 100%;
-  overflow-x: auto;
-  padding: 10px;
-}
-
-/*____________________________*/
-.add-review-link {
-    text-align: center;
-    display: block; /* Makes the link fill the container horizontally */
-    font-size: 24px; /* Adjust the font size as needed */
-    text-decoration: none; /* Remove underline for the link */
-    color: #007BFF; /* Change the color as needed */
+.container {
+    margin-top: 50px;
+    max-width: 800px;
+    margin-left: auto;
+    margin-top: 1%;
+    margin-right: auto;
+    background-color: #fff;
+    border: 1px solid #dee2e6;
+    border-radius: 10px;
     padding: 30px;
-}
-.add-review-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 30vh; /* Center vertically on the screen */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
-/* Style the "Add Review" section */
-.add-review-box {
-  background-color: #f7f7f7;
-  padding: 20px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  max-width: 500px; /* Limit the maximum width */
-
+.recipe-details {
+    text-align: center;
 }
 
-/* Style the individual review content */
-.review-content {
-  display: flex;
-  align-items: center;
+.recipe-details h2 {
+    color: #007bff;
 }
 
-.star-icon img {
-  margin-right: 10px; /* Add some spacing between the star icon and text */
+.recipe-details img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+    margin-top: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
-.review-details {
-  text-align: left;
+.recipe-instructions {
+    margin-top: 20px;
+    text-align: left;
 }
 
-.review-prompt {
-  font-size: 24px;
-  margin: 0;
-}
-
-.review-subtitle {
-  color: #888;
-  margin-top: 5px;
-  margin-bottom: 15px;
-}
-
-.add-review-link {
-  background-color: #4CAF50;
-  color: white;
-  padding: 10px 20px;
-  text-decoration: none;
-  border-radius: 5px;
-  transition: background-color 0.3s;
-}
-
-.add-review-link:hover {
-  background-color: #45a049;
-}
-
-/* Style the rating info section */
-.rating-info {
-  display: flex;
-  align-items: center;
-}
-
-.star-icon img {
-  margin-right: 10px; /* Add some spacing between the star icon and text */
-}
-
-.overall-rating {
-  font-size: 24px;
-  margin: 0;
-}
-
-.review-count {
-  color: #888;
-  margin-top: 5px;
+.recipe-instructions pre {
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    font-size: 16px;
+    line-height: 1.6;
 }
 
 
 
+/* Add review section */
+
+.review-section {
+    text-align: center;
+    margin: 20px;
+}
+
+label {
+    display: block;
+    margin-bottom: 10px;
+    font-weight: bold;
+}
+
+button {
+    padding: 10px;
+    font-size: 16px;
+    cursor: pointer;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+}
+
+button:hover {
+    background-color: #45a049;
+}
 
 
-/* ________________________________________________ */
+
+/* reviews section */
 .reviews-section {
-  margin: 20px auto;
-  width: 500px;
-  max-width: 1200px;
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
+/* Styles for individual reviews */
 .review {
-  border: 1px solid #ccc;
-  padding: 10px;
-  margin: 20px auto;
-  background-color: #f9f9f9;
-  border-radius: 5px;
-  text-align: center;
-}
-
-.review:hover {
-  background-color: #e5e5e5;
-  transition: background-color 0.3s;
+  width: 100%; /* Take full width of the container */
+  max-width: 400px; /* Set a maximum width for individual reviews if needed */
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  margin-bottom: 20px;
+  padding: 15px;
+  background-color: #fff;
 }
 
 .review-header {
   display: flex;
-  flex-direction: column;
+  justify-content: space-between;
   align-items: center;
 }
 
 .user-info {
-  font-weight: bold;
+  display: flex;
+  align-items: center;
+}
+
+.deleted-user {
+  color: #999;
 }
 
 .review-details {
   display: flex;
   align-items: center;
-  justify-content: space-between;
 }
 
-.review-rating {
-  color: #ffa500;
-}
-
-.review-timestamp {
-  color: #888;
-}
-
-.review-content {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.review-image img {
-  max-width: 100px;
-  max-height: 100px;
-  margin: 10px 0;
-  border-radius: 5px;
-}
-
-.review-text {
-  text-align: left;
-  margin-left: 10px;
-}
-
-/* __________________________________________ */
 .star-rating {
-  display: inline-block;
-  font-size: 0;
-}
-
-.stars::before {
-  content: '★★★★★';
-  font-size: 24px;
-  letter-spacing: 3px;
-  background: linear-gradient(90deg, gold, gold);
-  -webkit-background-clip: text;
-  color: transparent;
-  display: inline-block;
-  white-space: nowrap;
-  overflow: hidden;
+  margin-right: 10px;
 }
 
 .stars {
-  display: inline-block;
-  width: calc({{ review.rating }} * 20%);
-  overflow: hidden;
+  color: #f39c12; /* Star color */
+  font-size: 20px;
   white-space: nowrap;
+  overflow: hidden;
 }
-/* ________________________________________________ */
+
+.review-timestamp {
+  color: #777;
+  font-size: 14px;
+}
+
+.review-content {
+  margin-top: 10px;
+  display: flex;
+  align-items: center;
+  flex-direction: column; /* Stack items vertically */
+  text-align: center; /* Center text within the container */
+}
+
+.review-image {
+  margin-bottom: 10px; /* Add spacing between image and text */
+}
+
+.review-image img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px;
+}
+
+
+
+.review-text {
+  max-width: 100%;
+  word-wrap: break-word;
+}
+
+
+
+/* popup section*/
 
 .reviewOverlay {
-    display: none;
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.7);
+    background: rgba(0, 0, 0, 0.5);
+    display: none;
 }
 
-
 .reviewPopup {
-    display: none;
     position: fixed;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+    background: #fff;
     padding: 20px;
-    background-color: #fff;
-    border-radius: 5px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
-    z-index: 1;
-    width: 40%;
-    height: 65%;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    display: none;
+    max-width: 400px;
+    width: 100%;
+    text-align: center;
 }
 
-/* ________________________________________________ */
+.reviewPopup h1 {
+    font-size: 1.5em;
+    margin-bottom: 15px;
+}
 
+.reviewPopup img {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+    margin-bottom: 15px;
+}
+
+.reviewPopup h2 {
+    font-size: 1.2em;
+    margin-bottom: 10px;
+}
 
 .rating {
     display: flex;
@@ -291,3 +249,6 @@
 .close-btn i {
     font-size: 44px;
 }
+
+
+

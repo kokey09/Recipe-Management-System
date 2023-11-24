@@ -82,12 +82,19 @@ def recipe_display():
     return response
 
 
-
 @user_end_controller_bp.route('/recipe_instruction')
 def recipe_instruction():
     recipe_id = request.args.get('recipe_id', None, type=int)
 
-    recipe = Recipe.query.get_or_404(recipe_id)
+    # Use join to fetch the related entities in a single query
+    recipe = (
+        Recipe.query
+        .join(Review, Recipe.recipe_id == Review.recipe_id, isouter=True)
+        .join(RecipeIngredient, Recipe.recipe_id == RecipeIngredient.recipe_id, isouter=True)
+        .join(Ingredient, RecipeIngredient.ingredient_id == Ingredient.ingredient_id, isouter=True)
+        .filter(Recipe.recipe_id == recipe_id)
+        .first_or_404()
+    )
 
     user = get_authenticated_user()
 
@@ -95,15 +102,20 @@ def recipe_instruction():
         flash("You do not have permission to edit this recipe.", "error")
         return redirect(url_for('user_end_controller.shared_recipe'))
 
-    recipes = Recipe.query.filter_by(recipe_id=recipe_id).all()
+    # Assuming you want to get reviews and count using the relationships
     reviews = Review.query.filter_by(recipe_id=recipe_id).all()
-    ingredients = Ingredient.query.all()
     recipe_reviews_count = len(reviews)
 
-    response = make_response(render_template('recipe_instruction.html', recipes=recipes, ingredients=ingredients, user=user,
-                             reviews=reviews, recipe_reviews_count=recipe_reviews_count, recipe=recipe))
+    # Fetch all ingredients separately for use in the template
+    ingredients = Ingredient.query.all()
+
+    response = make_response(render_template('recipe_instruction.html', recipe=recipe, user=user,
+                                             reviews=reviews, recipe_reviews_count=recipe_reviews_count,
+                                             ingredients=ingredients))
     response.headers['Cache-Control'] = 'no-cache, no-store, must-revalidate'
     return response
+
+
 
 
 @user_end_controller_bp.route('/user_profile_dashboard')
