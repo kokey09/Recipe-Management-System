@@ -1,83 +1,26 @@
-ul.recipe-list {
-    list-style-type: none;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    padding: 10px;
-    height: 300px; /* Set a fixed height */
-
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f8f8f8;
 }
 
-
-
-.recipe-card {
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    width: 300px;
-    margin: 20px;
-    background-color: #333;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    transition: transform 0.2s;
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
 }
 
-.recipe-card i.bx-heart-circle {
-    position: absolute;
-    top: 10px; /* Adjust as needed */
-    right: 10px; /* Adjust as needed */
-    font-size: 44px; /* Adjust as needed */
-    color: #000000; /* Adjust as needed */
-    transition: color 0.2s ease; /* Add a smooth transition effect */
-}
-
-.recipe-card i.bx-heart-circle:hover {
-    color: #ff5733; /* Adjust as needed for the hover color */
-}
-
-.recipe-card:hover {
-    transform: translateY(-5px);
-}
-
-.recipe-card img {
-    width: 298px;
-    border-top-left-radius: 5px;
-    border-top-right-radius: 5px;
-}
-
-.recipe-card .recipe-details {
-    padding: 10px;
-}
-
-.recipe-card h2 {
-    font-size: 24px;
-    color: #FFFFFF;
-    margin-bottom: 10px;
-    text-align: center
-}
-
-.recipe-card p {
-    font-size: 16px;
-    color: #555;
-}
-
-.recipe-card a view-recipe  {
-    display: block;
+.logo-link {
     text-align: center;
-    padding: 10px;
-    background-color: #ff5733;
-    color: #fff;
-    text-decoration: none;
-    font-weight: bold;
-    border-radius: 0 0 5px 5px;
+    margin-bottom: 20px;
 }
 
-
-.recipe-card a:hover {
-    background-color: #ff3300;
+.logo-image {
+    width: 200px;
+    height: 80px;
 }
+
 .search-bar {
     display: block;
     margin: 0 auto 10px;
@@ -88,44 +31,107 @@ ul.recipe-list {
     border: 1px solid #ccc;
     border-radius: 5px;
 }
-.h1-center {
-    text-align: center;
-}
 
-
-.logo-link {
+.recipe-list {
+    list-style-type: none;
     display: flex;
+    flex-wrap: wrap;
     justify-content: center;
-    align-items: center;
-    width: 100%;
-    height: 80px;
-    margin-top: 1%;
 }
 
-.logo-image {
-    width: 100px;
-    height: 40px;
+.recipe-card {
+    position: relative;
+    width: 300px;
+    height: 340px;
+    margin: 20px;
+    background-color: #333;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s;
 }
-.view-recipe {
-    display: block;
+
+.recipe-card i.bx-heart-circle {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 44px;
+    color: #000000;
+    transition: color 0.2s ease;
+}
+
+.recipe-card i.bx-heart-circle:hover {
+    color: #c0392b;
+}
+
+.recipe-card:hover {
+    transform: translateY(-5px);
+}
+
+.recipe-card img {
+    width: 100%;
+    height: 60%;
+    object-fit: cover;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+}
+
+.recipe-details {
+    position: relative;
+    height: 40%;
+}
+
+.recipe-details h2 {
+    font-size: 20px;
+    color: #FFFFFF;
+    margin-bottom: 10px;
     text-align: center;
+}
+
+.button {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    text-align: center;
+}
+
+.view-recipe{
+    display: block;
     padding: 10px;
-    background-color: #ff5733;
+    background-color: #e74c3c;
     color: #fff;
     text-decoration: none;
     font-weight: bold;
-    border-radius: 0 0 5px 5px;
+    border-radius: 0 0 10px 10px;
 }
 .star-rating {
     display: block;
-    text-align: center;
     padding: 10px;
     background-color: #333;
     color: #fff;
     text-decoration: none;
     font-weight: bold;
-    border-radius: 0 0 5px 5px;
+    border-radius: 0 0 10px 10px;
 }
 
+.view-recipe:hover,
+.star-rating:hover {
+    background-color: #c0392b;
+}
 
+/* Media Query for Mobile */
+@media screen and (max-width: 600px) {
+    .search-bar {
+        width: 80%; /* Adjusted width for better mobile responsiveness */
+    }
+
+    .recipe-card {
+        width: 80%; /* Adjusted width for better mobile responsiveness */
+        margin: 20px auto; /* Center the card on smaller screens */
+    }
+
+    .logo-link {
+        margin-bottom: 10px; /* Adjusted margin for better spacing in mobile mode */
+    }
+}
 

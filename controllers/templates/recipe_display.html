@@ -2,52 +2,43 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Recipes display</title>
+    <title>Recipes Display</title>
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/recipe_display.css') }}">
-        <link rel="icon" href="{{ url_for('static', filename='recipes-img-table/recipes.png') }}" type="image/x-icon">
+    <link rel="icon" href="{{ url_for('static', filename='recipes-img-table/recipes.png') }}" type="image/x-icon">
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     <script src="{{ url_for('static', filename='js/favorites.js') }}"></script>
     <script src="{{ url_for('static', filename='js/popup.js') }}"></script>
-
-
 </head>
 <body>
     {% extends 'user_base.html' %}
-    {% block title %}Recipes display{% endblock %}
+    {% block title %}Recipes Display{% endblock %}
     {% block content %}
 
     <div class="logo-link">
-         <img src="{{ url_for('static', filename='recipes-img-table/recipes.png') }}" alt="Your Logo" style="width: 200px; height: 80px;" loading="lazy" >
+        <img src="{{ url_for('static', filename='recipes-img-table/recipes.png') }}" alt="Your Logo" class="logo-image" loading="lazy">
     </div>
 
     <input type="text" id="searchInput" class="search-bar" placeholder="Search Recipe">
 
-<ul class="recipe-list">
-    {% for recipe in recipes if not recipe.is_deleted %}
-    <li class="recipe-card">
-        {% if user %}
-        <i class='bx bx-heart-circle favorite-btn' title="add favorites" data-recipe-id="{{ recipe.recipe_id }}"></i>
-        {% else %}
-        <i class='bx bx-heart-circle favorite-btn' title="add favorites" onclick="redirectToLogin()"></i>
-        {% endif %}
-        <img src="{{ recipe.image_url }}" alt="{{ recipe.name }} Image" style="width: 298px; height: 270px;" loading="lazy">
-        <div class="recipe-details">
-            <h2>{{ recipe.name }}</h2>
-            <a href="{{ url_for('user_end_controller.recipe_instruction', recipe_id=recipe.recipe_id) }}" class="view-recipe">View Recipe</a>
-            <a href="{{ url_for('user_end_controller.recipe_instruction', recipe_id=recipe.recipe_id) }}" class="star-rating">
-                <i class='bx bxs-star' ></i> Reviews | {{ recipe_reviews_count[recipe.recipe_id] }} Reviews
-            </a>
-        </div>
-    </li>
-    {% endfor %}
-</ul>
+    <ul class="recipe-list">
+        {% for recipe in recipes if not recipe.is_deleted %}
+        <li class="recipe-card">
+            <i class='bx bx-heart-circle favorite-btn' title="Add to Favorites" data-recipe-id="{{ recipe.recipe_id }}"></i>
+            <img src="{{ recipe.image_url }}" alt="{{ recipe.name }} Image">
+            <div class="recipe-details">
+                <h2>{{ recipe.name }}</h2>
+                <div class="button">
+                    <a href="{{ url_for('user_end_controller.recipe_instruction', recipe_id=recipe.recipe_id) }}" class="view-recipe">View Recipe</a>
+                    <a href="{{ url_for('user_end_controller.recipe_instruction', recipe_id=recipe.recipe_id) }}" class="star-rating">
+                        <i class='bx bxs-star'></i> Reviews | {{ recipe_reviews_count[recipe.recipe_id] }} Reviews
+                    </a>
+                </div>
+            </div>
+        </li>
+        {% endfor %}
+    </ul>
+
     {% endblock %}
 </body>
 </html>
-
-
-
-
-
-

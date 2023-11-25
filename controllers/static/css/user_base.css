@@ -9,12 +9,20 @@
       padding: 0;
     }
 
-    /* Styles for the navigation bar */
-    nav {
-      background-color: #EE4B2B;
-      padding: 10px 0;
-      text-align: center;
-    }
+nav {
+  background-color: #EE4B2B;
+  padding: 10px 0;
+  text-align: center;
+  position: fixed;
+  width: 100%;
+  top: 0;
+  z-index: 1000;
+  margin-bottom: 10px; /* Add margin at the bottom */
+}
+main {
+  margin-top: 60px; /* Adjust this value based on your navigation bar's height */
+  padding: 10px; /* Add padding for better spacing */
+}
 
     ul {
       display: flex;

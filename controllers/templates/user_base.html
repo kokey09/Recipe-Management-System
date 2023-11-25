@@ -56,16 +56,19 @@
       {% endif %}
     </ul>
   </nav>
-</body>
-<script>
+  <main>
+    {% block content %}
+    {% endblock %}
+  </main>
+  <script>
     function toggleMenu() {
       const menu = document.querySelector('ul');
       menu.classList.toggle('show');
     }
   </script>
-{% block content %}
-{% endblock %}
+
 </body>
 </html>
+
 
 
