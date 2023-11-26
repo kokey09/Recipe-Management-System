@@ -1,4 +1,4 @@
-from flask import  render_template, request, redirect, url_for, Blueprint,current_app,session,flash,make_response
+from flask import  render_template, request, redirect, url_for, Blueprint,session,flash,make_response
 
 from models.recipe import Recipe
 from models.ingredient import Ingredient
@@ -6,7 +6,6 @@ from models.account import Account
 from models.recipe_ingredient import RecipeIngredient
 from models.review import Review
 from models.favorites import Favorite
-from sqlalchemy import not_
 
 user_end_controller_bp = Blueprint('user_end_controller',__name__,template_folder='templates',static_folder='static')
 
