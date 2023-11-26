@@ -16,6 +16,8 @@ CREATE TABLE recipes (
     image_url VARCHAR(512),
     is_deleted TINYINT(1),
     account_id INT(11),
+	status ENUM('pending', 'declined', 'approved') DEFAULT 'pending',
+
     FOREIGN KEY (account_id) REFERENCES account(id)
 );
 
