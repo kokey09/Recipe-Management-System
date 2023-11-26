@@ -9,6 +9,17 @@ CREATE DATABASE recipedb;
 
 USE recipedb;
 
+
+CREATE TABLE account (
+    id INT(11) AUTO_INCREMENT PRIMARY KEY,
+    username VARCHAR(50),
+    email VARCHAR(120),
+    password VARCHAR(60),
+    date_created TIMESTAMP,
+    type VARCHAR(255),
+    is_deleted TINYINT(1)
+);
+
 CREATE TABLE recipes (
     recipe_id INT(11) AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(255) NOT NULL,
@@ -22,20 +33,12 @@ CREATE TABLE recipes (
 );
 
 CREATE TABLE ingredients (
-     ingredient_id INT(11) AUTO_INCREMENT PRIMARY KEY,
-     name VARCHAR(255) NOT NULL,
-     description TEXT
+    ingredient_id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(255) NOT NULL UNIQUE,
+    description TEXT
 );
 
-CREATE TABLE account (
-    id INT(11) AUTO_INCREMENT PRIMARY KEY,
-    username VARCHAR(50),
-    email VARCHAR(120),
-    password VARCHAR(60),
-    date_created TIMESTAMP,
-    type VARCHAR(255),
-    is_deleted TINYINT(1)
-);
+
 
 CREATE TABLE recipe_ingredients (
      recipe_id INT(11),
