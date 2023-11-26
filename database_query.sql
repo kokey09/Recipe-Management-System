@@ -31,10 +31,11 @@ CREATE TABLE recipes (
 );
 
 CREATE TABLE ingredients (
-     ingredient_id INT(11) AUTO_INCREMENT PRIMARY KEY,
-     name VARCHAR(255) NOT NULL,
-     description TEXT
+    ingredient_id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(255) NOT NULL UNIQUE,
+    description TEXT
 );
+
 
 
 CREATE TABLE recipe_ingredients (
