@@ -31,3 +31,19 @@
 .bigger-font {
   font-size: 200%;
 }
+
+.red-text {
+    color: red;
+}
+
+.green-text {
+    color: green;
+}
+
+.blue-text {
+    color: blue;
+}
+.recipe-status{
+    text-align:center;
+    margin-top: 4%;
+}

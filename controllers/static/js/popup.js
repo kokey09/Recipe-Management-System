@@ -51,6 +51,12 @@ function openChangeStatusModal(recipeId) {
 function closeChangeStatusModal() {
    document.getElementById('ChangeStatusModal').style.display = 'none';
 }
+function changeStatus(status) {
+    // Set the selected status to the hidden input field
+   document.getElementById('new_status').value = status;
+   // Submit the form
+   document.getElementById('changeStatusForm').submit();
+}
 
 
 

@@ -140,6 +140,20 @@ def dashboard():
         flash('Please log in to access the dashboard', 'error')
         return redirect(url_for('authentication_controller.login'))
 
+@dashboard_controller_bp.route('/recipe_preview')
+def recipe_preview():
+    recipe_id = request.args.get('recipe_id', None, type=int)
+
+    user = get_authenticated_user()
+
+    if not user:
+        return redirect(url_for('authentication_controller.login'))
+
+    recipe = Recipe.query.get(recipe_id)
+    return render_template('recipe_preview.html', id=recipe_id, recipe=recipe,user=user)
+
+
+
 def get_authenticated_user():
     if 'user_id' in session:
         user_id = session['user_id']

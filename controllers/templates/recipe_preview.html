@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/recipe_preview.css') }}">
+    <script src="{{ url_for('static', filename='js/popup.js') }}"></script>
+</head>
+<body>
+    <h1>PREVIEW</h1>
+    <div class="container">
+        <div class="recipe-name">
+            <p>{{ recipe.name }}</p>
+            <p class="recipe-status {% if recipe.status == 'declined' %}red-text{% elif recipe.status == 'approved' %}green-text{% elif recipe.status == 'pending' %}blue-text{% endif %}">
+            {{ recipe.status }}
+            </p>
+            <img src="{{ recipe.image_url }}" alt="{{ recipe.name }} Image" style="width: 400px; height: 400px;" loading="lazy">
+        </div>
+        <div class="recipe_instruction">
+            <pre class="form-control" id="instructions" name="instructions" rows="4" required>{{ recipe.instructions }}</pre>
+        </div>
+        <!-- Form for changing status -->
+        <form id="changeStatusForm" method="POST" action="{{ url_for('edit_controller.change_status', recipe_id=recipe.recipe_id) }}">
+            <!-- Hidden input field to store the selected status -->
+            <input type="hidden" name="new_status" id="new_status" value="">
+            <!-- Buttons for changing status -->
+            {% if user.type == 'admin' %}
+            <button type="button" onclick="changeStatus('approved')">Approved</button>
+            <button type="button" class="decline" onclick="changeStatus('declined')">Decline</button>
+            {% endif %}
+        </form>
+    </div>
+
+
+
+
+
+</body>
+</html>
+
