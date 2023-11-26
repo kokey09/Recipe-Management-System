@@ -1,16 +1,13 @@
-from flask import render_template, request, redirect, url_for, flash, jsonify, session, Blueprint,current_app
+from flask import render_template, request, redirect, url_for, flash, session, Blueprint
 
-from werkzeug.utils import secure_filename
 
 from models.ingredient import Ingredient
 from models.account import Account
 from models.account import db
 from models.recipe import Recipe
 from models.recipe_ingredient import RecipeIngredient
-from models.review import Review
 from flask_bcrypt import Bcrypt
-import os
-import logging
+
 
 delete_controller_bp = Blueprint('delete_controller',__name__,template_folder='templates',static_folder='static')
 bcrypt = Bcrypt()
@@ -68,6 +65,7 @@ def delete_recipe_admin(id):
 @delete_controller_bp.route('/delete_shared_recipe/<int:id>', methods=['POST'])
 def delete_shared_recipe(id):
     return delete_recipe_base('recipe', id, 'user_end_controller.shared_recipe')
+
 
 @delete_controller_bp.route('/delete_ingredient/<int:id>', methods=['POST'])
 def delete_ingredient(id):

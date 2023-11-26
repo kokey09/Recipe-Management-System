@@ -122,6 +122,7 @@ thead {
     border: 1px solid #ccc;
     border-radius: 3px;
     width: 500px;
+    margin-bottom: 1%;
 }
 
 #columnSelector {
@@ -129,6 +130,7 @@ thead {
     border: 1px solid #ccc;
     border-radius: 3px;
     margin-right: 10px;
+    margin-bottom: 1%;
 }
 
 #searchButton {
@@ -139,6 +141,7 @@ thead {
     border-radius: 3px;
     cursor: pointer;
     margin-left: 5px;
+    margin-bottom: 1%;
 }
 .openPopup-btn {
     padding: 5px 10px;
@@ -148,6 +151,8 @@ thead {
     border-radius: 3px;
     cursor: pointer;
     margin-left: 1%;
+    margin-bottom: 1%;
+
 }
 
 

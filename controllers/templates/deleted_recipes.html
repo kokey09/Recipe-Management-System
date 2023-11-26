@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/recipe.css') }}">
+    <link rel="icon" href="{{ url_for('static', filename='recipes-img-table/recipes.png') }}" type="image/x-icon">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="{{ url_for('static', filename='js/search_recipe.js') }}"></script>
+</head>
+<body>
+    {% extends 'base.html' %}
+
+    {% block title %}Deleted Recipes{% endblock %}
+
+    {% block content %}
+        <fieldset>
+            <legend><h1>Deleted Recipes</h1></legend>
+
+            <div class="search-container">
+                <select id="columnSelector">
+                    <option value="all">Search All</option>
+                    <option value="recipe_id">Recipe ID</option>
+                    <option value="name">Name</option>
+                    <option value="instructions">Instructions</option>
+                </select>
+                <input type="text" id="search-Input-recipe" class="search-bar" placeholder="Search Recipe">
+                <button id="searchButton">Search</button>
+            </div>
+
+            <table class="recipes-table">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Recipe name</th>
+                        <th>Instructions</th>
+                        <th>Image</th>
+                        <th>Account ID </th>
+                        <th>Account username </th>
+                        <th>is deleted</th>
+                        <th>Status</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for recipe in deleted_recipes %}
+                        <tr>
+                            <td>{{ recipe.recipe_id }}</td>
+                            <td>{{ recipe.name }}</td>
+                            <td>{{ recipe.instructions }}</td>
+                            <td>
+                                <img src="{{ recipe.image_url }}" alt="{{ recipe.name }} Image" style="width: 100px; height: 100px;" loading="lazy">
+                            </td>
+                            <td>{{ recipe.account_id }}</td>
+                            <td>{{ recipe.account.username }}</td>
+                            <td>{{ recipe.is_deleted }}</td>
+                            <td>{{ recipe.status }}</td>
+                            <td>
+                                <form method="POST" action="{{ url_for('dashboard_controller.recover_recipe', id=recipe.recipe_id) }}">
+                                    <button class="btn" type="submit">Recover</button>
+                                </form>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+
+
+
+    {% endblock %}
+</body>
+</html>

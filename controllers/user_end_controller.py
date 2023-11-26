@@ -6,6 +6,7 @@ from models.account import Account
 from models.recipe_ingredient import RecipeIngredient
 from models.review import Review
 from models.favorites import Favorite
+from sqlalchemy import not_
 
 user_end_controller_bp = Blueprint('user_end_controller',__name__,template_folder='templates',static_folder='static')
 
@@ -15,10 +16,14 @@ user_end_controller_bp = Blueprint('user_end_controller',__name__,template_folde
 @user_end_controller_bp.route('/')
 def user_page():
     ingredients = Ingredient.query.all()
-    recipes = Recipe.query.filter_by(is_deleted=False).order_by(Recipe.recipe_id.desc()).all()
 
-    recipe_reviews_count = {}  # Dictionary to store the counts
+    # Filter recipes with 'approved' status and not deleted
+    recipes = Recipe.query.filter_by(status='approved', is_deleted=False).order_by(Recipe.recipe_id.desc()).all()
 
+    # Dictionary to store the counts of reviews
+    recipe_reviews_count = {}
+
+    # Calculate the number of reviews for each recipe
     for recipe in recipes:
         recipe_reviews_count[recipe.recipe_id] = len(Review.query.filter_by(recipe_id=recipe.recipe_id).all())
 
@@ -28,9 +33,11 @@ def user_page():
         user_id = session['user_id']
         user = Account.query.get(user_id)
 
+    # Render the template with the recipes, ingredients, user, and review counts
     response = make_response(render_template('user_page.html', recipes=recipes, ingredients=ingredients, user=user, recipe_reviews_count=recipe_reviews_count))
     response.headers['Cache-Control'] = 'no-cache, no-store, must-revalidate'
     return response
+
 
 
 @user_end_controller_bp.route('/about_us')
@@ -58,28 +65,35 @@ def ingredient_display():
     response.headers['Cache-Control'] = 'no-cache, no-store, must-revalidate'
     return response
 
-
 @user_end_controller_bp.route('/recipe_display')
 def recipe_display():
     ingredients = Ingredient.query.all()
     ingredient_id = request.args.get('ingredient_id', None)
-    if ingredient_id:
-        recipes = Recipe.query.join(Recipe.recipe_ingredients).join(RecipeIngredient.ingredient).filter(
-            Ingredient.ingredient_id == ingredient_id).all()
-    else:
-        recipes = Recipe.query.all()
 
-    # Load the number of reviews for each recipe
-    recipe_reviews_count = {}  # Dictionary to store the counts
+    # Filter recipes with approved status
+    recipes = Recipe.query.filter_by(status='approved')
+
+    # If ingredient_id is provided, filter by ingredient
+    if ingredient_id:
+        recipes = recipes.join(Recipe.recipe_ingredients).join(RecipeIngredient.ingredient).filter(
+            Ingredient.ingredient_id == ingredient_id
+        )
+    # get the filtered recipes
+    recipes = recipes.all()
+
+    recipe_reviews_count = {}  # Dictionary to store the review counts
 
     for recipe in recipes:
         recipe_reviews_count[recipe.recipe_id] = len(Review.query.filter_by(recipe_id=recipe.recipe_id).all())
 
     user = get_authenticated_user()
 
-    response = make_response (render_template('recipe_display.html', recipes=recipes, ingredients=ingredients, user=user, recipe_reviews_count=recipe_reviews_count))
+    response = make_response(render_template('recipe_display.html', recipes=recipes, ingredients=ingredients, user=user, recipe_reviews_count=recipe_reviews_count))
     response.headers['Cache-Control'] = 'no-cache, no-store, must-revalidate'
     return response
+
+
+
 
 
 @user_end_controller_bp.route('/recipe_instruction')

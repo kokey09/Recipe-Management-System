@@ -110,9 +110,11 @@ def add_ingredient():
         name = request.form.get('name')
         description = request.form.get('description')
 
-        new_ingredient = Ingredient(name=name, description=description)
-        db.session.add(new_ingredient)
-        db.session.commit()
+        existing_ingredient = Ingredient.query.filter_by(name=name).first()
+        if existing_ingredient is None:
+            new_ingredient = Ingredient(name=name, description=description)
+            db.session.add(new_ingredient)
+            db.session.commit()
 
         return redirect(url_for('dashboard_controller.ingredients'))  # Change 'ingredients' to 'ingredient_controller.ingredients'
 

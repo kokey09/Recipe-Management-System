@@ -1,4 +1,5 @@
 from controllers import db
+from sqlalchemy import Enum
 
 
 class Recipe(db.Model):
@@ -9,6 +10,7 @@ class Recipe(db.Model):
     image_url = db.Column(db.String(512))
     is_deleted = db.Column(db.Boolean, default=False)  # Define is_deleted as a boolean column
     account_id = db.Column(db.Integer, db.ForeignKey('account.id'))
+    status = db.Column(Enum('pending', 'declined', 'approved', name='status_enum'), default='pending', nullable=False)
 
     account = db.relationship('Account', backref='recipes')
 

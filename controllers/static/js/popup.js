@@ -22,10 +22,6 @@ function redirectToLogin() {
     window.location.href = loginUrl;
 }
 
-
-
-
-
 //ingredient dashboard
 function openPopup(){
     const Overlay = document.getElementById('Overlay');
@@ -44,6 +40,17 @@ function closePopup(){
 }
 
 
+//recipe change status
+function openChangeStatusModal(recipeId) {
+    // Set the action attribute of the form dynamically
+    document.getElementById('changeStatusForm').action = `/change_status/${recipeId}`;
+    document.getElementById('recipeIdDisplay').innerText = recipeId;  // Display recipeId for debugging
+    document.getElementById('ChangeStatusModal').style.display = 'block';
+}
+
+function closeChangeStatusModal() {
+   document.getElementById('ChangeStatusModal').style.display = 'none';
+}
 
 
 

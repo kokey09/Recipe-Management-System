@@ -1,6 +1,6 @@
 $(document).ready(function () {
-    $("#searchButton").click(function () {
-        const query = $("#searchInput-ingredients").val().toLowerCase();
+    $("#searchInput-ingredients").on('input', function () {
+        const query = $(this).val().toLowerCase();
         const filter = $("#columnSelector").val();
 
         $(".ingredients-table tbody tr").each(function () {
@@ -28,3 +28,4 @@ $(document).ready(function () {
         });
     });
 });
+

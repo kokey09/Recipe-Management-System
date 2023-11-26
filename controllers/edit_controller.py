@@ -9,7 +9,6 @@ from models.recipe import Recipe
 from models.review import Review
 from flask_bcrypt import Bcrypt
 import os
-import logging
 
 
 edit_controller_bp = Blueprint('edit_controller',__name__,template_folder='templates',static_folder='static')
@@ -40,30 +39,30 @@ def edit_account(id):
 
     return render_template('edit_account.html', account=account)
 
-@edit_controller_bp.route('/edit_recipe/<int:id>', methods=['GET', 'POST'])
-def edit_recipe(id):
-    recipe = Recipe.query.get(id)
-    user = None
+#@edit_controller_bp.route('/edit_recipe/<int:id>', methods=['GET', 'POST'])
+#def edit_recipe(id):
+#    recipe = Recipe.query.get(id)
+#    user = None
 
     # Check if the user is logged in
-    if 'user_id' in session:
-        user_id = session['user_id']
-        user = Account.query.get(user_id)
+#    if 'user_id' in session:
+#        user_id = session['user_id']
+#        user = Account.query.get(user_id)
 
-    if request.method == 'POST':
-        is_deleted = request.form.get('is_deleted', '0') == '1'  # Get the is_deleted value as an integer
-        try:
-            recipe.is_deleted = bool(is_deleted)
-            db.session.commit()
-            flash("Recipe updated successfully.", "success")
-            return redirect(url_for('dashboard_controller.recipes'))
+#    if request.method == 'POST':
+#       is_deleted = request.form.get('is_deleted', '0') == '1'  # Get the is_deleted value as an integer
+#        try:
+#            recipe.is_deleted = bool(is_deleted)
+#            db.session.commit()
+#            flash("Recipe updated successfully.", "success")
+#            return redirect(url_for('dashboard_controller.recipes'))
 
-        except Exception as e:
-            print(f"Error updating recipe: {str(e)}")
-            db.session.rollback()
-            flash("Error updating recipe. Please try again.", "error")
+#       except Exception as e:
+#            print(f"Error updating recipe: {str(e)}")
+#            db.session.rollback()
+#            flash("Error updating recipe. Please try again.", "error")
 
-    return render_template('edit_recipes.html', recipe=recipe, id=id, user=user)
+#    return render_template('edit_recipes.html', recipe=recipe, id=id, user=user)
 
 @edit_controller_bp.route('/user_edit_recipe/<int:id>', methods=['GET', 'POST'])
 def user_edit_recipe(id):
@@ -117,3 +116,20 @@ def edit_ingredient(id):
         return redirect(url_for('dashboard_controller.ingredients'))
 
     return render_template('edit_ingredients.html', ingredient=ingredient, id=id)
+
+
+# New route for changing the status
+@edit_controller_bp.route('/change_status/<int:recipe_id>', methods=['POST'])
+def change_status(recipe_id):
+    # Assuming you have a Recipe model with a status field
+    recipe = Recipe.query.get_or_404(recipe_id)
+
+    # Update the status field based on the form data
+    new_status = request.form.get('new_status')  # Adjust the actual field name
+    recipe.status = new_status
+
+    # Save changes to the database
+    db.session.commit()
+
+    # Redirect back to the deleted recipes page
+    return redirect(url_for('dashboard_controller.recipes'))

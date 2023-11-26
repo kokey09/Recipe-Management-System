@@ -61,14 +61,6 @@ thead {
     background-color: #c9302c;
 }
 
-.form-ingredients{
-    margin: 20px auto;
-    max-width: 400px;
-    padding: 20px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    background-color: #f9f9f9;
-}
 
 label {
     display: block;
