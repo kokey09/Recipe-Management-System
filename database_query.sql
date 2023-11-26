@@ -8,6 +8,8 @@ FLUSH PRIVILEGES;
 CREATE DATABASE recipedb;
 
 USE recipedb;
+
+
 CREATE TABLE account (
     id INT(11) AUTO_INCREMENT PRIMARY KEY,
     username VARCHAR(50),
