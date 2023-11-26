@@ -8,6 +8,15 @@ FLUSH PRIVILEGES;
 CREATE DATABASE recipedb;
 
 USE recipedb;
+CREATE TABLE account (
+    id INT(11) AUTO_INCREMENT PRIMARY KEY,
+    username VARCHAR(50),
+    email VARCHAR(120),
+    password VARCHAR(60),
+    date_created TIMESTAMP,
+    type VARCHAR(255),
+    is_deleted TINYINT(1)
+);
 
 CREATE TABLE recipes (
     recipe_id INT(11) AUTO_INCREMENT PRIMARY KEY,
@@ -25,15 +34,6 @@ CREATE TABLE ingredients (
      description TEXT
 );
 
-CREATE TABLE account (
-    id INT(11) AUTO_INCREMENT PRIMARY KEY,
-    username VARCHAR(50),
-    email VARCHAR(120),
-    password VARCHAR(60),
-    date_created TIMESTAMP,
-    type VARCHAR(255),
-    is_deleted TINYINT(1)
-);
 
 CREATE TABLE recipe_ingredients (
      recipe_id INT(11),
