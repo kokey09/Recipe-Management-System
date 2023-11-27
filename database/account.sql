@@ -2,7 +2,7 @@
 -- Query: SELECT * FROM recipedb.account
 LIMIT 0, 1000
 
--- Date: 2023-11-23 17:02
+-- Date: 2023-11-27 14:53
 */
 USE recipedb;
 INSERT INTO `account` (`id`,`username`,`email`,`password`,`date_created`,`type`,`is_deleted`) VALUES (36,'admin','admin@gmail.com','$2b$12$rt5h18AnAGaSsZ6VEsfUb.Mv4ECXM9OxyZYvgjKuo7ObqBwaNT5TK','2023-11-20 05:19:30','admin',0);

@@ -2,7 +2,7 @@
 -- Query: SELECT * FROM recipedb.favorites
 LIMIT 0, 1000
 
--- Date: 2023-11-27 14:41
+-- Date: 2023-11-27 14:53
 */
 USE recipedb;
 INSERT INTO `favorites` (`favorite_id`,`recipe_id`,`account_id`,`timestamp`,`is_deleted`) VALUES (1,80,41,'2023-11-23 06:46:17',0);

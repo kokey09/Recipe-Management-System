@@ -2,7 +2,7 @@
 -- Query: SELECT * FROM recipedb.ingredients
 LIMIT 0, 1000
 
--- Date: 2023-11-23 17:02
+-- Date: 2023-11-27 14:53
 */
 USE recipedb;
 INSERT INTO `ingredients` (`ingredient_id`,`name`,`description`) VALUES (26,'Egg','fasd');
