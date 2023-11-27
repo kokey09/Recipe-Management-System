@@ -4,7 +4,7 @@ LIMIT 0, 1000
 
 -- Date: 2023-11-27 14:54
 */
-USE recipedb;reviews
+USE recipedb;
 INSERT INTO `reviews` (`review_id`,`recipe_id`,`account_id`,`review_text`,`rating`,`timestamp`,`image_url`) VALUES (134,74,36,'wow Yuumy',5,'2023-11-21 11:08:54',NULL);
 INSERT INTO `reviews` (`review_id`,`recipe_id`,`account_id`,`review_text`,`rating`,`timestamp`,`image_url`) VALUES (135,72,36,'debugging',2,'2023-11-21 11:12:13',NULL);
 INSERT INTO `reviews` (`review_id`,`recipe_id`,`account_id`,`review_text`,`rating`,`timestamp`,`image_url`) VALUES (136,80,38,'yummy naman nito hmm',4,'2023-11-21 16:47:29','static/reviews-img-table/HD-wallpaper-violet-evergarden-umbrella-braid-profile-view-anime.jpg');
