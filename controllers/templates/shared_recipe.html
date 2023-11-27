@@ -34,9 +34,9 @@
                                     <a href="/user_edit_recipe/{{ recipe.recipe_id }}" class="btn btn-secondary"><i class='bx bxs-edit' title="preview and change status"></i></a>
 
                                     {% if recipe.status != 'approved' %}
-                                    <a href="{{ url_for('dashboard_controller.recipe_preview', recipe_id=recipe.recipe_id) }}" class="btn btn-info">Preview</a>
+                                    <a href="{{ url_for('dashboard_controller.recipe_preview', recipe_id=recipe.recipe_id) }}" class="btn btn-info"><i class='bx bxs-show'></i> Preview</a>
                                     {% else %}
-                                    <a href="{{ url_for('user_end_controller.recipe_instruction', recipe_id=recipe.recipe_id) }}" class="btn btn-info">View Recipe</a>
+                                    <a href="{{ url_for('user_end_controller.recipe_instruction', recipe_id=recipe.recipe_id) }}" class="btn btn-info"><i class='bx bxs-show'></i> View Recipe</a>
                                     {% endif %}
 
                                 </form>

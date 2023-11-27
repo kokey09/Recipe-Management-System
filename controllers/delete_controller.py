@@ -6,7 +6,10 @@ from models.account import Account
 from models.account import db
 from models.recipe import Recipe
 from models.recipe_ingredient import RecipeIngredient
+from models.favorites import Favorite
+
 from flask_bcrypt import Bcrypt
+
 
 
 delete_controller_bp = Blueprint('delete_controller',__name__,template_folder='templates',static_folder='static')
@@ -81,6 +84,26 @@ def delete_ingredient(id):
         else:
             flash('Ingredient not found', 'error')
     return redirect(url_for('dashboard_controller.ingredients'))
+
+
+
+
+@delete_controller_bp.route('/delete_favorite/<int:id>', methods=['POST'])
+def delete_favorite(id):
+    if request.method == 'POST':
+        favorite_to_delete = Favorite.query.get(id)
+        if favorite_to_delete:
+            try:
+                # Soft delete the favorite
+                favorite_to_delete.is_deleted = True
+                db.session.commit()
+                flash('Favorite deleted successfully', 'success')
+            except Exception as e:
+                flash('An error occurred while soft deleting the favorite: ' + str(e), 'error')
+        else:
+            flash('Favorite not found', 'error')
+    return redirect(url_for('user_end_controller.favorites'))
+
 
 
 @delete_controller_bp.route('/disconnect_recipe_ingredient/<int:recipe_id>/<int:ingredient_id>', methods=['POST'])

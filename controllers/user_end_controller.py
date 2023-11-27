@@ -99,15 +99,20 @@ def recipe_display():
 def recipe_instruction():
     recipe_id = request.args.get('recipe_id', None, type=int)
 
-    # Use join to fetch the related entities in a single query
+    # Fetch only approved recipes
     recipe = (
         Recipe.query
         .join(Review, Recipe.recipe_id == Review.recipe_id, isouter=True)
         .join(RecipeIngredient, Recipe.recipe_id == RecipeIngredient.recipe_id, isouter=True)
         .join(Ingredient, RecipeIngredient.ingredient_id == Ingredient.ingredient_id, isouter=True)
-        .filter(Recipe.recipe_id == recipe_id)
-        .first_or_404()
+        .filter(Recipe.recipe_id == recipe_id, Recipe.status == 'approved')  # Add status check here
+        .first()
     )
+
+    if recipe is None:
+        # Recipe not found or not approved, redirect to shared_recipe
+        flash("Recipe not found or not approved.", "error")
+        return redirect(url_for('user_end_controller.user_page'))
 
     user = get_authenticated_user()
 
@@ -122,13 +127,12 @@ def recipe_instruction():
     # Fetch all ingredients separately for use in the template
     ingredients = Ingredient.query.all()
 
-
-
     response = make_response(render_template('recipe_instruction.html', recipe=recipe, user=user,
                                              reviews=reviews, recipe_reviews_count=recipe_reviews_count,
                                              ingredients=ingredients))
     response.headers['Cache-Control'] = 'no-cache, no-store, must-revalidate'
     return response
+
 
 
 

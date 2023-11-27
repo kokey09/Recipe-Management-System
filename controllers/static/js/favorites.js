@@ -24,14 +24,17 @@ $(document).ready(function() {
             }
         });
     }
+function handleAddFavoriteResponse(response) {
+    const lowerCaseResponse = response.toLowerCase();
 
-    function handleAddFavoriteResponse(response) {
-        if (response === "Favorite added successfully") {
-            showPopup("Favorite added successfully");
-        } else if (response === "you already have this recipe as your favorite") {
-            showPopup("You already have this recipe as your favorite");
-        }
+    if (lowerCaseResponse.includes("added successfully")) {
+        showPopup("Favorite added successfully");
+    } else if (lowerCaseResponse.includes("already have this recipe as your favorite")) {
+        showPopup("You already have this recipe as your favorite");
+    } else if (lowerCaseResponse.includes("restored from soft deletion")) {
+        showPopup("Favorite added successfully (restored from soft deletion)");
     }
+}
 
 
     function showPopup(message) {

@@ -64,6 +64,7 @@ CREATE TABLE favorites (
     recipe_id INT(11),
     account_id INT(11),
     timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+	is_deleted TINYINT(1),
     FOREIGN KEY (recipe_id) REFERENCES recipes(recipe_id),
     FOREIGN KEY (account_id) REFERENCES account(id)
 );

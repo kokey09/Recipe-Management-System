@@ -147,7 +147,6 @@ def add_favorite():
     # Get the recipe_id from the form submission
     recipe_id = request.form.get('recipe_id')
 
-    # Get the currently authenticated user
     user = get_authenticated_user()
 
     if not user:
@@ -156,12 +155,16 @@ def add_favorite():
     # Check if the user has already favorited this recipe
     existing_favorite = Favorite.query.filter_by(recipe_id=recipe_id, account_id=user.id).first()
 
-    if existing_favorite:
-        return "you already have this recipe as your favorite"
+    if existing_favorite and existing_favorite.is_deleted:
+        # If the existing favorite is soft-deleted, "undelete" it
+        existing_favorite.is_deleted = False
+        db.session.commit()
+        return "Favorite added successfully"
 
+    if existing_favorite:
+        return "You already have this recipe as your favorite"
     # Create a new Favorite record with the current timestamp
     favorite = Favorite(recipe_id=recipe_id, account_id=user.id, timestamp=datetime.utcnow())
-
     # Add the new Favorite record to the database
     db.session.add(favorite)
     db.session.commit()
