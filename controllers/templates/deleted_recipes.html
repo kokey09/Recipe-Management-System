@@ -34,7 +34,6 @@
                     <tr>
                         <th>ID</th>
                         <th>Recipe name</th>
-                        <th>Instructions</th>
                         <th>Image</th>
                         <th>Account ID </th>
                         <th>Account username </th>
@@ -48,7 +47,6 @@
                         <tr>
                             <td>{{ recipe.recipe_id }}</td>
                             <td>{{ recipe.name }}</td>
-                            <td>{{ recipe.instructions }}</td>
                             <td>
                                 <img src="{{ recipe.image_url }}" alt="{{ recipe.name }} Image" style="width: 100px; height: 100px;" loading="lazy">
                             </td>
@@ -58,7 +56,7 @@
                             <td>{{ recipe.status }}</td>
                             <td>
                                 <form method="POST" action="{{ url_for('dashboard_controller.recover_recipe', id=recipe.recipe_id) }}">
-                                    <button class="btn" type="submit">Recover</button>
+                                    <button class="btn" type="submit" onclick="return confirm('do you want to recover this recipe?')">Recover</button>
                                 </form>
                             </td>
                         </tr>

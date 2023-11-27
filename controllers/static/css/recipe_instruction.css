@@ -1,55 +1,48 @@
-/* instruction section */
-
 body {
-    font-family: 'Arial', sans-serif;
-    background-color: #f8f9fa;
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
     margin: 0;
     padding: 0;
-
 }
 
 .container {
-    margin-top: 50px;
     max-width: 800px;
-    margin-left: auto;
-    margin-top: 1%;
-    margin-right: auto;
+    margin: 0 auto;
     background-color: #fff;
-    border: 1px solid #dee2e6;
-    border-radius: 10px;
-    padding: 30px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-}
-
-.recipe-details {
-    text-align: center;
-}
-
-.recipe-details h2 {
-    color: #007bff;
-}
-
-.recipe-details img {
-    max-width: 100%;
-    height: auto;
+    padding: 20px;
+    margin-top: 20px;
     border-radius: 8px;
-    margin-top: 20px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
-
-.recipe-instructions {
-    margin-top: 20px;
-    text-align: left;
+.recipe-name {
+    text-align: center;
+    margin-bottom: 20px;
 }
 
-.recipe-instructions pre {
-    white-space: pre-wrap;
-    word-wrap: break-word;
+.recipe-name p {
+    font-size: 24px;
+    color: #333;
+    margin: 0;
+}
+.recipe-name img {
+    border-radius: 5px ;
+    max-height: 60%;
+}
+
+
+
+.recipe_instruction {
+    background-color: #f9f9f9;
+    padding: 15px;
+    border-radius: 5px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+}
+
+.recipe_instruction pre {
     font-size: 16px;
-    line-height: 1.6;
+    white-space: pre-wrap;
+    margin: 0;
 }
-
-
 
 /* Add review section */
 

@@ -59,7 +59,7 @@
                     </select>
                     <input type="text" id="search-Input-recipe" class="search-bar" placeholder="Search Recipe">
                     <button class="openPopup-btn" onclick="openPopup()"><i class='bx bx-plus-medical' title="add recipe"></i></button>
-                    <a href="deleted_recipes">Recently Deleted</a>
+                    <a href="deleted_recipes" class="recently-deleted"><i class='bx bxs-trash'></i> Recently Deleted</a>
                 </div>
 
 
@@ -67,6 +67,7 @@
         <table class="recipes-table">
             <thead>
                 <tr>
+
                     <th>ID</th>
                     <th>Recipe name</th>
                     <th>Image</th> <!-- Add a new column for the image -->
@@ -80,6 +81,7 @@
 
                 {% for recipe in recipes %}
                 <tr>
+
                     <td>{{ recipe.recipe_id }}</td>
                     <td>{{ recipe.name }}</td>
                     <td>
@@ -95,11 +97,10 @@
                         </form>
                     </td>
                 </tr>
-
                 {% endfor %}
-
             </tbody>
         </table>
+
     </fieldset>
     {% endblock %}
 
