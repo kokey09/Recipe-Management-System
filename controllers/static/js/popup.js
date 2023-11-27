@@ -40,21 +40,11 @@ function closePopup(){
 }
 
 
-//recipe change status
-function openChangeStatusModal(recipeId) {
-    // Set the action attribute of the form dynamically
-    document.getElementById('changeStatusForm').action = `/change_status/${recipeId}`;
-    document.getElementById('recipeIdDisplay').innerText = recipeId;  // Display recipeId for debugging
-    document.getElementById('ChangeStatusModal').style.display = 'block';
-}
 
-function closeChangeStatusModal() {
-   document.getElementById('ChangeStatusModal').style.display = 'none';
-}
+
 function changeStatus(status) {
-    // Set the selected status to the hidden input field
    document.getElementById('new_status').value = status;
-   // Submit the form
+   // Optionally, submit the form programmatically
    document.getElementById('changeStatusForm').submit();
 }
 

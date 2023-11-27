@@ -12,7 +12,12 @@
         <div class="recipe-name">
             <p>{{ recipe.name }}</p>
             <p class="recipe-status {% if recipe.status == 'declined' %}red-text{% elif recipe.status == 'approved' %}green-text{% elif recipe.status == 'pending' %}blue-text{% endif %}">
-            {{ recipe.status }}
+            status: {{ recipe.status }}
+             {% if recipe.status == 'pending'%}
+                    (not ready to be displayed)
+             {% elif recipe.status == 'declined' %}
+                    (Recipe has been declined)
+             {% endif %}
             </p>
             <img src="{{ recipe.image_url }}" alt="{{ recipe.name }} Image" style="width: 400px; height: 400px;" loading="lazy">
         </div>
@@ -26,6 +31,7 @@
             <!-- Buttons for changing status -->
             {% if user.type == 'admin' %}
             <button type="button" onclick="changeStatus('approved')">Approved</button>
+            <button type="button" class="pending" onclick="changeStatus('pending')">Pending</button>
             <button type="button" class="decline" onclick="changeStatus('declined')">Decline</button>
             {% endif %}
         </form>

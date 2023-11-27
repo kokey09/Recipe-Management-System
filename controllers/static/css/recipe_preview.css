@@ -85,7 +85,14 @@ button.decline:hover {
     background-color: #c9302c;
 }
 
+button.pending {
+    background-color: #0000FF; /* Red for Decline */
+    color: white;
+}
 
+button.pending:hover {
+    background-color: #7393B3;
+}
 
 /* Add this to your recipe_preview.css file */
 

@@ -59,7 +59,7 @@
                     </select>
                     <input type="text" id="search-Input-recipe" class="search-bar" placeholder="Search Recipe">
                     <button class="openPopup-btn" onclick="openPopup()"><i class='bx bx-plus-medical' title="add recipe"></i></button>
-                    <a href="deleted_recipes">deleted recipes</a>
+                    <a href="deleted_recipes">Recently Deleted</a>
                 </div>
 
 
@@ -69,11 +69,9 @@
                 <tr>
                     <th>ID</th>
                     <th>Recipe name</th>
-                    <th>Instructions</th>
                     <th>Image</th> <!-- Add a new column for the image -->
                     <th>Account ID </th>
                     <th>Account username </th>
-                    <th>is deleted</th>
                     <th>Status</th>
                     <th>Actions</th>
                 </tr>
@@ -84,55 +82,26 @@
                 <tr>
                     <td>{{ recipe.recipe_id }}</td>
                     <td>{{ recipe.name }}</td>
-                    <td>{{ recipe.instructions }}</td>
                     <td>
                         <img src="{{ recipe.image_url }}" alt="{{ recipe.name }} Image" style="width: 100px; height: 100px;" loading="lazy">
                     </td>
                     <td>{{recipe.account_id}}</td>
                     <td>{{ recipe.account.username }}</td>
-                    <td>{{recipe.is_deleted}}</td>
                     <td>{{recipe.status}}</td>
                     <td>
                         <form method="POST" action="{{ url_for('delete_controller.delete_recipe_admin', id=recipe.recipe_id) }}" >
-                             <button class="btn btn-danger" title="Delete Recipe" type="submit" onclick="return confirm('Are you sure you want to delete this Recipe?')">Delete</button>
-                            <a href="{{ url_for('dashboard_controller.recipe_preview', recipe_id=recipe.recipe_id) }}" class="btn btn-info">View Recipe</a>
+                             <button class="btn btn-danger" title="Delete Recipe" type="submit" onclick="return confirm('Are you sure you want to delete this Recipe?')"><i class='bx bxs-trash' ></i></button>
+                            <a href="{{ url_for('dashboard_controller.recipe_preview', recipe_id=recipe.recipe_id) }}" class="btn btn-info"><i class='bx bxs-edit' title="preview and change status"></i></a>
                         </form>
-                        <button class="change-status" onclick="openChangeStatusModal('{{ recipe.recipe_id }}')">Change Status</button>
                     </td>
                 </tr>
-                <!-- Change Status Modal -->
-                <div class="Overlay" id="ChangeStatusOverlay" onclick="closeChangeStatusModal()"></div>
-                <div class="Modal" id="ChangeStatusModal">
-                    <span class="close" onclick="closeChangeStatusModal()">&times;</span>
-                    <form method="POST" action="" id="changeStatusForm">
-                        <h2>Change Recipe Status</h2>
-                        <!-- Debug statement to check the value of recipe_id -->
-                        <p>Recipe ID: <span id="recipeIdDisplay"></span></p>
-                        <p>{{ recipe.name }}</p>
-                        <img src="{{ recipe.image_url }}" alt="{{ recipe.name }} Image" style="width: 100px; height: 100px;" loading="lazy">
-                        <div class="recipe-name">
-                            <p>{{ recipe.name }}</p>
-                        </div>
-                        <!-- Add your form fields here -->
-                        <div class="form-group">
-                            <!-- Use buttons to select the status -->
-                            <button type="button" class="status-button" onclick="changeStatus('approved')">Approved</button>
-                            <button type="button" class="status-button" onclick="changeStatus('pending')">Pending</button>
-                            <button type="button" class="status-button" onclick="changeStatus('declined')">Declined</button>
-                            <a href="{{ url_for('dashboard_controller.recipe_preview', recipe_id=recipe.recipe_id) }}" class="btn btn-info">View Recipe</a>
-                        </div>
-                        <!-- Hidden input field to store the selected status -->
-                        <input type="hidden" name="new_status" id="new_status" value="">
-                    </form>
 
-                </div>
                 {% endfor %}
 
             </tbody>
         </table>
     </fieldset>
     {% endblock %}
-
 
 </body>
 </html>

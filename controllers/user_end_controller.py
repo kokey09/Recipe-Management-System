@@ -7,10 +7,10 @@ from models.recipe_ingredient import RecipeIngredient
 from models.review import Review
 from models.favorites import Favorite
 
+
+
+
 user_end_controller_bp = Blueprint('user_end_controller',__name__,template_folder='templates',static_folder='static')
-
-
-
 
 @user_end_controller_bp.route('/')
 def user_page():
@@ -121,6 +121,8 @@ def recipe_instruction():
 
     # Fetch all ingredients separately for use in the template
     ingredients = Ingredient.query.all()
+
+
 
     response = make_response(render_template('recipe_instruction.html', recipe=recipe, user=user,
                                              reviews=reviews, recipe_reviews_count=recipe_reviews_count,

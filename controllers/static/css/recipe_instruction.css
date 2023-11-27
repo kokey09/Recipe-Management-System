@@ -79,8 +79,7 @@ button:hover {
 }
 
 
-
-/* reviews section */
+/* Default styles for reviews section */
 .reviews-section {
   margin-top: 20px;
   display: flex;
@@ -88,10 +87,10 @@ button:hover {
   align-items: center;
 }
 
-/* Styles for individual reviews */
+/* Default styles for individual reviews */
 .review {
-  width: 100%; /* Take full width of the container */
-  max-width: 400px; /* Set a maximum width for individual reviews if needed */
+  width: 100%;
+  max-width: 30%;
   border: 1px solid #ddd;
   border-radius: 8px;
   margin-bottom: 20px;
@@ -124,7 +123,7 @@ button:hover {
 }
 
 .stars {
-  color: #f39c12; /* Star color */
+  color: #f39c12;
   font-size: 20px;
   white-space: nowrap;
   overflow: hidden;
@@ -139,12 +138,12 @@ button:hover {
   margin-top: 10px;
   display: flex;
   align-items: center;
-  flex-direction: column; /* Stack items vertically */
-  text-align: center; /* Center text within the container */
+  flex-direction: column;
+  text-align: center;
 }
 
 .review-image {
-  margin-bottom: 10px; /* Add spacing between image and text */
+  margin-bottom: 10px;
 }
 
 .review-image img {
@@ -153,14 +152,10 @@ button:hover {
   border-radius: 8px;
 }
 
-
-
 .review-text {
   max-width: 100%;
   word-wrap: break-word;
 }
-
-
 
 /* popup section*/
 
@@ -252,4 +247,19 @@ button:hover {
 }
 
 
+/* Responsive styles for smaller screens */
+@media (max-width: 768px) {
+  .review {
+    max-width: 100%; /* Adjust to take full width on smaller screens */
+  }
+}
 
+@media (max-width: 576px) {
+  .stars {
+    font-size: 16px; /* Decrease star size on even smaller screens */
+  }
+
+  .review-timestamp {
+    font-size: 12px; /* Decrease timestamp font size on even smaller screens */
+  }
+}

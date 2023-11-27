@@ -34,7 +34,7 @@
                                     <a href="/user_edit_recipe/{{ recipe.recipe_id }}" class="btn btn-secondary">Edit</a>
 
                                     {% if recipe.status != 'approved' %}
-                                    <a href="{{ url_for('dashboard_controller.recipe_preview', recipe_id=recipe.recipe_id) }}" class="btn btn-info">View Recipe</a>
+                                    <a href="{{ url_for('dashboard_controller.recipe_preview', recipe_id=recipe.recipe_id) }}" class="btn btn-info">Preview</a>
                                     {% else %}
                                     <a href="{{ url_for('user_end_controller.recipe_instruction', recipe_id=recipe.recipe_id) }}" class="btn btn-info">View Recipe</a>
                                     {% endif %}
