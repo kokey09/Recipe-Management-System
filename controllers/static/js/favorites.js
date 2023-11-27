@@ -39,7 +39,6 @@ function handleAddFavoriteResponse(response) {
 
     function showPopup(message) {
         alert(message);
-        // You can customize this function to display a popup/modal or update the DOM
     }
 });
 

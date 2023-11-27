@@ -43,9 +43,6 @@ def recover_recipe(id):
     # Redirect back to the deleted recipes page
     return redirect(url_for('dashboard_controller.deleted_recipes'))
 
-
-
-
 @dashboard_controller_bp.route('/ingredients')
 def ingredients():
     user = get_authenticated_user()
@@ -151,8 +148,6 @@ def recipe_preview():
 
     recipe = Recipe.query.get(recipe_id)
     return render_template('recipe_preview.html', id=recipe_id, recipe=recipe,user=user)
-
-
 
 def get_authenticated_user():
     if 'user_id' in session:

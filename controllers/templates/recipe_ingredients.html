@@ -74,7 +74,9 @@
         <label for="recipe_id">Select Recipe:</label>
         <select id="recipe_id" name="recipe_id">
           {% for recipe in recipes %}
+            {% if recipe.status == 'approved' and not recipe.is_deleted %}
           <option value="{{ recipe.recipe_id }}">{{ recipe.name }}</option>
+            {% endif %}
           {% endfor %}
         </select>
 
