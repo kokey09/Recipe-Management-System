@@ -42,11 +42,13 @@
                     <div class="user-info">
                         {% if review.account.is_deleted %}
                         <div class="user-info deleted-user">
-                            <i class='bx bxs-user-circle'></i> {{ review.account.username }}
+                            <i class='bx bxs-user-circle'></i>
+                            {{ review.account.username }}
                         </div>
                         {% else %}
                             <div class="user-info">
-                                <i class='bx bxs-user-circle'></i> {{ review.account.username }}
+                                <i class='bx bxs-user-circle'></i>
+                                {{ review.account.username }}
                             </div>
                         {% endif %}
                     </div>
