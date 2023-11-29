@@ -7,9 +7,6 @@ from models.recipe_ingredient import RecipeIngredient
 from models.review import Review
 from models.favorites import Favorite
 
-
-
-
 user_end_controller_bp = Blueprint('user_end_controller',__name__,template_folder='templates',static_folder='static')
 
 @user_end_controller_bp.route('/')

@@ -39,9 +39,6 @@ function closePopup(){
     Popup.style.display = 'none';
 }
 
-
-
-
 function changeStatus(status) {
    document.getElementById('new_status').value = status;
    // Optionally, submit the form programmatically

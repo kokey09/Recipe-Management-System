@@ -32,6 +32,8 @@ def deleted_recipes():
     if user and user.type == 'admin':
         deleted_recipes_data = Recipe.query.filter_by(is_deleted=True).all()
         return render_template('deleted_recipes.html', deleted_recipes=deleted_recipes_data, user=user)
+    else:
+        return redirect(url_for('user_end_controller.user_page'))
 
     return render_template('deleted_recipes.html')
 

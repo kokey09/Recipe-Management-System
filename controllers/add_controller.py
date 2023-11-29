@@ -138,10 +138,6 @@ def connect_recipe_ingredient():
 
     return redirect(url_for('dashboard_controller.recipe_ingredients'))
 
-
-
-
-
 @add_controller_bp.route('/add_favorite', methods=['POST'])
 def add_favorite():
     # Get the recipe_id from the form submission

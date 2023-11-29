@@ -112,3 +112,11 @@ button.pending:hover {
 }
 
 
+btn-horizontal {
+    display: flex;
+    gap: 10px; /* Adjust the gap between buttons as needed */
+}
+
+button {
+    display: inline-block;
+}

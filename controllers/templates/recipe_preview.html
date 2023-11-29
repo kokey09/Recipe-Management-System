@@ -29,11 +29,15 @@
             <!-- Hidden input field to store the selected status -->
             <input type="hidden" name="new_status" id="new_status" value="">
             <!-- Buttons for changing status -->
-            {% if user.type == 'admin' %}
-            <button type="button" onclick="changeStatus('approved')">Approved</button>
-            <button type="button" class="pending" onclick="changeStatus('pending')">Pending</button>
-            <button type="button" class="decline" onclick="changeStatus('declined')">Decline</button>
-            {% endif %}
+
+            <div class="btn-horizontal">
+                {% if user.type == 'admin' %}
+                <button type="button" onclick="changeStatus('approved')">Approved</button>
+                <button type="button" class="pending" onclick="changeStatus('pending')">Pending</button>
+                <button type="button" class="decline" onclick="changeStatus('declined')">Decline</button>
+                {% endif %}
+            </div>
+
         </form>
     </div>
 

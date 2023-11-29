@@ -17,9 +17,7 @@
 </head>
 <body>
     {% extends 'base.html' %}
-
     {% block title %}Recipes{% endblock %}
-
     {% block content %}
     <fieldset>
         <legend><h1>Recipes</h1></legend>
@@ -92,7 +90,6 @@
                     <td>{{recipe.account_id}}</td>
                     <td>{{ recipe.account.username }}</td>
                     <td>{{recipe.status}}</td>
-<!-- Inside the loop where you display recipes -->
                     <td>
                         <form>
                             <button class="btn btn-danger delete-recipe-btn"
@@ -114,7 +111,6 @@
 
     </fieldset>
     {% endblock %}
-
 </body>
 </html>
 

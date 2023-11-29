@@ -1,34 +1,42 @@
-//recipe
 $(document).ready(function () {
-    $("#search-Input-recipe").on('input', function () {
-        const query = $(this).val().toLowerCase();
+    // Retrieve the saved search query and filter from localStorage
+    const savedQuery = localStorage.getItem('recipeSearchQuery') || '';
+    const savedFilter = localStorage.getItem('recipeSearchFilter') || 'all';
+
+    // Set the saved query and filter in the corresponding elements
+    $("#search-Input-recipe").val(savedQuery);
+    $("#columnSelector").val(savedFilter);
+
+    // Function to handle the search
+    function handleSearch() {
+        const query = $("#search-Input-recipe").val().toLowerCase();
         const filter = $("#columnSelector").val();
+
+        // Save the current search query and filter to localStorage
+        localStorage.setItem('recipeSearchQuery', query);
+        localStorage.setItem('recipeSearchFilter', filter);
 
         $(".recipes-table tbody tr").each(function () {
             const row = $(this);
 
             if (filter === "all" || filter === "") {
-                if (query === "") {
+                if (query === "" || row.text().toLowerCase().includes(query)) {
                     row.show();
                 } else {
-                    const rowText = row.text().toLowerCase();
-                    if (rowText.includes(query)) {
-                        row.show();
-                    } else {
-                        row.hide();
-                    }
+                    row.hide();
                 }
             } else {
                 let text;
 
                 if (filter === "status") {
-                    text = row.find("td:nth-child(8)").text().toLowerCase(); // Assuming status is in the 8th column
+                    text = row.find("td:nth-child(8)").text().toLowerCase();
                 } else if (filter === "account_id") {
-                    text = row.find("td:nth-child(5)").text().toLowerCase(); // Assuming account_id is in the 5th column
+                    text = row.find("td:nth-child(5)").text().toLowerCase();
                 } else if (filter === "account_username") {
-                    text = row.find("td:nth-child(6)").text().toLowerCase(); // Assuming account_username is in the 6th column
+                    text = row.find("td:nth-child(6)").text().toLowerCase();
                 } else {
-                    text = row.find("td:nth-child(" + (filter === "recipe_id" ? "1" : filter === "name" ? "2" : filter === "instructions" ? "3" : "4") + ")").text().toLowerCase();
+                    const columnIndex = filter === "recipe_id" ? 1 : filter === "name" ? 2 : filter === "instructions" ? 3 : 4;
+                    text = row.find("td:nth-child(" + columnIndex + ")").text().toLowerCase();
                 }
 
                 if (text.includes(query)) {
@@ -38,5 +46,12 @@ $(document).ready(function () {
                 }
             }
         });
-    });
+    }
+
+    // Initial search
+    handleSearch();
+
+    // Attach the handleSearch function to the input and select change events
+    $("#search-Input-recipe, #columnSelector").on('input change', handleSearch);
 });
+
