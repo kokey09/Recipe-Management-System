@@ -1,4 +1,4 @@
-from flask import render_template, request, redirect, url_for, flash, session, Blueprint
+from flask import render_template, request, redirect, url_for, flash, session, Blueprint,jsonify
 
 
 from models.ingredient import Ingredient
@@ -48,14 +48,16 @@ def delete_recipe_base(model, id, redirect_page):
                 db.session.commit()
                 flash(f'{model.capitalize()} deleted successfully', 'success')
 
-                return redirect(url_for(redirect_page))
+                return jsonify({'message': f'{model.capitalize()} deleted successfully'}), 200
 
             except Exception as e:
-                flash(f'An error occurred while deleting the {model}', 'error')
+                flash(f'An error occurred while deleting the {model}: {str(e)}', 'error')
+                return jsonify({'error': f'Internal server error: {str(e)}'}), 500
         else:
             flash(f'{model.capitalize()} not found', 'error')
+            return jsonify({'error': f'{model.capitalize()} not found'}), 404
 
-    return redirect(url_for('dashboard_controller.recipes', user=user))
+    return jsonify({'error': 'Invalid request'}), 400
 
 
 # delete main function extension for admin
@@ -63,11 +65,17 @@ def delete_recipe_base(model, id, redirect_page):
 def delete_recipe_admin(id):
     return delete_recipe_base('recipe', id, 'dashboard_controller.recipes')
 
-
 # delete main function extension for user end
 @delete_controller_bp.route('/delete_shared_recipe/<int:id>', methods=['POST'])
 def delete_shared_recipe(id):
-    return delete_recipe_base('recipe', id, 'user_end_controller.shared_recipe')
+    result = delete_recipe_base('recipe', id, 'user_end_controller.shared_recipe')
+
+    # Check if the result is a JSON response
+    if isinstance(result, tuple) and len(result) == 2 and result[1] == 200:
+        # This means it's a JSON response with a 200 status code, so redirect
+        return redirect(url_for('user_end_controller.shared_recipe'))
+
+    return result  # If not a JSON response, return it as is
 
 
 @delete_controller_bp.route('/delete_ingredient/<int:id>', methods=['POST'])

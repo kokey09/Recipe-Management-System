@@ -1,4 +1,4 @@
-from flask import  render_template, request, redirect, url_for, Blueprint,current_app,session,flash,make_response
+from flask import  render_template, request, redirect, url_for, Blueprint,current_app,session,flash,make_response,jsonify
 
 from models.recipe import Recipe
 from models.ingredient import Ingredient
@@ -33,6 +33,9 @@ def deleted_recipes():
         deleted_recipes_data = Recipe.query.filter_by(is_deleted=True).all()
         return render_template('deleted_recipes.html', deleted_recipes=deleted_recipes_data, user=user)
 
+    return render_template('deleted_recipes.html')
+
+
 
 @dashboard_controller_bp.route('/recover_recipe/<int:id>', methods=['POST'])
 def recover_recipe(id):
@@ -40,8 +43,8 @@ def recover_recipe(id):
     recipe.is_deleted = False
     db.session.commit()
 
-    # Redirect back to the deleted recipes page
-    return redirect(url_for('dashboard_controller.deleted_recipes'))
+    # Return a JSON response indicating success
+    return jsonify({"message": "Recipe recovered successfully"})
 
 @dashboard_controller_bp.route('/ingredients')
 def ingredients():

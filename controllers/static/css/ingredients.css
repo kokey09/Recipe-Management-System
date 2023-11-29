@@ -29,6 +29,8 @@ thead {
     border: none;
     cursor: pointer;
     border-radius: 5px;
+    background-color: #FA8072;
+
 }
 
 .ingredients-table .btn.delete-button {
@@ -169,3 +171,5 @@ button[type="submit"]:hover {
     cursor: pointer;
     margin-left: 1%;
 }
+
+

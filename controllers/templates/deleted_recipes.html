@@ -8,6 +8,8 @@
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="{{ url_for('static', filename='js/search_recipe.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/dynamic.js') }}"></script>
+
 </head>
 <body>
     {% extends 'base.html' %}
@@ -56,16 +58,14 @@
                             <td>{{ recipe.status }}</td>
                             <td>
                                 <form method="POST" action="{{ url_for('dashboard_controller.recover_recipe', id=recipe.recipe_id) }}">
-                                    <button class="btn" type="submit" onclick="return confirm('do you want to recover this recipe?')">Recover</button>
+                                    <button class="btn recover-recipe-btn" type="button" data-recipe-id="{{ recipe.recipe_id }}">Recover</button>
                                 </form>
                             </td>
                         </tr>
                     {% endfor %}
                 </tbody>
             </table>
-
-
-
+        </fieldset>
     {% endblock %}
 </body>
 </html>
