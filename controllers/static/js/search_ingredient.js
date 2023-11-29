@@ -1,24 +1,34 @@
 $(document).ready(function () {
-    $("#searchInput-ingredients").on('input', function () {
-        const query = $(this).val().toLowerCase();
+    // Retrieve the saved search query and filter from localStorage
+    const savedQuery = localStorage.getItem('ingredientsSearchQuery') || '';
+    const savedFilter = localStorage.getItem('ingredientsSearchFilter') || 'all';
+
+    // Set the saved query and filter in the corresponding elements
+    $("#searchInput-ingredients").val(savedQuery);
+    $("#columnSelector").val(savedFilter);
+
+    // Function to handle the search
+    function handleSearch() {
+        const query = $("#searchInput-ingredients").val().toLowerCase();
         const filter = $("#columnSelector").val();
+
+        // Save the current search query and filter to localStorage
+        localStorage.setItem('ingredientsSearchQuery', query);
+        localStorage.setItem('ingredientsSearchFilter', filter);
 
         $(".ingredients-table tbody tr").each(function () {
             const row = $(this);
 
             if (filter === "all" || filter === "") {
-                if (query === "") {
+                if (query === "" || row.text().toLowerCase().includes(query)) {
                     row.show();
                 } else {
-                    const rowText = row.text().toLowerCase();
-                    if (rowText.includes(query)) {
-                        row.show();
-                    } else {
-                        row.hide();
-                    }
+                    row.hide();
                 }
             } else {
-                const text = row.find("td:nth-child(" + (filter === "ingredient_id" ? "1" : filter === "name" ? "2" : filter === "description" ? "3" : "4") + ")").text().toLowerCase();
+                const columnIndex = filter === "ingredient_id" ? 1 : filter === "name" ? 2 : filter === "description" ? 3 : 4;
+                const text = row.find("td:nth-child(" + columnIndex + ")").text().toLowerCase();
+
                 if (text.includes(query)) {
                     row.show();
                 } else {
@@ -26,6 +36,13 @@ $(document).ready(function () {
                 }
             }
         });
-    });
+    }
+
+    // Initial search
+    handleSearch();
+
+    // Attach the handleSearch function to the input event of the search input
+    $("#searchInput-ingredients").on('input', handleSearch);
 });
+
 
