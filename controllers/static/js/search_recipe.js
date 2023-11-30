@@ -18,32 +18,37 @@ $(document).ready(function () {
 
         $(".recipes-table tbody tr").each(function () {
             const row = $(this);
+            let text = "";
 
-            if (filter === "all" || filter === "") {
-                if (query === "" || row.text().toLowerCase().includes(query)) {
-                    row.show();
-                } else {
-                    row.hide();
+                // Update the switch statement in handleSearch function
+                switch (filter) {
+                    case "all":
+                    case "":
+                        text = row.text().toLowerCase();
+                        break;
+                    case "status":
+                        text = row.find("td:nth-child(6)").text().toLowerCase(); // Update index for status
+                        break;
+                    case "account_id":
+                        text = row.find("td:nth-child(4)").text().toLowerCase(); // Update index for account_id
+                        break;
+                    case "account_username":
+                        text = row.find("td:nth-child(5)").text().toLowerCase(); // Update index for account_username
+                        break;
+                    case "image": // Add a case for the image column
+                        // You might want to modify this depending on how you want to handle image searching
+                        text = row.find("td:nth-child(3) img").attr("alt").toLowerCase();
+                        break;
+                    default:
+                        const columnIndex = filter === "recipe_id" ? 1 : filter === "name" ? 2 : filter === "instructions" ? 3 : 4;
+                        text = row.find("td:nth-child(" + columnIndex + ")").text().toLowerCase();
+                        break;
                 }
+
+            if (text.includes(query)) {
+                row.show();
             } else {
-                let text;
-
-                if (filter === "status") {
-                    text = row.find("td:nth-child(8)").text().toLowerCase();
-                } else if (filter === "account_id") {
-                    text = row.find("td:nth-child(5)").text().toLowerCase();
-                } else if (filter === "account_username") {
-                    text = row.find("td:nth-child(6)").text().toLowerCase();
-                } else {
-                    const columnIndex = filter === "recipe_id" ? 1 : filter === "name" ? 2 : filter === "instructions" ? 3 : 4;
-                    text = row.find("td:nth-child(" + columnIndex + ")").text().toLowerCase();
-                }
-
-                if (text.includes(query)) {
-                    row.show();
-                } else {
-                    row.hide();
-                }
+                row.hide();
             }
         });
     }
