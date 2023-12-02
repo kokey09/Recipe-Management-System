@@ -12,6 +12,8 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="{{ url_for('static', filename='js/search_recipe.js') }}"></script>
     <script src="{{ url_for('static', filename='js/dynamic.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/massDeletionRecipe.js') }}"></script>
+
 
 
 </head>
@@ -39,7 +41,6 @@
 
                 <button type="submit">Add Recipe</button>
             </form>
-
             <div onclick="closePopup()" class="close-btn">
                 <i class='bx bx-x'></i>
             </div>
@@ -47,26 +48,33 @@
 
 
             <!-- search container -->
-                <div class="search-container">
-                    <select id="columnSelector">
-                        <option value="all">Search All</option>
-                        <option value="recipe_id">ID</option>
-                        <option value="name">Recipe Name</option>
-                        <option value="account_id">Account ID</option>
-                        <option value="account_username">Account Username</option>
-                        <option value="status">Status</option>
-                    </select>
-                    <input type="text" id="search-Input-recipe" class="search-bar" placeholder="Search Recipe">
-                    <button class="openPopup-btn" onclick="openPopup()"><i class='bx bx-plus-medical' title="add recipe"></i></button>
-                    <a href="deleted_recipes" class="recently-deleted"><i class='bx bxs-trash'></i> Recently Deleted</a>
-                </div>
+<div class="search-container">
+    <select id="columnSelector">
+        <option value="all">Search All</option>
+        <option value="recipe_id">ID</option>
+        <option value="name">Recipe Name</option>
+        <option value="account_id">Account ID</option>
+        <option value="account_username">Account Username</option>
+        <option value="status">Status</option>
+    </select>
+    <input type="text" id="search-Input-recipe" class="search-bar" placeholder="Search Recipe">
+    <button class="refresh-button" onclick="refreshSearch()"><i class='bx bx-refresh'></i></button>
+    <button class="openPopup-btn" onclick="openPopup()"><i class='bx bx-plus-medical' title="add recipe"></i></button>
+    <a href="deleted_recipes" class="recently-deleted"><i class='bx bxs-trash'></i> Recently Deleted</a>
+</div>
+
+
+<button class="btn btn-danger delete-selected-btn" id="delete-selected-btn" style="display: none;" title="Delete Selected" type="button">
+    Delete Selected
+</button>
+<button id="select-all-button" style="display: none;">Select All</button>
 
 
         <!-- tables -->
         <table class="recipes-table">
             <thead>
                 <tr>
-
+                    <th></th>
                     <th>ID</th>
                     <th>Recipe name</th>
                     <th>Image</th> <!-- Add a new column for the image -->
@@ -80,7 +88,9 @@
 
                 {% for recipe in recipes %}
                 <tr>
-
+                    <td>
+                        <input type="checkbox" name="checkbox" class="checkbox" id="checkbox-{{ recipe.recipe_id }}">
+                    </td>
                     <td>{{ recipe.recipe_id }}</td>
                     <td>{{ recipe.name }}</td>
                     <td>

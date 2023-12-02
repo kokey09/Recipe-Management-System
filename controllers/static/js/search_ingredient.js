@@ -8,7 +8,7 @@ $(document).ready(function () {
     $("#columnSelector").val(savedFilter);
 
     // Function to handle the search
-    function handleSearch() {
+ function handleSearch() {
         const query = $("#searchInput-ingredients").val().toLowerCase();
         const filter = $("#columnSelector").val();
 
@@ -18,22 +18,36 @@ $(document).ready(function () {
 
         $(".ingredients-table tbody tr").each(function () {
             const row = $(this);
+            let text = "";
 
-            if (filter === "all" || filter === "") {
-                if (query === "" || row.text().toLowerCase().includes(query)) {
-                    row.show();
-                } else {
-                    row.hide();
-                }
+            // Update the switch statement in handleSearch function
+            switch (filter) {
+                case "all":
+                case "":
+                    text = row.text().toLowerCase();
+                    break;
+                case "ingredient_id":
+                    text = row.find("td:nth-child(2)").text().toLowerCase(); // Update index for ingredient_id
+                    break;
+                case "name":
+                    text = row.find("td:nth-child(3)").text().toLowerCase(); // Update index for name
+                    break;
+                case "description":
+                    text = row.find("td:nth-child(4)").text().toLowerCase(); // Update index for description
+                    break;
+                // Add a case for your new column, adjust the index accordingly
+                case "your_new_column":
+                    text = row.find("td:nth-child(your_column_index)").text().toLowerCase();
+                    break;
+                default:
+                    text = row.find("td:nth-child(2)").text().toLowerCase(); // Default to ingredient_id
+                    break;
+            }
+
+            if (text.includes(query)) {
+                row.show();
             } else {
-                const columnIndex = filter === "ingredient_id" ? 1 : filter === "name" ? 2 : filter === "description" ? 3 : 4;
-                const text = row.find("td:nth-child(" + columnIndex + ")").text().toLowerCase();
-
-                if (text.includes(query)) {
-                    row.show();
-                } else {
-                    row.hide();
-                }
+                row.hide();
             }
         });
     }

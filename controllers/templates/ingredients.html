@@ -8,6 +8,8 @@
     <script src="{{ url_for('static', filename='js/popup.js') }}"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="{{ url_for('static', filename='js/search_ingredient.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/massDeletionIngredient.js') }}"></script>
+
 </head>
 <body>
     {% extends 'base.html' %}
@@ -47,15 +49,24 @@
     <table class="ingredients-table">
         <thead>
             <tr>
+                <th></th>
                 <th>ID</th>
                 <th>Name</th>
                 <th>Description</th>
                 <th>Actions</th> <!-- Add a header for the buttons -->
             </tr>
         </thead>
+
+        <button class="btn btn-danger delete-selected-btn" id="delete-selected-btn" style="display: none;" title="Delete Selected" type="button">
+            Delete Selected
+        </button>
+        <button id="select-all-button" style="display: none;">Select All</button>
         <tbody>
             {% for ingredient in ingredients  %}
             <tr>
+                <td>
+                    <input type="checkbox" class="checkbox" data-ingredient-id="{{ ingredient.ingredient_id }}">
+                </td>
                 <td>{{ ingredient.ingredient_id }}</td>
                 <td>{{ ingredient.name }}</td>
                 <td>{{ ingredient.description }}</td>

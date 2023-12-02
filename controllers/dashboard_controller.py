@@ -39,14 +39,7 @@ def deleted_recipes():
 
 
 
-@dashboard_controller_bp.route('/recover_recipe/<int:id>', methods=['POST'])
-def recover_recipe(id):
-    recipe = Recipe.query.get_or_404(id)
-    recipe.is_deleted = False
-    db.session.commit()
 
-    # Return a JSON response indicating success
-    return jsonify({"message": "Recipe recovered successfully"})
 
 @dashboard_controller_bp.route('/ingredients')
 def ingredients():

@@ -78,6 +78,17 @@ def delete_shared_recipe(id):
     return result  # If not a JSON response, return it as is
 
 
+@delete_controller_bp.route('/mass_recipe_deletion', methods=['POST'])
+def mass_recipe_deletion():
+    selected_ids = request.form.getlist('ids[]')
+
+    for recipe_id in selected_ids:
+        delete_recipe_base('recipe', int(recipe_id), 'dashboard_controller.recipes')
+
+    return jsonify({'message': 'Selected recipes deleted successfully'}), 200
+
+
+
 @delete_controller_bp.route('/delete_ingredient/<int:id>', methods=['POST'])
 def delete_ingredient(id):
     if request.method == 'POST':
@@ -93,7 +104,18 @@ def delete_ingredient(id):
             flash('Ingredient not found', 'error')
     return redirect(url_for('dashboard_controller.ingredients'))
 
+@delete_controller_bp.route('/mass_delete_ingredients', methods=['POST'])
+def mass_delete_ingredients():
+    if request.method == 'POST':
+        selected_ids = request.form.getlist('ids[]')
+        try:
+            Ingredient.query.filter(Ingredient.ingredient_id.in_(selected_ids)).delete(synchronize_session='fetch')
+            db.session.commit()
+            flash('Ingredients deleted successfully', 'success')
+        except Exception as e:
+            flash('An error occurred while deleting ingredients', 'error')
 
+    return jsonify({"message": "Ingredients deleted successfully"})
 
 
 @delete_controller_bp.route('/delete_favorite/<int:id>', methods=['POST'])

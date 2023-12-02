@@ -133,3 +133,24 @@ def change_status(recipe_id):
 
     # Redirect back to the deleted recipes page
     return redirect(url_for('dashboard_controller.recipes'))
+
+
+@edit_controller_bp.route('/recover_recipe/<int:id>', methods=['POST'])
+def recover_recipe(id):
+    recipe = Recipe.query.get_or_404(id)
+    recipe.is_deleted = False
+    db.session.commit()
+
+    # Return a JSON response indicating success
+    return jsonify({"message": "Recipe recovered successfully"})
+
+@edit_controller_bp.route('/mass_recover_recipes', methods=['POST'])
+def mass_recover_recipes():
+    selected_ids = request.form.getlist('ids[]')
+
+    for recipe_id in selected_ids:
+        recipe = Recipe.query.get_or_404(int(recipe_id))
+        recipe.is_deleted = False
+        db.session.commit()
+
+    return jsonify({'message': 'Selected recipes recovered successfully'}), 200
