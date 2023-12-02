@@ -1,5 +1,5 @@
 from flask import render_template, request, redirect, url_for, flash, jsonify, session, Blueprint,current_app
-
+from datetime import datetime
 from werkzeug.utils import secure_filename
 
 from models.ingredient import Ingredient
@@ -123,11 +123,11 @@ def edit_ingredient(id):
 def change_status(recipe_id):
     # Assuming you have a Recipe model with a status field
     recipe = Recipe.query.get_or_404(recipe_id)
-
     # Update the status field based on the form data
     new_status = request.form.get('new_status')  # Adjust the actual field name
-    recipe.status = new_status
 
+    recipe.status = new_status
+    recipe.status_changed_at = datetime.utcnow()
     # Save changes to the database
     db.session.commit()
 
@@ -138,9 +138,9 @@ def change_status(recipe_id):
 @edit_controller_bp.route('/recover_recipe/<int:id>', methods=['POST'])
 def recover_recipe(id):
     recipe = Recipe.query.get_or_404(id)
+    recipe.recovered_at = datetime.utcnow()
     recipe.is_deleted = False
     db.session.commit()
-
     # Return a JSON response indicating success
     return jsonify({"message": "Recipe recovered successfully"})
 

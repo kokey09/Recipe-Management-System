@@ -1,5 +1,5 @@
 from flask import render_template, request, redirect, url_for, flash, session, Blueprint,jsonify
-
+from datetime import datetime
 
 from models.ingredient import Ingredient
 from models.account import Account
@@ -44,6 +44,7 @@ def delete_recipe_base(model, id, redirect_page):
 
         if entity_to_delete:
             try:
+                entity_to_delete.deleted_at = datetime.utcnow()
                 entity_to_delete.is_deleted = True
                 db.session.commit()
                 flash(f'{model.capitalize()} deleted successfully', 'success')

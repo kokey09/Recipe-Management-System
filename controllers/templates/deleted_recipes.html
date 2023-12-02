@@ -7,7 +7,7 @@
     <link rel="icon" href="{{ url_for('static', filename='recipes-img-table/recipes.png') }}" type="image/x-icon">
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="{{ url_for('static', filename='js/search_recipe.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/deleted_recipe_search.js') }}"></script>
     <script src="{{ url_for('static', filename='js/dynamic.js') }}"></script>
         <script src="{{ url_for('static', filename='js/massRecover.js') }}"></script>
 
@@ -23,14 +23,16 @@
             <legend><h1>Deleted Recipes</h1></legend>
 
             <div class="search-container">
-                    <select id="columnSelector">
-                        <option value="all">Search All</option>
-                        <option value="recipe_id">ID</option>
-                        <option value="name">Recipe Name</option>
-                        <option value="account_id">Account ID</option>
-                        <option value="account_username">Account Username</option>
-                        <option value="status">Status</option>
-                    </select>
+                <select id="columnSelector">
+                    <option value="all">Search All</option>
+                    <option value="recipe_id">ID</option>
+                    <option value="name">Recipe Name</option>
+                    <option value="account_id">Account ID</option>
+                    <option value="account_username">Account Username</option>
+                    <option value="deleted_at">delete at</option>
+                    <option value="status">Status</option>
+                    <option value="status_changed_at">status change at</option>
+                </select>
                 <input type="text" id="search-Input-recipe" class="search-bar" placeholder="Search Recipe">
                 <button id="searchButton">Search</button>
             </div>
@@ -41,12 +43,14 @@
             <table class="recipes-table">
                 <thead>
                     <tr>
+                        <th></th>
                         <th>ID</th>
                         <th>Recipe name</th>
                         <th>Image</th>
                         <th>Account ID </th>
                         <th>Account username </th>
                         <th>is deleted</th>
+                        <th>deleted at</th>
                         <th>Status</th>
                         <th>Actions</th>
                     </tr>
@@ -65,6 +69,7 @@
                             <td>{{ recipe.account_id }}</td>
                             <td>{{ recipe.account.username }}</td>
                             <td>{{ recipe.is_deleted }}</td>
+                            <td>{{ recipe.deleted_at }}</td>
                             <td>{{ recipe.status }}</td>
                             <td>
                                 <form method="POST" action="{{ url_for('edit_controller.recover_recipe', id=recipe.recipe_id) }}">

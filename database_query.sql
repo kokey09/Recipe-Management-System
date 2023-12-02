@@ -26,11 +26,15 @@ CREATE TABLE recipes (
     instructions TEXT NOT NULL,
     image_url VARCHAR(512),
     is_deleted TINYINT(1),
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    deleted_at TIMESTAMP NULL DEFAULT NULL,
+    recovered_at TIMESTAMP NULL DEFAULT NULL,
     account_id INT(11),
     status ENUM('pending', 'declined', 'approved') DEFAULT 'pending',
-
+    status_changed_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (account_id) REFERENCES account(id)
 );
+
 
 CREATE TABLE ingredients (
     ingredient_id INT AUTO_INCREMENT PRIMARY KEY,

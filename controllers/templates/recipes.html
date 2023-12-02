@@ -21,106 +21,116 @@
     {% extends 'base.html' %}
     {% block title %}Recipes{% endblock %}
     {% block content %}
-    <fieldset>
-        <legend><h1>Recipes</h1></legend>
 
 
-        <!-- add recipe -->
-        <div class="Overlay" id="Overlay" onclick="closePopup()"></div>
-        <div class="Popup" id="Popup">
-            <form method="POST" action="/add_recipe" enctype="multipart/form-data" class="form-recipe">
-                <!-- Form for adding a new recipe -->
-                <label for="recipe_name">Name:</label>
-                <input type="text" id="recipe_name" name="recipe_name" class="name-form" required>
+        <fieldset>
+            <legend><h1>Recipes</h1></legend>
 
-                <label for="instructions">Instructions:</label>
-                <textarea id="instructions" name="instructions" rows="4" class="text-area-form" required></textarea>
+            <!-- add recipe -->
+            <div class="Overlay" id="Overlay" onclick="closePopup()"></div>
+            <div class="Popup" id="Popup">
+                <form method="POST" action="/add_recipe" enctype="multipart/form-data" class="form-recipe">
+                    <!-- Form for adding a new recipe -->
+                    <label for="recipe_name">Name:</label>
+                    <input type="text" id="recipe_name" name="recipe_name" class="name-form" required>
 
-                <label for="image_file">Image File:</label>
-                <input type="file" id="image_file" name="image_file" accept="image/*" required>
+                    <label for="instructions">Instructions:</label>
+                    <textarea id="instructions" name="instructions" rows="4" class="text-area-form" required></textarea>
 
-                <button type="submit">Add Recipe</button>
-            </form>
-            <div onclick="closePopup()" class="close-btn">
-                <i class='bx bx-x'></i>
+                    <label for="image_file">Image File:</label>
+                    <input type="file" id="image_file" name="image_file" accept="image/*" required>
+
+                    <button type="submit">Add Recipe</button>
+                </form>
+                <div onclick="closePopup()" class="close-btn">
+                    <i class='bx bx-x'></i>
+                </div>
             </div>
-        </div>
-
 
             <!-- search container -->
-<div class="search-container">
-    <select id="columnSelector">
-        <option value="all">Search All</option>
-        <option value="recipe_id">ID</option>
-        <option value="name">Recipe Name</option>
-        <option value="account_id">Account ID</option>
-        <option value="account_username">Account Username</option>
-        <option value="status">Status</option>
-    </select>
-    <input type="text" id="search-Input-recipe" class="search-bar" placeholder="Search Recipe">
-    <button class="refresh-button" onclick="refreshSearch()"><i class='bx bx-refresh'></i></button>
-    <button class="openPopup-btn" onclick="openPopup()"><i class='bx bx-plus-medical' title="add recipe"></i></button>
-    <a href="deleted_recipes" class="recently-deleted"><i class='bx bxs-trash'></i> Recently Deleted</a>
-</div>
+            <div class="search-container">
+                <select id="columnSelector">
+                    <option value="all">Search All</option>
+                    <option value="recipe_id">ID</option>
+                    <option value="name">Recipe Name</option>
+                    <option value="account_id">Account ID</option>
+                    <option value="account_username">Account Username</option>
+                    <option value="created_at">create at</option>
+                    <option value="recovered_at">recovered at</option>
+                    <option value="status">Status</option>
+                    <option value="status_changed_at">status change at</option>
+                </select>
+                <input type="text" id="search-Input-recipe" class="search-bar" placeholder="Search Recipe">
+                <button class="refresh-button" onclick="refreshSearch()"><i class='bx bx-refresh'></i></button>
+                <button class="openPopup-btn" onclick="openPopup()"><i class='bx bx-plus-medical' title="add recipe"></i></button>
+                <a href="deleted_recipes" class="recently-deleted"><i class='bx bxs-trash'></i> Recently Deleted</a>
+            </div>
 
+            <button class="btn btn-danger delete-selected-btn" id="delete-selected-btn" style="display: none;" title="Delete Selected" type="button">
+                Delete Selected
+            </button>
+            <button id="select-all-button" style="display: none;">Select All</button>
 
-<button class="btn btn-danger delete-selected-btn" id="delete-selected-btn" style="display: none;" title="Delete Selected" type="button">
-    Delete Selected
-</button>
-<button id="select-all-button" style="display: none;">Select All</button>
+            {% if not recipes %}
+                <h1 class="no-recipe">No recipes available</h1>
+            {% else %}
 
-
-        <!-- tables -->
-        <table class="recipes-table">
-            <thead>
-                <tr>
-                    <th></th>
-                    <th>ID</th>
-                    <th>Recipe name</th>
-                    <th>Image</th> <!-- Add a new column for the image -->
-                    <th>Account ID </th>
-                    <th>Account username </th>
-                    <th>Status</th>
-                    <th>Actions</th>
-                </tr>
-            </thead>
-            <tbody>
-
-                {% for recipe in recipes %}
-                <tr>
-                    <td>
-                        <input type="checkbox" name="checkbox" class="checkbox" id="checkbox-{{ recipe.recipe_id }}">
-                    </td>
-                    <td>{{ recipe.recipe_id }}</td>
-                    <td>{{ recipe.name }}</td>
-                    <td>
-                        <img src="{{ recipe.image_url }}" alt="{{ recipe.name }} Image" style="width: 100px; height: 100px;" loading="lazy">
-                    </td>
-                    <td>{{recipe.account_id}}</td>
-                    <td>{{ recipe.account.username }}</td>
-                    <td>{{recipe.status}}</td>
-                    <td>
-                        <form>
-                            <button class="btn btn-danger delete-recipe-btn"
-                                    data-recipe-id="{{ recipe.recipe_id }}"
-                                    title="Delete Recipe"
-                                    type="button">
-                                <i class='bx bxs-trash'></i>
-                            </button>
-                            <a href="{{ url_for('dashboard_controller.recipe_preview', recipe_id=recipe.recipe_id) }}" class="btn btn-info">
-                                <i class='bx bxs-edit' title="preview and change status"></i>
-                            </a>
-                        </form>
-                    </td>
-
-                </tr>
-                {% endfor %}
-            </tbody>
-        </table>
-
-    </fieldset>
+            <!-- tables -->
+            <table class="recipes-table">
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th>ID</th>
+                        <th>Recipe name</th>
+                        <th>Image</th> <!-- Add a new column for the image -->
+                        <th>Account ID </th>
+                        <th>Account username </th>
+                        <th>Created at</th>
+                        <th>recovered at</th>
+                        <th>Status</th>
+                        <th>status change at</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for recipe in recipes %}
+                    <tr>
+                        <td>
+                            <input type="checkbox" name="checkbox" class="checkbox" id="checkbox-{{ recipe.recipe_id }}">
+                        </td>
+                        <td>{{ recipe.recipe_id }}</td>
+                        <td>{{ recipe.name }}</td>
+                        <td>
+                            <img src="{{ recipe.image_url }}" alt="{{ recipe.name }} Image" style="width: 100px; height: 100px;" loading="lazy">
+                        </td>
+                        <td>{{recipe.account_id}}</td>
+                        <td>{{ recipe.account.username }}</td>
+                        <td>{{ recipe.created_at }}</td>
+                        <td>{{ recipe.recovered_at }}</td>
+                        <td>{{recipe.status}}</td>
+                        <td>{{ recipe.status_changed_at }}</td>
+                        <td>
+                            <form>
+                                <button class="btn btn-danger delete-recipe-btn"
+                                        data-recipe-id="{{ recipe.recipe_id }}"
+                                        title="Delete Recipe"
+                                        type="button">
+                                    <i class='bx bxs-trash'></i>
+                                </button>
+                                <a href="{{ url_for('dashboard_controller.recipe_preview', recipe_id=recipe.recipe_id) }}" class="btn btn-info">
+                                    <i class='bx bxs-edit' title="preview and change status"></i>
+                                </a>
+                            </form>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            {% endif %}
+        </fieldset>
     {% endblock %}
 </body>
+
 </html>
 
 
