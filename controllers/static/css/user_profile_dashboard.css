@@ -1,69 +1,77 @@
-* {
+*{
     margin: 0;
     padding: 0;
+    border: none;
+    outline: none;
     box-sizing: border-box;
 }
-
-body {
-    font-family: Arial, sans-serif;
-    background-color: #f5f5f5;
+:root{
+    --main-color: #ff702a;
+    --text-color: #1e1c2a;
+    --bg-color:#C0C0C0;
+    --big-font: 5rem;
+    --h2-font:2.25rem;
+    --p-font: 0.9rem;
+}
+body{
+    display: flex;
 }
 
-.sidebar {
-    background-color: #C0C0C0;
-    color: #fff;
-    width: 250px;
-    height: 100%;
-    position: fixed;
+.sidebar{
+    position: sticky;
     top: 0;
     left: 0;
-    padding: 20px;
-    overflow-y: auto;
+    bottom: 0;
+    width: 110px;
+    height: 100vh;
+    padding: 0 1.7rem;
+    color: #fff;
+    overflow: hidden;
+    transition: all 0.5s linear;
+    background: var(--bg-color);
 }
-
-.sidebar h1 {
-    text-align: center;
-    margin-bottom: 20px;
+.sidebar:hover{
+    width: 240px;
+    transition: 0.5s;
 }
-.sidebar h3 {
-    text-align: center;
-    margin-bottom: 20px;
+.logo{
+    height: 80px;
+    padding: 16px;
 }
-
-.sidebar ul {
-    list-style-type: none;
+.menu{
+    height: 88%;
+    position: relative;
+    list-style: none;
     padding: 0;
 }
-
-.sidebar ul li {
-    margin: 10px 0;
+.menu li{
+    padding: 1rem;
+    margin: 8px 0;
+    border-radius: 8px;
+    transition: all 0.5s ease-in-out;
+}
+.menu li:hover,
+ .active{
+    background: #e0e0e058;
 }
 
-.sidebar ul li a {
+.menu a{
+    color: #030303;
+    font-size: 14px;
     text-decoration: none;
-    color: #1e1c2a;
-    display: block;
-    padding: 10px 0;
-    transition: background-color 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
 }
-
-.sidebar ul li a:hover {
-    background-color: #555;
+.menu a span{
+    overflow: hidden;
 }
-
-.content {
-    margin-left: 250px;
-    padding: 20px;
+.menu a i{
+    font-size: 1.2rem;
 }
-
-.sidebar h1 a {
-    text-decoration: none;
-    color: #fff;
-}
-
-.sidebar h1 a:hover {
-}
-
-.sidebar ul li a.active {
-    background-color: #555;
+.logout{
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
 }
