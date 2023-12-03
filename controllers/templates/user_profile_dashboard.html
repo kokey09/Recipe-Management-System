@@ -14,35 +14,35 @@
         <div class="logo"></div>
             <ul class="menu">
 
-                <li>
+                <li class="active">
                     <a href="#" title="go back to dashboard">
                         <i class='bx bx-user' ></i>
-                         <span>Hi {{ user.username }}</span> 
+                        <span>Hi {{ user.username }}</span> 
                     </a>
                 </li>
 
-                <li class="active">
+                <li>
                     <a href="{{url_for('user_end_controller.shared_recipe') }}">
                         <i class='bx bxs-share' ></i>
                         <span>Publish Recipe</span>
                     </a>
                 </li>
 
-                <li class="active">
+                <li>
                     <a href="{{url_for('user_end_controller.favorites') }}" >
                         <i class='bx bxs-heart' ></i>
                         <span>Favorites</span>
                     </a>
                 </li>
 
-                <li class="active">
+                <li>
                     <a href="/" >
                         <i class='bx bxs-home-alt-2'></i>
                         <span>Home Page</span>
                     </a>
                 </li>
                 {% if user and user.type == 'admin' %}
-                <li class="active">
+                <li>
                     <a href="{{ url_for('dashboard_controller.dashboard') }}" >
                         <i class='bx bxs-dashboard'></i>
                         <span>Admin Dashboard</span>
