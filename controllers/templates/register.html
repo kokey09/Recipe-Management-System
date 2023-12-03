@@ -10,6 +10,8 @@
 
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
         <script src="{{ url_for('static', filename='js/register.js') }}"></script>
+        <script src="{{ url_for('static', filename='js/showPassword.js') }}"></script>
+
 </head>
 <body>
     <div class="container">
@@ -39,6 +41,10 @@
                 <div class="form-group">
                     <label for="confirm_password">Confirm Password:</label>
                     <input type="password" id="confirm_password" name="confirm_password" required placeholder="Confirm password">
+                </div>
+
+                <div class="show-password">
+                    <input type="checkbox" onclick="myFunction()">Show Password
                 </div>
 
                 <button type="submit">Register</button>
