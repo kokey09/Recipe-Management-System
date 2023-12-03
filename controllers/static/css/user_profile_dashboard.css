@@ -29,6 +29,7 @@ body{
     overflow: hidden;
     transition: all 0.5s linear;
     background: var(--bg-color);
+    margin-right: 10%;
 }
 .sidebar:hover{
     width: 240px;
@@ -52,7 +53,7 @@ body{
 }
 .menu li:hover,
  .active{
-    background: #e0e0e058;
+    background: #fffefe58;
 }
 
 .menu a{
