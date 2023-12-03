@@ -5,6 +5,8 @@
     <title>About Us</title>
     <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='css/about.css')}}">
     <link rel="icon" href="{{ url_for('static', filename='recipes-img-table/recipes.png') }}" type="image/x-icon">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+
 </head>
 <body>
   {% extends 'user_base.html' %}
@@ -19,6 +21,58 @@
         <p>Whether you're a seasoned chef or just starting in the kitchen, our platform is designed to inspire your culinary creativity and simplify meal planning. We believe that great meals can be made with what you have, and we're here to prove it.</p>
         <p>Explore our collection of recipes, discover new flavors, and make the most of your ingredients. We're excited to be part of your culinary journey!</p>
     </main>
+
+    <div class="team">
+        <h1>Our <span>Team</span></h1>
+        
+        <div class="team_box">
+            <div class="profile">
+                <img src="{{ url_for('static', filename='raw-image/alice.jpg') }}" alt="Your Logo" loading="lazy">
+
+                <div class="info">
+                    <h2 class="name">Alice</h2>
+                    <p class="bio">Lorem ipsum dolor sit amet, </p>
+                    <div class="team_icon">
+                        <a href=""><i class='bx bxl-facebook'></i></a>
+                        <a href=""><i class='bx bxl-discord'></i></a>
+                        <a href=""><i class='bx bxl-youtube'></i></a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="profile">
+                <img src="{{ url_for('static', filename='raw-image/erina.jpg') }}" alt="Your Logo" loading="lazy">
+
+                <div class="info">
+                    <h2 class="name">Erina</h2>
+                    <p class="bio">Lorem ipsum dolor sit amet, </p>
+                    <div class="team_icon">
+                        <a href=""><i class='bx bxl-facebook'></i></a>
+                        <a href=""><i class='bx bxl-discord'></i></a>
+                        <a href=""><i class='bx bxl-youtube'></i></a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="profile">
+                <img src="{{ url_for('static', filename='raw-image/soma.jpg') }}" alt="Your Logo" loading="lazy">
+
+                <div class="info">
+                    <h2 class="name">Yukihira Soma</h2>
+                    <p class="bio">Lorem ipsum dolor sit amet, </p>
+                    <div class="team_icon">
+                        <a href=""><i class='bx bxl-facebook'></i></a>
+                        <a href=""><i class='bx bxl-discord'></i></a>
+                        <a href=""><i class='bx bxl-youtube'></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
 
     <footer>
         <p>&copy; 2023 Recipe Discovery Platform</p>
