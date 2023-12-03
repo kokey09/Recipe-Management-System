@@ -5,6 +5,7 @@ ul.ingredients-list {
     display: flex;
     flex-wrap: wrap;
     justify-content: flex-start;
+
 }
 
 ul.ingredients-list li {
@@ -55,4 +56,6 @@ ul.ingredients-list li a:hover {
     font-size: 16px;
     border: 1px solid #ccc;
     border-radius: 5px;
+    margin-top: 1%;
+
 }

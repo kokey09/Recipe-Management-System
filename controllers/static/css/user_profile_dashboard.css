@@ -10,7 +10,7 @@ body {
 }
 
 .sidebar {
-    background-color: #EE4B2B;
+    background-color: #C0C0C0;
     color: #fff;
     width: 250px;
     height: 100%;
@@ -41,7 +41,7 @@ body {
 
 .sidebar ul li a {
     text-decoration: none;
-    color: #fff;
+    color: #1e1c2a;
     display: block;
     padding: 10px 0;
     transition: background-color 0.3s ease;

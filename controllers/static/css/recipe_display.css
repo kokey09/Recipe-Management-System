@@ -3,6 +3,7 @@ body {
     margin: 0;
     padding: 0;
     background-color: #f8f8f8;
+    padding-top: 5%;
 }
 
 .container {
@@ -31,6 +32,7 @@ body {
     border: 1px solid #ccc;
     border-radius: 5px;
 }
+
 
 .recipe-list {
     list-style-type: none;
@@ -84,16 +86,16 @@ body {
 .recipe-details h2 {
     font-size: 20px;
     color: #FFFFFF;
-    margin-bottom: 10px;
     text-align: center;
 }
 
 .button {
     position: absolute;
-    bottom: 0;
+    bottom: -11px; /* Adjust the margin from the bottom */
     width: 100%;
     text-align: center;
 }
+
 
 .view-recipe{
     display: block;
@@ -119,19 +121,38 @@ body {
     background-color: #c0392b;
 }
 
-/* Media Query for Mobile */
-@media screen and (max-width: 600px) {
+
+
+
+@media screen and (max-width: 1140px) {
     .search-bar {
-        width: 80%; /* Adjusted width for better mobile responsiveness */
+        width: 80%;
     }
 
     .recipe-card {
-        width: 80%; /* Adjusted width for better mobile responsiveness */
-        margin: 20px auto; /* Center the card on smaller screens */
+        width: 80%;
+        margin: 20px auto;
     }
 
     .logo-link {
-        margin-bottom: 10px; /* Adjusted margin for better spacing in mobile mode */
+        margin-top: 40px;
+        margin-bottom: 10px;
+    }
+}
+
+@media screen and (max-width: 600px) {
+    .search-bar {
+        width: 80%;
+    }
+
+    .recipe-card {
+        width: 80%;
+        margin: 20px auto;
+    }
+
+    .logo-link {
+        margin-top: 40px;
+        margin-bottom: 10px;
     }
 }
 

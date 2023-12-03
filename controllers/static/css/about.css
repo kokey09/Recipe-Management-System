@@ -4,12 +4,12 @@ body, h1, p, ul, li {
 }
 
 body {
-
     color: #333;
     font-family: Arial, sans-serif;
     display: flex;
     flex-direction: column;
     min-height: 100vh;
+    padding-top: 4%;
 }
 
 main {
@@ -35,3 +35,20 @@ footer {
     text-align: center;
 }
 
+@media (max-width: 1140px){
+    main{
+        padding-top:9%;
+    }
+}
+
+
+@media (max-width: 720px){
+    main{
+        padding-top:15%;
+    }
+}
+@media (max-width: 575px){
+    main{
+        padding-top:15%;
+    }
+}

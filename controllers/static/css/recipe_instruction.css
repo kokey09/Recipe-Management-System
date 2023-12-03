@@ -10,7 +10,7 @@ body {
     margin: 0 auto;
     background-color: #fff;
     padding: 20px;
-    margin-top: 20px;
+    margin-top: 7%;
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
@@ -244,6 +244,9 @@ button:hover {
 @media (max-width: 768px) {
   .review {
     max-width: 100%; /* Adjust to take full width on smaller screens */
+  }
+  .container{
+  margin-top: 100px;
   }
 }
 

@@ -24,7 +24,11 @@
     <ul class="recipe-list">
         {% for recipe in recipes if not recipe.is_deleted %}
         <li class="recipe-card">
-            <i class='bx bx-heart-circle favorite-btn' title="Add to Favorites" data-recipe-id="{{ recipe.recipe_id }}"></i>
+            {% if user %}
+            <i class='bx bx-heart-circle favorite-btn' title="add favorites" data-recipe-id="{{ recipe.recipe_id }}"></i>
+            {% else %}
+            <i class='bx bx-heart-circle favorite-btn' title="add favorites" onclick="redirectToLogin()"></i>
+            {% endif %}
             <img src="{{ recipe.image_url }}" alt="{{ recipe.name }} Image">
             <div class="recipe-details">
                 <h2>{{ recipe.name }}</h2>

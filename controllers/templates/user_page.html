@@ -1,85 +1,99 @@
 {% extends 'user_base.html' %}
 {% block title %}Home Page{% endblock %}
 {% block content %}
-    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/user_page.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/user_base.css') }}">
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
-    <link rel="icon" href="{{ url_for('static', filename='recipes-img-table/recipes.png') }}" type="image/x-icon">
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script src="{{ url_for('static', filename='js/popup.js') }}"></script>
     <script src="{{ url_for('static', filename='js/favorites.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/navBurger.js') }}"></script>
 
+<!-- home start -->
+    <section class="home" id="home">
+        <div class="home-text">
+            <h1>Full website</h1>
+            <h2>Food the <br> Most Precious Things</h2>
+            <a href="#" class="btn">Today's Menu</a>
+        </div>
 
+        <div class="home-img">
+            <img src="{{ url_for('static', filename='raw-image/home.png') }}" alt="">
+        </div>
+    </section>
+    <!-- about start -->
+    <section class="about" id="about">
+        <div class="about-img">
+            <img src="{{ url_for('static', filename='raw-image/about.png') }}" alt="">
+        </div>
 
-<div class="recipe-list">
-    <div class="logo-link">
-        <img src="{{ url_for('static', filename='recipes-img-table/recipes.png') }}" alt="Your Logo" style="width: 600px; height: 240px;" loading="lazy">
-        <p class="welcome">Welcome to our recipe and ingredient discovery platform! We're here to help you make the most of what's in your kitchen and satisfy your culinary curiosity.</p>
-        <a href="/ingredient_display" class="explore-button">
-            <button class="explore">Explore</button>
-        </a>
-    </div>
+        <div class="about-text">
+            <span>About us</span>
+            <h2>We speak the good <br> food language</h2>
+            <p>Welcome to our recipe and ingredient discovery platform! We're here to help you make the most of what's in your kitchen and satisfy your culinary curiosity.</p>
+                <a href="/about_us" class="btn">About us</a>
+        </div>
+    </section>
 
-    <div class="recipe-row">
-        {% for recipe in recipes [:4]  if not recipe.is_deleted %}
-            <div class="recipe-card">
-                {% if user %}
-                <i class='bx bx-heart-circle favorite-btn' title="add favorites" data-recipe-id="{{ recipe.recipe_id }}"></i>
-                {% else %}
-                <i class='bx bx-heart-circle favorite-btn' title="add favorites" onclick="redirectToLogin()"></i>
-                {% endif %}
-                <img src="{{ recipe.image_url }}" alt="{{ recipe.name }} Image" style="width: 298px; height: 270px;" loading="lazy">
-                <div class="recipe-details">
+    <!-- wha's new?  -->
+    <section class="menu" id="menu">
+        <div class="heading">
+            <span>What's new?</span>
+            <h2>New Recipes!</h2>
+        </div>
+
+        <div class="menu-container">
+            {% for recipe in recipes [:3] %}
+                <div class="box">
+                    <div class="box-img">
+                        {% if user %}
+                        <i class='bx bx-heart-circle favorite-btn' title="add favorites" data-recipe-id="{{ recipe.recipe_id }}"></i>
+                        {% else %}
+                        <i class='bx bx-heart-circle favorite-btn' title="add favorites" onclick="redirectToLogin()"></i>
+                        {% endif %}
+                        <img src="{{ recipe.image_url }}" alt="{{ recipe.name }} Image" style="width: 300px; height: 300px;" loading="lazy">
+                    </div>
                     <h2>{{ recipe.name }}</h2>
-                        <a href="{{ url_for('user_end_controller.recipe_instruction', recipe_id=recipe.recipe_id) }}" class="view-recipe">View Recipe</a>
-                        <a href="{{ url_for('user_end_controller.recipe_instruction', recipe_id=recipe.recipe_id) }}" class="star-rating"><i class='bx bxs-star' ></i> Reviews | {{ recipe_reviews_count[recipe.recipe_id] }} Reviews</a>
+                    <a href="{{ url_for('user_end_controller.recipe_instruction', recipe_id=recipe.recipe_id) }}" class="view-new-recipe">View Recipe</a>
+                    <a href="{{ url_for('user_end_controller.recipe_instruction', recipe_id=recipe.recipe_id) }}" class="star-new-rating"><i class='bx bxs-star' ></i> Reviews | {{ recipe_reviews_count[recipe.recipe_id] }} Review </a>
+                </div>
+            {% endfor %}
+        </div>
+    </section>
+    <!--  footer start  -->
+    <section id="contact">
+        <div class="footer">
+            <div class="main">
+                <div class="col">
+                    <h4>Menu links</h4>
+                    <ul>
+                        <li><a href="">Home</a></li>
+                        <li><a href="about_us">About us</a></li>
+                        <li><a href="">Contact</a></li>
+                    </ul>
+                </div>
+
+                <div class="col">
+                    <h4>Information</h4>
+                    <ul>
+                        <li><a href="about_us">About us </a></li>
+                        <li><a href="">Privacy Policy</a></li>
+                        <li><a href="">Terms & Conditions</a></li>
+                    </ul>
+                </div>
+
+                
+                <div class="col">
+                    <h4>Contact Us</h4>
+                    <div class="social">
+                        <a href="https://www.facebook.com/messenger_media?attachment_id=1221681665415639&message_id=mid.%24gAAVX3htTax2SQmjow2MESM25EKEv&thread_id=1503986336361245"><i class='bx bxl-facebook'></i></a>
+                        <a href="https://discord.gg/UeVKBv2ZBY"><i class='bx bxl-discord'></i></a>
+                        <a href=""><i class='bx bxl-instagram'></i></a>
+                        <a href="https://www.youtube.com/@AnimMouse"><i class='bx bxl-youtube'></i></a>
+                    </div>
                 </div>
             </div>
-        {% if loop.index % 2 == 0 %}
-            </div>
-            <div class="recipe-row">
-                    {% endif %}
-                {% endfor %}
-            </div>
-</div>
-
-<h1 class="new">What's New?</h1>
-
-
-<div class="recipe-new-list">
-    {% for recipe in recipes [:6]%}
-        <div class="recipe-new-card">
-            {% if user %}
-            <i class='bx bx-heart-circle favorite-btn' title="add favorites" data-recipe-id="{{ recipe.recipe_id }}"></i>
-            {% else %}
-            <i class='bx bx-heart-circle favorite-btn' title="add favorites" onclick="redirectToLogin()"></i>
-            {% endif %}
-            <img src="{{ recipe.image_url }}" alt="{{ recipe.name }} Image" style="width: 298px; height: 270px;" loading="lazy">
-            <div class="recipe-new-details">
-                <h2>{{ recipe.name }}</h2>
-                <a href="{{ url_for('user_end_controller.recipe_instruction', recipe_id=recipe.recipe_id) }}" class="view-new-recipe">View Recipe</a>
-                <a href="{{ url_for('user_end_controller.recipe_instruction', recipe_id=recipe.recipe_id) }}" class="star-new-rating"><i class='bx bxs-star' ></i> Reviews | {{ recipe_reviews_count[recipe.recipe_id] }} Reviews</a>
-            </div>
         </div>
-        {% if loop.index % 3 == 0 %}
-            </div>
-            <div class="recipe-new-list">
-        {% endif %}
-    {% endfor %}
-</div>
+    </section>
 
-
-<footer class="site-footer">
-    <div class="container">
-        <p>&copy; 2023 Recipe Discovery Platform</p>
-        <ul class="footer-links">
-            <li><a href="/about_us">About us</a></li>
-            <li><a href="/ingredient_display">Ingredients</a></li>
-            <li><a href="/recipe_display">Recipes</a></li>
-            <li><a href="/contact_us">Contact us</a></li>
-            <li><a href="#">back on top </a></li>
-
-        </ul>
-    </div>
-</footer>
 
 {% endblock %}
-

@@ -1,158 +1,407 @@
-    body {
-      margin: 0;
-      padding: 0;
-    }
+*{
+    padding:0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+    scroll-behavior: smooth;
+    list-style: none;
+    text-decoration: none;
 
-    ul {
-      list-style-type: none;
-      margin: 0;
-      padding: 0;
-    }
-
-nav {
-  background-color: #EE4B2B;
-  padding: 10px 0;
-  text-align: center;
-  position: fixed;
-  width: 100%;
-  top: 0;
-  z-index: 1000;
-  margin-bottom: 10px; /* Add margin at the bottom */
-}
-main {
-  margin-top: 60px; /* Adjust this value based on your navigation bar's height */
-  padding: 10px; /* Add padding for better spacing */
 }
 
-    ul {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
+:root{
+    --main-color: #ff702a;
+    --text-color: #1e1c2a;
+    --bg-color:#C0C0C0;
+    --big-font: 5rem;
+    --h2-font:2.25rem;
+    --p-font: 0.9rem;
+}
+::selection{
+    background: var(--main-color);
+    color:#fff;
+}
+body{
+    color: var(--text-color);
+    background: var(--bg-color);
+}
+header{
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 100%;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 30px 170px ;
+    background: var(--bg-color);
+}
+.logo{
+    color: var(--main-color);
+    font-weight: 600;
+    font-size: 2.4rem;
+}
+.navbar{
+    display: flex;
+}
+.navbar a{
+    color: var(--text-color);
+    font-size: 1.1rem;
+    padding: 10px 20px;
+    font-weight: 500;
+}
+.navbar a:hover{
+    color: var(--main-color);
+    transition: .4s;
+}
+#menu-icon {
+    font-size: 2rem;
+    cursor: pointer;
+    display: none;
+}
 
-    /* Styles for the navigation links */
-    ul a {
-      text-decoration: none;
-      color: white;
-      padding: 10px 15px;
-      display: inline-block;
-    }
+section{
+    padding: 70px 17%;
+}
+.home{
+    width: 100%;
+    min-height: 90vh;
+    display: grid;
+    grid-template-columns: repeat(2,1fr);
+    grid-gap: 1.5rem;
+    align-items: center;
+}
+.home-img img{
+    max-width: 100%;
+    width: 600px;
+    height: auto;
+}
+.home-text h1{
+    font-size: var(--big-font) ;
+    color: var(--main-color) ;
+}
+.home-text h2{
+    font-size: var(--h2-font);
+    margin: 1rem 0 2rem;
+}
+.btn{
+    display: inline-block;
+    padding: 10px 20px;
+    background: var(--main-color);
+    color: #fff;
+    border-radius: 0.5rem;
+}
+.btn:hover{
+    transform: scale(1.2) translateY(10px);
+    transition: .4s;
+}
+.about{
+    display: grid;
+    grid-template-columns: repeat(2,2fr);
+    grid-gap: 1.5rem;
+    align-items: center;
+}
+.about-img img{
+    max-width: 100%;
+    width: 480px;
+    height: auto;
+}
 
-    #home-link img {
-      vertical-align: middle;
-    }
+.about-text span{
+    color: var(--main-color);
+    font-weight: 600;
+}
+.about-text h2{
+    font-size: var(--h2-font);
+}
 
-    /* Styles for the dropdown */
-    .dropdown {
-      position: relative;
-      display: inline-block;
-    }
+.about-text p{
+    margin: 0.8rem 0 1.8rem;
+    line-height: 1.7 ;
+}
 
-    .dropdown-content {
-      display: none;
-      position: absolute;
-      background-color: #EE4B2B;
-      min-width: 160px;
-      z-index: 1;
-    }
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
 
-    .dropdown-content a {
-      color: white;
-      padding: 12px 16px;
-      display: block;
-      text-align: left;
-    }
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: var(--bg-color);
+    min-width: 160px;
+    z-index: 1;
+}
 
-    .dropdown:hover .dropdown-content {
-      display: block;
-    }
+.dropdown-content a {
+    color: #1e1c2a;
+    padding: 12px 16px;
+    display: block;
+    text-align: left;
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
 
     /* Styles for user-related links */
-    .dropdown li {
-      display: inline-block;
-      margin-right: 10px;
+.dropdown li {
+    display: inline-block;
+    margin-right: 10px;
       position: relative; /* Add relative positioning */
+}
+
+.dropdown-content i {
+    margin-right: 5px;
+    position: absolute;
+    left: -5px; /* Adjust the left positioning to eliminate space */
+}
+
+
+
+.user-dropdown {
+    position: relative;
+    display: inline-block;
     }
 
-    .dropdown-content i {
-      margin-right: 5px;
-      position: absolute;
-      left: -5px; /* Adjust the left positioning to eliminate space */
+    .user-dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: var(--bg-color);
+    min-width: 160px;
+    z-index: 1;
     }
 
-    /* Add some spacing between links */
-    ul li {
-      margin: 0 5px;
-    }
-
-    .user-dropdown {
-      display: inline-block;
-      position: relative;
-    }
-
-    .user-dropdown a {
-      text-decoration: none;
-      color: white;
-      padding: 10px 15px;
-      display: inline-block;
-    }
-
-    .user-dropdown .dropdown-content {
-      display: none;
-      position: absolute;
-      background-color: #EE4B2B;
-      min-width: 160px;
-      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-      z-index: 1;
-    }
-
-    .user-dropdown .dropdown-content a {
-      color: white;
-      padding: 12px 16px;
-      display: block;
-      text-align: left;
+    .user-dropdown-content a {
+    color: #1e1c2a;
+    padding: 12px 16px;
+    display: block;
+    text-align: left;
     }
 
     .user-dropdown:hover .dropdown-content {
-      display: block;
+    display: block;
     }
 
-    /* Styles for the burger menu */
-    .burger-menu {
-      display: none;
-      cursor: pointer;
+    /* Styles for user-related links */
+    .user-dropdown li {
+    display: inline-block;
+    margin-right: 10px;
+    position: relative; /* Add relative positioning */
     }
 
-    .burger-menu div {
-      width: 30px;
-      height: 3px;
-      background-color: #fff;
-      margin: 6px 0;
-      transition: 0.4s;
+    .user-dropdown-content i {
+    margin-right: 5px;
+    position: absolute;
+    left: -5px; /* Adjust the left positioning to eliminate space */
+}
+
+.heading{
+    text-align: center;
+}
+.heading span{
+    color: var(--main-color);
+    font-weight: 600;
+}
+.heading h2{
+    font-size: var(--h2-font);
+}
+
+.menu-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, auto));
+    grid-gap: 1.5rem;
+    align-items: start; /* or baseline, depending on your preference */
+}
+.box{
+    position:relative;
+    margin-top: 4rem;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: #feeee7;
+    padding: 20px;
+    border-radius: 0.5rem;
+
+
+}
+.box-img{
+    width: 300px;
+    height: 300px;
+}
+.box-img img{
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+}
+
+
+.box-img i.bx-heart-circle {
+    position: absolute;
+    right: 0px;
+    top: 0px;
+    font-size: 44px;
+    padding: 7px 10px;
+    color: #000000;
+    transition: color 0.3s ease;
+}
+
+.box-img i.bx-heart-circle:hover {
+    color: #ff5733;
+}
+
+.box h2{
+    font-size: 1.3rem;
+    color: var(--text-color);
+}
+
+.box a{
+    color: var(--text-color);
+    font-size: 1rem;
+    font-weight: 400;
+    margin: 4px 0 10px;
+}
+
+
+.main{
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.footer{
+    padding: 10px 0;
+}
+
+.col{
+    width: 25%;
+}
+
+.col h4{
+    font-size: 1.2rem;
+    color: var(--text-color);
+    margin-bottom: 25px;
+    position: relative;
+}
+
+.col h4::before{
+    content: "";
+    position: absolute;
+    height: 2px;
+    width: 50px;
+    left: 0;
+    bottom: -8px;
+    background-color: var(--main-color) ;
+}
+
+.col ul li::not(:last-child){
+    margin-bottom: 15px;
+}
+.col ul li a{
+    color: #0a0824;
+    font-size: 1.1rem;
+    display: block;
+    text-transform: capitalize;
+    transition: .4s;
+}
+
+.col ul li a:hover{
+    color: var(--text-color);
+    transform: translateX(-12px);
+}
+
+.col .social{
+    width: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+}
+.col .social a{
+    height: 40px;
+    width: 40px;
+    background: var(--main-color);
+    color: var(--text-color);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    border-radius: 50%;
+    transition: .4s;
+}
+.col .social a:hover{
+    transform: scale(1.2);
+    color: var(--bg-color);
+    background: var(--text-color);
+}
+
+@media (max-width: 1560px){
+    header{
+        padding: 15px 40px
     }
+    :root{
+        --big-font: 3.5rem;
+        --h2-font:2rem;
+    }
+}
 
-    @media screen and (max-width: 600px) {
-      .burger-menu {
-        display: block;
-      }
 
-      ul {
-        display: none;
+@media (max-width: 1140px){
+    section{
+        padding: 50px 8%;
+    }
+    #menu-icon{
+        display: initial;
+        color: var(--text-color);
+    }
+    header .navbar{
+        position: absolute;
+        top: -400px;
+        left: 0;
+        right: 0;
+        display: flex;
         flex-direction: column;
         text-align: center;
-        background-color: #EE4B2B;
-        position: absolute;
-        top: 60px;
-        left: 0;
-        width: 100%;
-        z-index: 1;
-      }
-
-      ul.show {
-        display: flex;
-      }
-
-      ul li {
-        margin: 0;
-      }
+        background: #c8c5c5;
+        transition: .3s;
     }
+    header .navbar.active{
+        top: 70px;
+    }
+    .navbar a{
+        padding: 1.5rem;
+        display: block;
+    }
+    .col{
+        width: 50%;
+        margin-bottom: 10px;
+    }
+}
+
+@media (max-width: 720px){
+    header{
+        padding: 10px 16px;
+    }
+    .home{
+        grid-template-columns: 1fr;
+        text-align: center;
+    }
+    .about{
+        grid-template-columns: 1fr;
+        text-align: center;
+    }
+    .about-img{
+        order: 2;
+    }
+    section{
+        padding: 100px 7%;
+    }
+}
+
+@media (max-width: 575px){
+    .col{
+        width: 100%;
+    }
+}

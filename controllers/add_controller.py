@@ -126,7 +126,6 @@ def connect_recipe_ingredient():
         ingredient_id = request.form['ingredient_id']
 
         try:
-            # Create a new RecipeIngredient object and save it to the database
             new_recipe_ingredient = RecipeIngredient(recipe_id=recipe_id, ingredient_id=ingredient_id)
             db.session.add(new_recipe_ingredient)
             db.session.commit()

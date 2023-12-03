@@ -13,8 +13,8 @@
         <img src="{{ url_for('static', filename='recipes-img-table/recipes.png') }}" alt="Your Logo" style="width: 200px; height: 80px;">
         <h1><a href="/dashboard" title="go back to dashboard"><i class='bx bx-user' ></i> Hi {{ user.username }}</a></h1>
             <ul>
+                <li><a href="{{url_for('user_end_controller.shared_recipe') }}" class="ingredients"><i class='bx bxs-share' ></i> Publish Recipe</a></li>
                 <li><a href="{{url_for('user_end_controller.favorites') }}" class="ingredients"><i class='bx bxs-heart' ></i> Favorites</a></li>
-                <li><a href="{{url_for('user_end_controller.shared_recipe') }}" class="ingredients"><i class='bx bxs-share' ></i> Personal Recipe</a></li>
                 <li><a href="/" class="ingredients" title="back to home page"><i class='bx bxs-home-alt-2'></i> Homepage</a></li>
                 {% if user and user.type == 'admin' %}
                 <li><a href="{{ url_for('dashboard_controller.dashboard') }}" class="ingredients" title="back to home page"><i class='bx bxs-dashboard'></i> admin dashboard</a></li>
