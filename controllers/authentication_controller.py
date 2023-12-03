@@ -20,7 +20,9 @@ def register():
         existing_email = Account.query.filter_by(email=email).first()
         existing_username = Account.query.filter_by(username=username).first()
         # Check account already exists
-        if existing_email:
+        if len(password) < 8:
+            error = "Password must be at least 8 characters long."
+        elif existing_email:
             error = "An account with this email already exists."
         elif existing_username:
             error = "An account with this username already exists."
