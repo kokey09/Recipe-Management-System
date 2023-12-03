@@ -31,13 +31,15 @@
             <!-- Buttons for changing status -->
 
             <div class="btn-horizontal">
-                {% if user.type == 'admin' %}
+                {% if user.type == 'admin' and not recipe.is_deleted %}
                 <button type="button" onclick="changeStatus('approved')">Approved</button>
                 <button type="button" class="pending" onclick="changeStatus('pending')">Pending</button>
                 <button type="button" class="decline" onclick="changeStatus('declined')">Decline</button>
                 {% endif %}
             </div>
-
+            {% if recipe.is_deleted %}
+                <h1 class="deleted-mark">recipe has been soft deleted status cannot be altered</h1>
+            {% endif %}
         </form>
     </div>
 

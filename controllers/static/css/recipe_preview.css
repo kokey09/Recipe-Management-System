@@ -120,3 +120,7 @@ btn-horizontal {
 button {
     display: inline-block;
 }
+
+.deleted-mark{
+    color: red;
+}
