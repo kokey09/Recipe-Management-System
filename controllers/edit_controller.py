@@ -138,7 +138,7 @@ def change_status(recipe_id):
 @edit_controller_bp.route('/recover_recipe/<int:id>', methods=['POST'])
 def recover_recipe(id):
     recipe = Recipe.query.get_or_404(id)
-    recipe.recovered_at = datetime.utcnow()
+    recipe.recovered_at =  db.func.current_timestamp()
     recipe.is_deleted = False
     db.session.commit()
     # Return a JSON response indicating success
