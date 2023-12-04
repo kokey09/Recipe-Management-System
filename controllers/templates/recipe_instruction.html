@@ -36,7 +36,7 @@
 
     <!--  reviews  -->
     <div class="reviews-section">
-        {% for review in reviews %}
+        {% for review in reviews|sort(attribute='timestamp',reverse=true) %}
             <div class="review">
                 <div class="review-header">
                     <div class="user-info">
