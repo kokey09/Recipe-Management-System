@@ -127,7 +127,7 @@ def change_status(recipe_id):
     new_status = request.form.get('new_status')  # Adjust the actual field name
 
     recipe.status = new_status
-    recipe.status_changed_at = datetime.utcnow()
+    recipe.status_changed_at =  db.func.current_timestamp()
     # Save changes to the database
     db.session.commit()
 
@@ -150,6 +150,7 @@ def mass_recover_recipes():
 
     for recipe_id in selected_ids:
         recipe = Recipe.query.get_or_404(int(recipe_id))
+        recipe.recovered_at = db.func.current_timestamp()
         recipe.is_deleted = False
         db.session.commit()
 

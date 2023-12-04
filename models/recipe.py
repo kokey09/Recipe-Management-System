@@ -10,13 +10,13 @@ class Recipe(db.Model):
     instructions = db.Column(db.Text)
     image_url = db.Column(db.String(512))
     is_deleted = db.Column(db.Boolean, default=False)  # Define is_deleted as a boolean column
-    created_at = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
-    deleted_at = db.Column(db.DateTime, nullable=True, default=None)
-    recovered_at = db.Column(db.DateTime, nullable=True, default=None)
+    created_at = db.Column(db.TIMESTAMP, server_default=db.text('CURRENT_TIMESTAMP'), nullable=False)
+    deleted_at = db.Column(db.TIMESTAMP, server_default=db.text('CURRENT_TIMESTAMP'), nullable=False)
+    recovered_at = db.Column(db.TIMESTAMP, server_default=db.text('CURRENT_TIMESTAMP'), nullable=False)
 
     account_id = db.Column(db.Integer, db.ForeignKey('account.id'))
     status = db.Column(Enum('pending', 'declined', 'approved', name='status_enum'), default='pending', nullable=False)
-    status_changed_at = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
+    status_changed_at = db.Column(db.TIMESTAMP, server_default=db.func.current_timestamp(), nullable=False)
 
     account = db.relationship('Account', backref='recipes')
 

@@ -40,6 +40,12 @@
             <button id="mass-recover-button" style="display: none;">Mass Recover</button>
             <button id="select-all-button" style="display: none;">Select All</button>
 
+
+
+            <!-- table section  -->
+            {% if not deleted_recipes %}
+            <h1 class="no-recipe">No data deleted</h1>
+            {% endif %}
             <table class="recipes-table">
                 <thead>
                     <tr>
@@ -69,7 +75,13 @@
                             <td>{{ recipe.account_id }}</td>
                             <td>{{ recipe.account.username }}</td>
                             <td>{{ recipe.is_deleted }}</td>
-                            <td>{{ recipe.deleted_at }}</td>
+                            <td>
+                                {% if recipe.deleted_at %}
+                                {{ recipe.deleted_at.strftime("%B %d, %Y at %I:%M:%S %p") }}
+                                {% else %}
+                                N/a
+                                {% endif %}
+                            </td>
                             <td>{{ recipe.status }}</td>
                             <td>
                                 <form method="POST" action="{{ url_for('edit_controller.recover_recipe', id=recipe.recipe_id) }}">

@@ -43,7 +43,9 @@ def add_review():
                 image_path = os.path.join(image_directory, filename)
                 image_file.save(image_path)
 
-            new_review = Review(recipe_id=recipe_id, account_id=account_id, review_text=review_text, rating=rating, image_url=f'static/reviews-img-table/{filename}' if filename else None)
+            new_review = Review(recipe_id=recipe_id, account_id=account_id,
+                                review_text=review_text, rating=rating,
+                                image_url=f'static/reviews-img-table/{filename}' if filename else None)
 
             db.session.add(new_review)
             db.session.commit()
@@ -143,7 +145,6 @@ def add_favorite():
     recipe_id = request.form.get('recipe_id')
 
     user = get_authenticated_user()
-
     if not user:
         return redirect(url_for('authentication_controller.login'))
 

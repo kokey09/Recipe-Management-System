@@ -8,7 +8,7 @@ class Review(db.Model):
     review_text = db.Column(db.Text, nullable=False)
     rating = db.Column(db.Integer, nullable=False)
     image_url = db.Column(db.String(512))
-    timestamp = db.Column(db.TIMESTAMP, server_default=db.text('CURRENT_TIMESTAMP'), nullable=False)
+    timestamp = db.Column(db.TIMESTAMP, server_default=db.func.current_timestamp(), nullable=False)
 
     # Define a relationship to the Recipe model
     recipe = db.relationship('Recipe', backref='reviews')

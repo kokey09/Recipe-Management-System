@@ -71,11 +71,11 @@
             </button>
             <button id="select-all-button" style="display: none;">Select All</button>
 
-            {% if not recipes %}
-                <h1 class="no-recipe">No recipes available</h1>
-            {% else %}
 
             <!-- tables -->
+            {% if not recipes %}
+                <h1 class="no-recipe">No recipes available</h1>
+            {% endif %}
             <table class="recipes-table">
                 <thead>
                     <tr>
@@ -105,10 +105,16 @@
                         </td>
                         <td>{{recipe.account_id}}</td>
                         <td>{{ recipe.account.username }}</td>
-                        <td>{{ recipe.created_at }}</td>
-                        <td>{{ recipe.recovered_at }}</td>
+                        <td>{{ recipe.created_at.strftime("%B %d, %Y at %I:%M:%S %p") }}</td>
+                        <td>
+                            {% if recipe.recovered_at %}
+                            {{ recipe.recovered_at.strftime("%B %d, %Y at %I:%M:%S %p") }}
+                            {% else %}
+                            N/A
+                            {% endif %}
+                        </td>
                         <td>{{recipe.status}}</td>
-                        <td>{{ recipe.status_changed_at }}</td>
+                        <td>{{ recipe.status_changed_at.strftime("%B %d, %Y at %I:%M:%S %p") }}</td>
                         <td>
                             <form>
                                 <button class="btn btn-danger delete-recipe-btn"
@@ -126,7 +132,7 @@
                     {% endfor %}
                 </tbody>
             </table>
-            {% endif %}
+
         </fieldset>
     {% endblock %}
 </body>

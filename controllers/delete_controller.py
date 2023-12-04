@@ -44,7 +44,7 @@ def delete_recipe_base(model, id, redirect_page):
 
         if entity_to_delete:
             try:
-                entity_to_delete.deleted_at = datetime.utcnow()
+                entity_to_delete.deleted_at = db.func.current_timestamp()
                 entity_to_delete.is_deleted = True
                 db.session.commit()
                 flash(f'{model.capitalize()} deleted successfully', 'success')
