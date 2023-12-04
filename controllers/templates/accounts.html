@@ -49,7 +49,7 @@
                 <td>{{ account.password }}</td>
                 <td>{{ account.email }}</td>
                 <td>{{ account.type }}</td>
-                <td>{{ account.date_created.strftime('%Y-%m-%d %H:%M:%S') }}</td>
+                <td>{{ account.date_created.strftime("%B %d, %Y at %I:%M:%S %p") }}</td>
                 <td>{{ account.is_deleted }}</td>
                 <td>
                 <form method="POST" action="{{ url_for('delete_controller.delete_account', account_id=account.id) }}">
