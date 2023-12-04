@@ -114,7 +114,13 @@
                             {% endif %}
                         </td>
                         <td>{{recipe.status}}</td>
-                        <td>{{ recipe.status_changed_at.strftime("%B %d, %Y at %I:%M:%S %p") }}</td>
+                        <td>
+                            {% if recipe.status_changed_at %}
+                            {{ recipe.status_changed_at.strftime("%B %d, %Y at %I:%M:%S %p") }}
+                            {% else %}
+                            N/A
+                            {% endif %}
+                        </td>
                         <td>
                             <form>
                                 <button class="btn btn-danger delete-recipe-btn"
