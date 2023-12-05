@@ -16,7 +16,7 @@ $(document).ready(function () {
         localStorage.setItem('recipeIngredientSearchQuery', query);
         localStorage.setItem('recipeIngredientSearchFilter', filter);
 
-        $(".recipe-ingredient-table tbody tr").each(function () {
+        $(".table tbody tr").each(function () {
             const row = $(this);
 
             if (filter === "all" || filter === "") {
@@ -46,3 +46,13 @@ $(document).ready(function () {
 });
 
 
+function refreshSearch() {
+    // Reset the select to the default value
+    $("#columnSelector").val("all");
+
+    // Clear the search input
+    $("#searchInput").val("");
+
+    // Trigger the search event to update the table
+    $("#searchInput").trigger("input");
+}

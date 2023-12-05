@@ -1,165 +1,110 @@
-/* Reset some default styles */
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-legend h1 {
-  color: black !important;
-}
-body {
-  font-family: Arial, sans-serif;
-  background-color: #f5f5f5;
+*{
+    margin: 0;
+    padding: 0;
+
+    box-sizing: border-box;
+    font-family: sans-serif;
 }
 
-
-.container {
-  max-width: 800px;
-  margin: 0 auto;
-  padding: 20px;
-  background-color: #fff;
-  border-radius: 5px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-}
-
-h1 {
-  font-size: 24px;
-  color: #007bff;
-  margin-bottom: 20px;
-}
-
-.recipe-ingredient-table {
-  width: 100%;
-  border-collapse: collapse;
-  margin-bottom: 20px;
-}
-
-.recipe-ingredient-table th,
-.recipe-ingredient-table td {
-  padding: 10px;
-  text-align: left;
-  border-bottom: 1px solid #ccc;
-}
-
-.recipe-ingredient-table th {
-  background-color: #333;
-}
-thead {
-    background-color: #333;
-    color: #fff	;
-    position: sticky;
-    top: 0;
-}
-.recipe-ingredient-table tbody tr:nth-child(even) {
-  background-color: #f2f2f2;
-}
-
-.disconnect-button {
-  background-color: #ff4136;
-  color: #fff;
-  padding: 10px 20px;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  font-size: 16px;
-}
-
-.disconnect-button:hover {
-  background-color: #d63230;
-}
-
-.connect-form-container {
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  padding: 20px;
-}
-
-.connect-form-container legend {
-  font-size: 20px;
-  font-weight: bold;
-  color: #007bff;
-}
-
-.connect-form-container form {
-  display: flex;
-  flex-direction: column;
-}
-
-.connect-form-container label {
-  margin-bottom: 10px;
-  font-weight: bold;
-}
-
-.connect-form-container select {
-  padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  margin-bottom: 15px;
-}
-
-.connect-form-container button {
-  background-color: #007bff;
-  color: #fff;
-  padding: 10px 20px;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  font-size: 16px;
-}
-
-.connect-form-container button:hover {
-  background-color: #0056b3;
-}
-.search-container {
+body{
+    min-height: 100vh;
+    background: url('/static/raw-image/Spanish_Chorizo_Stuffed_Chicken_Breast.png') center / cover;
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-top: 10px;
-}
-
-.search-bar {
-    padding: 5px;
-    border: 1px solid #ccc;
-    border-radius: 3px;
-    width: 500px;
-    margin-bottom: 1%;
-}
-
-#columnSelector {
-    padding: 5px;
-    border: 1px solid #ccc;
-    border-radius: 3px;
-    margin-right: 10px;
-    margin-bottom: 1%;
-}
-
-#searchButton {
-    padding: 5px 10px;
-    background-color: #4CAF50;
-    color: white;
-    border: none;
-    border-radius: 3px;
-    cursor: pointer;
-    margin-left: 5px;
-    margin-bottom: 1%;
-}
-.openPopup-btn {
-    padding: 5px 10px;
-    background-color: #2F539B;
-    color: white;
-    border: none;
-    border-radius: 3px;
-    cursor: pointer;
-    margin-left: 1%;
-    margin-bottom: 1%;
 
 }
 
+main.table{
+    width: 82vw;
+    height: 90vh;
+    background-color: #fff5;
+    backdrop-filter: blur(7px);
+    box-shadow: 0 .4rem .8rem #0085;
+    border-radius: .8rem;
+    overflow: hidden;
+}
 
+.table-header{
+    width: 100%;
+    height: 10%;
+    background-color: #fff4;
+    padding: .8rem 1rem;
+}
 
+.table-body{
+    width: 95%;
+    max-height: calc(89% - 1.6rem);
+    background-color: #fffb;
+    margin: .8rem auto;
+    border-radius: .6rem;
+    overflow: auto;
+}
+.table-body::-webkit-scrollbar{
+    width: 0.5rem;
+    height: 0.5rem;
+}
+.table-body::-webkit-scrollbar-thumb{
+    border-radius: .5rem;
+    background-color: #0004;
+    visibility: hidden;
+}
 
+.table-body:hover::-webkit-scrollbar-thumb{
+    visibility: visible;
+}
+table{
+    width: 100%;
+}
 
+td img{
+    width: 36px;
+    height: 36px;
+    margin-right: .5rem;
+    border-radius: 50%;
+    vertical-align: middle;
+}
 
+table, th, td{
+    border-collapse: collapse;
+    padding: 1rem;
+    text-align: left ;
+}
+
+thead th{
+    position: sticky;
+    top: 0;
+    left: 0;
+    background-color: #d5d1defe;
+}
+
+tbody tr:nth-child(even){
+    background-color: #0000000b;
+}
+
+tbody tr:hover{
+    background-color: #fff6;
+}
+
+.status{
+    padding: .4rem 0;
+    border-radius: 2rem;
+    text-align: center;
+}
+
+.status.delivered{
+    background-color: #86e49d;
+    color: #006b21;
+}
+
+.status.cancelled{
+    background-color: #d893a3;
+    color: #b30021;
+}
+.status.pending{
+    background-color: #ebc474;
+
+}
 
 
 .Overlay {
@@ -195,16 +140,96 @@ thead {
 .close-btn i {
     font-size: 44px;
 }
+.openPopup-btn{
+    padding: 5px 10px;
+    background-color: #2F539B;
+    color: white;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+    margin-left: 1%;
+}
 
+.connect-form-container {
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 20px;
+}
+.connect-form-container form {
+  display: flex;
+  flex-direction: column;
+}
 
+.connect-form-container label {
+  margin-bottom: 10px;
+  font-weight: bold;
+}
 
+.connect-form-container select {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  margin-bottom: 15px;
+}
 
+.connect-form-container button {
+  background-color: #007bff;
+  color: #fff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+}
 
+.connect-form-container button:hover {
+  background-color: #0056b3;
+}
 
+.disconnect-button {
+  background-color: #ff4136;
+  color: #fff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+}
 
+.disconnect-button:hover {
+  background-color: #d63230;
+}
+.search-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 
+.search-bar {
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    width: 500px;
 
+}
 
-
-
-
+#columnSelector {
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    margin-right: 10px;
+}
+.refresh-button{
+    padding: 5px 10px;
+    background-color: #39e75f;
+    color: white;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+    margin-left: 1%;
+}
+@media  (max-width: 1000px){
+    td:not(:first-of-type){
+        min-width: 12.1rem;
+    }
+}

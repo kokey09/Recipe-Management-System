@@ -15,73 +15,85 @@
     {% extends 'base.html' %}
         {% block title %}Ingredients{% endblock %}
         {% block content %}
-<fieldset>
-    <legend><h1>Ingredients</h1></legend>
 
-    <div class="Overlay" id="Overlay" onclick="closePopup()"></div>
-    <div class="Popup" id="Popup">
-        <form method="POST" action="add-ingredient" class="form-ingredients">
-            <label for="name">Name:</label>
-            <input type="text" id="name" name="name" class="name-form" required>
+    <main class="table">
+        <section class="table-header">
+            <h1>Ingredients</h1>
 
-            <label for="description" >Description:</label>
-            <textarea id="description" name="description" rows="4" class="text-area-form" required></textarea>
+            <div class="Overlay" id="Overlay" onclick="closePopup()"></div>
+            <div class="Popup" id="Popup">
+                <form method="POST" action="add-ingredient" class="form-ingredients">
+                    <label for="name">Name:</label>
+                    <input type="text" id="name" name="name" class="name-form" required>
 
-            <button type="submit">Add Ingredient</button>
-        </form>
-        <div onclick="closePopup()" class="close-btn">
-            <i class='bx bx-x'></i>
-        </div>
-    </div>
+                    <label for="description" >Description:</label>
+                    <textarea id="description" name="description" rows="4" class="text-area-form" required></textarea>
 
-    <div class="search-container">
-        <select id="columnSelector">
-            <option value="all">Search All</option>
-            <option value="ingredient_id">Ingredient ID</option>
-            <option value="name">Name</option>
-            <option value="description">Description</option>
-        </select>
-        <input type="text" id="searchInput-ingredients" class="search-bar" placeholder="Search Ingredients">
-        <button class="openPopup-btn" onclick="openPopup()"><i class='bx bx-plus-medical'></i></button>
+                    <button type="submit">Add Ingredient</button>
+                </form>
+                <div onclick="closePopup()" class="close-btn">
+                    <i class='bx bx-x'></i>
+                </div>
+            </div>
 
-    </div>
+            <div class="mass-action">
+                <button class="mass-delete-btn" id="delete-selected-btn" style="display: none;" title="Delete Selected" type="button">
+                    Delete
+                </button>
+                <button id="select-all-button" style="display: none;">Select All</button>
+            </div>
 
-    <table class="ingredients-table">
-        <thead>
-            <tr>
-                <th></th>
-                <th>ID</th>
-                <th>Name</th>
-                <th>Description</th>
-                <th>Actions</th> <!-- Add a header for the buttons -->
-            </tr>
-        </thead>
+            <div class="search-container">
+                <select id="columnSelector">
+                    <option value="all">Search All</option>
+                    <option value="ingredient_id">Ingredient ID</option>
+                    <option value="name">Name</option>
+                    <option value="description">Description</option>
+                </select>
+                <input type="text" id="searchInput-ingredients" class="search-bar" placeholder="Search Ingredients">
+                <button class="openPopup-btn" onclick="openPopup()"><i class='bx bx-plus-medical'></i></button>
+                <button class="refresh-button" onclick="refreshSearch()"><i class='bx bx-refresh'></i></button>
+            </div>
+        </section>
+        <section class="table-body">
+            <table>
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th>Description</th>
+                        <th>Actions</th> <!-- Add a header for the buttons -->
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for ingredient in ingredients  %}
+                    <tr>
+                        <td>
+                            <input type="checkbox" class="checkbox" data-ingredient-id="{{ ingredient.ingredient_id }}">
+                        </td>
+                        <td>{{ ingredient.ingredient_id }}</td>
+                        <td>{{ ingredient.name }}</td>
+                        <td>{{ ingredient.description }}</td>
+                        <td>
+                            <form method="POST" action="{{ url_for('delete_controller.delete_ingredient', id=ingredient.ingredient_id) }}">
+                                <div class="action-btn">
+                                    <button class="btn btn-danger delete-btn"  type="submit" onclick="return confirm('Are you sure you want to delete this Ingredient?')">
+                                        <i class='bx bxs-trash' title="Delete Ingredient" ></i>
+                                    </button>
+                                    <a href="/edit_ingredient/{{ ingredient.ingredient_id }}" class="btn edit-button" title="edit">
+                                        <i class='bx bxs-edit' title="preview and change status"></i>
+                                    </a>
+                                </div>
+                            </form>
+                        </td>
 
-        <button class="btn btn-danger delete-selected-btn" id="delete-selected-btn" style="display: none;" title="Delete Selected" type="button">
-            Delete Selected
-        </button>
-        <button id="select-all-button" style="display: none;">Select All</button>
-        <tbody>
-            {% for ingredient in ingredients  %}
-            <tr>
-                <td>
-                    <input type="checkbox" class="checkbox" data-ingredient-id="{{ ingredient.ingredient_id }}">
-                </td>
-                <td>{{ ingredient.ingredient_id }}</td>
-                <td>{{ ingredient.name }}</td>
-                <td>{{ ingredient.description }}</td>
-                <td>
-                    <form method="POST" action="{{ url_for('delete_controller.delete_ingredient', id=ingredient.ingredient_id) }}">
-                        <button class="btn btn-danger"  type="submit" onclick="return confirm('Are you sure you want to delete this Ingredient?')"><i class='bx bxs-trash' title="Delete Ingredient" ></i></button>
-                        <a href="/edit_ingredient/{{ ingredient.ingredient_id }}" class="btn edit-button" title="edit"><i class='bx bxs-edit' title="preview and change status"></i></a>
-                    </form>
-                </td>
-
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
-</fieldset>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </section>
+    </main>
 
     {% endblock %}
 </body>

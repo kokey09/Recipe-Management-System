@@ -40,3 +40,13 @@ $(document).ready(function () {
     $("#searchInput-account").on('input', handleSearch);
 });
 
+function refreshSearch() {
+    // Reset the select to the default value
+    $("#columnSelector").val("all");
+
+    // Clear the search input
+    $("#searchInput-account").val("");
+
+    // Trigger the search event to update the table
+    $("#searchInput-account").trigger("input");
+}

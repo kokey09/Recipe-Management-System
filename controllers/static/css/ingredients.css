@@ -1,106 +1,115 @@
-.ingredients-table {
+*{
+    margin: 0;
+    padding: 0;
+
+    box-sizing: border-box;
+    font-family: sans-serif;
+}
+
+body{
+    min-height: 100vh;
+    background: url('/static/raw-image/Spanish_Chorizo_Stuffed_Chicken_Breast.png') center / cover;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+
+main.table{
+    width: 82vw;
+    height: 90vh;
+    background-color: #fff5;
+    backdrop-filter: blur(7px);
+    box-shadow: 0 .4rem .8rem #0085;
+    border-radius: .8rem;
+    overflow: hidden;
+}
+
+.table-header{
     width: 100%;
+    height: 10%;
+    background-color: #fff4;
+    padding: .8rem 1rem;
+}
+
+.table-body{
+    width: 95%;
+    max-height: calc(89% - 1.6rem);
+    background-color: #fffb;
+    margin: .8rem auto;
+    border-radius: .6rem;
+    overflow: auto;
+}
+.table-body::-webkit-scrollbar{
+    width: 0.5rem;
+    height: 0.5rem;
+}
+.table-body::-webkit-scrollbar-thumb{
+    border-radius: .5rem;
+    background-color: #0004;
+    visibility: hidden;
+}
+
+.table-body:hover::-webkit-scrollbar-thumb{
+    visibility: visible;
+}
+table{
+    width: 100%;
+}
+
+td img{
+    width: 36px;
+    height: 36px;
+    margin-right: .5rem;
+    border-radius: 50%;
+    vertical-align: middle;
+}
+
+table, th, td{
     border-collapse: collapse;
-    margin-top: 20px;
+    padding: 1rem;
+    text-align: left ;
 }
 
-.ingredients-table th,
-.ingredients-table td {
-    padding: 10px;
-    text-align: left;
-    border-bottom: 1px solid #ddd;
-}
-
-.ingredients-table th {
-    background-color: #333;
-    font-weight: bold;
-}
-thead {
-    color: #fff	;
+thead th{
     position: sticky;
     top: 0;
-}
-.ingredients-table tbody tr:nth-child(even) {
-    background-color: #f2f2f2;
-}
-
-.ingredients-table .btn {
-    padding: 5px 10px;
-    border: none;
-    cursor: pointer;
-    border-radius: 5px;
-    background-color: #FA8072;
-
+    left: 0;
+    background-color: #d5d1defe;
 }
 
-.ingredients-table .btn.delete-button {
-    background-color: #ff6b6b;
-    color: #fff;
+tbody tr:nth-child(even){
+    background-color: #0000000b;
 }
 
-.ingredients-table .btn.edit-button {
-    background-color: #007bff;
-    color: #fff;
+tbody tr:hover{
+    background-color: #fff6;
 }
 
-.ingredients-table .btn:hover {
-    filter: brightness(1.2);
+.status{
+    padding: .4rem 0;
+    border-radius: 2rem;
+    text-align: center;
 }
 
-
-
-.delete-button, .edit-button {
-    padding: 5px 10px;
-    background-color: #d9534f;
-    color: #fff;
-    border: none;
-    cursor: pointer;
-    border-radius: 4px;
-    margin-right: 5px;
+.status.delivered{
+    background-color: #86e49d;
+    color: #006b21;
 }
 
-.delete-button:hover, .edit-button:hover {
-    background-color: #c9302c;
+.status.cancelled{
+    background-color: #d893a3;
+    color: #b30021;
+}
+.status.pending{
+    background-color: #ebc474;
+
 }
 
-
-label {
-    display: block;
-    margin-bottom: 5px;
-}
-
-
-.text-area-form {
-    width: 100%;
-    padding: 10px;
-    margin-bottom: 10px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-}
-.name-form {
-    width: 100%;
-    padding: 10px;
-    margin-bottom: 10px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-}
-button[type="submit"] {
-    background-color: #5bc0de;
-    color: #fff;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 4px;
-    cursor: pointer;
-}
-
-button[type="submit"]:hover {
-    background-color: #46b8da;
-}
 .search-container {
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-top: 10px;
 }
 
 .search-bar {
@@ -108,6 +117,7 @@ button[type="submit"]:hover {
     border: 1px solid #ccc;
     border-radius: 3px;
     width: 500px;
+
 }
 
 #columnSelector {
@@ -117,15 +127,7 @@ button[type="submit"]:hover {
     margin-right: 10px;
 }
 
-#searchButton {
-    padding: 5px 10px;
-    background-color: #4CAF50;
-    color: white;
-    border: none;
-    border-radius: 3px;
-    cursor: pointer;
-    margin-left: 5px;
-}
+
 
 
 .Overlay {
@@ -171,5 +173,66 @@ button[type="submit"]:hover {
     cursor: pointer;
     margin-left: 1%;
 }
+.text-area-form {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+.name-form {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
 
+.mass-action{
+    position: absolute;
+    left: 1;
+}
+.action-btn {
+    display: flex;
+}
 
+.btn {
+    cursor: pointer;
+    border: none;
+    padding: 10px;
+    margin: 0 5px;
+    font-size: 16px;
+}
+
+.btn-danger {
+    background-color: #dc3545;
+    color: #fff;
+}
+
+.edit-button {
+    background-color: #007bff;
+    color: #fff;
+}
+
+/* Optional: Add hover effects */
+.btn:hover {
+    opacity: 0.8;
+}
+
+.delete-btn:hover {
+    background-color: #c82333;
+}
+.refresh-button{
+    padding: 5px 10px;
+    background-color: #39e75f;
+    color: white;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+    margin-left: 1%;
+}
+@media  (max-width: 1000px){
+    td:not(:first-of-type){
+        min-width: 12.1rem;
+    }
+}

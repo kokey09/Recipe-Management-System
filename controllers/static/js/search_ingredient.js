@@ -8,7 +8,7 @@ $(document).ready(function () {
     $("#columnSelector").val(savedFilter);
 
     // Function to handle the search
- function handleSearch() {
+    function handleSearch() {
         const query = $("#searchInput-ingredients").val().toLowerCase();
         const filter = $("#columnSelector").val();
 
@@ -16,7 +16,7 @@ $(document).ready(function () {
         localStorage.setItem('ingredientsSearchQuery', query);
         localStorage.setItem('ingredientsSearchFilter', filter);
 
-        $(".ingredients-table tbody tr").each(function () {
+        $(".table-body tbody tr").each(function () {
             const row = $(this);
             let text = "";
 
@@ -27,13 +27,13 @@ $(document).ready(function () {
                     text = row.text().toLowerCase();
                     break;
                 case "ingredient_id":
-                    text = row.find("td:nth-child(2)").text().toLowerCase(); // Update index for ingredient_id
+                    text = row.find("td:nth-child(2)").text().toLowerCase();
                     break;
                 case "name":
-                    text = row.find("td:nth-child(3)").text().toLowerCase(); // Update index for name
+                    text = row.find("td:nth-child(3)").text().toLowerCase();
                     break;
                 case "description":
-                    text = row.find("td:nth-child(4)").text().toLowerCase(); // Update index for description
+                    text = row.find("td:nth-child(4)").text().toLowerCase();
                     break;
                 // Add a case for your new column, adjust the index accordingly
                 case "your_new_column":
@@ -59,4 +59,15 @@ $(document).ready(function () {
     $("#searchInput-ingredients").on('input', handleSearch);
 });
 
+
+function refreshSearch() {
+    // Reset the select to the default value
+    $("#columnSelector").val("all");
+
+    // Clear the search input
+    $("#searchInput-ingredients").val("");
+
+    // Trigger the search event to update the table
+    $("#searchInput-ingredients").trigger("input");
+}
 

@@ -7,31 +7,139 @@
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/dashboard.css') }}">
     <link rel="icon" href="{{ url_for('static', filename='raw-image/home.png') }}" type="image/x-icon">
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
-
-    <script src="{{ url_for('static', filename='js/base.js') }}"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"/>
 </head>
 <body>
-    <nav class="sidebar">
-            <img src="{{ url_for('static', filename='recipes-img-table/recipes.png') }}" alt="Your Logo" style="width: 200px; height: 80px;">
-        <h1><a href="/dashboard" title="go back to dashboard"><i class='bx bxs-dashboard' ></i> Dashboard</a></h1>
-        {% if user %}
-            <h3><i class='bx bx-user-circle' ></i> Hi {{ user.username }}</h3>
-        {% endif %}
-            <ul>
-                <li><a href="/ingredients" class="ingredients"><i class='bx bx-food-menu' ></i> Ingredients</a></li>
-                <li><a href="/recipes" class="recipes"><i class='bx bxs-food-menu' ></i> Recipe</a></li>
-                <li><a href="/recipe_ingredients" class="recipeINgredients"><i class='bx bxs-food-menu' ></i> Recipe Ingredients</a></li>
-                <li><a href="/accounts" class="accounts"><i class='bx bxs-user-account' ></i> Accounts</a></li>
-                <li><a href="/reviews_dashboard" class="reviews_dashboard"><i class='bx bx-star' ></i> Reviews</a></li>
+    <div class="sidebar close">
+      <div class="logo">
+        <i class="fab fa-trade-federation"></i>
+        <span class="logo-name">Tivotal</span>
+      </div>
 
-            </ul>
-            <ul class="logout-link">
-                <li><a href="/favorites"><i class='bx bxs-heart' ></i> Favorites</a></li>
-                <li><a href="/shared_recipe"><i class='bx bxs-share' ></i> Shared recipe</a></li>
-                <li><a href="/"><i class='bx bxs-home-alt-2'></i> Homepage</a></li>
-                <li><a href="{{ url_for('authentication_controller.logout') }}" onclick="return confirm('Are you sure you want to log out?')"><i class='bx bx-log-out' ></i> Logout</a></li>
-            </ul>
-    </nav>
+      <ul class="nav-list">
+        <li>
+            <i class="fas fa-bars"></i>
+        </li>
+
+        <li>
+          <a href="/ingredients">
+            <i class="fa-solid fa-carrot"></i>
+            <span class="link-name">Ingredients</span>
+          </a>
+
+          <ul class="sub-menu blank">
+            <li><a href="#" class="link-name">Ingredients</a></li>
+          </ul>
+        </li>
+
+        <li>
+          <div class="icon-link">
+            <a href="#">
+                <i class='bx bxs-food-menu'></i>
+              <span class="link-name">Recipe</span>
+            </a>
+            <i class="fas fa-caret-down arrow"></i>
+          </div>
+
+          <ul class="sub-menu">
+            <li><a href="#" class="link-name">Recipe</a></li>
+            <li><a href="/recipes">Added Recipe</a></li>
+            <li><a href="/deleted_recipes">Deleted Recipe</a></li>
+            <li><a href="/recipe_ingredients">Recipe Ingredients</a></li>
+          </ul>
+        </li>
+
+        <li>
+          <div class="icon-link">
+            <a href="#">
+            <i class="fa-solid fa-user"></i>
+              <span class="link-name">Accounts</span>
+            </a>
+            <i class="fas fa-caret-down arrow"></i>
+          </div>
+
+          <ul class="sub-menu">
+            <li><a href="/accounts">Active Accounts</a></li>
+            <li><a href="#">Soft deleted</a></li>
+          </ul>
+        </li>
+
+        <li>
+          <a href="/reviews_dashboard">
+            <i class="fa-solid fa-star"></i>
+            <span class="link-name">Review</span>
+          </a>
+
+          <ul class="sub-menu blank">
+            <li><a href="#" class="link-name">Review</a></li>
+          </ul>
+        </li>
+
+        <li>
+          <a href="/favorites">
+            <i class="fas fa-heart"></i>
+            <span class="link-name">Favourite</span>
+          </a>
+
+          <ul class="sub-menu blank">
+            <li><a href="#" class="link-name">Favourite</a></li>
+          </ul>
+        </li>
+
+
+
+        <li>
+          <a href="/shared_recipe">
+            <i class="fa-solid fa-upload"></i>
+            <span class="link-name">Publish Recipe</span>
+          </a>
+
+          <ul class="sub-menu blank">
+            <li><a href="#" class="link-name">Publish Recipe</a></li>
+          </ul>
+        </li>
+
+        <li>
+          <a href="/">
+            <i class="fa-solid fa-house"></i>
+            <span class="link-name">Home Page</span>
+          </a>
+
+          <ul class="sub-menu blank">
+            <li>
+                <a href="#" class="link-name">Home Page</a>
+            </li>
+          </ul>
+        </li>
+
+
+        <li>
+          <a href="{{ url_for('authentication_controller.logout') }}" onclick="return confirm('Are you sure you want to log out?')">
+            <i class="fa-solid fa-right-from-bracket"></i>
+            <span class="link-name">Logout</span>
+          </a>
+
+          <ul class="sub-menu blank">
+            <li><a href="#" class="link-name">Logout</a></li>
+          </ul>
+        </li>
+
+        <li>
+          <div class="profile-details">
+            <div class="profile-content">
+              <img src="{{ url_for('static', filename='raw-image/home.png') }}" alt="" />
+            </div>
+
+            <div class="name-job">
+              <div class="name">{{ user.username }}</div>
+              <div class="job">{{ user.type}}</div>
+            </div>
+            <i class="fa-solid fa-user"></i>
+          </div>
+        </li>
+      </ul>
+    </div>
+        <script src="{{ url_for('static', filename='js/base.js') }}"></script>
 
     <div class="content">
         {% block content %}{% endblock %}

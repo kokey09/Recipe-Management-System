@@ -18,16 +18,18 @@
 
 </head>
 <body>
+
     {% extends 'base.html' %}
-    {% block title %}Recipes{% endblock %}
+
+    {% block title %}Deleted Recipes{% endblock %}
+
     {% block content %}
 
-
-        <fieldset>
-            <legend><h1>Recipes</h1></legend>
-
-            <!-- add recipe -->
-            <div class="Overlay" id="Overlay" onclick="closePopup()"></div>
+<main class="table">
+    <section class="table-header">
+        <h1>Added Recipes</h1>
+             <!-- add recipe -->
+	    <div class="Overlay" id="Overlay" onclick="closePopup()"></div>
             <div class="Popup" id="Popup">
                 <form method="POST" action="/add_recipe" enctype="multipart/form-data" class="form-recipe">
                     <!-- Form for adding a new recipe -->
@@ -46,8 +48,13 @@
                     <i class='bx bx-x'></i>
                 </div>
             </div>
-
-            <!-- search container -->
+        	    <!-- search container -->
+                 <div class="mass-action">
+                    <button class="mass-delete-btn" id="delete-selected-btn" style="display: none;" title="Delete Selected" type="button">
+                    Delete
+                    </button>
+                    <button id="select-all-button" style="display: none;">Select All</button>
+                </div>
             <div class="search-container">
                 <select id="columnSelector">
                     <option value="all">Search All</option>
@@ -66,12 +73,9 @@
                 <a href="deleted_recipes" class="recently-deleted"><i class='bx bxs-trash'></i> Recently Deleted</a>
             </div>
 
-            <button class="btn btn-danger delete-selected-btn" id="delete-selected-btn" style="display: none;" title="Delete Selected" type="button">
-                Delete Selected
-            </button>
-            <button id="select-all-button" style="display: none;">Select All</button>
 
-
+    </section>
+    <section class="table-body">
             <!-- tables -->
             {% if not recipes %}
                 <h1 class="no-recipe">No recipes available</h1>
@@ -113,7 +117,12 @@
                             N/A
                             {% endif %}
                         </td>
-                        <td>{{recipe.status}}</td>
+                        <td>
+                            <p class="status {{ recipe.status }}">
+                                {{ recipe.status }}
+                            </p>
+                        </td>
+
                         <td>
                             {% if recipe.status_changed_at %}
                             {{ recipe.status_changed_at.strftime("%B %d, %Y at %I:%M:%S %p") }}
@@ -122,25 +131,28 @@
                             {% endif %}
                         </td>
                         <td>
-                            <form>
-                                <button class="btn btn-danger delete-recipe-btn"
-                                        data-recipe-id="{{ recipe.recipe_id }}"
-                                        title="Delete Recipe"
-                                        type="button">
-                                    <i class='bx bxs-trash'></i>
-                                </button>
-                                <a href="{{ url_for('dashboard_controller.recipe_preview', recipe_id=recipe.recipe_id) }}" class="btn btn-info">
-                                    <i class='bx bxs-edit' title="preview and change status"></i>
-                                </a>
+                             <form method="post" action="{{ url_for('delete_controller.delete_recipe_admin', id=recipe.recipe_id) }}" class="delete-form" type="submit">
+                                 <div class="action-btn">
+                                    <button class="btn btn-danger delete-recipe-btn"
+                                            data-recipe-id="{{ recipe.recipe_id }}"
+                                            title="Delete Recipe"
+                                            type="button">
+                                        <i class='bx bxs-trash'></i>
+                                    </button>
+                                    <a href="{{ url_for('dashboard_controller.recipe_preview', recipe_id=recipe.recipe_id) }}" class="btn edit-button">
+                                        <i class='bx bxs-edit' title="preview and change status"></i>
+                                    </a>
+                                 </div>
                             </form>
                         </td>
                     </tr>
                     {% endfor %}
                 </tbody>
             </table>
+        </section>
+    </main>
 
-        </fieldset>
-    {% endblock %}
+{% endblock %}
 </body>
 
 </html>

@@ -7,61 +7,81 @@
     <link rel="icon" href="{{ url_for('static', filename='raw-image/home.png') }}" type="image/x-icon">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="{{ url_for('static', filename='js/search_account.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/dynamic.js') }}"></script>
+
 </head>
 <body>
 {% extends 'base.html' %}
 {% block title %}Account{% endblock %}
 {% block content %}
-<fieldset>
-    <legend><h1>Account Table</h1></legend>
+ <main class="table">
+        <section class="table-header">
+            <h1>Active Accounts</h1>
 
-    <div class="search-container">
-        <select id="columnSelector">
-            <option value="all">Search All</option>
-            <option value="id">ID</option>
-            <option value="username">Username</option>
-            <option value="email">Email</option>
-            <option value="type">Type</option>
-            <option value="date_created">Date Created</option>
-            <option value="is_deleted">Is Deleted</option>
-        </select>
-        <input type="text" id="searchInput-account" class="search-bar" placeholder="Search accounts">
-    </div>
+            <div class="search-container">
+                <select id="columnSelector">
+                    <option value="all">Search All</option>
+                    <option value="id">ID</option>
+                    <option value="username">Username</option>
+                    <option value="email">Email</option>
+                    <option value="type">Type</option>
+                    <option value="date_created">Date Created</option>
+                    <option value="is_deleted">Is Deleted</option>
+                </select>
+                <input type="text" id="searchInput-account" class="search-bar" placeholder="Search accounts">
+                <button class="refresh-button" onclick="refreshSearch()"><i class='bx bx-refresh'></i></button>
+            </div>
 
-    <table>
-        <thead>
-            <tr>
-                <th>ID</th>
-                <th>Username</th>
-                <th>Password</th>
-                <th>Email</th>
-                <th>Type</th>
-                <th>Date Created</th>
-                <th>Is Deleted</th>
-                <th>Actions</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for account in accounts %}
-            <tr>
-                <td>{{ account.id }}</td>
-                <td>{{ account.username }}</td>
-                <td>{{ account.password }}</td>
-                <td>{{ account.email }}</td>
-                <td>{{ account.type }}</td>
-                <td>{{ account.date_created.strftime("%B %d, %Y at %I:%M:%S %p") }}</td>
-                <td>{{ account.is_deleted }}</td>
-                <td>
-                <form method="POST" action="{{ url_for('delete_controller.delete_account', account_id=account.id) }}">
-                    <button class="btn btn-danger delete-button" title="Delete Account" type="submit" onclick="return confirm('Are you sure you want to delete this Account?')">Delete</button>
-                </form>
-                    <a href="/edit_account/{{ account.id }}" class="edit-button">Edit</a>
-                </td>
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
-</fieldset>
+
+        </section>
+        <section class="table-body">
+            <table>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Username</th>
+                        <th>Password</th>
+                        <th>Email</th>
+                        <th>Type</th>
+                        <th>Date Created</th>
+                        <th>Is Deleted</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for account in accounts %}
+                    <tr>
+                        <td>{{ account.id }}</td>
+                        <td>{{ account.username }}</td>
+                        <td>{{ account.password }}</td>
+                        <td>{{ account.email }}</td>
+                        <td>{{ account.type }}</td>
+                        <td>{{ account.date_created.strftime("%B %d, %Y at %I:%M:%S %p") }}</td>
+                        <td>
+                            <p class="deleted {{ account.is_deleted }}">
+                            {{ account.is_deleted }}
+                            </p>
+                        </td>
+                        <td>
+                        <form method="POST" action="{{ url_for('delete_controller.delete_account', account_id=account.id) }}">
+                            <div class="action-btn">
+                                <button class="btn btn-danger delete-btn"  title="Delete Account" type="submit" onclick="return confirm('Are you sure you want to delete this Account?')">
+                                    <i class='bx bxs-trash' title="Delete Ingredient" ></i>
+                                </button>
+                                <a href="/edit_account/{{ account.id }}"  class="btn edit-button">
+                                    <i class='bx bxs-edit' title="preview and change status"></i>
+                                </a>
+                            </div>
+                        </form>
+
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </section>
+    </main>
+
 {% endblock %}
 </body>
 </html>

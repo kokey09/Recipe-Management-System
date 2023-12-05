@@ -1,10 +1,116 @@
+*{
+    margin: 0;
+    padding: 0;
 
-
-label {
-    display: block;
-    margin-bottom: 5px;
+    box-sizing: border-box;
+    font-family: sans-serif;
 }
 
+body{
+    min-height: 100vh;
+    background: url('/static/raw-image/Spanish_Chorizo_Stuffed_Chicken_Breast.png') center / cover;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+
+main.table{
+    width: 82vw;
+    height: 90vh;
+    background-color: #fff5;
+    backdrop-filter: blur(7px);
+    box-shadow: 0 .4rem .8rem #0085;
+    border-radius: .8rem;
+    overflow: hidden;
+}
+
+.table-header{
+    width: 100%;
+    height: 10%;
+    background-color: #fff4;
+    padding: .8rem 1rem;
+}
+
+.table-body{
+    width: 95%;
+    max-height: calc(89% - 1.6rem);
+    background-color: #fffb;
+    margin: .8rem auto;
+    border-radius: .6rem;
+    overflow: auto;
+}
+.table-body::-webkit-scrollbar{
+    width: 0.5rem;
+    height: 0.5rem;
+}
+.table-body::-webkit-scrollbar-thumb{
+    border-radius: .5rem;
+    background-color: #0004;
+    visibility: hidden;
+}
+
+.table-body:hover::-webkit-scrollbar-thumb{
+    visibility: visible;
+}
+table{
+    width: 100%;
+}
+
+td img{
+    width: 36px;
+    height: 36px;
+    margin-right: .5rem;
+    border-radius: 50%;
+    vertical-align: middle;
+}
+
+table, th, td{
+    border-collapse: collapse;
+    padding: 1rem;
+    text-align: left;
+}
+
+thead th{
+    position: sticky;
+    top: 0;
+    left: 0;
+    background-color: #d5d1defe;
+}
+
+tbody tr:nth-child(even){
+    background-color: #0000000b;
+}
+
+tbody tr:hover{
+    background-color: #fff6;
+}
+
+.status{
+    padding: .4rem 0;
+    border-radius: 2rem;
+    text-align: center;
+}
+
+.status.approved{
+    background-color: #86e49d;
+    color: #006b21;
+}
+
+.status.pending{
+    background-color: #9bedff;
+    color: #0000FF;
+}
+.status.declined{
+    background-color: #d893a3;
+}
+
+
+
+
+
+
+/* popup add */
 .text-area-form {
     width: 100%;
     padding: 10px;
@@ -20,116 +126,8 @@ label {
     border: 1px solid #ccc;
     border-radius: 4px;
 }
-button[type="submit"] {
-    background-color: #5bc0de;
-    color: #fff;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 4px;
-    cursor: pointer;
-}
-
-button[type="submit"]:hover {
-    background-color: #46b8da;
-}
 
 
-.recipes-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 20px;
-}
-
-.recipes-table th,
-.recipes-table td {
-    padding: 10px;
-    text-align: left;
-    border-bottom: 1px solid #ddd;
-}
-
-.recipes-table th {
-    background-color: #333;
-    font-weight: bold;
-}
-thead {
-    color: #fff	;
-    position: sticky;
-    top: 0;
-}
-.recipes-table tbody tr:nth-child(even) {
-    background-color: #f2f2f2;
-}
-
-.recipes-table .btn {
-    padding: 5px 10px;
-    border: none;
-    cursor: pointer;
-    border-radius: 5px;
-    display: inline-block;
-}
-
-.recipes-table .btn.delete-button {
-    background-color: #ff6b6b;
-    color: #fff;
-}
-
-.recipes-table .btn.edit-button {
-    background-color: #007bff;
-    color: #fff;
-}
-
-.recipes-table .btn:hover {
-    filter: brightness(1.2);
-}
-
-.recipes-table td:nth-child(3) {
-    padding-right: 20px;
-    max-width: 300px;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-}
-
-
-.recipes-table td:nth-child(3) div {
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-}
-
-.search-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-top: 10px;
-
-}
-
-.search-bar {
-    padding: 5px;
-    border: 1px solid #ccc;
-    border-radius: 3px;
-    width: 500px;
-
-}
-
-#columnSelector {
-    padding: 5px;
-    border: 1px solid #ccc;
-    border-radius: 3px;
-    margin-right: 10px;
-}
-
-#searchButton {
-    padding: 5px 10px;
-    background-color: #4CAF50;
-    color: white;
-    border: none;
-    border-radius: 3px;
-    cursor: pointer;
-    margin-left: 5px;
-
-}
 
 .Overlay {
     display: none;
@@ -156,38 +154,6 @@ thead {
     width: 28%;
     height: 65%;
 }
-
-
-
-
-
-.editOverlay {
-    display: none;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.7);
-}
-
-
-.editPopup {
-    display: none;
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    padding: 20px;
-    background-color: #fff;
-    border-radius: 5px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
-    z-index: 1;
-    width: 28%;
-    height: 65%;
-}
-
-
 .close-btn{
 	position: absolute;
 	top: 0;
@@ -196,16 +162,6 @@ thead {
 
 .close-btn i {
     font-size: 44px;
-}
-
-.openPopup-btn{
-    padding: 5px 10px;
-    background-color: #2F539B;
-    color: white;
-    border: none;
-    border-radius: 3px;
-    cursor: pointer;
-    margin-left: 1%;
 }
 
 .refresh-button{
@@ -217,42 +173,68 @@ thead {
     cursor: pointer;
     margin-left: 1%;
 }
+.openPopup-btn{
+    padding: 5px 10px;
+    background-color: #2F539B;
+    color: white;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+    margin-left: 1%;
+}
+.search-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 
+.search-bar {
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    width: 500px;
 
+}
 
-
-
-.recently-deleted{
-    margin-left: 2%;
+#columnSelector {
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    margin-right: 10px;
 }
 
 
-
-.delete-recipe-btn{
-    background-color: #FA8072;
-}
-.recover-recipe-btn{
-    background-color: #69d84f;
-
+.action-btn {
+    display: flex;
 }
 
-.no-recipe{
-    text-align: center;
-    margin-top: 10% ;
+.btn {
+    cursor: pointer;
+    border: none;
+    padding: 10px;
+    margin: 0 5px;
+    font-size: 16px;
 }
 
+.btn-danger {
+    background-color: #dc3545;
+    color: #fff;
+}
 
+.edit-button {
+    background-color: #007bff;
+    color: #fff;
+}
 
+/* Optional: Add hover effects */
+.btn:hover {
+    opacity: 0.8;
+}
 
-
-
-
-
-
-
-
-
-
-
-
-
+.delete-btn:hover {
+    background-color: #c82333;
+}
+.mass-action{
+    position: absolute;
+    left: 1;
+}

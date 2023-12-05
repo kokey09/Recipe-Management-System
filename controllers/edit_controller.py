@@ -16,6 +16,8 @@ bcrypt = Bcrypt()
 
 @edit_controller_bp.route('/edit_account/<int:id>', methods=['GET', 'POST'])
 def edit_account(id):
+    user = get_authenticated_user()
+
     account = Account.query.get(id)
     if not account:
         return jsonify({"error": "Account not found"}), 404
@@ -37,7 +39,7 @@ def edit_account(id):
         db.session.commit()
         return redirect(url_for('dashboard_controller.accounts'))
 
-    return render_template('edit_account.html', account=account)
+    return render_template('edit_account.html', account=account, user=user)
 
 #@edit_controller_bp.route('/edit_recipe/<int:id>', methods=['GET', 'POST'])
 #def edit_recipe(id):
@@ -105,6 +107,8 @@ def user_edit_recipe(id):
 
 @edit_controller_bp.route('/edit_ingredient/<int:id>', methods=['GET', 'POST'])
 def edit_ingredient(id):
+    user = get_authenticated_user()
+
     ingredient = Ingredient.query.get(id)
 
     if request.method == 'POST':
@@ -115,7 +119,7 @@ def edit_ingredient(id):
         db.session.commit()
         return redirect(url_for('dashboard_controller.ingredients'))
 
-    return render_template('edit_ingredients.html', ingredient=ingredient, id=id)
+    return render_template('edit_ingredients.html', ingredient=ingredient, id=id, user=user)
 
 
 # New route for changing the status
@@ -155,3 +159,8 @@ def mass_recover_recipes():
         db.session.commit()
 
     return jsonify({'message': 'Selected recipes recovered successfully'}), 200
+
+def get_authenticated_user():
+    if 'user_id' in session:
+        user_id = session['user_id']
+        return Account.query.get(user_id)

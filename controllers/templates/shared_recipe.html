@@ -32,17 +32,29 @@
                             <div class="buttons">
 
                                 <form method="POST" action="{{ url_for('delete_controller.delete_shared_recipe', id=recipe.recipe_id) }}">
-                                    <button class="btn btn-danger" title="Delete Recipe" type="submit" onclick="return confirm('Are you sure you want to delete this Recipe?')"><i class='bx bxs-trash' title="Delete Ingredient" ></i></button>
-                                    <a href="/user_edit_recipe/{{ recipe.recipe_id }}" class="btn btn-secondary"><i class='bx bxs-edit' title="preview and change status"></i></a>
-
+                                    <button class="btn btn-danger" title="Delete Recipe" type="submit" onclick="return confirm('Are you sure you want to delete this Recipe?')">
+                                        <i class='bx bxs-trash' title="Delete Ingredient" ></i>
+                                    </button>
+                                    <a href="/user_edit_recipe/{{ recipe.recipe_id }}" class="btn btn-secondary">
+                                        <i class='bx bxs-edit' title="preview and change status"></i>
+                                    </a>
                                     {% if recipe.status != 'approved' %}
-                                    <a href="{{ url_for('dashboard_controller.recipe_preview', recipe_id=recipe.recipe_id) }}" class="btn btn-info"><i class='bx bxs-show'></i> Preview</a>
+                                    <a href="{{ url_for('dashboard_controller.recipe_preview', recipe_id=recipe.recipe_id) }}" class="btn btn-info">
+                                        <i class='bx bxs-show'></i>
+                                        Preview
+                                    </a>
                                     {% else %}
-                                    <a href="{{ url_for('user_end_controller.recipe_instruction', recipe_id=recipe.recipe_id) }}" class="btn btn-info"><i class='bx bxs-show'></i> View Recipe</a>
+                                    <a href="{{ url_for('user_end_controller.recipe_instruction', recipe_id=recipe.recipe_id) }}" class="btn btn-info">
+                                        <i class='bx bxs-show'></i>
+                                        View Recipe
+                                    </a>
                                     {% endif %}
-
                                 </form>
-                                <a href="{{ url_for('user_end_controller.recipe_instruction', recipe_id=recipe.recipe_id) }}" class="star-new-rating"><i class='bx bxs-star' ></i> Reviews | {{ recipe_reviews_count[recipe.recipe_id] }} Reviews</a>
+                                <a href="{{ url_for('user_end_controller.recipe_instruction', recipe_id=recipe.recipe_id) }}" class="star-new-rating">
+                                    <i class='bx bxs-star' ></i>
+                                    Reviews | {{ recipe_reviews_count[recipe.recipe_id] }}
+                                    Reviews
+                                </a>
                                 <p class="recipe-status {% if recipe.status == 'declined' %}red-text{% elif recipe.status == 'approved' %}green-text{% elif recipe.status == 'pending' %}blue-text{% endif %}">
                                     {{ recipe.status }}
                                 </p>
