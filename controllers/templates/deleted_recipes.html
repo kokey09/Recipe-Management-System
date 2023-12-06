@@ -92,7 +92,7 @@
                             </td>
                             <td>
                                 <form method="POST" action="{{ url_for('edit_controller.recover_recipe', id=recipe.recipe_id) }}">
-                                    <button class="btn recover-recipe-btn" type="button" data-recipe-id="{{ recipe.recipe_id }}">Recover</button>
+                                    <button class="btn recover-recipe-btn" type="button" data-recipe-id="{{ recipe.recipe_id }}"><i class='bx bx-revision' title="recover"></i></button>
                                 <a href="{{ url_for('dashboard_controller.recipe_preview', recipe_id=recipe.recipe_id) }}" class="btn edit-button">
                                     <i class='bx bxs-edit' title="preview and change status"></i>
                                 </a>

@@ -13,127 +13,117 @@ dashboard_controller_bp = Blueprint('dashboard_controller',__name__,template_fol
 def recipes():
     user = get_authenticated_user()
 
-    if user:
-        if user.type == 'admin':
-            recipes_data = Recipe.query.filter_by(is_deleted=False).all()
-            response = make_response(render_template('recipes.html', recipes=recipes_data, user=user))
-            response.headers['Cache-Control'] = 'no-cache, no-store, must-revalidate'
-            return response
-        else:
-            return redirect(url_for('user_end_controller.user_page'))
-    else:
+    if not user:
         flash('Please log in to access recipes', 'error')
         return redirect(url_for('authentication_controller.login'))
+
+    if user.type != 'admin':
+        return redirect(url_for('user_end_controller.user_page'))
+
+    recipes_data = Recipe.query.filter_by(is_deleted=False).all()
+    response = make_response(render_template('recipes.html', recipes=recipes_data, user=user))
+    response.headers['Cache-Control'] = 'no-cache, no-store, must-revalidate'
+    return response
 
 @dashboard_controller_bp.route('/deleted_recipes')
 def deleted_recipes():
     user = get_authenticated_user()
 
-    if user and user.type == 'admin':
-        deleted_recipes_data = Recipe.query.filter_by(is_deleted=True).all()
-        return render_template('deleted_recipes.html', deleted_recipes=deleted_recipes_data, user=user)
-    else:
+    if not user or user.type != 'admin':
         return redirect(url_for('user_end_controller.user_page'))
 
-    return render_template('deleted_recipes.html')
-
-
-
-
+    deleted_recipes_data = Recipe.query.filter_by(is_deleted=True).all()
+    return render_template('deleted_recipes.html', deleted_recipes=deleted_recipes_data, user=user)
 
 @dashboard_controller_bp.route('/ingredients')
 def ingredients():
     user = get_authenticated_user()
 
-    if user:
-        if user.type == 'admin':
-            ingredients_data = Ingredient.query.all()
-            response = make_response(render_template('ingredients.html', ingredients=ingredients_data,user=user))
-            response.headers['Cache-Control'] = 'no-cache, no-store, must-revalidate'
-            return response
-        else:
-            return redirect(url_for('user_end_controller.user_page'))
-    else:
+    if not user:
         flash('Please log in to access ingredients.','error')
         return redirect(url_for('authentication_controller.login'))
+
+    if user.type != 'admin':
+        return redirect(url_for('user_end_controller.user_page'))
+
+    ingredients_data = Ingredient.query.all()
+    response = make_response(render_template('ingredients.html', ingredients=ingredients_data,user=user))
+    response.headers['Cache-Control'] = 'no-cache, no-store, must-revalidate'
+    return response
 
 @dashboard_controller_bp.route('/recipe_ingredients')
 def recipe_ingredients():
     user = get_authenticated_user()
 
-    if user:
-        if user.type == 'admin':
-            recipes_data = Recipe.query.all()
-            ingredients_data = Ingredient.query.all()
-            recipe_ingredients_data = RecipeIngredient.query.all()
-
-            response = make_response(render_template(
-                'recipe_ingredients.html',
-                recipe_ingredients=recipe_ingredients_data,
-                recipes=recipes_data,
-                ingredients=ingredients_data,
-                user=user
-            ))
-            response.headers['Cache-Control'] = 'no-cache, no-store, must-revalidate'
-            return response
-        else:
-            flash('You do not have access to view recipe ingredients', 'error')
-            return redirect(url_for('user_end_controller.user_page'))
-    else:
+    if not user:
         flash('Please log in to access recipe ingredients', 'error')
         return redirect(url_for('authentication_controller.login'))
 
+    if user.type != 'admin':
+        flash('You do not have access to view recipe ingredients', 'error')
+        return redirect(url_for('user_end_controller.user_page'))
+
+    recipes_data = Recipe.query.all()
+    ingredients_data = Ingredient.query.all()
+    recipe_ingredients_data = RecipeIngredient.query.all()
+
+    response = make_response(render_template(
+        'recipe_ingredients.html',
+        recipe_ingredients=recipe_ingredients_data,
+        recipes=recipes_data,
+        ingredients=ingredients_data,
+        user=user
+    ))
+    response.headers['Cache-Control'] = 'no-cache, no-store, must-revalidate'
+    return response
+
 @dashboard_controller_bp.route('/reviews_dashboard')
 def reviews_dashboard():
-    reviews = Review.query.all()
-
     user = get_authenticated_user()
 
-    if user:
-        if user.type == 'admin':
-            response = make_response(render_template('reviews_dashboard.html', user=user, reviews=reviews))
-            response.headers['Cache-Control'] = 'no-cache, no-store, must-revalidate'
-            return response
-        else:
-            return redirect(url_for('user_end_controller.user_page'))
-
-    else:
+    if not user:
         flash('Please log in to access the dashboard', 'error')
         return redirect(url_for('authentication_controller.login'))
 
+    if user.type != 'admin':
+        return redirect(url_for('user_end_controller.user_page'))
+
+    reviews = Review.query.all()
+    response = make_response(render_template('reviews_dashboard.html', user=user, reviews=reviews))
+    response.headers['Cache-Control'] = 'no-cache, no-store, must-revalidate'
+    return response
+
 @dashboard_controller_bp.route('/accounts')
 def accounts():
-    accounts_data = Account.query.all()
-
     user = get_authenticated_user()
 
-    if user:
-        if user.type == 'admin':
-            response = make_response(render_template('accounts.html', accounts=accounts_data, user=user))
-            response.headers['Cache-Control'] = 'no-cache, no-store, must-revalidate'
-            return response
-        else:
-            flash('You do not have permission to access accounts.', 'error')
-            return redirect(url_for('user_end_controller.user_page'))
-    else:
+    if not user:
         flash('Please log in to access accounts.', 'error')
         return redirect(url_for('authentication_controller.login'))
+
+    if user.type != 'admin':
+        flash('You do not have permission to access accounts.', 'error')
+        return redirect(url_for('user_end_controller.user_page'))
+
+    accounts_data = Account.query.all()
+    response = make_response(render_template('accounts.html', accounts=accounts_data, user=user))
+    response.headers['Cache-Control'] = 'no-cache, no-store, must-revalidate'
+    return response
 
 @dashboard_controller_bp.route('/dashboard')
 def dashboard():
     user = get_authenticated_user()
 
-    if user:
-        if user.type == 'admin':
-            response = make_response(render_template('dashboard.html', user=user))
-            response.headers['Cache-Control'] = 'no-cache, no-store, must-revalidate'
-            return response
-        else:
-            return redirect(url_for('user_end_controller.user_page'))
-
-    else:
+    if not user:
         flash('Please log in to access the dashboard', 'error')
         return redirect(url_for('authentication_controller.login'))
+
+    if user.type != 'admin':
+        return redirect(url_for('user_end_controller.user_page'))
+
+    response = make_response(render_template('dashboard.html', user=user))
+    response.headers['Cache-Control'] = 'no-cache, no-store, must-revalidate'
+    return response
 
 @dashboard_controller_bp.route('/recipe_preview')
 def recipe_preview():
@@ -142,7 +132,11 @@ def recipe_preview():
     user = get_authenticated_user()
 
     if not user:
+        flash('Please log in to access the dashboard', 'error')
         return redirect(url_for('authentication_controller.login'))
+
+    if user.type != 'admin':
+        return redirect(url_for('user_end_controller.user_page'))
 
     recipe = Recipe.query.get(recipe_id)
     return render_template('recipe_preview.html', id=recipe_id, recipe=recipe,user=user)
