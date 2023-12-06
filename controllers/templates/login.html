@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="icon" href="{{ url_for('static', filename='raw-image/home.png') }}" type="image/x-icon">
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/login.css') }}">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <script src="{{ url_for('static', filename='js/showPassword.js') }}"></script>
 
@@ -13,49 +12,49 @@
 
 </head>
 <body>
-
-<div class="container">
-    <div class="form-container">
-        <div class="back-btn">
-            <a href="/" title="back to home page"><i class='bx bx-arrow-back' ></i></a>
-        </div>
-
-        <fieldset>
-            <legend><h1><i class='bx bxs-user-circle' ></i> Login</h1></legend>
+    <div class="wrapper">
+        <div class="login-box">
+            <div class="login-header">
+                <span>login</span>
+            </div>
             <form action="/login" method="POST" id="login-form">
 
-                <div class="form-group">
-                    <label for="username">Username</label>
-                    <input type="text" id="username" name="username" class="form-control" required placeholder="Username">
+                <div class="input-box">
+                    <input type="text" name="username" id="username" class="input-field" required>
+                    <label for="username" class="label">Username</label>
+                    <i class="bx bx-user icon"></i>
                 </div>
 
-                <div class="form-group">
-                    <label for="password">Password</label>
-                    <input type="password" id="password" name="password" class="form-control" required placeholder="Password">
+                <div class="input-box">
+                    <input type="password" name="password" id="password" class="input-field" required>
+                    <label for="password" class="label">Password</label>
+                    <i class="bx bx-lock-alt icon"></i>
                 </div>
-
                 <div class="show-password">
-                    <input type="checkbox" onclick="myFunction()">Show Password
+                    <div class="show">
+                        <input type="checkbox" onclick="myFunction()">
+                        <label for="show">Show password </label>
+                    </div>
+                    <div class="forgot">
+                        <a href="#">Forgot password</a>
+                    </div>
                 </div>
-                
-                <div class="error-message">
+                <div class="input-box">
+                    <input type="submit" value="login" class="input-submit">
+                </div>
+
+            </form>
+            <div class="register">
+                <span>Don't have an account?
+                     <a href="/register">Register</a>
+                </span>
+            </div>
+            <div class="error-message">
                     {% if error %}
                         {{ error }}
                     {% endif %}
-                </div>
-
-
-                <button type="submit" class="btn btn-primary btn-block" title="login">
-                    <i class='bx bx-log-in'></i> Login
-                </button>
-
-                <hr>
-
-                <div class="button-container">
-                    <a href="/register" class="button-link" title="create-new-account">Create new account</a>
-                </div>
-
-                {% with messages = get_flashed_messages() %}
+            </div>
+            {% with messages = get_flashed_messages() %}
                   {% if messages %}
                     <ul>
                       {% for message in messages %}
@@ -63,16 +62,10 @@
                       {% endfor %}
                     </ul>
                   {% endif %}
-                {% endwith %}
-
-            </form>
-        </fieldset>
+            {% endwith %}
+        </div>
     </div>
-</div>
 
-<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.0.7/dist/umd/popper.min.js"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>
 

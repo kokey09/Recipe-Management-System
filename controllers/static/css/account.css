@@ -145,11 +145,13 @@ tbody tr:hover{
 .btn-danger {
     background-color: #dc3545;
     color: #fff;
+    border-radius: 1rem;
 }
 
 .edit-button {
     background-color: #007bff;
     color: #fff;
+    border-radius: 1rem;
 }
 
 /* Optional: Add hover effects */
@@ -172,6 +174,26 @@ tbody tr:hover{
 }
 .deleted.True{
     background-color: #d893a3;
+}
+.search-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.search-bar {
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    width: 500px;
+
+}
+
+#columnSelector {
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    margin-right: 10px;
 }
 @media  (max-width: 1000px){
     td:not(:first-of-type){

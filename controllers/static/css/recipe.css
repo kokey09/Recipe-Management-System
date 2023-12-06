@@ -219,11 +219,14 @@ tbody tr:hover{
 .btn-danger {
     background-color: #dc3545;
     color: #fff;
+    border-radius: 1rem;
 }
 
 .edit-button {
     background-color: #007bff;
     color: #fff;
+    border-radius: 1rem;
+
 }
 
 /* Optional: Add hover effects */
@@ -237,4 +240,8 @@ tbody tr:hover{
 .mass-action{
     position: absolute;
     left: 1;
+}
+.recover-recipe-btn{
+    background-color: #69d84f;
+    border-radius:1rem;
 }

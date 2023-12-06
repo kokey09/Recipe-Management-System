@@ -207,11 +207,13 @@ tbody tr:hover{
 .btn-danger {
     background-color: #dc3545;
     color: #fff;
+    border-radius: 1rem;
 }
 
 .edit-button {
     background-color: #007bff;
     color: #fff;
+    border-radius: 1rem;
 }
 
 /* Optional: Add hover effects */

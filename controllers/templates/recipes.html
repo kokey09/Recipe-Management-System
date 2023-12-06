@@ -97,7 +97,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    {% for recipe in recipes %}
+                    {% for recipe in recipes|sort(attribute='created_at',reverse=true) %}
                     <tr>
                         <td>
                             <input type="checkbox" name="checkbox" class="checkbox" id="checkbox-{{ recipe.recipe_id }}">
