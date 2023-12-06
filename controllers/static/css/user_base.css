@@ -129,7 +129,7 @@ section{
 .dropdown-content {
     display: none;
     position: absolute;
-    background-color: var(--bg-color);
+    background: white; opacity: 0.75;
     min-width: 160px;
     z-index: 1;
 }
