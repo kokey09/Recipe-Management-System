@@ -9,7 +9,7 @@ bcrypt = Bcrypt()
 
 @authentication_controller_bp.route('/register', methods=['GET', 'POST'])
 def register():
-    error = None  # Define error here
+    error = None  # Define notif here
 
     if request.method == 'POST':
         username = request.form.get('username')
@@ -32,6 +32,7 @@ def register():
             new_account = Account(username=username, email=email, password=hashed_password)
             db.session.add(new_account)
             db.session.commit()
+            session['success'] = "account has been registered"
             return redirect(url_for('authentication_controller.login'))
         else:
             error = "Your password and confirm password do not match."
@@ -42,7 +43,8 @@ def register():
 @authentication_controller_bp.route('/login', methods=['GET', 'POST'])
 def login():
     error = None
-
+    success = session.pop('success', None)
+    
     if request.method == 'POST':
         username = request.form.get('username')
         entered_password = request.form.get('password')
@@ -51,19 +53,16 @@ def login():
         if user and bcrypt.check_password_hash(user.password, entered_password):
             if not user.is_deleted:  # Check if the account is not soft deleted
                 session['user_id'] = user.id
-
                 if user.type == 'admin':
                     return redirect(url_for('dashboard_controller.dashboard'))
                 elif user.type == 'normal':
-                    # Query records excluding those with a specific account_id value
-                    reviews = Review.query.filter(Review.account_id != -1).all()
                     return redirect(url_for('user_end_controller.user_page'))
             else:
                 error = "Account has been soft deleted."
         else:
             error = "Incorrect username or password. Please try again."
 
-    return render_template('login.html', error=error)
+    return render_template('login.html', error=error, success=success)
 
 
 

@@ -11,16 +11,16 @@ user_end_controller_bp = Blueprint('user_end_controller',__name__,template_folde
 
 @user_end_controller_bp.route('/')
 def user_page():
+
     ingredients = Ingredient.query.all()
-    # Filter recipes with 'approved' status and not deleted
     recipes = Recipe.query.filter_by(status='approved', is_deleted=False).order_by(Recipe.status_changed_at.desc()).all()
-    # Dictionary to store the counts of reviews
+    
     recipe_reviews_count = {}
-    # Calculate the number of reviews for each recipe
     for recipe in recipes:
         recipe_reviews_count[recipe.recipe_id] = len(Review.query.filter_by(recipe_id=recipe.recipe_id).all())
     # Check if the user is logged in
     user = get_authenticated_user()
+
     # Render the template with the recipes, ingredients, user, and review counts
     response = make_response(render_template('user_page.html', recipes=recipes, ingredients=ingredients, user=user, recipe_reviews_count=recipe_reviews_count))
     response.headers['Cache-Control'] = 'no-cache, no-store, must-revalidate'
@@ -51,6 +51,7 @@ def ingredient_display():
     response = make_response (render_template('ingredient_display.html', ingredients=ingredients,user=user))
     response.headers['Cache-Control'] = 'no-cache, no-store, must-revalidate'
     return response
+
 
 @user_end_controller_bp.route('/recipe_display')
 def recipe_display():
@@ -86,6 +87,7 @@ def recipe_display():
 @user_end_controller_bp.route('/recipe_instruction')
 def recipe_instruction():
     recipe_id = request.args.get('recipe_id', None, type=int)
+    added_review = session.pop('added_review', None)
 
     # Fetch only approved recipes
     recipe = (
@@ -117,7 +119,7 @@ def recipe_instruction():
 
     response = make_response(render_template('recipe_instruction.html', recipe=recipe, user=user,
                                              reviews=reviews, recipe_reviews_count=recipe_reviews_count,
-                                             ingredients=ingredients))
+                                             ingredients=ingredients, added_review=added_review))
     response.headers['Cache-Control'] = 'no-cache, no-store, must-revalidate'
     return response
 
@@ -135,6 +137,7 @@ def user_profile_dashboard():
     response.headers['Cache-Control'] = 'no-cache, no-store, must-revalidate'
     return response
 
+
 @user_end_controller_bp.route('/user_add_recipe')
 def user_add_recipe():
     user = get_authenticated_user()
@@ -146,8 +149,11 @@ def user_add_recipe():
     response.headers['Cache-Control'] = 'no-cache, no-store, must-revalidate'
     return response
 
+
 @user_end_controller_bp.route('/shared_recipe')
 def shared_recipe():
+    added_recipe = session.pop('added_recipe', None)
+    deleted_recipe = session.pop('deleted_recipe', None)                            
     # Check if the user is logged in
     user = get_authenticated_user()
 
@@ -159,9 +165,10 @@ def shared_recipe():
     for recipe in recipes:
         recipe_reviews_count[recipe.recipe_id] = len(Review.query.filter_by(recipe_id=recipe.recipe_id).all())
 
-    response = make_response (render_template('shared_recipe.html', recipes=recipes, user=user, recipe_reviews_count=recipe_reviews_count))
+    response = make_response (render_template('shared_recipe.html', recipes=recipes, user=user, recipe_reviews_count=recipe_reviews_count, added_recipe=added_recipe, deleted_recipe=deleted_recipe))
     response.headers['Cache-Control'] = 'no-cache, no-store, must-revalidate'
     return response
+
 
 @user_end_controller_bp.route('/favorites')
 def favorites():
@@ -169,7 +176,6 @@ def favorites():
 
     if not user:
         return redirect(url_for('authentication_controller.login'))
-
 
     # Get favorites associated with non-deleted recipes
     favorites = Favorite.query.join(Recipe).filter(

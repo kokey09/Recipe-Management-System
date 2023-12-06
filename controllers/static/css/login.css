@@ -153,10 +153,6 @@ a:hover{
     font-weight: 500;
 }
 
-
-.error-message {
-    color: red;
-}
 @media only screen and (max-width: 564px){
     .wrapper{
         padding: 20px;

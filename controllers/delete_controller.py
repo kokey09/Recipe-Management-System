@@ -47,6 +47,7 @@ def delete_recipe_base(model, id, redirect_page):
                 entity_to_delete.deleted_at = db.func.current_timestamp()
                 entity_to_delete.is_deleted = True
                 db.session.commit()
+                session['deleted_recipe'] = "deleted successfully"
                 flash(f'{model.capitalize()} deleted successfully', 'success')
 
                 return jsonify({'message': f'{model.capitalize()} deleted successfully'}), 200
@@ -70,7 +71,6 @@ def delete_recipe_admin(id):
 @delete_controller_bp.route('/delete_shared_recipe/<int:id>', methods=['POST'])
 def delete_shared_recipe(id):
     result = delete_recipe_base('recipe', id, 'user_end_controller.shared_recipe')
-
     # Check if the result is a JSON response
     if isinstance(result, tuple) and len(result) == 2 and result[1] == 200:
         # This means it's a JSON response with a 200 status code, so redirect

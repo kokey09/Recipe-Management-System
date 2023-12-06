@@ -13,6 +13,7 @@
     <script src="{{ url_for('static', filename='js/search_recipe.js') }}"></script>
     <script src="{{ url_for('static', filename='js/dynamic.js') }}"></script>
     <script src="{{ url_for('static', filename='js/massDeletionRecipe.js') }}"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
 
 
@@ -152,6 +153,18 @@
         </section>
     </main>
 
+    {% if added_recipe %}
+    <script>
+        swal("Success", "{{ added_recipe }}", "success");
+    </script>
+    {% endif %}
+
+    {% if deleted_recipe %}
+    <script>
+        swal("Success", "{{ deleted_recipe }}", "success");
+    </script>
+    {% endif %}
+    
 {% endblock %}
 </body>
 

@@ -9,6 +9,7 @@
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <link rel="icon" href="{{ url_for('static', filename='raw-image/home.png') }}" type="image/x-icon">
     <script src="{{ url_for('static', filename='js/dynamic.js') }}"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
 </head>
 <body>
@@ -68,6 +69,18 @@
         {% endfor %}
     </div>
 </div>
+    {% if added_recipe %}
+    <script>
+        swal("Success", "{{ added_recipe }}", "success");
+    </script>
+    {% endif %}
+
+    {% if deleted_recipe %}
+    <script>
+        swal("Success", "{{ deleted_recipe }}", "success");
+    </script>
+    {% endif %}
+
 {% endblock %}
 </body>
 </html>
