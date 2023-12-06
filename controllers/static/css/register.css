@@ -1,93 +1,167 @@
-.container {
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+:root{
+    --primary-color: #c6c3c3;
+    --second-color: #ffffff;
+    --black-color: #000000; 
+}
+body{
+    background: url('/static/raw-image/Spanish_Chorizo_Stuffed_Chicken_Breast.png');
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+a{
+    text-decoration: none;
+    color: var(--second-color);
+}
+a:hover{
+    text-decoration: underline;
+}
+.wrapper{
+    width: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
-    background-color: #f0f2f5;
+    min-height: 100vh;
+    background-color: rgba(0,0,0,0.2);
+}
+.login-box{
+    position: relative;
+    width: 450px;
+    backdrop-filter: blur(25px);
+    border: 2px solid var(--primary-color);
+    border-radius: 15px;
+    padding: 7.5rem 2.5rem 4em 2.5em;
+    color: var(--second-color);
+    box-shadow: 0px 0px 10px 2px rgba(0,0,0,0.3);
+}
+.login-header{
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--primary-color);
+    width: 140px;
+    height: 70px;
+    border-radius: 0 0 20px 20px;
 }
 
-.form-container {
-    background-color: #fff;
-    border-radius: 10px;
-    box-shadow: 0px 0px 5px 0px #888888;
-    padding: 20px;
-    max-width: 400px;
+.login-header span{
+    font-size: 30px;
+    color: var(--black-color);
+}
+
+.login-header::before{
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -30px;
+    width: 30px;
+    height: 30px;
+    border-top-right-radius: 50%;
+    background: transparent;
+    box-shadow: 15px 0 0 0 var(--primary-color);
+}
+.login-header::after{
+    content: "";
+    position: absolute;
+    top: 0;
+    right: -30px;
+    width: 30px;
+    height: 30px;
+    border-top-left-radius: 50%;
+    background: transparent;
+    box-shadow: -15px 0 0 0 var(--primary-color);
+}
+
+.input-box{
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    margin: 20px 0;
+}
+
+.input-field{
     width: 100%;
-}
-
-fieldset {
-    border: 2px solid transparent;
-    border-radius: 5px;
-    padding: 20px;
-    margin: 10px 0;
-}
-
-legend {
-    font-size: 24px;
-    border: none;
-    border-radius: 5px;
-    padding: 5px 10px;
-    margin: 0;
-}
-
-.form-group label {
-    display: block;
-    margin-bottom: 5px;
-    font-weight: bold;
-}
-
-.form-group input {
-    width: 94%;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    margin-bottom: 15px;
+    height: 55px;
     font-size: 16px;
+    background: transparent;
+    color: var(--second-color);
+    padding-inline: 20px 50px;
+    border: 2px solid var(--primary-color);
+    border-radius: 30px;
+    outline: none;
+}
+#username{
+    margin-bottom: 10px;
+}
+.label{
+    position: absolute;
+    top: 15px;
+    left: 20px;
+    transform: .2s;
+}
+.input-field:focus ~ .label,
+.input-field:valid ~ .label{
+    position: absolute;
+    top: -10px;
+    left: 20px;
+    font-size: 14px;
+    background-color: var(--primary-color);
+    border-radius: 30px;
+    color: var(--black-color);
+    padding: 0 10px;
+}
+.icon{
+    position: absolute;
+    top: 18px;
+    right: 25px;
+    font-size: 20px;
+}
+.show-password{
+    display: flex;
+    justify-content: space-between;
+    font-size: 15px;
+}
+.input-submit{
+    width: 100%;
+    height: 50px;
+    background: #ececec;
+    font-size: 16px;
+    font-weight: 500;
+    border: none;
+    border-radius: 30px;
+    cursor: pointer;
+    transition: .3s;
+}
+.input-submit:hover{
+    background: var(--second-color);
+}
+.login{
+    text-align: center;
+}
+.login a{
+    font-weight: 500;
 }
 
 .error-message {
-    margin-top: 10px;
-    text-align: center;
     color: red;
 }
-
-button {
-    background-color: #007bff;
-    color: #fff;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 16px;
-}
-.error {
-    color: red;
-}
-a {
-    text-decoration: none;
-    color: #ffffff;
-    background-color: #007bff;
-    padding: 10px 20px;
-    border-radius: 5px;
-    font-size: 16px;
-    transition: background-color 0.3s;
-}
-
-a:hover {
-    background-color: #0056b3;
-}
-
-
-
-@media (max-width: 768px) {
-    .form-container {
-        width: 90%;
+@media only screen and (max-width: 564px){
+    .wrapper{
+        padding: 20px;
     }
-}
-
-@media (min-width: 769px) {
-    .form-container {
-        width: 70%;
+    .login-box{
+        padding: 7.5rem 1.5rem 4em 1.5em;
     }
-}
 
+}

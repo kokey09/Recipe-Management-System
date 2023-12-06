@@ -7,6 +7,10 @@
 
     <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='css/register.css')}}">
     <link rel="icon" href="{{ url_for('static', filename='raw-image/home.png') }}" type="image/x-icon">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
 
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
         <script src="{{ url_for('static', filename='js/register.js') }}"></script>
@@ -14,43 +18,59 @@
 
 </head>
 <body>
-    <div class="container">
-        <div class="form-container">
-            <h1>User Registration</h1>
+        <div class="wrapper">
+        <div class="login-box">
+            <div class="login-header">
+                <span>login</span>
+            </div>
             <form method="POST" action="/register">
 
-                <div class="form-group">
-                    <label for="username">Username:</label>
-                    <input type="text" id="username" name="username" required placeholder="Enter username">
+                <div class="input-box">
+                    <input type="text" name="username" id="username" class="input-field" required>
+                    <label for="username" class="label">Username</label>
+                    <i class="bx bx-user icon"></i>
                 </div>
 
-                <div class="form-group">
-                    <label for="email">Email:</label>
-                    <input type="email" id="email" name="email" required placeholder="Enter email">
+
+                <div class="input-box">
+                    <input type="text" name="email" id="email" class="input-field" required>
+                    <label for="email" class="label">Email</label>
+                    <i class="bx bx-user icon"></i>
                 </div>
 
-                <div class="form-group">
-                    <label for="password">Password:</label>
-                    <input type="password" id="password" name="password" required placeholder="Enter password">
+                <div class="input-box">
+                    <input type="password" name="password" id="password" class="input-field" required>
+                    <label for="password" class="label">Password</label>
+                    <i class="bx bx-lock-alt icon"></i>
                 </div>
 
-                {% if error %}
-                <p class="error">{{ error }}</p>
-                {% endif %}
 
-                <div class="form-group">
-                    <label for="confirm_password">Confirm Password:</label>
-                    <input type="password" id="confirm_password" name="confirm_password" required placeholder="Confirm password">
+                <div class="input-box">
+                    <input type="password" name="confirm_password" id="confirm_password" class="input-field" required>
+                    <label for="confirm_password" class="label">Confirm password</label>
+                    <i class="bx bx-lock-alt icon"></i>
                 </div>
 
                 <div class="show-password">
-                    <input type="checkbox" onclick="myFunction()">Show Password
+                    <div class="show">
+                        <input type="checkbox" onclick="myFunction()">
+                        <label for="checkbox">Show password </label>
+                    </div>
                 </div>
 
-                <button type="submit">Register</button>
-                <a href="/login">Login</a>
+                <div class="input-box">
+                    <input type="submit" value="Register" class="input-submit">
+                </div>
 
             </form>
+            <div class="login">
+                <span>Already have an account?
+                     <a href="/login">Login</a>
+                </span>
+            </div>
+            {% if error %}
+                <p class="error-message">{{ error }}</p>
+            {% endif %}
         </div>
     </div>
 </body>
