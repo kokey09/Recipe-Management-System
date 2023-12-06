@@ -50,7 +50,7 @@ a:hover{
     align-items: center;
     justify-content: center;
     background-color: var(--primary-color);
-    width: 140px;
+    width: 150px;
     height: 70px;
     border-radius: 0 0 20px 20px;
 }
