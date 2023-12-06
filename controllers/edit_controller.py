@@ -18,6 +18,10 @@ bcrypt = Bcrypt()
 def edit_account(id):
     user = get_authenticated_user()
 
+    if not user or user.type != 'admin':
+        flash('You must be logged in as an admin to edit an account.', 'error')
+        return redirect(url_for('authentication_controller.login'))
+
     account = Account.query.get(id)
     if not account:
         return jsonify({"error": "Account not found"}), 404
@@ -108,6 +112,10 @@ def user_edit_recipe(id):
 @edit_controller_bp.route('/edit_ingredient/<int:id>', methods=['GET', 'POST'])
 def edit_ingredient(id):
     user = get_authenticated_user()
+
+    if not user or user.type != 'admin':
+        flash('You must be logged in as an admin to edit an ingredient.', 'error')
+        return redirect(url_for('authentication_controller.login'))
 
     ingredient = Ingredient.query.get(id)
 

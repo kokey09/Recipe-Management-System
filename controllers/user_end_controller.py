@@ -12,23 +12,15 @@ user_end_controller_bp = Blueprint('user_end_controller',__name__,template_folde
 @user_end_controller_bp.route('/')
 def user_page():
     ingredients = Ingredient.query.all()
-
     # Filter recipes with 'approved' status and not deleted
     recipes = Recipe.query.filter_by(status='approved', is_deleted=False).order_by(Recipe.status_changed_at.desc()).all()
-
     # Dictionary to store the counts of reviews
     recipe_reviews_count = {}
-
     # Calculate the number of reviews for each recipe
     for recipe in recipes:
         recipe_reviews_count[recipe.recipe_id] = len(Review.query.filter_by(recipe_id=recipe.recipe_id).all())
-
     # Check if the user is logged in
-    user = None
-    if 'user_id' in session:
-        user_id = session['user_id']
-        user = Account.query.get(user_id)
-
+    user = get_authenticated_user()
     # Render the template with the recipes, ingredients, user, and review counts
     response = make_response(render_template('user_page.html', recipes=recipes, ingredients=ingredients, user=user, recipe_reviews_count=recipe_reviews_count))
     response.headers['Cache-Control'] = 'no-cache, no-store, must-revalidate'
@@ -39,10 +31,9 @@ def user_page():
 @user_end_controller_bp.route('/about_us')
 def about_us():
     ingredients = Ingredient.query.all()
-    user = None
-    if 'user_id' in session:
-        user_id = session['user_id']
-        user = Account.query.get(user_id)
+
+    user = get_authenticated_user()
+
     response = make_response(render_template('about_us.html',ingredients=ingredients, user=user))
     response.headers['Cache-Control'] = 'no-cache, no-store, must-revalidate'
     return response
