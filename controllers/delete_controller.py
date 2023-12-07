@@ -14,6 +14,8 @@ from flask_bcrypt import Bcrypt
 
 delete_controller_bp = Blueprint('delete_controller',__name__,template_folder='templates',static_folder='static')
 bcrypt = Bcrypt()
+
+
 # delete account
 @delete_controller_bp.route('/delete_account/<int:account_id>', methods=['POST'])
 def delete_account(account_id):
@@ -30,8 +32,6 @@ def delete_account(account_id):
         else:
             flash('Account not found', 'error')
     return redirect(url_for('dashboard_controller.accounts'))
-
-
 
 
 # delete main function
@@ -60,14 +60,10 @@ def delete_recipe_base(model, id, redirect_page):
     return jsonify({'error': 'Invalid request'}), 400
 
 
-
-
 # delete main function extension for admin
 @delete_controller_bp.route('/delete_recipe_admin/<int:id>', methods=['POST'])
 def delete_recipe_admin(id):
     return delete_recipe_base('recipe', id, 'dashboard_controller.recipes')
-
-
 
 
 # delete main function extension for user end
@@ -79,8 +75,6 @@ def delete_shared_recipe(id):
     return result
 
 
-
-
 @delete_controller_bp.route('/mass_recipe_deletion', methods=['POST'])
 def mass_recipe_deletion():
     selected_ids = request.form.getlist('ids[]')
@@ -89,9 +83,6 @@ def mass_recipe_deletion():
         delete_recipe_base('recipe', int(recipe_id), 'dashboard_controller.recipes')
 
     return jsonify({'message': 'Selected recipes deleted successfully'}), 200
-
-
-
 
 
 @delete_controller_bp.route('/delete_ingredient/<int:id>', methods=['POST'])
@@ -111,9 +102,6 @@ def delete_ingredient(id):
     return redirect(url_for('dashboard_controller.ingredients'))
 
 
-
-
-
 @delete_controller_bp.route('/mass_delete_ingredients', methods=['POST'])
 def mass_delete_ingredients():
     if request.method == 'POST':
@@ -126,9 +114,6 @@ def mass_delete_ingredients():
             flash('An error occurred while deleting ingredients', 'error')
 
     return jsonify({"message": "Ingredients deleted successfully"})
-
-
-
 
 
 @delete_controller_bp.route('/delete_favorite/<int:id>', methods=['POST'])
@@ -148,7 +133,6 @@ def delete_favorite(id):
     return redirect(url_for('user_end_controller.favorites'))
 
 
-
 @delete_controller_bp.route('/disconnect_recipe_ingredient/<int:recipe_id>/<int:ingredient_id>', methods=['POST'])
 def disconnect_recipe_ingredient(recipe_id, ingredient_id):
     if request.method == 'POST':
@@ -159,9 +143,6 @@ def disconnect_recipe_ingredient(recipe_id, ingredient_id):
         return redirect(url_for('dashboard_controller.recipe_ingredients'))
 
     return render_template('disconnect_confirmation.html', recipe_id=recipe_id, ingredient_id=ingredient_id)
-
-
-
 
 
 def get_authenticated_user():

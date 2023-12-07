@@ -9,6 +9,7 @@ from models.favorites import Favorite
 
 user_end_controller_bp = Blueprint('user_end_controller',__name__,template_folder='templates',static_folder='static')
 
+
 @user_end_controller_bp.route('/')
 def user_page():
 
@@ -22,10 +23,12 @@ def user_page():
     user = get_authenticated_user()
 
     # Render the template with the recipes, ingredients, user, and review counts
-    response = make_response(render_template('user_page.html', recipes=recipes, ingredients=ingredients, user=user, recipe_reviews_count=recipe_reviews_count))
+    response = make_response(render_template('user_page.html', recipes=recipes,
+                                                               ingredients=ingredients,
+                                                               user=user,
+                                                               recipe_reviews_count=recipe_reviews_count))
     response.headers['Cache-Control'] = 'no-cache, no-store, must-revalidate'
     return response
-
 
 
 @user_end_controller_bp.route('/about_us')
@@ -76,7 +79,10 @@ def recipe_display():
 
     user = get_authenticated_user()
 
-    response = make_response(render_template('recipe_display.html', recipes=recipes, ingredients=ingredients, user=user, recipe_reviews_count=recipe_reviews_count))
+    response = make_response(render_template('recipe_display.html', recipes=recipes,
+                                                                    ingredients=ingredients,
+                                                                    user=user,
+                                                                    recipe_reviews_count=recipe_reviews_count))
     response.headers['Cache-Control'] = 'no-cache, no-store, must-revalidate'
     return response
 
@@ -113,9 +119,12 @@ def recipe_instruction():
     # Fetch all ingredients separately for use in the template
     ingredients = Ingredient.query.all()
 
-    response = make_response(render_template('recipe_instruction.html', recipe=recipe, user=user,
-                                             reviews=reviews, recipe_reviews_count=recipe_reviews_count,
-                                             ingredients=ingredients, added_review=added_review))
+    response = make_response(render_template('recipe_instruction.html', recipe=recipe,
+                                                                        user=user,
+                                                                        reviews=reviews,
+                                                                        recipe_reviews_count=recipe_reviews_count,
+                                                                        ingredients=ingredients,
+                                                                        added_review=added_review))
     response.headers['Cache-Control'] = 'no-cache, no-store, must-revalidate'
     return response
 
@@ -160,10 +169,10 @@ def shared_recipe():
         recipe_reviews_count[recipe.recipe_id] = len(Review.query.filter_by(recipe_id=recipe.recipe_id).all())
 
     response = make_response (render_template('shared_recipe.html', recipes=recipes, user=user,
-                                               recipe_reviews_count=recipe_reviews_count,
-                                                 added_recipe=added_recipe,
-                                                   deleted_recipe=deleted_recipe,
-                                                   error=error))
+                                                                    recipe_reviews_count=recipe_reviews_count,
+                                                                    added_recipe=added_recipe,
+                                                                    deleted_recipe=deleted_recipe,
+                                                                    error=error))
     response.headers['Cache-Control'] = 'no-cache, no-store, must-revalidate'
     return response
 
@@ -184,6 +193,7 @@ def favorites():
     response = make_response (render_template('favorites.html', user=user, favorites=favorites))
     response.headers['Cache-Control'] = 'no-cache, no-store, must-revalidate'
     return response
+
 
 def get_authenticated_user():
     if 'user_id' in session:

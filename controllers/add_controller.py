@@ -19,9 +19,6 @@ add_controller_bp = Blueprint('add_controller',__name__,template_folder='templat
 bcrypt = Bcrypt()
 
 
-
-
-
 def save_image_file(image_file, directory):
     filename = secure_filename(image_file.filename)
     image_directory = os.path.join(current_app.root_path, 'static', directory)
@@ -29,9 +26,6 @@ def save_image_file(image_file, directory):
     image_path = os.path.join(image_directory, filename)
     image_file.save(image_path)
     return filename
-
-
-
 
 
 @add_controller_bp.route('/add_review', methods=['POST'])
@@ -63,9 +57,6 @@ def add_review():
         session['added_review'] = 'Thanks you for your feedback!'
 
     return redirect(url_for('user_end_controller.recipe_instruction', recipe_id=recipe_id))
-
-
-
 
 
 @add_controller_bp.route('/add_recipe', methods=['POST'])
@@ -103,9 +94,6 @@ def add_recipe():
     return redirect(url_for('dashboard_controller.recipes'))
 
 
-
-
-
 @add_controller_bp.route('/add-ingredient', methods=['POST'])
 def add_ingredient():
     if request.method == 'POST':
@@ -127,9 +115,6 @@ def add_ingredient():
     return redirect(url_for('dashboard_controller.ingredients')) 
 
 
-
-
-
 @add_controller_bp.route('/connect_recipe_ingredient', methods=['POST'])
 def connect_recipe_ingredient():
     if request.method == 'POST':
@@ -146,9 +131,6 @@ def connect_recipe_ingredient():
             logging.error(f"Error connecting recipe and ingredient: {str(e)}")
 
     return redirect(url_for('dashboard_controller.recipe_ingredients'))
-
-
-
 
 
 @add_controller_bp.route('/add_favorite', methods=['POST'])
@@ -183,9 +165,6 @@ def add_favorite():
             notif = "Error adding favorite"
 
     return notif
-
-
-
 
 
 def get_authenticated_user():

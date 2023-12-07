@@ -245,3 +245,6 @@ tbody tr:hover{
     background-color: #69d84f;
     border-radius:1rem;
 }
+.checkbox {
+    transform: scale(1.5);
+}

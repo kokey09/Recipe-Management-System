@@ -65,7 +65,6 @@ def login():
     return render_template('login.html', error=error, success=success)
 
 
-
 @authentication_controller_bp.route('/logout')
 def logout():
     if 'user_id' in session:

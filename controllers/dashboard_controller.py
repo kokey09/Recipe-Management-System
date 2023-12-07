@@ -23,12 +23,12 @@ def recipes():
         return redirect(url_for('user_end_controller.user_page'))
 
     recipes_data = Recipe.query.filter_by(is_deleted=False).all()
-    response = make_response(render_template('recipes.html', recipes=recipes_data, user=user, added_recipe=added_recipe, deleted_recipe=deleted_recipe))
+    response = make_response(render_template('recipes.html', recipes=recipes_data,
+                                                             user=user,
+                                                             added_recipe=added_recipe,
+                                                             deleted_recipe=deleted_recipe))
     response.headers['Cache-Control'] = 'no-cache, no-store, must-revalidate'
     return response
-
-
-
 
 
 @dashboard_controller_bp.route('/deleted_recipes')
@@ -40,10 +40,9 @@ def deleted_recipes():
         return redirect(url_for('user_end_controller.user_page'))
 
     deleted_recipes_data = Recipe.query.filter_by(is_deleted=True).all()
-    return render_template('deleted_recipes.html', deleted_recipes=deleted_recipes_data, user=user, recover_recipe=recover_recipe)
-
-
-
+    return render_template('deleted_recipes.html', deleted_recipes=deleted_recipes_data,
+                                                   user=user,
+                                                   recover_recipe=recover_recipe)
 
 
 @dashboard_controller_bp.route('/ingredients')
@@ -62,15 +61,12 @@ def ingredients():
 
     ingredients_data = Ingredient.query.all()
     response = make_response(render_template('ingredients.html', ingredients=ingredients_data,
-                                             user=user,
-                                               deleted_ingredients=deleted_ingredients,
-                                                 added_ingredients=added_ingredients,
-                                                 error=error))
+                                                                 user=user,
+                                                                 deleted_ingredients=deleted_ingredients,
+                                                                 added_ingredients=added_ingredients,
+                                                                 error=error))
     response.headers['Cache-Control'] = 'no-cache, no-store, must-revalidate'
     return response
-
-
-
 
 
 @dashboard_controller_bp.route('/recipe_ingredients')
@@ -100,9 +96,6 @@ def recipe_ingredients():
     return response
 
 
-
-
-
 @dashboard_controller_bp.route('/reviews_dashboard')
 def reviews_dashboard():
     user = get_authenticated_user()
@@ -118,9 +111,6 @@ def reviews_dashboard():
     response = make_response(render_template('reviews_dashboard.html', user=user, reviews=reviews))
     response.headers['Cache-Control'] = 'no-cache, no-store, must-revalidate'
     return response
-
-
-
 
 
 @dashboard_controller_bp.route('/accounts')
@@ -141,9 +131,6 @@ def accounts():
     return response
 
 
-
-
-
 @dashboard_controller_bp.route('/dashboard')
 def dashboard():
     user = get_authenticated_user()
@@ -158,9 +145,6 @@ def dashboard():
     response = make_response(render_template('dashboard.html', user=user))
     response.headers['Cache-Control'] = 'no-cache, no-store, must-revalidate'
     return response
-
-
-
 
 
 @dashboard_controller_bp.route('/recipe_preview')
@@ -180,9 +164,6 @@ def recipe_preview():
         return redirect(url_for('user_end_controller.shared_recipe'))
 
     return render_template('recipe_preview.html', id=recipe_id, recipe=recipe,user=user)
-
-
-
 
 
 def get_authenticated_user():
