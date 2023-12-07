@@ -153,6 +153,9 @@
         </section>
     </main>
 
+
+
+    <!-- alerts using swal -->
     {% if added_recipe %}
     <script>
         swal("Success", "{{ added_recipe }}", "success");
@@ -161,7 +164,7 @@
 
     {% if deleted_recipe %}
     <script>
-        swal("Success", "{{ deleted_recipe }}", "success");
+        swal("Deleted", "{{ deleted_recipe }}", "info");
     </script>
     {% endif %}
     

@@ -55,8 +55,13 @@
                         <img src="{{ recipe.image_url }}" alt="{{ recipe.name }} Image" style="width: 300px; height: 300px;" loading="lazy">
                     </div>
                     <h2>{{ recipe.name }}</h2>
-                    <a href="{{ url_for('user_end_controller.recipe_instruction', recipe_id=recipe.recipe_id) }}" class="view-new-recipe">View Recipe</a>
-                    <a href="{{ url_for('user_end_controller.recipe_instruction', recipe_id=recipe.recipe_id) }}" class="star-new-rating"><i class='bx bxs-star' ></i> Reviews | {{ recipe_reviews_count[recipe.recipe_id] }} Review </a>
+                    <a href="{{ url_for('user_end_controller.recipe_instruction', recipe_id=recipe.recipe_id) }}" class="view-new-recipe">
+                        View Recipe
+                    </a>
+                    <a href="{{ url_for('user_end_controller.recipe_instruction', recipe_id=recipe.recipe_id) }}" class="star-new-rating">
+                        <i class='bx bxs-star' ></i>
+                         Reviews | {{ recipe_reviews_count[recipe.recipe_id] }} Review 
+                    </a>
                 </div>
             {% endfor %}
         </div>

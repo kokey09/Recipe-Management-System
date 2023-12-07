@@ -258,13 +258,18 @@ section{
     color: var(--text-color);
 }
 
-.box a{
+.box a {
     color: var(--text-color);
     font-size: 1rem;
     font-weight: 400;
     margin: 4px 0 10px;
+    transition: background-color 0.3s ease, color 0.3s ease; 
 }
 
+.box a:hover {
+    background-color: #444; 
+    color: white;
+}
 
 .main{
     display: flex;

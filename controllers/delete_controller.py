@@ -48,16 +48,11 @@ def delete_recipe_base(model, id, redirect_page):
                 entity_to_delete.is_deleted = True
                 db.session.commit()
                 session['deleted_recipe'] = "deleted successfully"
-                flash(f'{model.capitalize()} deleted successfully', 'success')
-
                 return jsonify({'message': f'{model.capitalize()} deleted successfully'}), 200
-
             except Exception as e:
-                flash(f'An error occurred while deleting the {model}: {str(e)}', 'error')
                 return jsonify({'error': f'Internal server error: {str(e)}'}), 500
-        else:
-            flash(f'{model.capitalize()} not found', 'error')
-            return jsonify({'error': f'{model.capitalize()} not found'}), 404
+
+        return jsonify({'error': f'{model.capitalize()} not found'}), 404
 
     return jsonify({'error': 'Invalid request'}), 400
 
@@ -67,16 +62,14 @@ def delete_recipe_base(model, id, redirect_page):
 def delete_recipe_admin(id):
     return delete_recipe_base('recipe', id, 'dashboard_controller.recipes')
 
+
 # delete main function extension for user end
 @delete_controller_bp.route('/delete_shared_recipe/<int:id>', methods=['POST'])
 def delete_shared_recipe(id):
     result = delete_recipe_base('recipe', id, 'user_end_controller.shared_recipe')
-    # Check if the result is a JSON response
     if isinstance(result, tuple) and len(result) == 2 and result[1] == 200:
-        # This means it's a JSON response with a 200 status code, so redirect
         return redirect(url_for('user_end_controller.shared_recipe'))
-
-    return result  # If not a JSON response, return it as is
+    return result
 
 
 @delete_controller_bp.route('/mass_recipe_deletion', methods=['POST'])
