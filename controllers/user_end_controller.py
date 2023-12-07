@@ -147,7 +147,8 @@ def user_add_recipe():
 @user_end_controller_bp.route('/shared_recipe')
 def shared_recipe():
     added_recipe = session.pop('added_recipe', None)
-    deleted_recipe = session.pop('deleted_recipe', None)                            
+    deleted_recipe = session.pop('deleted_recipe', None)  
+    error = session.pop('error', None)                       
     # Check if the user is logged in
     user = get_authenticated_user()
 
@@ -159,7 +160,11 @@ def shared_recipe():
     for recipe in recipes:
         recipe_reviews_count[recipe.recipe_id] = len(Review.query.filter_by(recipe_id=recipe.recipe_id).all())
 
-    response = make_response (render_template('shared_recipe.html', recipes=recipes, user=user, recipe_reviews_count=recipe_reviews_count, added_recipe=added_recipe, deleted_recipe=deleted_recipe))
+    response = make_response (render_template('shared_recipe.html', recipes=recipes, user=user,
+                                               recipe_reviews_count=recipe_reviews_count,
+                                                 added_recipe=added_recipe,
+                                                   deleted_recipe=deleted_recipe,
+                                                   error=error))
     response.headers['Cache-Control'] = 'no-cache, no-store, must-revalidate'
     return response
 
@@ -171,7 +176,7 @@ def favorites():
     if not user:
         return redirect(url_for('authentication_controller.login'))
 
-    # Get favorites associated with non-deleted recipes
+    # Get favorites associated with non-deleted or not soft deletedrecipes
     favorites = Favorite.query.join(Recipe).filter(
         Favorite.account_id == user.id,
         Recipe.is_deleted == False

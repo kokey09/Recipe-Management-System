@@ -175,9 +175,10 @@ def recipe_preview():
 
     recipe = Recipe.query.get(recipe_id)
 
-    if user.type == 'normal' and recipe.account_id != user.id or recipe.is_deleted:
+    if user.type == 'normal' and recipe.account_id != user.id:
+        session['error'] = 'You do not have permission to view this recipe.'
         return redirect(url_for('user_end_controller.shared_recipe'))
-    
+
     return render_template('recipe_preview.html', id=recipe_id, recipe=recipe,user=user)
 
 

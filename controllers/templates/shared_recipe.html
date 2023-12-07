@@ -83,6 +83,13 @@
     </script>
     {% endif %}
 
+    
+    {% if error %}
+        <script>
+            swal("Error", "{{ error }}", "error");
+        </script>
+    {% endif %}
+
 {% endblock %}
 </body>
 </html>
