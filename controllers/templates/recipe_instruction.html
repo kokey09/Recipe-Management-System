@@ -38,7 +38,7 @@
 
     <!--  reviews  -->
     <div class="reviews-section">
-        {% for review in reviews|sort(attribute='timestamp',reverse=true) %}
+        {% for review in reviews|sort(attribute='date_created',reverse=true) %}
             <div class="review">
                 <div class="review-header">
                     <div class="user-info">
@@ -61,7 +61,7 @@
                             </div>
                         </div>
                         <div class="review-timestamp">
-                            {{ review.timestamp.strftime("%B %d, %Y at %I:%M:%S %p") }}
+                            {{ review.date_created.strftime("%B %d, %Y at %I:%M:%S %p") }}
                         </div>
                     </div>
                 </div>

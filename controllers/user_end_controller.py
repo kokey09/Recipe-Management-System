@@ -85,7 +85,6 @@ def recipe_display():
 def recipe_instruction():
     recipe_id = request.args.get('recipe_id', None, type=int)
     added_review = session.pop('added_review', None)
-
     # Fetch only approved recipes
     recipe = (
         Recipe.query

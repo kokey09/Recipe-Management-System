@@ -57,7 +57,7 @@ CREATE TABLE reviews (
     account_id INT(11),
     review_text TEXT,
     rating INT(5),
-    timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    date_created TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     image_url VARCHAR(512),
     FOREIGN KEY (account_id) REFERENCES account(id),
     FOREIGN KEY (recipe_id) REFERENCES recipes(recipe_id)
@@ -67,8 +67,8 @@ CREATE TABLE favorites (
     favorite_id INT(11) AUTO_INCREMENT PRIMARY KEY,
     recipe_id INT(11),
     account_id INT(11),
-    timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-	is_deleted TINYINT(1),
+    date_created TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    is_deleted TINYINT(1),
     FOREIGN KEY (recipe_id) REFERENCES recipes(recipe_id),
     FOREIGN KEY (account_id) REFERENCES account(id)
 );

@@ -38,7 +38,7 @@
                     <th>account username</th>
                     <th>Review Text</th>
                     <th>Rating</th>
-                    <th>Timestamp</th>
+                    <th>Date Create</th>
                     <th>Image</th>
                 </tr>
             </thead>
@@ -52,7 +52,7 @@
                     <td>
                         <div class="ellipsis-text">{{ review.review_text }}</div>
                     </td>                    <td>{{ review.rating }}</td>
-                    <td>{{ review.timestamp }}</td>
+                    <td>{{ review.date_created }}</td>
                     <td>
                         <img src="{{ review.image_url }}" alt="NULL Image" style="width: 100px; height: 100px;" loading="lazy">
                     </td>
