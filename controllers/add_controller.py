@@ -104,6 +104,7 @@ def add_ingredient():
             db.session.add(new_ingredient)
             try:
                 db.session.commit()
+                session['added_ingredients'] = "Ingredient added successfully"
             except Exception as e:
                 db.session.rollback()
                 logging.error(f"Error adding ingredient: {str(e)}")

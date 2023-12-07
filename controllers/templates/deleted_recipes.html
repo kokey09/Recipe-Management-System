@@ -9,7 +9,8 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="{{ url_for('static', filename='js/deleted_recipe_search.js') }}"></script>
     <script src="{{ url_for('static', filename='js/dynamic.js') }}"></script>
-        <script src="{{ url_for('static', filename='js/massRecover.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/massRecover.js') }}"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
 
 </head>
@@ -104,6 +105,12 @@
             </table>
      </section>
 </main>
+
+    {% if recover_recipe %}
+        <script>
+            swal("Success", "{{ recover_recipe }}", "success");
+        </script>
+    {% endif %}
     {% endblock %}
 </body>
 </html>

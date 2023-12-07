@@ -45,6 +45,10 @@ def edit_account(id):
 
     return render_template('edit_account.html', account=account, user=user)
 
+
+
+
+
 #@edit_controller_bp.route('/edit_recipe/<int:id>', methods=['GET', 'POST'])
 #def edit_recipe(id):
 #    recipe = Recipe.query.get(id)
@@ -69,6 +73,10 @@ def edit_account(id):
 #            flash("Error updating recipe. Please try again.", "error")
 
 #    return render_template('edit_recipes.html', recipe=recipe, id=id, user=user)
+
+
+
+
 
 @edit_controller_bp.route('/user_edit_recipe/<int:id>', methods=['GET', 'POST'])
 def user_edit_recipe(id):
@@ -107,6 +115,9 @@ def user_edit_recipe(id):
     return render_template('user_edit_recipe.html', recipe=recipe, id=id, user=user)
 
 
+
+
+
 @edit_controller_bp.route('/edit_ingredient/<int:id>', methods=['GET', 'POST'])
 def edit_ingredient(id):
     user = get_authenticated_user()
@@ -128,6 +139,9 @@ def edit_ingredient(id):
     return render_template('edit_ingredients.html', ingredient=ingredient, id=id, user=user)
 
 
+
+
+
 # New route for changing the status
 @edit_controller_bp.route('/change_status/<int:recipe_id>', methods=['POST'])
 def change_status(recipe_id):
@@ -145,14 +159,22 @@ def change_status(recipe_id):
     return redirect(url_for('dashboard_controller.recipes'))
 
 
+
+
+
 @edit_controller_bp.route('/recover_recipe/<int:id>', methods=['POST'])
 def recover_recipe(id):
     recipe = Recipe.query.get_or_404(id)
     recipe.recovered_at = db.func.current_timestamp()
     recipe.is_deleted = False
     db.session.commit()
+    session['recover_recipe'] = "Recipe recovered successfully"
     # Return a JSON response indicating success
     return jsonify({"message": "Recipe recovered successfully"})
+
+
+
+
 
 @edit_controller_bp.route('/mass_recover_recipes', methods=['POST'])
 def mass_recover_recipes():
@@ -163,8 +185,13 @@ def mass_recover_recipes():
         recipe.recovered_at = db.func.current_timestamp()
         recipe.is_deleted = False
         db.session.commit()
+        session['recover_recipe'] = "Recipe recovered successfully"
 
     return jsonify({'message': 'Selected recipes recovered successfully'}), 200
+
+
+
+
 
 def get_authenticated_user():
     if 'user_id' in session:

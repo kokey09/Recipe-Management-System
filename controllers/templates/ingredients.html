@@ -9,6 +9,7 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="{{ url_for('static', filename='js/search_ingredient.js') }}"></script>
     <script src="{{ url_for('static', filename='js/massDeletionIngredient.js') }}"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
 </head>
 <body>
@@ -94,6 +95,29 @@
             </table>
         </section>
     </main>
+
+    {% if deleted_ingredients %}
+    <script>
+        swal("Deleted", "{{ deleted_ingredients }}", "info");
+    </script>
+    {% endif %}
+
+    {% if added_ingredients %}
+    <script>
+        swal("Success", "{{ added_ingredients }}", "success");
+    </script>
+    {% endif %}
+
+    {% if error %}
+    <script>
+        swal("Error", "{{ error }}", "error");
+    </script>
+    {% endif %}
+
+
+
+
+
 
     {% endblock %}
 </body>

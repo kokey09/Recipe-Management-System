@@ -31,6 +31,9 @@ def delete_account(account_id):
             flash('Account not found', 'error')
     return redirect(url_for('dashboard_controller.accounts'))
 
+
+
+
 # delete main function
 def delete_recipe_base(model, id, redirect_page):
     user = get_authenticated_user()
@@ -57,10 +60,14 @@ def delete_recipe_base(model, id, redirect_page):
     return jsonify({'error': 'Invalid request'}), 400
 
 
+
+
 # delete main function extension for admin
 @delete_controller_bp.route('/delete_recipe_admin/<int:id>', methods=['POST'])
 def delete_recipe_admin(id):
     return delete_recipe_base('recipe', id, 'dashboard_controller.recipes')
+
+
 
 
 # delete main function extension for user end
@@ -70,6 +77,8 @@ def delete_shared_recipe(id):
     if isinstance(result, tuple) and len(result) == 2 and result[1] == 200:
         return redirect(url_for('user_end_controller.shared_recipe'))
     return result
+
+
 
 
 @delete_controller_bp.route('/mass_recipe_deletion', methods=['POST'])
@@ -83,6 +92,8 @@ def mass_recipe_deletion():
 
 
 
+
+
 @delete_controller_bp.route('/delete_ingredient/<int:id>', methods=['POST'])
 def delete_ingredient(id):
     if request.method == 'POST':
@@ -91,12 +102,17 @@ def delete_ingredient(id):
             try:
                 db.session.delete(ingredient_to_delete)
                 db.session.commit()
-                flash('Ingredient deleted successfully', 'success')
+                session['deleted_ingredients'] = "deleted successfully"
+                
             except Exception as e:
-                flash('An error occurred while deleting the ingredient', 'error')
+                session['error'] = "you cannot delete this ingredients, please disconnect it first on recipe ingredients"
         else:
             flash('Ingredient not found', 'error')
     return redirect(url_for('dashboard_controller.ingredients'))
+
+
+
+
 
 @delete_controller_bp.route('/mass_delete_ingredients', methods=['POST'])
 def mass_delete_ingredients():
@@ -110,6 +126,9 @@ def mass_delete_ingredients():
             flash('An error occurred while deleting ingredients', 'error')
 
     return jsonify({"message": "Ingredients deleted successfully"})
+
+
+
 
 
 @delete_controller_bp.route('/delete_favorite/<int:id>', methods=['POST'])
@@ -140,6 +159,10 @@ def disconnect_recipe_ingredient(recipe_id, ingredient_id):
         return redirect(url_for('dashboard_controller.recipe_ingredients'))
 
     return render_template('disconnect_confirmation.html', recipe_id=recipe_id, ingredient_id=ingredient_id)
+
+
+
+
 
 def get_authenticated_user():
     if 'user_id' in session:
