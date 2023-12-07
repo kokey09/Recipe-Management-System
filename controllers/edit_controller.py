@@ -76,15 +76,13 @@ def user_edit_recipe(id):
     user = None
 
     # Check if the user is logged in
-    if 'user_id' in session:
-        user_id = session['user_id']
-        user = Account.query.get(user_id)
+    user = get_authenticated_user()
 
-        if user and recipe.account_id != user_id or recipe.is_deleted:
-            flash("You do not have permission to edit this recipe.", "error")
-            return redirect(url_for('user_end_controller.shared_recipe'))
-        elif not user:
-            return redirect(url_for('authentication_controller.login'))
+    if user and recipe.account_id != user.id or recipe.is_deleted:
+        flash("You do not have permission to edit this recipe.", "error")
+        return redirect(url_for('user_end_controller.shared_recipe'))
+    elif not user:
+        return redirect(url_for('authentication_controller.login'))
 
     if request.method == 'POST':
         recipe.name = request.form.get('recipe_name')

@@ -137,10 +137,11 @@ def recipe_preview():
         flash('Please log in to access the dashboard', 'error')
         return redirect(url_for('authentication_controller.login'))
 
-    if user.type != 'admin':
-        return redirect(url_for('user_end_controller.user_page'))
-
     recipe = Recipe.query.get(recipe_id)
+
+    if recipe.account_id != user.id or recipe.is_deleted:
+        return redirect(url_for('user_end_controller.shared_recipe'))
+
     return render_template('recipe_preview.html', id=recipe_id, recipe=recipe,user=user)
 
 def get_authenticated_user():
