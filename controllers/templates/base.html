@@ -28,7 +28,7 @@
           </a>
 
           <ul class="sub-menu blank">
-            <li><a href="#" class="link-name">Ingredients</a></li>
+            <li><a href="/ingredients" class="link-name">Ingredients</a></li>
           </ul>
         </li>
 
@@ -71,7 +71,7 @@
           </a>
 
           <ul class="sub-menu blank">
-            <li><a href="#" class="link-name">Review</a></li>
+            <li><a href="/reviews_dashboard" class="link-name">Review</a></li>
           </ul>
         </li>
 
@@ -82,7 +82,7 @@
           </a>
 
           <ul class="sub-menu blank">
-            <li><a href="#" class="link-name">Favourite</a></li>
+            <li><a href="/favorites" class="link-name">Favourite</a></li>
           </ul>
         </li>
 
@@ -95,7 +95,7 @@
           </a>
 
           <ul class="sub-menu blank">
-            <li><a href="#" class="link-name">Publish Recipe</a></li>
+            <li><a href="/shared_recipe" class="link-name">Publish Recipe</a></li>
           </ul>
         </li>
 
@@ -107,7 +107,7 @@
 
           <ul class="sub-menu blank">
             <li>
-                <a href="#" class="link-name">Home Page</a>
+                <a href="/" class="link-name">Home Page</a>
             </li>
           </ul>
         </li>
@@ -120,7 +120,7 @@
           </a>
 
           <ul class="sub-menu blank">
-            <li><a href="#" class="link-name">Logout</a></li>
+            <li><a href="{{ url_for('authentication_controller.logout') }}" class="link-name">Logout</a></li>
           </ul>
         </li>
 

@@ -81,9 +81,6 @@ def recipe_display():
     return response
 
 
-
-
-
 @user_end_controller_bp.route('/recipe_instruction')
 def recipe_instruction():
     recipe_id = request.args.get('recipe_id', None, type=int)
@@ -122,9 +119,6 @@ def recipe_instruction():
                                              ingredients=ingredients, added_review=added_review))
     response.headers['Cache-Control'] = 'no-cache, no-store, must-revalidate'
     return response
-
-
-
 
 
 @user_end_controller_bp.route('/user_profile_dashboard')

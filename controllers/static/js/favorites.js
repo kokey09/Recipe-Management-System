@@ -28,17 +28,16 @@ function handleAddFavoriteResponse(response) {
     const lowerCaseResponse = response.toLowerCase();
 
     if (lowerCaseResponse.includes("added successfully")) {
-        showPopup("Favorite added successfully");
+        showPopup("Favorite added successfully", "success");
     } else if (lowerCaseResponse.includes("already have this recipe as your favorite")) {
-        showPopup("You already have this recipe as your favorite");
+        showPopup("You already have this recipe as your favorite", "info");
     } else if (lowerCaseResponse.includes("restored from soft deletion")) {
         showPopup("Favorite added successfully (restored from soft deletion)");
     }
 }
 
-
-    function showPopup(message) {
-        alert(message);
+    function showPopup(message, type) {
+        swal("Info", message, type);
     }
 });
 

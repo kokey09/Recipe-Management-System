@@ -87,8 +87,9 @@ def add_recipe():
 
         if user.type == 'normal':
             return redirect(url_for('user_end_controller.shared_recipe'))
-				 
+
     return redirect(url_for('dashboard_controller.recipes'))
+
 
 @add_controller_bp.route('/add-ingredient', methods=['POST'])
 def add_ingredient():
