@@ -21,8 +21,7 @@ def recipes():
 
     if user.type != 'admin':
         return redirect(url_for('user_end_controller.user_page'))
-
-    recipes_data = Recipe.query.filter_by(is_deleted=False).all()
+    recipes_data = Recipe.query.filter_by(is_deleted=False).order_by(Recipe.recipe_id.desc()).all()
     response = make_response(render_template('recipes.html', recipes=recipes_data,
                                                              user=user,
                                                              added_recipe=added_recipe,
@@ -39,7 +38,7 @@ def deleted_recipes():
     if not user or user.type != 'admin':
         return redirect(url_for('user_end_controller.user_page'))
 
-    deleted_recipes_data = Recipe.query.filter_by(is_deleted=True).all()
+    deleted_recipes_data = Recipe.query.filter_by(is_deleted=True).order_by(Recipe.deleted_at.desc()).all()
     return render_template('deleted_recipes.html', deleted_recipes=deleted_recipes_data,
                                                    user=user,
                                                    recover_recipe=recover_recipe)

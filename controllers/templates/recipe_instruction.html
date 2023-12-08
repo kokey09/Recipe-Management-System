@@ -38,7 +38,7 @@
 
     <!--  reviews  -->
     <div class="reviews-section">
-        {% for review in reviews|sort(attribute='date_created',reverse=true) %}
+        {% for review in reviews %}
             <div class="review">
                 <div class="review-header">
                     <div class="user-info">

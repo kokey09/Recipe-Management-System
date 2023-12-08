@@ -113,7 +113,7 @@ def recipe_instruction():
         return redirect(url_for('user_end_controller.shared_recipe'))
 
     # Assuming you want to get reviews and count using the relationships
-    reviews = Review.query.filter_by(recipe_id=recipe_id).all()
+    reviews = Review.query.filter_by(recipe_id=recipe_id).order_by(Review.review_id.desc()).all()
     recipe_reviews_count = len(reviews)
 
     # Fetch all ingredients separately for use in the template
