@@ -1,11 +1,13 @@
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
-app = Flask(__name__)
+import os
 db = SQLAlchemy()
 
 def create_app():
 
-    app = Flask(__name__)  # Create the Flask app instance here
+    app = Flask(__name__, 
+                template_folder=os.path.join(os.getcwd(), 'views/templates'), 
+                static_folder=os.path.join(os.getcwd(), 'views/static'))  # Create the Flask app instance here
 
     app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://dashboard:dashboard@127.0.0.1/recipedb'
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
