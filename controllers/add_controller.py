@@ -59,8 +59,8 @@ def add_review():
     return redirect(url_for('user_end_controller.recipe_instruction', recipe_id=recipe_id))
 
 
-@add_controller_bp.route('/add_recipe', methods=['POST'])
-def add_recipe():
+# add main function
+def add_recipe_base(model, redirect_page):
     if request.method == 'POST':
 
         user = get_authenticated_user()
@@ -88,10 +88,19 @@ def add_recipe():
             logging.error(f"Error adding recipe: {str(e)}")
             db.session.rollback()
 
-        if user.type == 'normal':
-            return redirect(url_for('user_end_controller.shared_recipe'))
+        return redirect(url_for(redirect_page))
 
     return redirect(url_for('dashboard_controller.recipes'))
+
+# add main function extension for admin
+@add_controller_bp.route('/add_recipe_admin', methods=['POST'])
+def add_recipe_admin():
+    return add_recipe_base('recipe', 'dashboard_controller.recipes')
+
+# add main function extension for user
+@add_controller_bp.route('/add_recipe_user', methods=['POST'])
+def add_recipe_user():
+    return add_recipe_base('recipe', 'user_end_controller.shared_recipe')
 
 
 @add_controller_bp.route('/add-ingredient', methods=['POST'])
