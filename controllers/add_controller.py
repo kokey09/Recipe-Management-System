@@ -21,7 +21,7 @@ bcrypt = Bcrypt()
 
 def save_image_file(image_file, directory):
     filename = secure_filename(image_file.filename)
-    image_directory = os.path.join(current_app.root_path, 'static', directory)
+    image_directory = os.path.join(current_app.root_path, '..', 'views', 'static', directory)
     os.makedirs(image_directory, exist_ok=True)
     image_path = os.path.join(image_directory, filename)
     image_file.save(image_path)
