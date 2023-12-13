@@ -7,33 +7,39 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="{{ url_for('static', filename='js/search_review_dashboard.js') }}"></script>
     <link rel="icon" href="{{ url_for('static', filename='raw-image/home.png') }}" type="image/x-icon">
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 </head>
 <body>
     {% extends 'base.html' %}
     {% block title %}Recipes{% endblock %}
     {% block content %}
 
-    <fieldset>
-        <legend><h1>Reviews</h1></legend>
-        <div class="search-container">
+ <main class="table">
+        <section class="table-header">
+            <h1>Reviews</h1>
+            <div class="search-container">
+                <select id="columnSelector">
+                    <option value="all">Search All</option>
+                    <option value="review_id">Review ID</option>
+                    <option value="recipe_id">Recipe ID</option>
+                    <option value="recipe_name">Recipe Name</option>
+                    <option value="account_id">Account ID</option>
+                    <option value="account_username">Account Username</option>
+                    <option value="review_text">Review Text</option>
+                    <option value="rating">Rating</option>
+                    <option value="date_created">Date Created</option>
+                </select>
+                <input type="text" id="searchInput-reviews" class="search-bar" placeholder="Search reviews">
+            </div>
+        </section>
 
-            <select id="columnSelector">
-                <option value="all">Search All</option>
-                <option value="review_id">Review ID</option>
-                <option value="recipe_id">Recipe ID</option>
-                <option value="account_id">Account ID</option>
-                <option value="review_text">Review Text</option>
-                <option value="rating">Rating</option>
-                <option value="timestamp">Timestamp</option>
-            </select>
-            <input type="text" id="searchInput-reviews" class="search-bar" placeholder="Search reviews">
-            <button id="searchButton">Search</button>
-        </div>
-        <table>
-            <thead>
+        <section class="table-body">
+            <table>
+                <thead>
                 <tr>
                     <th>review ID</th>
                     <th>recipe ID</th>
+                    <th>recipe name</th>
                     <th>account ID</th>
                     <th>account username</th>
                     <th>Review Text</th>
@@ -41,26 +47,67 @@
                     <th>Date Create</th>
                     <th>Image</th>
                 </tr>
-            </thead>
-            <tbody>
-                {% for review in reviews %}
-                <tr>
-                    <td>{{ review.review_id }}</td>
-                    <td>{{ review.recipe_id }}</td>
-                    <td>{{ review.account_id }}</td>
-                    <td>{{ review.account.username }}</td>
-                    <td>
-                        <div class="ellipsis-text">{{ review.review_text }}</div>
-                    </td>                    <td>{{ review.rating }}</td>
-                    <td>{{ review.date_created }}</td>
-                    <td>
-                        <img src="{{ review.image_url }}" alt="NULL Image" style="width: 100px; height: 100px;" loading="lazy">
-                    </td>
-                </tr>
+                </thead>
+                <tbody>
+				{% for review in reviews %}
+					<tr>
+                        <td >
+                            <a href="{{ url_for('user_end_controller.recipe_instruction', recipe_id=review.recipe_id) }}#{{review.review_id}}"
+                            data-is-deleted="{{ review.recipe.is_deleted }}">
+                             {{ review.review_id }}
+                            </a>
+                        </td>
+
+						<td>
+                            {{ review.recipe_id }}
+                        </td>
+
+                        <td class="deleted {{ review.recipe.is_deleted }}">
+                            {{ review.recipe.name }}
+                        </td>
+
+						<td>
+                            {{ review.account_id }}
+                        </td>
+
+						<td>
+                            {{ review.account.username }}
+                        </td>
+
+						<td>
+							<div class="ellipsis-text">
+                                {{ review.review_text }}
+                            </div>
+						</td>
+
+                        <td>
+                            {{ review.rating }}
+                        </td>
+
+						<td>
+                            {{ review.date_created.strftime("%B %d, %Y at %I:%M:%S %p") }}
+                        </td>
+
+						<td>
+							<img src="{{ review.image_url }}" alt="NULL Image" style="width: 100px; height: 100px;" loading="lazy">
+						</td>
+
+					</tr>
                 {% endfor %}
-            </tbody>
-        </table>
-    </fieldset>
+                </tbody>
+            </table>
+        </section>
+    </main>
+        <script>
+            document.querySelectorAll('a[data-is-deleted]').forEach(function(link) {
+                link.addEventListener('click', function(event) {
+                    if (this.getAttribute('data-is-deleted') === 'True') {
+                        event.preventDefault();
+                        swal("Deleted", "This review has been deleted and cannot be viewed", "info");
+                    }
+                });
+            });
+        </script>
     {% endblock %}
 </body>
 </html>

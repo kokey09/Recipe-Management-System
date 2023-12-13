@@ -24,7 +24,6 @@
     </a>
     <div class="row">
         {% for recipe in recipes %}
-            {% if user and recipe.account_id == user.id %}
                 <div class="col-md-4">
                     <div class="card recipe-card">
                         <img src="{{ recipe.image_url }}" alt="{{ recipe.name }} Image"  style="width: 100%; height: 200px;" loading="lazy">
@@ -63,9 +62,6 @@
                         </div>
                     </div>
                 </div>
-            {% elif not user %}
-                <p>User not logged in Popup</p>
-            {% endif %}
         {% endfor %}
     </div>
 </div>

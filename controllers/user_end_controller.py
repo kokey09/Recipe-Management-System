@@ -163,7 +163,8 @@ def shared_recipe():
     if not user:
         return redirect(url_for('authentication_controller.login'))
 
-    recipes = Recipe.query.filter_by(is_deleted=False).order_by(Recipe.recipe_id.desc()).all()
+    # Filter recipes to only include those belonging to the current user
+    recipes = Recipe.query.filter_by(is_deleted=False, account_id=user.id).order_by(Recipe.recipe_id.desc()).all()
     recipe_reviews_count = {}  # Dictionary to store the counts
     for recipe in recipes:
         recipe_reviews_count[recipe.recipe_id] = len(Review.query.filter_by(recipe_id=recipe.recipe_id).all())
