@@ -22,10 +22,10 @@ def register():
         # Check account already exists
         if len(password) < 8:
             error = "Password must be at least 8 characters long."
-        elif existing_email:
-            error = "An account with this email already exists."
         elif existing_username:
             error = "An account with this username already exists."
+        elif existing_email:
+            error = "An account with this email already exists."
         elif password == confirm_password:
             hashed_password = bcrypt.generate_password_hash(password).decode('utf-8')
 
