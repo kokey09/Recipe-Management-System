@@ -11,12 +11,12 @@ USE recipedb;
 
 
 CREATE TABLE account (
-    id INT(11) AUTO_INCREMENT PRIMARY KEY,
-    username VARCHAR(50),
-    email VARCHAR(120),
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    username VARCHAR(50) UNIQUE,
+    email VARCHAR(120) UNIQUE,
     password VARCHAR(60),
     date_created TIMESTAMP,
-    type VARCHAR(255),
+    type VARCHAR(50),
     is_deleted TINYINT(1)
 );
 
