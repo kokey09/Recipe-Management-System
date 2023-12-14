@@ -114,10 +114,11 @@
     </script>
     {% endif %}
 
-
-
-
-
+    {% if existing_ingredient %}
+    <script>
+        swal("Error", "{{ existing_ingredient }}", "info");
+    </script>
+    {% endif %}
 
     {% endblock %}
 </body>

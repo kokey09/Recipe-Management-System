@@ -49,6 +49,7 @@ def ingredients():
     deleted_ingredients = session.pop('deleted_ingredients', None)
     added_ingredients = session.pop('added_ingredients', None)
     error = session.pop('error', None)
+    existing_ingredient = session.pop('existing_ingredient', None)
     user = get_authenticated_user()
 
     if not user:
@@ -63,7 +64,8 @@ def ingredients():
                                                                  user=user,
                                                                  deleted_ingredients=deleted_ingredients,
                                                                  added_ingredients=added_ingredients,
-                                                                 error=error))
+                                                                 error=error,
+                                                                 existing_ingredient=existing_ingredient))
     response.headers['Cache-Control'] = 'no-cache, no-store, must-revalidate'
     return response
 

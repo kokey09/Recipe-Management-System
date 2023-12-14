@@ -120,6 +120,8 @@ def add_ingredient():
             except Exception as e:
                 db.session.rollback()
                 logging.error(f"Error adding ingredient: {str(e)}")
+        elif existing_ingredient:
+            session['existing_ingredient'] = 'ingredients already exist'
 
     return redirect(url_for('dashboard_controller.ingredients')) 
 
