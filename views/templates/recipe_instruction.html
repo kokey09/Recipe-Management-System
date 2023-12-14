@@ -39,7 +39,7 @@
     <!--  reviews  -->
     <div class="reviews-section">
         {% for review in reviews %}
-            <div class="review">
+            <div class="review" id="{{review.review_id}}">
                 <div class="review-header">
                     <div class="user-info">
                         {% if review.account.is_deleted %}
