@@ -46,9 +46,11 @@ def deleted_recipes():
 
 @dashboard_controller_bp.route('/ingredients')
 def ingredients():
+
     deleted_ingredients = session.pop('deleted_ingredients', None)
     added_ingredients = session.pop('added_ingredients', None)
-    error = session.pop('error', None)
+    error = session.pop('error', None) #from delete controller exception
+
     existing_ingredient = session.pop('existing_ingredient', None)
     user = get_authenticated_user()
 

@@ -109,9 +109,9 @@ def mass_delete_ingredients():
         try:
             Ingredient.query.filter(Ingredient.ingredient_id.in_(selected_ids)).delete(synchronize_session='fetch')
             db.session.commit()
-            flash('Ingredients deleted successfully', 'success')
+            session['deleted_ingredients'] = 'Ingredients deleted successfully'
         except Exception as e:
-            flash('An error occurred while deleting ingredients', 'error')
+            session['deleted_ingredients'] = 'An error occurred while deleting ingredients'
 
     return jsonify({"message": "Ingredients deleted successfully"})
 

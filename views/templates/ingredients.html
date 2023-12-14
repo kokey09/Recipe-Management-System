@@ -96,29 +96,23 @@
         </section>
     </main>
 
-    {% if deleted_ingredients %}
-    <script>
-        swal("Deleted", "{{ deleted_ingredients }}", "info");
-    </script>
-    {% endif %}
-
-    {% if added_ingredients %}
-    <script>
-        swal("Success", "{{ added_ingredients }}", "success");
-    </script>
-    {% endif %}
-
-    {% if error %}
-    <script>
-        swal("Error", "{{ error }}", "error");
-    </script>
-    {% endif %}
-
-    {% if existing_ingredient %}
-    <script>
-        swal("Error", "{{ existing_ingredient }}", "info");
-    </script>
-    {% endif %}
+        {% if deleted_ingredients %}
+        <script>
+            swal("Deleted", "{{ deleted_ingredients }}", "info");
+        </script>
+        {% elif added_ingredients %}
+        <script>
+            swal("Success", "{{ added_ingredients }}", "success");
+        </script>
+        {% elif error %}
+        <script>
+            swal("Error", "{{ error }}", "error");
+        </script>
+        {% elif existing_ingredient %}
+        <script>
+            swal("Error", "{{ existing_ingredient }}", "info");
+        </script>
+        {% endif %}
 
     {% endblock %}
 </body>
