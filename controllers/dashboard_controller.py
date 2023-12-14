@@ -106,7 +106,7 @@ def reviews_dashboard():
     if user.type != 'admin':
         return redirect(url_for('user_end_controller.user_page'))
 
-    reviews = Review.query.all()
+    reviews = Review.query.order_by(Review.date_created.desc()).all()
     response = make_response(render_template('reviews_dashboard.html', user=user, reviews=reviews))
     response.headers['Cache-Control'] = 'no-cache, no-store, must-revalidate'
     return response

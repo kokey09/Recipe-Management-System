@@ -98,16 +98,16 @@
             </table>
         </section>
     </main>
-        <script>
-            document.querySelectorAll('a[data-is-deleted]').forEach(function(link) {
-                link.addEventListener('click', function(event) {
-                    if (this.getAttribute('data-is-deleted') === 'True') {
-                        event.preventDefault();
-                        swal("Deleted", "This review has been deleted and cannot be viewed", "info");
-                    }
-                });
+    <script>
+        document.querySelectorAll('a[data-is-deleted]').forEach(function(link) {
+            link.addEventListener('click', function(event) {
+                if (this.getAttribute('data-is-deleted') === 'True') {
+                    event.preventDefault();
+                    swal("Deleted", "This review has been deleted and cannot be viewed", "info");
+                }
             });
-        </script>
+        });
+    </script>
     {% endblock %}
 </body>
 </html>
