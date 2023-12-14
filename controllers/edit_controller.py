@@ -71,6 +71,13 @@ def edit_account(id):
 
 #    return render_template('edit_recipes.html', recipe=recipe, id=id, user=user)
 
+def save_image_file(image_file, directory):
+    filename = secure_filename(image_file.filename)
+    image_directory = os.path.join(current_app.root_path, '..', 'views', 'static', directory)
+    os.makedirs(image_directory, exist_ok=True)
+    image_path = os.path.join(image_directory, filename)
+    image_file.save(image_path)
+    return filename
 
 @edit_controller_bp.route('/user_edit_recipe/<int:id>', methods=['GET', 'POST'])
 def user_edit_recipe(id):
@@ -93,9 +100,8 @@ def user_edit_recipe(id):
 
         image_file = request.files.get('image_file')
         if image_file:
-            filename = secure_filename(image_file.filename)
-            image_path = os.path.join(current_app.root_path, 'static', 'recipes-img-table', filename)
-            image_file.save(image_path)
+            filename = save_image_file(image_file, 'recipes-img-table')  # Use save_image_file function here
+
             recipe.image_url = f'static/recipes-img-table/{filename}'
 
         try:
