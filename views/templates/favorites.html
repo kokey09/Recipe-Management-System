@@ -9,6 +9,8 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@iconify/all.css">
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <link rel="icon" href="{{ url_for('static', filename='raw-image/home.png') }}" type="image/x-icon">
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
 </head>
 <body>
     {% extends 'user_profile_dashboard.html' %}
@@ -43,6 +45,12 @@
     </div>
 </div>
 
+
+{% if remove_favorite %}
+<script>
+    swal("Remove", "{{ remove_favorite }}", "info");
+</script>
+{% endif %}
 
 
     {% endblock %}

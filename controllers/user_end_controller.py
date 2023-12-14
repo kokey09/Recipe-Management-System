@@ -180,6 +180,7 @@ def shared_recipe():
 
 @user_end_controller_bp.route('/favorites')
 def favorites():
+    remove_favorite = session.pop('remove_favorite', None)
     user = get_authenticated_user()
 
     if not user:
@@ -191,7 +192,7 @@ def favorites():
         Recipe.is_deleted == False
     ).all()
 
-    response = make_response (render_template('favorites.html', user=user, favorites=favorites))
+    response = make_response (render_template('favorites.html', user=user, favorites=favorites,remove_favorite=remove_favorite))
     response.headers['Cache-Control'] = 'no-cache, no-store, must-revalidate'
     return response
 

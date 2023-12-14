@@ -8,7 +8,7 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="{{ url_for('static', filename='js/search_account.js') }}"></script>
     <script src="{{ url_for('static', filename='js/dynamic.js') }}"></script>
-
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 </head>
 <body>
 {% extends 'base.html' %}
@@ -81,6 +81,13 @@
             </table>
         </section>
     </main>
+
+    {% if remove_account %}
+    <script>
+         swal("Deleted", "{{ remove_account }}", "info");
+    </script>
+    {% endif %}
+
 
 {% endblock %}
 </body>

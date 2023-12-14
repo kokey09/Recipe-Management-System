@@ -118,6 +118,7 @@ def reviews_dashboard():
 
 @dashboard_controller_bp.route('/accounts')
 def accounts():
+    remove_account = session.pop('remove_account', None)
     user = get_authenticated_user()
 
     if not user:
@@ -129,7 +130,7 @@ def accounts():
         return redirect(url_for('user_end_controller.user_page'))
 
     accounts_data = Account.query.all()
-    response = make_response(render_template('accounts.html', accounts=accounts_data, user=user))
+    response = make_response(render_template('accounts.html', accounts=accounts_data, user=user, remove_account=remove_account))
     response.headers['Cache-Control'] = 'no-cache, no-store, must-revalidate'
     return response
 

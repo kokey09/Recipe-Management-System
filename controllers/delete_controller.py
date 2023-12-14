@@ -26,11 +26,11 @@ def delete_account(account_id):
                 # Soft delete the account
                 account_to_delete.is_deleted = True
                 db.session.commit()
-                flash('Account deleted successfully', 'success')
+                session['remove_account'] = 'Account soft deleted successfully'
             except Exception as e:
-                flash('An error occurred while soft deleting the account: ' + str(e), 'error')
+                session['remove_account'] = 'An error occurred while soft deleting the account: '+ str(e)
         else:
-            flash('Account not found', 'error')
+            session['remove_account'] = 'Account not found'
     return redirect(url_for('dashboard_controller.accounts'))
 
 
@@ -98,7 +98,7 @@ def delete_ingredient(id):
             except Exception as e:
                 session['error'] = "you cannot delete this ingredients, please disconnect it first on recipe ingredients"
         else:
-            flash('Ingredient not found', 'error')
+            session['error'] = 'Ingredient not found'
     return redirect(url_for('dashboard_controller.ingredients'))
 
 
@@ -125,11 +125,11 @@ def delete_favorite(id):
                 # Soft delete the favorite
                 favorite_to_delete.is_deleted = True
                 db.session.commit()
-                flash('Favorite deleted successfully', 'success')
+                session['remove_favorite'] = 'Favorite remove successfully'
             except Exception as e:
-                flash('An error occurred while soft deleting the favorite: ' + str(e), 'error')
+                session['remove_favorite'] = 'An error occurred while soft deleting the favorite: ' + str(e)
         else:
-            flash('Favorite not found', 'error')
+            session['remove_favorite'] = 'Favorite not found'
     return redirect(url_for('user_end_controller.favorites'))
 
 
