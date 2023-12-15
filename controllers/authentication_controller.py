@@ -131,18 +131,34 @@ def reset_password(token):
     error = None
     if request.method == 'POST':
         password = request.form.get('password')
+        password2 = request.form.get('password2')
         email = confirm_reset_token(token)
 
-        if email is None:
-            return redirect(url_for('authentication_controller.login'))  # updated
+        if not email:
+            session['reset_password'] = 'Invalid or expired token'
+            return redirect(url_for('authentication_controller.login'))
+
         if len(password) < 8:
-            error = "Password must be at least 8 characters long."
+            error = 'Password must be at least 8 characters long.'
             return render_template('reset_password.html', token=token, error=error)
-        
+
+        if password != password2:
+            error = 'Your password and confirm password do not match.'
+            return render_template('reset_password.html', token=token, error=error)
+
         user = Account.query.filter_by(email=email).first()
+        if not user:
+            error = 'User not found'
+            return redirect(url_for('authentication_controller.login'))
+        
+        if bcrypt.check_password_hash(user.password, password):
+            error = 'New password cannot be the same as the old password.'
+            return render_template('reset_password.html', token=token, error=error)
+
         hashed_password = bcrypt.generate_password_hash(password).decode('utf-8')
         user.password = hashed_password
         db.session.commit()
         session['reset_password'] = "Password has been reset."
-        return redirect(url_for('authentication_controller.login'))  # updated
+        return redirect(url_for('authentication_controller.login'))
+
     return render_template('reset_password.html', token=token, error=error)
