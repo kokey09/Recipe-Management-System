@@ -94,7 +94,7 @@ def add_header(response):
 def forgot_password():
     notif = None
     if request.method == 'POST':
-        email = request.form.get('email') # getting the email from the form
+        email = request.form.get('email') 
         # looking for the email in the database
         user = Account.query.filter_by(email=email).first()
 

@@ -15,18 +15,6 @@
         <h1>Edit Account</h1>
         <form method="POST" action="/edit_account/{{ account.id }}" onsubmit="return confirmUpdate();">
             <div class="form-group">
-                <label for="username">Username:</label>
-                <input type="text" id="username" name="username" value="{{ account.username }}" required>
-            </div>
-            <div class="form-group">
-                <label for="email">Email:</label>
-                <input type="email" id="email" name="email" value="{{ account.email }}" required>
-            </div>
-            <div class="form-group">
-                <label for="password">Password:</label>
-                <input type="password" id="password" name="password" required placeholder="Enter new password">
-            </div>
-            <div class="form-group">
                 <label for="type">Account Type:</label>
                 <select id="type" name="type" required>
                     <option value="admin" {% if account.type == 'admin' %}selected{% endif %}>Admin</option>

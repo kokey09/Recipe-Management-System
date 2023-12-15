@@ -27,18 +27,9 @@ def edit_account(id):
         return jsonify({"error": "Account not found"}), 404
 
     if request.method == 'POST':
-        account.username = request.form.get('username')
-        account.email = request.form.get('email')
         account.type = request.form.get('type')
-        account.is_deleted = request.form.get('is_deleted')
         is_deleted = request.form.get('is_deleted', '0') == '1'
         account.is_deleted = is_deleted
-
-        if 'password' in request.form:
-            new_password = request.form['password']
-            # Rehash the new password and update it in the database
-            hashed_password = bcrypt.generate_password_hash(new_password).decode('utf-8')
-            account.password = hashed_password
 
         db.session.commit()
         return redirect(url_for('dashboard_controller.accounts'))
