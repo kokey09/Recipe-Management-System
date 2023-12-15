@@ -1,7 +1,10 @@
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
+from flask_mail import Mail
 import os
+
 db = SQLAlchemy()
+mail = Mail()
 
 def create_app():
 
@@ -12,9 +15,15 @@ def create_app():
     app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://dashboard:dashboard@127.0.0.1/recipedb'
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
     app.config['STATIC_FOLDER'] = 'static'
+    app.config['MAIL_SERVER'] = 'smtp.googlemail.com'
+    app.config['MAIL_PORT'] = 587
+    app.config['MAIL_USE_TLS'] = True
+    app.config['MAIL_USERNAME'] = 'khimrata11@gmail.com'  # Replace with your actual email
+    app.config['MAIL_PASSWORD'] = 'mlxo tdne vatb pmax '  # Replace with your actual password or App Password
     app.secret_key = 'your_secret_key'
 
     db.init_app(app)
+    mail.init_app(app)
 
     from controllers.authentication_controller import authentication_controller_bp
     from controllers.edit_controller import edit_controller_bp

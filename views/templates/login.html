@@ -39,7 +39,7 @@
                         <label for="show">Show password </label>
                     </div>
                     <div class="forgot">
-                        <a href="#">Forgot password</a>
+                        <a href="/forgot_password">Forgot password</a>
                     </div>
                 </div>
                 <div class="input-box">
@@ -63,6 +63,12 @@
     {% if success %}
     <script>
         swal("Success", "{{ success }}", "success");
+    </script>
+    {% endif %}
+
+    {% if reset_password %}
+    <script>
+        swal("Success", "{{ reset_password }}", "success");
     </script>
     {% endif %}
 
