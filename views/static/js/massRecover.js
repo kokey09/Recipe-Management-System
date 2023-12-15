@@ -22,22 +22,25 @@ $(document).ready(function() {
         });
     
         if (selectedIds.length > 0) {
-            // Perform mass recovery by sending selectedIds to the server
-            $.ajax({
-                type: "POST",
-                url: "/mass_recover_recipes",
-                data: { ids: selectedIds },
-                success: function(response) {
-                    // Clear all checkboxes
-                    $(".checkbox:checked").prop("checked", false);
-                    // Handle success, e.g., refresh the page or update the table
-                    location.reload();
-                },
-                error: function(error) {
-                    console.error("Error during mass recovery:", error);
-                    // Handle error if needed
-                }
-            });
+            // Confirm before performing mass recovery
+            if (confirm('Are you sure you want to recover selected items?')) {
+                // Perform mass recovery by sending selectedIds to the server
+                $.ajax({
+                    type: "POST",
+                    url: "/mass_recover_recipes",
+                    data: { ids: selectedIds },
+                    success: function(response) {
+                        // Clear all checkboxes
+                        $(".checkbox:checked").prop("checked", false);
+                        // Handle success, e.g., refresh the page or update the table
+                        location.reload();
+                    },
+                    error: function(error) {
+                        console.error("Error during mass recovery:", error);
+                        // Handle error if needed
+                    }
+                });
+            }
         }
     });
 

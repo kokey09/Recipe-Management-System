@@ -22,20 +22,23 @@ $(document).ready(function() {
         });
 
         if (selectedIds.length > 0) {
-            // Perform mass deletion by sending selectedIds to the server
-            $.ajax({
-                type: "POST",
-                url: "/mass_recipe_deletion",
-                data: { ids: selectedIds },
-                success: function(response) {
-                    // Handle success, e.g., refresh the page or update the table
-                    location.reload();
-                },
-                error: function(error) {
-                    console.error("Error during mass deletion:", error);
-                    // Handle error if needed
-                }
-            });
+            // Confirm before performing mass deletion
+            if (confirm('Are you sure you want to delete selected items?')) {
+                // Perform mass deletion by sending selectedIds to the server
+                $.ajax({
+                    type: "POST",
+                    url: "/mass_recipe_deletion",
+                    data: { ids: selectedIds },
+                    success: function(response) {
+                        // Handle success, e.g., refresh the page or update the table
+                        location.reload();
+                    },
+                    error: function(error) {
+                        console.error("Error during mass deletion:", error);
+                        // Handle error if needed
+                    }
+                });
+            }
         }
     });
 
@@ -51,5 +54,3 @@ $(document).ready(function() {
         $("#select-all-button").toggle(anyCheckboxUnchecked);
     }
 });
-
-
