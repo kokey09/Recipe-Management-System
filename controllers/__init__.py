@@ -23,7 +23,7 @@ def create_app():
     app.secret_key = 'your_secret_key'
 
     if 'CODESPACES' in os.environ:
-        app.config['SERVER_NAME'] = os.environ['CODESPACE_NAME'] + '-5000.githubpreview.dev'
+        app.config['SERVER_NAME'] = os.environ['CODESPACE_NAME'] + '-5000.app.github.dev'
     else:
         app.config['SERVER_NAME'] = '127.0.0.1:5000'
         
