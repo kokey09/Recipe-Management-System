@@ -131,7 +131,7 @@ def reset_password(token):
     error = None
     if request.method == 'POST':
         password = request.form.get('password')
-        password2 = request.form.get('password2')
+        confirm_password = request.form.get('confirm_password')
         email = confirm_reset_token(token)
 
         if not email:
@@ -142,7 +142,7 @@ def reset_password(token):
             error = 'Password must be at least 8 characters long.'
             return render_template('reset_password.html', token=token, error=error)
 
-        if password != password2:
+        if password != confirm_password:
             error = 'Your password and confirm password do not match.'
             return render_template('reset_password.html', token=token, error=error)
 
