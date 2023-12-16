@@ -19,9 +19,8 @@ def user_page():
     recipe_reviews_count = {}
     for recipe in recipes:
         recipe_reviews_count[recipe.recipe_id] = len(Review.query.filter_by(recipe_id=recipe.recipe_id).all())
-    # Check if the user is logged in
+    
     user = get_authenticated_user()
-
     # Render the template with the recipes, ingredients, user, and review counts
     response = make_response(render_template('user_page.html', recipes=recipes,
                                                                ingredients=ingredients,

@@ -3,13 +3,13 @@ from models.account import Account
 from models.account import db
 from models.review import Review
 from flask_bcrypt import Bcrypt
-
+import os
 
 from flask import current_app
 from flask_mail import Mail, Message
 from itsdangerous import URLSafeTimedSerializer
 
-
+BASE_URL = os.getenv('BASE_URL', 'http://localhost:5000')
 
 authentication_controller_bp = Blueprint('authentication_controller',__name__,template_folder='templates',static_folder='static')
 bcrypt = Bcrypt()
@@ -72,10 +72,9 @@ def verify_email(token):
     flash('An error occurred')
     return redirect(url_for('authentication_controller.register'))
 
-
 def send_verification_email(email, token):
     msg = Message('Account Verification', sender='your-email@gmail.com', recipients=[email])
-    verify_url = url_for('authentication_controller.verify_email', token=token, _external=True)
+    verify_url = f"{BASE_URL}/verify_email/{token}"
     msg.body = f'Click the following link to verify your account: {verify_url}'
     mail.send(msg)
 
@@ -99,10 +98,10 @@ def confirm_verification_token(token, expiration=3600):
 def login():
     if request.method == 'POST':
         username = request.form.get('username')
-        entered_password = request.form.get('password')
+        password = request.form.get('password')
         user = Account.query.filter_by(username=username).first()
 
-        if not user or not bcrypt.check_password_hash(user.password, entered_password):
+        if not user or not bcrypt.check_password_hash(user.password, password):
             error="Incorrect username or password. Please try again."
             return render_template('login.html', error=error)
 
@@ -175,7 +174,8 @@ def confirm_reset_token(token, expiration=3600):
 
 def send_reset_email(email, token):
     msg = Message('Password Reset Request', sender='your-email@gmail.com', recipients=[email])
-    msg.body = f'Click the following link to reset your password: {url_for("authentication_controller.reset_password", token=token, _external=True)}'
+    reset_url = f"{BASE_URL}/reset_password/{token}"
+    msg.body = f'Click the following link to reset your password: {reset_url}'
     mail.send(msg)
 
 
