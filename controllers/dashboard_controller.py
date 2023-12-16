@@ -1,4 +1,5 @@
 from flask import  render_template, request, redirect, url_for, Blueprint,current_app,session,flash,make_response,jsonify
+from sqlalchemy import func
 
 from models.recipe import Recipe
 from models.ingredient import Ingredient
@@ -146,7 +147,26 @@ def dashboard():
     if user.type != 'admin':
         return redirect(url_for('user_end_controller.user_page'))
 
-    response = make_response(render_template('dashboard.html', user=user))
+    # Query for counts
+
+    total_accounts = Account.query.filter_by(is_deleted=False, status='verified').count()
+    total_pending_recipes = Recipe.query.filter_by(status='pending', is_deleted=False).count()
+    total_approved_recipes = Recipe.query.filter_by(status='approved', is_deleted=False).count()
+    total_declined_recipes = Recipe.query.filter_by(status='declined', is_deleted=False).count()
+    # Query for recipes
+    recipes = Recipe.query.filter_by(is_deleted=False).order_by(Recipe.recipe_id.desc()).all()
+
+    # Prepare data for rendering
+    data = {
+        'user': user,
+        'total_accounts': total_accounts,
+        'total_pending_recipes': total_pending_recipes,
+        'total_approved_recipes': total_approved_recipes,
+        'total_declined_recipes': total_declined_recipes,
+        'recipes': recipes
+    }
+
+    response = make_response(render_template('dashboard.html', **data))
     response.headers['Cache-Control'] = 'no-cache, no-store, must-revalidate'
     return response
 

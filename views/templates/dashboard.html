@@ -3,8 +3,77 @@
 {% block title %}Dashboard{% endblock %}
 
 {% block content %}
-    <h2>Welcome to the Dashboard</h2>
-    <p>bla bla bla</p>
-    <div id="employee-list-container"></div>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/dashboard_page.css') }}">
+
+    <main>
+        <ul class="box-info">
+
+            <li>
+                <i class='bx bxs-calendar-check'></i>
+                <span class="text">
+                    <h3>{{ total_pending_recipes }}</h3>
+                    <p>Pending Recipe</p>
+                </span>
+            </li>
+
+            <li>
+                <i class='bx bxs-calendar-check'></i>
+                <span class="text">
+                    <h3>{{ total_approved_recipes }}</h3>
+                    <p>Approved Recipe</p>
+                </span>
+            </li>
+
+            <li>
+                <i class='bx bxs-calendar-check'></i>
+                <span class="text">
+                    <h3>{{ total_declined_recipes }}</h3>
+                    <p>Decline Recipe</p>
+                </span>
+            </li>
+
+            <li>
+                <i class='bx bxs-group'></i>
+                <span class="text">
+                    <h3>{{ total_accounts }}</h3>
+                    <p>Verified Active Accounts</p>
+                </span>
+            </li>
+
+        </ul>
+
+
+        <div class="table-data">
+            <div class="order">
+                <div class="head">
+                    <h3>Recently Added</h3>
+                    <i class='bx bx-search' ></i>
+                    <i class='bx bx-filter' ></i>
+                </div>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Recipe</th>
+                            <th>Date Added</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for recipe in recipes [:5]%}
+                        <tr>
+                            <td>
+                                <img src="{{ recipe.image_url }}" alt="{{ recipe.name }} Image" loading="lazy">
+                                <p>{{ recipe.name }}</p>
+                            </td>
+                            <td>{{ recipe.created_at.strftime("%B %d, %Y at %I:%M:%S %p") }}</td>
+                            <td><span class="status {{ recipe.status }}">{{ recipe.status}}</span></td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </main>
+
 
 {% endblock %}
