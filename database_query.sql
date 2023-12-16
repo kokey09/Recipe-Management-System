@@ -17,8 +17,8 @@ CREATE TABLE account (
     password VARCHAR(60),
     date_created TIMESTAMP,
     type VARCHAR(50),
-    is_deleted TINYINT(1)
-	status ENUM('unverified', 'verified') DEFAULT 'unverified',
+    is_deleted TINYINT(1),
+	status ENUM('unverified', 'verified') DEFAULT 'unverified'
 );
 
 CREATE TABLE recipes (
