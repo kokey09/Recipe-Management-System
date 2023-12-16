@@ -111,6 +111,8 @@ def login():
             return render_template('login.html', error=error)
 
         if user.status != 'verified':
+            token = generate_verification_token(user.email)  # Generate a new token
+            send_verification_email(user.email, token)  # Send the verification email
             error="Account is not verified. Please check your email for the verification link."
             return render_template('login.html', error=error)
 
