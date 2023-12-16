@@ -19,6 +19,7 @@ mail = Mail()
 def register():
     error = None  # Define notif here
     success = None
+    exprired_token = session.pop('exprired_token', None)
     if request.method == 'POST':
         username = request.form.get('username')
         email = request.form.get('email')
@@ -49,7 +50,7 @@ def register():
         else:
             error = "Your password and confirm password do not match."
 
-    return render_template('register.html', error=error, success=success)
+    return render_template('register.html', error=error, success=success, exprired_token=exprired_token)
 
 
 @authentication_controller_bp.route('/verify_email/<token>', methods=['GET', 'POST'])
@@ -57,7 +58,7 @@ def verify_email(token):
     email = confirm_verification_token(token)
 
     if not email:
-        flash('Invalid or expired token')
+        session['exprired_token'] = 'Invalid or expired token'
         return redirect(url_for('authentication_controller.register'))
 
     # Look up the account in the database and update its status
@@ -70,7 +71,6 @@ def verify_email(token):
 
     flash('An error occurred')
     return redirect(url_for('authentication_controller.register'))
-
 
 
 def send_verification_email(email, token):
@@ -213,12 +213,3 @@ def reset_password(token):
         return redirect(url_for('authentication_controller.login'))
 
     return render_template('reset_password.html', token=token, error=error)
-
-
-
-
-
-
-
-
-

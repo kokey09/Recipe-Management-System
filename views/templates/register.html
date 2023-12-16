@@ -72,6 +72,7 @@
             </div>
         </div>
     </div>
+
     {% if error %}
     <script>
         swal("Error", "{{ error }}", "error");
@@ -83,6 +84,13 @@
         swal("Mail", "{{ success }}", "success");
     </script>
     {% endif %}
+
+    {% if exprired_token %}
+    <script>
+        swal("Info", "{{ exprired_token }}", "info");
+    </script>
+    {% endif %}
+    
 </body>
 </html>
 

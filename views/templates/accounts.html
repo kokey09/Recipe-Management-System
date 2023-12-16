@@ -45,6 +45,7 @@
                         <th>Type</th>
                         <th>Date Created</th>
                         <th>Is Deleted</th>
+                        <th>Status</th>
                         <th>Actions</th>
                     </tr>
                 </thead>
@@ -62,6 +63,7 @@
                             {{ account.is_deleted }}
                             </p>
                         </td>
+                        <td>{{ account.status}}</td>
                         <td>
                         <form method="POST" action="{{ url_for('delete_controller.delete_account', account_id=account.id) }}">
                             <div class="action-btn">
