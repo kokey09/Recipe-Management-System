@@ -1,73 +1,43 @@
-// user base or page
-
-document.addEventListener("DOMContentLoaded", function() {
-    const searchInput = document.getElementById("searchInput");
-    const recipeList = document.querySelector(".recipe-list");
-    const recipeItems = recipeList.querySelectorAll("li");
+// Function to handle search
+function handleSearch(searchInputId, listClass) {
+    const searchInput = document.getElementById(searchInputId);
+    const list = document.querySelector(listClass);
+    const items = list.querySelectorAll("li");
+    const noDataFoundMessage = document.createElement("p");
+    noDataFoundMessage.textContent = "Data not found";
+    noDataFoundMessage.style.display = "none";
+    noDataFoundMessage.style.fontSize = "20px"; // Set the font size to 20px
+    list.appendChild(noDataFoundMessage);
 
     searchInput.addEventListener("input", function() {
         const searchText = searchInput.value.toLowerCase();
+        let dataFound = false;
 
-        for (const recipeItem of recipeItems) {
-            const recipeName = recipeItem.textContent.toLowerCase();
-            if (recipeName.includes(searchText)) {
-                recipeItem.style.display = "block";
+        for (const item of items) {
+            const itemName = item.textContent.toLowerCase();
+            if (itemName.includes(searchText)) {
+                item.style.display = "block";
+                dataFound = true;
             } else {
-                recipeItem.style.display = "none";
+                item.style.display = "none";
             }
         }
+
+        noDataFoundMessage.style.display = dataFound ? "none" : "block";
     });
+}
+
+// user base or page
+document.addEventListener("DOMContentLoaded", function() {
+    handleSearch("searchInput", ".recipe-list");
 });
 
 // ingredient display
 document.addEventListener("DOMContentLoaded", function() {
-    const searchInput = document.getElementById("searchInput");
-    const ingredientList = document.querySelector(".ingredients-list");
-    const ingredientItems = ingredientList.querySelectorAll("li");
-
-    searchInput.addEventListener("input", function() {
-        const searchText = searchInput.value.toLowerCase();
-
-        for (const ingredientItem of ingredientItems) {
-            const ingredientName = ingredientItem.textContent.toLowerCase();
-            if (ingredientName.includes(searchText)) {
-                ingredientItem.style.display = "block";
-            } else {
-                ingredientItem.style.display = "none";
-            }
-        }
-    });
+    handleSearch("searchInput", ".ingredients-list");
 });
 
 //recipe display
 document.addEventListener("DOMContentLoaded", function() {
-    const searchInput = document.getElementById("searchInput");
-    const recipeList = document.querySelector(".recipe-list");
-    const recipeItems = recipeList.querySelectorAll("li");
-
-    searchInput.addEventListener("input", function() {
-        const searchText = searchInput.value.toLowerCase();
-
-        for (const recipeItem of recipeItems) {
-            const recipeName = recipeItem.textContent.toLowerCase();
-            if (recipeName.includes(searchText)) {
-                recipeItem.style.display = "block";
-            } else {
-                recipeItem.style.display = "none";
-            }
-        }
-    });
+    handleSearch("searchInput", ".recipe-list");
 });
-
-
-
-
-
-
-
-
-
-
-
-
-

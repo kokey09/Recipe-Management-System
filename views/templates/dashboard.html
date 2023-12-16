@@ -7,7 +7,6 @@
 
     <main>
         <ul class="box-info">
-
             <li>
                 <i class='bx bxs-calendar-check'></i>
                 <span class="text">
@@ -39,7 +38,6 @@
                     <p>Verified Active Accounts</p>
                 </span>
             </li>
-
         </ul>
 
 
@@ -65,8 +63,14 @@
                                 <img src="{{ recipe.image_url }}" alt="{{ recipe.name }} Image" loading="lazy">
                                 <p>{{ recipe.name }}</p>
                             </td>
-                            <td>{{ recipe.created_at.strftime("%B %d, %Y at %I:%M:%S %p") }}</td>
-                            <td><span class="status {{ recipe.status }}">{{ recipe.status}}</span></td>
+                            <td>
+                                {{ recipe.created_at.strftime("%B %d, %Y at %I:%M:%S %p") }}
+                            </td>
+                            <td>
+                                <span class="status {{ recipe.status }}">
+                                    {{ recipe.status}}
+                                </span>
+                            </td>
                         </tr>
                         {% endfor %}
                     </tbody>

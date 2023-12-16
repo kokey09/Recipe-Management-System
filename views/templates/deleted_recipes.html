@@ -55,8 +55,7 @@
                     <tr>
                         <th></th>
                         <th>ID</th>
-                        <th>Recipe name</th>
-                        <th>Image</th>
+                        <th>Recipe</th>
                         <th>Account ID </th>
                         <th>Account username </th>
                         <th>is deleted</th>
@@ -72,9 +71,11 @@
                                 <input type="checkbox" name="checkbox" class="checkbox" id="checkbox-{{ recipe.recipe_id }}">
                             </td>
                             <td>{{ recipe.recipe_id }}</td>
-                            <td>{{ recipe.name }}</td>
                             <td>
-                                <img src="{{ recipe.image_url }}" alt="{{ recipe.name }} Image" style="width: 100px; height: 100px;" loading="lazy">
+                                <div style="display: flex; align-items: center;">
+                                    <img src="{{ recipe.image_url }}" alt="{{ recipe.name }} Image" loading="lazy" style="margin-right: 10px;">
+                                    <p>{{ recipe.name }}</p>
+                                </div>
                             </td>
                             <td>{{ recipe.account_id }}</td>
                             <td>{{ recipe.account.username }}</td>

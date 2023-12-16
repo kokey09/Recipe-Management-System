@@ -23,6 +23,7 @@ main.table{
     box-shadow: 0 .4rem .8rem #0085;
     border-radius: .8rem;
     overflow: hidden;
+    
 }
 
 .table-header{
@@ -39,6 +40,7 @@ main.table{
     margin: .8rem auto;
     border-radius: .6rem;
     overflow: auto;
+    
 }
 .table-body::-webkit-scrollbar{
     width: 0.5rem;
@@ -58,8 +60,8 @@ table{
 }
 
 td img{
-    width: 36px;
-    height: 36px;
+    width: 67px;
+    height: 67px;
     margin-right: .5rem;
     border-radius: 50%;
     vertical-align: middle;

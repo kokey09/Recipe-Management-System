@@ -18,6 +18,7 @@
     <div class="container">
         <div class="recipe-name">
             <h1>{{ recipe.name }}</h1>
+            <p>(written by: {{ recipe.account.username }})</p>
             <img src="{{ recipe.image_url }}" alt="{{ recipe.name }} Image" style="width: 450px; height: 450px; " loading="lazy">
         </div>
         <div class="recipe_instruction">

@@ -15,7 +15,9 @@
 	--orange: #FD7238;
 	--light-orange: #FFE0D3;
 }
-
+body{
+	background: url('/static/raw-image/Spanish_Chorizo_Stuffed_Chicken_Breast.png') center / cover;
+}
 
 main .box-info{
     display: grid;
