@@ -77,6 +77,12 @@
         swal("Error", "{{ error }}", "error");
     </script>
     {% endif %}
+
+    {% if success %}
+    <script>
+        swal("Mail", "{{ success }}", "success");
+    </script>
+    {% endif %}
 </body>
 </html>
 

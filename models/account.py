@@ -2,6 +2,8 @@ from datetime import datetime
 from flask_bcrypt import Bcrypt
 from controllers import db  # Assuming you've defined the 'db' instance in a separate file
 from models.review import Review
+from sqlalchemy import Enum
+
 bcrypt = Bcrypt()  # Initialize bcrypt
 
 class Account(db.Model):
@@ -13,7 +15,7 @@ class Account(db.Model):
     type = db.Column(db.String(20), nullable=False, default='normal')
     date_created = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
     is_deleted = db.Column(db.Boolean, nullable=False, default=False)
-
+    status = db.Column(Enum('unverified', 'verified', name='status_enum'), default='unverified', nullable=False)
 
 def create_default_admin(app):
     with app.app_context():
@@ -24,7 +26,7 @@ def create_default_admin(app):
             hashed_password = bcrypt.generate_password_hash(admin_password).decode('utf-8')
 
             # Create the default admin account
-            default_admin = Account(username='admin', email='admin@gmail.com', password=hashed_password, type='admin')
+            default_admin = Account(username='admin', email='admin@gmail.com', password=hashed_password, type='admin', status='verified')
             db.session.add(default_admin)
             db.session.commit()
 

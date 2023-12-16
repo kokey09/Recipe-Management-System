@@ -18,7 +18,7 @@ mail = Mail()
 @authentication_controller_bp.route('/register', methods=['GET', 'POST'])
 def register():
     error = None  # Define notif here
-
+    success = None
     if request.method == 'POST':
         username = request.form.get('username')
         email = request.form.get('email')
@@ -37,41 +37,92 @@ def register():
         elif password == confirm_password:
             hashed_password = bcrypt.generate_password_hash(password).decode('utf-8')
 
-            new_account = Account(username=username, email=email, password=hashed_password)
+                    # Store the account details in the database with a status of 'unverified'
+            new_account = Account(username=username, email=email, password=hashed_password, status='unverified')
             db.session.add(new_account)
             db.session.commit()
-            session['success'] = "account has been registered"
-            return redirect(url_for('authentication_controller.login'))
+                    # Generate a verification token and send it to the user's email
+            token = generate_verification_token(email)
+            send_verification_email(email, token)
+
+            success = f"An email has been sent to {email} with a link to verify your account. Please check your email and click the link to complete your registration"
         else:
             error = "Your password and confirm password do not match."
 
-    return render_template('register.html', error=error)
+    return render_template('register.html', error=error, success=success)
+
+
+@authentication_controller_bp.route('/verify_email/<token>', methods=['GET', 'POST'])
+def verify_email(token):
+    email = confirm_verification_token(token)
+
+    if not email:
+        flash('Invalid or expired token')
+        return redirect(url_for('authentication_controller.register'))
+
+    # Look up the account in the database and update its status
+    account = Account.query.filter_by(email=email).first()
+    if account and account.status == 'unverified':
+        account.status = 'verified'
+        db.session.commit()
+        session['success'] = "Account has been registered"
+        return redirect(url_for('authentication_controller.login'))
+
+    flash('An error occurred')
+    return redirect(url_for('authentication_controller.register'))
+
+
+
+def send_verification_email(email, token):
+    msg = Message('Account Verification', sender='your-email@gmail.com', recipients=[email])
+    verify_url = url_for('authentication_controller.verify_email', token=token, _external=True)
+    msg.body = f'Click the following link to verify your account: {verify_url}'
+    mail.send(msg)
+
+def generate_verification_token(email):
+    serializer = URLSafeTimedSerializer(current_app.config['SECRET_KEY'])
+    return serializer.dumps(email)
+
+def confirm_verification_token(token, expiration=3600):
+    serializer = URLSafeTimedSerializer(current_app.config['SECRET_KEY'])
+    try:
+        email = serializer.loads(
+            token,
+            max_age=expiration
+        )
+    except:
+        return False
+    return email
 
 
 @authentication_controller_bp.route('/login', methods=['GET', 'POST'])
 def login():
-    error = None
-    success = session.pop('success', None)
-    reset_password = session.pop('reset_password', None)
-    
     if request.method == 'POST':
         username = request.form.get('username')
         entered_password = request.form.get('password')
         user = Account.query.filter_by(username=username).first()
 
-        if user and bcrypt.check_password_hash(user.password, entered_password):
-            if not user.is_deleted:  # Check if the account is not soft deleted
-                session['user_id'] = user.id
-                if user.type == 'admin':
-                    return redirect(url_for('dashboard_controller.dashboard'))
-                elif user.type == 'normal':
-                    return redirect(url_for('user_end_controller.user_page'))
-            else:
-                error = "Account has been soft deleted."
-        else:
-            error = "Incorrect username or password. Please try again."
+        if not user or not bcrypt.check_password_hash(user.password, entered_password):
+            error="Incorrect username or password. Please try again."
+            return render_template('login.html', error=error)
 
-    return render_template('login.html', error=error, success=success, reset_password=reset_password)
+        if user.is_deleted:
+            error="Account has been soft deleted."
+            return render_template('login.html', error=error)
+
+        if user.status != 'verified':
+            error="Account is not verified. Please check your email for the verification link."
+            return render_template('login.html', error=error)
+
+        session['user_id'] = user.id
+        if user.type == 'admin':
+            return redirect(url_for('dashboard_controller.dashboard'))
+        elif user.type == 'normal':
+            return redirect(url_for('user_end_controller.user_page'))
+
+    success = session.pop('success', None)
+    reset_password = session.pop('reset_password', None)
+    return render_template('login.html', success=success, reset_password=reset_password)
 
 
 @authentication_controller_bp.route('/logout')
@@ -162,3 +213,12 @@ def reset_password(token):
         return redirect(url_for('authentication_controller.login'))
 
     return render_template('reset_password.html', token=token, error=error)
+
+
+
+
+
+
+
+
+
