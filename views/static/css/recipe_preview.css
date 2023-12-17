@@ -25,10 +25,15 @@ h1 {
     margin-bottom: 20px;
 }
 
-.recipe-name p {
-    font-size: 24px;
+.recipe-name author {
+    font-size: 14px;
     color: #333;
     margin: 0;
+}
+
+.recipe-name h1{
+    font-size: 40px;
+    color: #333;
 }
 
 .recipe_instruction {

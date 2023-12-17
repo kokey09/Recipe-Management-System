@@ -11,7 +11,8 @@
     <h1>PREVIEW</h1>
     <div class="container">
         <div class="recipe-name">
-            <p>{{ recipe.name }}</p>
+            <h1>{{ recipe.name }}</h1>
+            <p class="author">(written by: {{ recipe.account.username }})</p>
             <p class="recipe-status {% if recipe.status == 'declined' %}red-text{% elif recipe.status == 'approved' %}green-text{% elif recipe.status == 'pending' %}blue-text{% endif %}">
             status: {{ recipe.status }}
              {% if recipe.status == 'pending'%}
