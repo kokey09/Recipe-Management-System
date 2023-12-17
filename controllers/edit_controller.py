@@ -134,12 +134,10 @@ def change_status(recipe_id):
     recipe = Recipe.query.get_or_404(recipe_id)
     # Update the status field based on the form data
     new_status = request.form.get('new_status')  # Adjust the actual field name
-
     recipe.status = new_status
     recipe.status_changed_at = db.func.current_timestamp()
     # Save changes to the database
     db.session.commit()
-
     # Redirect back to the deleted recipes page
     return redirect(url_for('dashboard_controller.recipes'))
 

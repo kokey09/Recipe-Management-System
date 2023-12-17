@@ -59,7 +59,13 @@ def add_review():
     return redirect(url_for('user_end_controller.recipe_instruction', recipe_id=recipe_id))
 
 
-# add main function
+HARMFUL_KEYWORDS = [
+    'tae', 'lason', 'ewan', 'cyanide', 'mercury', 'lead', 'arsenic', 'raw meat',
+    'rotten eggs', 'moldy cheese', 'spoiled milk', 'uncooked chicken', 'raw pork',
+    'unwashed vegetables', 'expired canned goods', 'contaminated water', 'tainted seafood',
+    'unpasteurized milk', 'unrefrigerated leftovers'
+]
+
 def add_recipe_base(model, redirect_page):
     if request.method == 'POST':
 
@@ -73,11 +79,17 @@ def add_recipe_base(model, redirect_page):
         image_file = request.files.get('image_file')
         filename = save_image_file(image_file, 'recipes-img-table') if image_file else None
 
+        # Check for harmful keywords in instructions
+        if any(keyword in recipe_name for keyword in HARMFUL_KEYWORDS) or any(keyword in instructions for keyword in HARMFUL_KEYWORDS):
+            session['harmful_array'] = "Recipe contains inappropriate content and cannot be uploaded."
+            return redirect(url_for(redirect_page))
+
         new_recipe = Recipe(
             name=recipe_name,
             instructions=instructions,
             image_url=f'static/recipes-img-table/{filename}' if filename else None,
-            account_id=user.id
+            account_id=user.id,
+            status='pending'
         )
 
         try:

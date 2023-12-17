@@ -155,7 +155,8 @@ def user_add_recipe():
 def shared_recipe():
     added_recipe = session.pop('added_recipe', None)
     deleted_recipe = session.pop('deleted_recipe', None)  
-    error = session.pop('error', None)                       
+    error = session.pop('error', None)  
+    harmful_array = session.pop('harmful_array', None)                     
     # Check if the user is logged in
     user = get_authenticated_user()
 
@@ -172,7 +173,8 @@ def shared_recipe():
                                                                     recipe_reviews_count=recipe_reviews_count,
                                                                     added_recipe=added_recipe,
                                                                     deleted_recipe=deleted_recipe,
-                                                                    error=error))
+                                                                    error=error,
+                                                                    harmful_array=harmful_array))
     response.headers['Cache-Control'] = 'no-cache, no-store, must-revalidate'
     return response
 

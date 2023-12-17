@@ -170,6 +170,12 @@
     {% endif %}
     
     
+    {% if harmful_array %}
+    <script>
+        swal("harmful", "{{ harmful_array }}", "info");
+    </script>
+    {% endif %}
+    
 
 {% endblock %}
 </body>

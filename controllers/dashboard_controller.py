@@ -14,6 +14,7 @@ dashboard_controller_bp = Blueprint('dashboard_controller',__name__,template_fol
 def recipes():
     added_recipe = session.pop('added_recipe', None)
     deleted_recipe = session.pop('deleted_recipe', None)
+    harmful_array = session.pop('harmful_array', None)
     user = get_authenticated_user()
 
     if not user:
@@ -26,7 +27,8 @@ def recipes():
     response = make_response(render_template('recipes.html', recipes=recipes_data,
                                                              user=user,
                                                              added_recipe=added_recipe,
-                                                             deleted_recipe=deleted_recipe))
+                                                             deleted_recipe=deleted_recipe,
+                                                             harmful_array=harmful_array))
     response.headers['Cache-Control'] = 'no-cache, no-store, must-revalidate'
     return response
 
