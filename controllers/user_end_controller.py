@@ -61,7 +61,7 @@ def recipe_display():
     ingredient_id = request.args.get('ingredient_id', None)
 
     # Filter recipes with approved status
-    recipes = Recipe.query.filter_by(status='approved')
+    recipes = Recipe.query.filter_by(status='approved', is_deleted=False)
 
     # If ingredient_id is provided, filter by ingredient
     if ingredient_id:

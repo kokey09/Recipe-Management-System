@@ -20,13 +20,17 @@ body {
 }
 
 .recipe-name p {
-    font-size: 24px;
+    font-size: 14px;
     color: #333;
     margin: 0;
 }
 .recipe-name img {
     border-radius: 5px ;
     max-height: 60%;
+}
+.recipe-name h1{
+    font-size: 60px;
+    color: #333;
 }
 
 
