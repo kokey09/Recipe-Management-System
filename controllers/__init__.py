@@ -21,6 +21,7 @@ def create_app():
     app.config['MAIL_USERNAME'] = 'khimrata11@gmail.com'  # Replace with your actual email
     app.config['MAIL_PASSWORD'] = 'mlxo tdne vatb pmax '  # Replace with your App Password
     app.secret_key = 'your_secret_key'
+    
   
     db.init_app(app)
     mail.init_app(app)

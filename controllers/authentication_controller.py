@@ -9,11 +9,15 @@ from flask import current_app
 from flask_mail import Mail, Message
 from itsdangerous import URLSafeTimedSerializer
 
-BASE_URL = os.getenv('BASE_URL', 'http://localhost:5000')
+if 'CODESPACES' in os.environ:
+    BASE_URL = os.environ['GITHUB_CODESPACES_PORT_FORWARDING_DOMAIN']
+else:
+    BASE_URL = '127.0.0.1:5000'
 
 authentication_controller_bp = Blueprint('authentication_controller',__name__,template_folder='templates',static_folder='static')
 bcrypt = Bcrypt()
 mail = Mail()
+
 
 @authentication_controller_bp.route('/register', methods=['GET', 'POST'])
 def register():
