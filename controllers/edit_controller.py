@@ -79,8 +79,9 @@ def user_edit_recipe(id):
     user = get_authenticated_user()
 
     if user and recipe.account_id != user.id or recipe.is_deleted:
-        flash("You do not have permission to edit this recipe.", "error")
+        session['notif'] = ("error","You do not have permission to edit this recipe.", "error")
         return redirect(url_for('user_end_controller.shared_recipe'))
+    
     elif not user:
         return redirect(url_for('authentication_controller.login'))
 
@@ -97,7 +98,7 @@ def user_edit_recipe(id):
 
         try:
             db.session.commit()
-            flash("Recipe updated successfully.", "success")
+            session['notif'] = ("Added","Recipe updated successfully.", "success")
             return redirect(url_for('user_end_controller.shared_recipe'))
         except Exception as e:
             print(f"Error updating recipe: {str(e)}")

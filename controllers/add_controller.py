@@ -63,7 +63,7 @@ HARMFUL_KEYWORDS = [
     'tae', 'lason', 'ewan', 'cyanide', 'mercury', 'lead', 'arsenic', 'raw meat',
     'rotten eggs', 'moldy cheese', 'spoiled milk', 'uncooked chicken', 'raw pork',
     'unwashed vegetables', 'expired canned goods', 'contaminated water', 'tainted seafood',
-    'unpasteurized milk', 'unrefrigerated leftovers'
+    'unpasteurized milk', 'unrefrigerated leftovers', 'bobo'
 ]
 
 def add_recipe_base(model, redirect_page):
