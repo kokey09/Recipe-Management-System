@@ -152,12 +152,23 @@ footer {
     main{
         padding-top:9%;
     }
+    .team .team_box {
+        flex-direction: column;
+    }
+    .team .team_box .profile {
+        margin-bottom: 15px;
+    }
+    
 }
-
-
 @media (max-width: 720px){
     main{
         padding-top:15%;
+    }
+    .team .team_box {
+        flex-direction: column;
+    }
+    .team .team_box .profile {
+        margin-bottom: 15px;
     }
 }
 @media (max-width: 575px){
