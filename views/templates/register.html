@@ -73,21 +73,9 @@
         </div>
     </div>
 
-    {% if error %}
+    {% if notif %}
     <script>
-        swal("Error", "{{ error }}", "error");
-    </script>
-    {% endif %}
-
-    {% if success %}
-    <script>
-        swal("Mail", "{{ success }}", "success");
-    </script>
-    {% endif %}
-
-    {% if exprired_token %}
-    <script>
-        swal("Info", "{{ exprired_token }}", "info");
+        swal("{{ notif[0] }}", "{{ notif[1] }}", "{{ notif[2] }}");
     </script>
     {% endif %}
     

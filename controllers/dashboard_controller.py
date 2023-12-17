@@ -14,8 +14,7 @@ dashboard_controller_bp = Blueprint('dashboard_controller',__name__,template_fol
 def recipes():
     # Pop session variables and store them in a dictionary
     session_vars = {
-        'added_recipe': session.pop('added_recipe', None),
-        'deleted_recipe': session.pop('deleted_recipe', None),
+        'notif': session.pop('notif', None),
         'harmful_array': session.pop('harmful_array', None)
     }
 
@@ -52,10 +51,7 @@ def deleted_recipes():
 def ingredients():
     # Pop session variables and store them in a dictionary
     session_vars = {
-        'deleted_ingredients': session.pop('deleted_ingredients', None),
-        'added_ingredients': session.pop('added_ingredients', None),
-        'error': session.pop('error', None),  # from delete controller exception
-        'existing_ingredient': session.pop('existing_ingredient', None),
+        'notif': session.pop('notif', None),
         'harmful_array': session.pop('harmful_array', None)
     }
 

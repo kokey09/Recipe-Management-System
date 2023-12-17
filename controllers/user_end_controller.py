@@ -155,8 +155,7 @@ def user_add_recipe():
 def shared_recipe():
     # Pop session variables and store them in a dictionary
     session_vars = {
-        'added_recipe': session.pop('added_recipe', None),
-        'deleted_recipe': session.pop('deleted_recipe', None),
+        'notif': session.pop('notif', None),
         'error': session.pop('error', None),
         'harmful_array': session.pop('harmful_array', None)
     }

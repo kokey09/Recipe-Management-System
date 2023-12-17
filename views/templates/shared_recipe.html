@@ -71,20 +71,13 @@
     </div>
 </div>
 
-    <!-- alerts using swal -->
-    {% if added_recipe %}
+    <!-- alerts swal -->
+    {% if notif %}
     <script>
-        swal("Success", "{{ added_recipe }}", "success");
+        swal("{{ notif[0] }}", "{{ notif[1] }}", "{{ notif[2] }}");
     </script>
     {% endif %}
 
-    {% if deleted_recipe %}
-    <script>
-        swal("Delete", "{{ deleted_recipe }}", "info");
-    </script>
-    {% endif %}
-
-    
     {% if error %}
         <script>
             swal("Error", "{{ error }}", "error");

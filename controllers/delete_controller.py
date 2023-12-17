@@ -50,7 +50,7 @@ def delete_recipe_base(model, id, redirect_page):
                 entity_to_delete.deleted_at = db.func.current_timestamp()
                 entity_to_delete.is_deleted = True
                 db.session.commit()
-                session['deleted_recipe'] = "deleted successfully"
+                session['notif'] =("Deleted","deleted successfully","success") 
                 return jsonify({'message': f'{model.capitalize()} deleted successfully'}), 200
             except Exception as e:
                 return jsonify({'error': f'Internal server error: {str(e)}'}), 500
@@ -93,10 +93,10 @@ def delete_ingredient(id):
             try:
                 db.session.delete(ingredient_to_delete)
                 db.session.commit()
-                session['deleted_ingredients'] = "deleted successfully"
+                session['notif'] = ("Deleted", "Deleted successfully", "success")
                 
             except Exception as e:
-                session['error'] = "you cannot delete this ingredients, please disconnect it first on recipe ingredients"
+                session['notif'] = ("Error", "You cannot delete this ingredient, please disconnect it first from recipe ingredients", "error")
         else:
             session['error'] = 'Ingredient not found'
     return redirect(url_for('dashboard_controller.ingredients'))

@@ -157,19 +157,12 @@
 
 
     <!-- alerts using swal -->
-    {% if added_recipe %}
+    {% if notif %}
     <script>
-        swal("Success", "{{ added_recipe }}", "success");
+        swal("{{ notif[0] }}", "{{ notif[1] }}", "{{ notif[2] }}");
     </script>
     {% endif %}
 
-    {% if deleted_recipe %}
-    <script>
-        swal("Deleted", "{{ deleted_recipe }}", "info");
-    </script>
-    {% endif %}
-    
-    
     {% if harmful_array %}
     <script>
         swal("harmful", "{{ harmful_array }}", "info");

@@ -17,7 +17,7 @@ mail = Mail()
 
 @authentication_controller_bp.route('/register', methods=['GET', 'POST'])
 def register():
-    error = None  # Define notif here
+    notif = None  # Define notif here
     success = None
     exprired_token = session.pop('exprired_token', None)
     if request.method == 'POST':
@@ -30,11 +30,11 @@ def register():
         existing_username = Account.query.filter_by(username=username).first()
         # Check account already exists
         if len(password) < 8:
-            error = "Password must be at least 8 characters long."
+            notif = ("Error", "An account with this username already exists.", "error")
         elif existing_username:
-            error = "An account with this username already exists."
+            notif = ("Error", "An account with this username already exists.", "error")
         elif existing_email:
-            error = "An account with this email already exists."
+            notif = ("Error", "An account with this email already exists.", "error")
         elif password == confirm_password:
             hashed_password = bcrypt.generate_password_hash(password).decode('utf-8')
 
@@ -46,11 +46,11 @@ def register():
             token = generate_verification_token(email)
             send_verification_email(email, token)
 
-            success = f"An email has been sent to {email} with a link to verify your account. Please check your email and click the link to complete your registration"
+            notif = ("Success", f"An email has been sent to {email} with a link to verify your account. Please check your email and click the link to complete your registration", "success")
         else:
-            error = "Your password and confirm password do not match."
+            notif = ("Error", "Your password and confirm password do not match.", "error")
 
-    return render_template('register.html', error=error, success=success, exprired_token=exprired_token)
+    return render_template('register.html', notif=notif, exprired_token=exprired_token)
 
 
 @authentication_controller_bp.route('/verify_email/<token>', methods=['GET', 'POST'])
@@ -66,7 +66,7 @@ def verify_email(token):
     if account and account.status == 'unverified':
         account.status = 'verified'
         db.session.commit()
-        session['success'] = "Account has been registered"
+        session['notif'] = ("Registered", "Account has been registered", "success")
         return redirect(url_for('authentication_controller.login'))
 
     flash('An error occurred')
@@ -102,18 +102,18 @@ def login():
         user = Account.query.filter_by(username=username).first()
 
         if not user or not bcrypt.check_password_hash(user.password, password):
-            error="Incorrect username or password. Please try again."
-            return render_template('login.html', error=error)
+            notif=("Error","Incorrect username or password. Please try again.", "error")
+            return render_template('login.html', notif=notif)
 
         if user.is_deleted:
-            error="Account has been soft deleted."
-            return render_template('login.html', error=error)
+            notif=("Deleted", "Account has been soft deleted.", "error")
+            return render_template('login.html', notif=notif)
 
         if user.status != 'verified':
             token = generate_verification_token(user.email)  # Generate a new token
             send_verification_email(user.email, token)  # Send the verification email
-            error="Account is not verified. Please check your email for the verification link."
-            return render_template('login.html', error=error)
+            notif=("Error", "Account is not verified. Please check your email for the verification link.", "error")
+            return render_template('login.html', notif=notif)
 
         session['user_id'] = user.id
         if user.type == 'admin':
@@ -121,9 +121,9 @@ def login():
         elif user.type == 'normal':
             return redirect(url_for('user_end_controller.user_page'))
 
-    success = session.pop('success', None)
+    notif = session.pop('notif', None)
     reset_password = session.pop('reset_password', None)
-    return render_template('login.html', success=success, reset_password=reset_password)
+    return render_template('login.html', notif=notif, reset_password=reset_password)
 
 
 @authentication_controller_bp.route('/logout')

@@ -95,7 +95,7 @@ def add_recipe_base(model, redirect_page):
         try:
             db.session.add(new_recipe)
             db.session.commit()
-            session['added_recipe'] = "Recipe added successfully"
+            session['notif'] = ("Success","Recipe added successfully","success")
         except Exception as e:
             logging.error(f"Error adding recipe: {str(e)}")
             db.session.rollback()
@@ -132,12 +132,12 @@ def add_ingredient():
             db.session.add(new_ingredient)
             try:
                 db.session.commit()
-                session['added_ingredients'] = "Ingredient added successfully"
+                session['notif'] = ("Success", "Ingredient added successfully", "success")
             except Exception as e:
                 db.session.rollback()
                 logging.error(f"Error adding ingredient: {str(e)}")
         elif existing_ingredient:
-            session['existing_ingredient'] = 'ingredients already exist'
+            session['notif'] = ("Error", "Ingredient Already Exist!", "error")
 
     return redirect(url_for('dashboard_controller.ingredients')) 
 

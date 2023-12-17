@@ -99,23 +99,13 @@
         </section>
     </main>
 
-        {% if deleted_ingredients %}
+        {% if notif %}
         <script>
-            swal("Deleted", "{{ deleted_ingredients }}", "info");
+            swal("{{ notif[0] }}", "{{ notif[1] }}", "{{ notif[2] }}");
         </script>
-        {% elif added_ingredients %}
-        <script>
-            swal("Success", "{{ added_ingredients }}", "success");
-        </script>
-        {% elif error %}
-        <script>
-            swal("Error", "{{ error }}", "error");
-        </script>
-        {% elif existing_ingredient %}
-        <script>
-            swal("Error", "{{ existing_ingredient }}", "info");
-        </script>
-        {% elif harmful_array %}
+        {% endif %}
+
+        {% if harmful_array %}
         <script>
             swal("Error", "{{ harmful_array }}", "info");
         </script>
