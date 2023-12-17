@@ -34,7 +34,7 @@ def register():
         existing_username = Account.query.filter_by(username=username).first()
         # Check account already exists
         if len(password) < 8:
-            notif = ("Error", "An account with this username already exists.", "error")
+            notif = ("Error", "Your password is less than 8 characters.", "error")
         elif existing_username:
             notif = ("Error", "An account with this username already exists.", "error")
         elif existing_email:
