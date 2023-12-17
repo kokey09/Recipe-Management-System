@@ -17,12 +17,11 @@ $(document).ready(function () {
             let text = "";
 
             switch (filter) {
-                case "all":
-                case "":
-                    text = row.text().toLowerCase(); // All columns
+                case "recipe_id":
+                    text = row.find("td:nth-child(2)").text().toLowerCase(); // Recipe ID
                     break;
-                case "status":
-                    text = row.find("td:nth-child(8)").text().toLowerCase(); // Status
+                case "name":
+                    text = row.find("td:nth-child(3) p").text().toLowerCase(); // Name
                     break;
                 case "account_id":
                     text = row.find("td:nth-child(4)").text().toLowerCase(); // Account ID
@@ -30,17 +29,24 @@ $(document).ready(function () {
                 case "account_username":
                     text = row.find("td:nth-child(5)").text().toLowerCase(); // Account Username
                     break;
+                case "deleted_by_id":
+                    text = row.find("td:nth-child(7)").text().toLowerCase(); // Deleted by id 
+                    break;
+                case "deleted_by_username":
+                    text = row.find("td:nth-child(7)").text().toLowerCase(); // Deleted by username
+                    break;
                 case "deleted_at":
-                    text = row.find("td:nth-child(7)").text().toLowerCase(); // Deleted At
+                    text = row.find("td:nth-child(8)").text().toLowerCase(); // Deleted At
+                    break;
+                case "status":
+                    text = row.find("td:nth-child(9)").text().toLowerCase(); // Status
                     break;
                 case "status_changed_at":
-                    text = row.find("td:nth-child(9)").text().toLowerCase(); // Status Changed At
+                    text = row.find("td:nth-child(10)").text().toLowerCase(); // Status Changed At
                     break;
-                case "recipe_id":
-                    text = row.find("td:nth-child(2)").text().toLowerCase(); // Recipe ID
-                    break;
-                case "name":
-                    text = row.find("td:nth-child(3) p").text().toLowerCase(); // column: Name
+                case "all":
+                case "":
+                    text = row.text().toLowerCase(); // All columns
                     break;
                 default:
                     const columnIndex = filter === "recipe_id" ? 2 : filter === "name" ? 3 : filter === "status" ? 8 : 4;

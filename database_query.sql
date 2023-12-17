@@ -22,19 +22,27 @@ CREATE TABLE account (
 );
 
 CREATE TABLE recipes (
-    recipe_id INT(11) AUTO_INCREMENT PRIMARY KEY,
-    name VARCHAR(255) NOT NULL,
-    instructions TEXT NOT NULL,
-    image_url VARCHAR(512),
-    is_deleted TINYINT(1),
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    deleted_at TIMESTAMP NULL DEFAULT NULL,
-    recovered_at TIMESTAMP NULL DEFAULT NULL,
-    account_id INT(11),
-    status ENUM('pending', 'declined', 'approved') DEFAULT 'pending',
-    status_changed_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    FOREIGN KEY (account_id) REFERENCES account(id)
+  recipe_id INT AUTO_INCREMENT PRIMARY KEY,
+  name VARCHAR(255) NOT NULL,
+  instructions TEXT,
+  image_url VARCHAR(512),
+  is_deleted BOOLEAN DEFAULT FALSE,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  deleted_at DATETIME DEFAULT NULL,
+  deleted_by INT,
+  recovered_at DATETIME DEFAULT NULL,
+  recovered_by INT,
+  account_id INT,
+  status ENUM('pending', 'declined', 'approved') NOT NULL DEFAULT 'pending',
+  status_changed_at DATETIME DEFAULT NULL,
+  status_changed_by INT,
+  FOREIGN KEY (`account_id`) REFERENCES `account`(`id`),
+  FOREIGN KEY (`deleted_by`) REFERENCES `account`(`id`),
+  FOREIGN KEY (`recovered_by`) REFERENCES `account`(`id`),
+  FOREIGN KEY (`status_changed_by`) REFERENCES `account`(`id`)
 );
+
+
 
 
 CREATE TABLE ingredients (

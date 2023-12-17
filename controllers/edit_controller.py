@@ -128,15 +128,18 @@ def edit_ingredient(id):
     return render_template('edit_ingredients.html', ingredient=ingredient, id=id, user=user)
 
 
-# New route for changing the status
 @edit_controller_bp.route('/change_status/<int:recipe_id>', methods=['POST'])
 def change_status(recipe_id):
-    # Assuming you have a Recipe model with a status field
-    recipe = Recipe.query.get_or_404(recipe_id)
+   
+    recipe = Recipe.query.get_or_404(recipe_id) # Assuming you have a Recipe model with a status field
     # Update the status field based on the form data
     new_status = request.form.get('new_status')  # Adjust the actual field name
     recipe.status = new_status
     recipe.status_changed_at = db.func.current_timestamp()
+   
+    user = get_authenticated_user() # Add the current user's id to the status_changed_by field
+    if user:
+        recipe.status_changed_by = user.id
     # Save changes to the database
     db.session.commit()
     # Redirect back to the deleted recipes page
@@ -145,9 +148,11 @@ def change_status(recipe_id):
 
 @edit_controller_bp.route('/recover_recipe/<int:id>', methods=['POST'])
 def recover_recipe(id):
+    user = get_authenticated_user()
     recipe = Recipe.query.get_or_404(id)
     recipe.recovered_at = db.func.current_timestamp()
     recipe.is_deleted = False
+    recipe.recovered_by = user.id  # Set the recovered_by field
     db.session.commit()
     session['recover_recipe'] = "Recipe recovered successfully"
     # Return a JSON response indicating success
@@ -156,12 +161,15 @@ def recover_recipe(id):
 
 @edit_controller_bp.route('/mass_recover_recipes', methods=['POST'])
 def mass_recover_recipes():
+    user = get_authenticated_user()
+
     selected_ids = request.form.getlist('ids[]')
 
     for recipe_id in selected_ids:
         recipe = Recipe.query.get_or_404(int(recipe_id))
         recipe.recovered_at = db.func.current_timestamp()
         recipe.is_deleted = False
+        recipe.recovered_by = user.id  # Set the recovered_by field
         db.session.commit()
         session['recover_recipe'] = "Recipe recovered successfully"
 

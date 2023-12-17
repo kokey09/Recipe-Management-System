@@ -64,8 +64,12 @@
                     <option value="account_id">Account ID</option>
                     <option value="account_username">Account Username</option>
                     <option value="created_at">create at</option>
+                    <option value="recovered_by_id">recovered by id</option>
+                    <option value="recovered_by_username">recovered by username</option>
                     <option value="recovered_at">recovered at</option>
                     <option value="status">Status</option>
+                    <option value="status_changed_by_id">Status by id</option>
+                    <option value="status_changed_by_username">Status by username</option>
                     <option value="status_changed_at">status change at</option>
                 </select>
                 <input type="text" id="search-Input-recipe" class="search-bar" placeholder="Search Recipe">
@@ -87,11 +91,12 @@
                         <th></th>
                         <th>ID</th>
                         <th>Recipe</th>
-                        <th>Account ID </th>
-                        <th>Account username </th>
+                        <th>Added By </th>
                         <th>Created at</th>
+                        <th>recovered by</th>
                         <th>recovered at</th>
                         <th>Status</th>
+                        <th>status change by </th>
                         <th>status change at</th>
                         <th>Actions</th>
                     </tr>
@@ -109,9 +114,23 @@
                                 <p>{{ recipe.name }}</p>
                             </div>
                         </td>
-                        <td>{{recipe.account_id}}</td>
-                        <td>{{ recipe.account.username }}</td>
+                        <td>
+                            <div style="display: flex; align-items: center; gap: 10px;">
+                                <p>{{recipe.account.id}}</p>
+                                <p>{{ recipe.account.username}}</p>
+                            </div>
+                        </td>
                         <td>{{ recipe.created_at.strftime("%B %d, %Y at %I:%M:%S %p") }}</td>
+                        <td>
+                            <div style="display: flex; align-items: center; gap: 10px;">
+                                {% if recipe.recovered_at %}
+                                <p>{{recipe.recoverer.id}}</p>
+                                <p>{{ recipe.recoverer.username}}</p>
+                                {% else %}
+                                N/A
+                                {% endif %}
+                            </div>
+                        </td>
                         <td>
                             {% if recipe.recovered_at %}
                             {{ recipe.recovered_at.strftime("%B %d, %Y at %I:%M:%S %p") }}
@@ -124,7 +143,12 @@
                                 {{ recipe.status }}
                             </p>
                         </td>
-
+                        <td>
+                            <div style="display: flex; align-items: center; gap: 10px;">
+                                <p>{{recipe.status_changer.id}}</p>
+                                <p>{{recipe.status_changer.username}}</p>
+                            </div>
+                        </td>
                         <td>
                             {% if recipe.status_changed_at %}
                             {{ recipe.status_changed_at.strftime("%B %d, %Y at %I:%M:%S %p") }}
@@ -169,7 +193,9 @@
     </script>
     {% endif %}
     
-
+    <script type="text/javascript">
+        var userId = "{{ session['user_id'] }}";  // Get the user's ID from the session
+    </script>
 {% endblock %}
 </body>
 

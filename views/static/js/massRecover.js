@@ -15,20 +15,23 @@ $(document).ready(function() {
     // Mass Recover button click event
     $("#mass-recover-button").on("click", function() {
         var selectedIds = [];
-    
+
         // Get all checked checkboxes
         $(".checkbox:checked").each(function() {
             selectedIds.push($(this).attr("id").replace("checkbox-", ""));
         });
-    
+
         if (selectedIds.length > 0) {
             // Confirm before performing mass recovery
             if (confirm('Are you sure you want to recover selected items?')) {
-                // Perform mass recovery by sending selectedIds to the server
+                // Perform mass recovery by sending selectedIds and userId to the server
                 $.ajax({
                     type: "POST",
                     url: "/mass_recover_recipes",
-                    data: { ids: selectedIds },
+                    data: { 
+                        ids: selectedIds,
+                        recovered_by: userId  // Include the user's ID
+                    },
                     success: function(response) {
                         // Clear all checkboxes
                         $(".checkbox:checked").prop("checked", false);

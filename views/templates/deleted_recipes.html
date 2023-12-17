@@ -36,6 +36,8 @@
                     <option value="name">Recipe Name</option>
                     <option value="account_id">Account ID</option>
                     <option value="account_username">Account Username</option>
+                    <option value="deleted_by_id">delete by id </option>
+                    <option value="deleted_by_username">delete by username</option>
                     <option value="deleted_at">delete at</option>
                     <option value="status">Status</option>
                     <option value="status_changed_at">status change at</option>
@@ -59,6 +61,7 @@
                         <th>Account ID </th>
                         <th>Account username </th>
                         <th>is deleted</th>
+                        <th>deleted by</th>
                         <th>deleted at</th>
                         <th>Status</th>
                         <th>Actions</th>
@@ -80,6 +83,12 @@
                             <td>{{ recipe.account_id }}</td>
                             <td>{{ recipe.account.username }}</td>
                             <td>{{ recipe.is_deleted }}</td>
+                            <td>
+                                <div style="display: flex; align-items: center; gap: 10px;">
+                                    <p>{{recipe.deleter.id}}</p>
+                                    <p>{{ recipe.deleter.username}}</p>
+                                </div>
+                            </td>
                             <td>
                                 {% if recipe.deleted_at %}
                                 {{ recipe.deleted_at.strftime("%B %d, %Y at %I:%M:%S %p") }}
@@ -112,7 +121,9 @@
             swal("Success", "{{ recover_recipe }}", "success");
         </script>
     {% endif %}
-    
+    <script type="text/javascript">
+        var userId = "{{ session['user_id'] }}";  // Get the user's ID from the session
+    </script>
     {% endblock %}
 </body>
 </html>

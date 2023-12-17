@@ -1,5 +1,3 @@
-
-
 $(document).ready(function () {
     const savedQuery = localStorage.getItem('recipeSearchQuery') || '';
     const savedFilter = localStorage.getItem('recipeSearchFilter') || 'all';
@@ -19,33 +17,45 @@ $(document).ready(function () {
             let text = "";
 
             switch (filter) {
-                case "all":
-                case "":
-                    text = row.text().toLowerCase();
-                    break;
-                case "status":
-                    text = row.find("td:nth-child(8)").text().toLowerCase(); //for status
-                    break;
-                case "account_id":
-                    text = row.find("td:nth-child(4)").text().toLowerCase(); //for account_id
-                    break;
-                case "account_username":
-                    text = row.find("td:nth-child(5)").text().toLowerCase(); //for account_username
-                    break;
-                case "created_at":
-                    text = row.find("td:nth-child(6)").text().toLowerCase(); //for created_at
-                    break;
-                case "recovered_at":
-                    text = row.find("td:nth-child(7)").text().toLowerCase(); //for recovered_at
-                    break;
-                case "status_changed_at":
-                    text = row.find("td:nth-child(9)").text().toLowerCase(); //for status_changed_at
-                    break;
                 case "recipe_id":
                     text = row.find("td:nth-child(2)").text().toLowerCase(); //for recipe_id
                     break;
                 case "name":
                     text = row.find("td:nth-child(3)").text().toLowerCase(); //for name
+                    break;
+                case "account_id":
+                    text = row.find("td:nth-child(4) p:first-child").text().toLowerCase(); //for account_id
+                    break;
+                case "account_username":
+                    text = row.find("td:nth-child(4) p:last-child").text().toLowerCase(); //for account_username
+                    break;
+                case "created_at":
+                    text = row.find("td:nth-child(5)").text().toLowerCase(); //for created_at
+                    break;
+                case "recovered_by":
+                     text = row.find("td:nth-child(6)").text().toLowerCase(); //for recovered_at
+                    break;
+                case "recovered_by_username":
+                    text = row.find("td:nth-child(6)").text().toLowerCase(); //for recovered_at
+                    break;
+                case "recovered_at":
+                    text = row.find("td:nth-child(7)").text().toLowerCase(); //for recovered_at
+                    break;
+                case "status":
+                    text = row.find("td:nth-child(8)").text().toLowerCase(); //for status
+                    break;
+                case "status_changed_by_id":
+                    text = row.find("td:nth-child(9) p:first-child").text().toLowerCase(); //for status_changed_by_id
+                    break;
+                case "status_changed_by_username":
+                    text = row.find("td:nth-child(9) p:last-child").text().toLowerCase(); //for status_changed_by_username
+                    break;
+                case "status_changed_at":
+                    text = row.find("td:nth-child(10)").text().toLowerCase(); //for status_changed_at
+                    break;
+                case "all":
+                case "":
+                    text = row.text().toLowerCase();
                     break;
                 default:
                     const columnIndex = filter === "recipe_id" ? 2 : filter === "name" ? 3 : 4;

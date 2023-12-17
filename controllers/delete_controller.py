@@ -49,6 +49,7 @@ def delete_recipe_base(model, id, redirect_page):
             try:
                 entity_to_delete.deleted_at = db.func.current_timestamp()
                 entity_to_delete.is_deleted = True
+                entity_to_delete.deleted_by = user.id  # Set the deleted_by field
                 db.session.commit()
                 session['notif'] =("Deleted","deleted successfully","success") 
                 return jsonify({'message': f'{model.capitalize()} deleted successfully'}), 200
@@ -77,6 +78,7 @@ def delete_shared_recipe(id):
 
 @delete_controller_bp.route('/mass_recipe_deletion', methods=['POST'])
 def mass_recipe_deletion():
+    user_id = request.form.get('deleted_by')
     selected_ids = request.form.getlist('ids[]')
 
     for recipe_id in selected_ids:
