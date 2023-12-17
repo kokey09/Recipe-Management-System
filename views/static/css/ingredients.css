@@ -236,6 +236,16 @@ tbody tr:hover{
 .checkbox {
     transform: scale(1.5); 
 }
+.table-body h1{
+    text-align: center;
+    color: red;
+    font-size: 50px;
+}
+
+
+
+
+
 @media  (max-width: 1000px){
     td:not(:first-of-type){
         min-width: 12.1rem;

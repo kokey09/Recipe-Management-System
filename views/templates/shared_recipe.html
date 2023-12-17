@@ -22,6 +22,11 @@
     <a href="{{ url_for('user_end_controller.user_add_recipe') }}" title="add recipe?">
         <i class='bx bxs-folder-plus bigger-font'></i>add recipe
     </a>
+
+    {% if not recipes%}
+        <h1>No Publish Recipes found</h1>
+    {% endif %}
+
     <div class="row">
         {% for recipe in recipes %}
                 <div class="col-md-4">

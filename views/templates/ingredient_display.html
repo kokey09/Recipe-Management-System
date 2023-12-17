@@ -17,6 +17,10 @@
         </div>
         <input type="text" id="searchInput" class="search-bar" placeholder="Search ingredients...">
 
+        {% if not ingredients %}
+            <h1>No Ingredients found</h1>
+        {% endif %}           
+                  
         <ul class="ingredients-list">
             {% for ingredient in ingredients | sort(attribute='name') %}
                 <li>

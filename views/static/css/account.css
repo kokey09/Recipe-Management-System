@@ -188,6 +188,11 @@ tbody tr:hover{
     width: 500px;
 
 }
+.table-body h1{
+    text-align: center;
+    color: red;
+    font-size: 50px;
+}
 
 #columnSelector {
     padding: 5px;

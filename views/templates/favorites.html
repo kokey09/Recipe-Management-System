@@ -21,7 +21,7 @@
     <h1>Favorites</h1>
 
     {% if not favorites %}
-        <h5>No favorites available!</h5>
+        <h1 class="favo">No favorites available!</h1 class="favo">
     {% endif %}
     <div class="row">
         {% for favorite in favorites if not favorite.is_deleted %}

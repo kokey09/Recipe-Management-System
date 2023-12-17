@@ -114,3 +114,8 @@ tbody tr td a{
 .deleted.True{
     background-color: #d893a3;
 }
+.table-body h1{
+    text-align: center;
+    color: red;
+    font-size: 50px;
+}

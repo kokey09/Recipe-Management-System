@@ -23,6 +23,10 @@
 
     <input type="text" id="searchInput" class="search-bar" placeholder="Search Recipe">
 
+    {% if not recipes %}
+        <h1>No Recipes found</h1>
+    {% endif %}
+
     <ul class="recipe-list">
         {% for recipe in recipes if not recipe.is_deleted %}
         <li class="recipe-card">

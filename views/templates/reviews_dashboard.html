@@ -34,6 +34,9 @@
         </section>
 
         <section class="table-body">
+            {% if not reviews %}
+                <h1>No Reviews Found</h1>
+            {% endif %}
             <table>
                 <thead>
                 <tr>

@@ -35,6 +35,9 @@
 
         </section>
         <section class="table-body">
+            {% if not accounts %}
+                <h1>No Accounts Found</h1>
+            {% endif %}
             <table>
                 <thead>
                     <tr>

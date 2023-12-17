@@ -57,6 +57,9 @@
             </div>
         </section>
         <section class="table-body">
+            {% if not ingredients %}
+                <h1>No ingredients available</h1>
+            {% endif %}
             <table>
                 <thead>
                     <tr>
