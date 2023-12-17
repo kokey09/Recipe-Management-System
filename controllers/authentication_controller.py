@@ -10,7 +10,7 @@ from flask_mail import Mail, Message
 from itsdangerous import URLSafeTimedSerializer
 
 if 'CODESPACES' in os.environ:
-    BASE_URL = os.environ['GITHUB_CODESPACES_PORT_FORWARDING_DOMAIN']
+    BASE_URL = os.environ['CODESPACE_NAME'] + '-5000.' + os.environ['GITHUB_CODESPACES_PORT_FORWARDING_DOMAIN']
 else:
     BASE_URL = '127.0.0.1:5000'
 
