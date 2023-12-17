@@ -130,7 +130,7 @@ def login():
 def logout():
     if 'user_id' in session:
         session.pop('user_id', None)  # Remove the 'user_id' key from the session
-    return redirect(url_for('authentication_controller.login'))
+    return redirect(url_for('user_end_controller.user_page'))
 
 
 @authentication_controller_bp.after_request

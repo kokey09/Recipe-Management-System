@@ -19,22 +19,24 @@ body{
 	background: url('/static/raw-image/Spanish_Chorizo_Stuffed_Chicken_Breast.png') center / cover;
 }
 
-main .box-info{
+main .box-info {
+    list-style-type: none; /* This line removes the bullet points */
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
     grid-gap: 24px;
     margin-top: 36px;
 }
-main .box-info li{
+main .box-info li a{
     padding: 24px;
 	background: var(--light);
 	border-radius: 20px;
 	display: flex;
 	align-items: center;
 	grid-gap: 24px;
+	text-decoration: none;
 }
 
-main .box-info li .bx {
+main .box-info li a .bx {
 	width: 80px;
 	height: 80px;
 	border-radius: 10px;
@@ -60,18 +62,6 @@ main .box-info li:nth-child(3) .bx {
 main .box-info li:nth-child(4) .bx {
 	background: #86e49d;
 	color: #006b21;
-}
-main .box-info li:nth-child(5) .bx {
-	background: var(--light-orange);
-	color: var(--orange);
-}
-main .box-info li:nth-child(6) .bx {
-	background: #86e49d;
-	color: #006b21;
-}
-main .box-info li:nth-child(7) .bx {
-	background: var(--light-orange);
-	color: var(--orange);
 }
 main .box-info li .text h3 {
 	font-size: 24px;
