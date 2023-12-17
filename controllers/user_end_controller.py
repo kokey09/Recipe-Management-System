@@ -153,10 +153,14 @@ def user_add_recipe():
 
 @user_end_controller_bp.route('/shared_recipe')
 def shared_recipe():
-    added_recipe = session.pop('added_recipe', None)
-    deleted_recipe = session.pop('deleted_recipe', None)  
-    error = session.pop('error', None)  
-    harmful_array = session.pop('harmful_array', None)                     
+    # Pop session variables and store them in a dictionary
+    session_vars = {
+        'added_recipe': session.pop('added_recipe', None),
+        'deleted_recipe': session.pop('deleted_recipe', None),
+        'error': session.pop('error', None),
+        'harmful_array': session.pop('harmful_array', None)
+    }
+
     # Check if the user is logged in
     user = get_authenticated_user()
 
@@ -169,12 +173,8 @@ def shared_recipe():
     for recipe in recipes:
         recipe_reviews_count[recipe.recipe_id] = len(Review.query.filter_by(recipe_id=recipe.recipe_id).all())
 
-    response = make_response (render_template('shared_recipe.html', recipes=recipes, user=user,
-                                                                    recipe_reviews_count=recipe_reviews_count,
-                                                                    added_recipe=added_recipe,
-                                                                    deleted_recipe=deleted_recipe,
-                                                                    error=error,
-                                                                    harmful_array=harmful_array))
+    response = make_response(render_template('shared_recipe.html', recipes=recipes, user=user,
+                                             recipe_reviews_count=recipe_reviews_count, **session_vars))
     response.headers['Cache-Control'] = 'no-cache, no-store, must-revalidate'
     return response
 

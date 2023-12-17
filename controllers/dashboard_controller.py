@@ -12,9 +12,13 @@ dashboard_controller_bp = Blueprint('dashboard_controller',__name__,template_fol
 
 @dashboard_controller_bp.route('/recipes')
 def recipes():
-    added_recipe = session.pop('added_recipe', None)
-    deleted_recipe = session.pop('deleted_recipe', None)
-    harmful_array = session.pop('harmful_array', None)
+    # Pop session variables and store them in a dictionary
+    session_vars = {
+        'added_recipe': session.pop('added_recipe', None),
+        'deleted_recipe': session.pop('deleted_recipe', None),
+        'harmful_array': session.pop('harmful_array', None)
+    }
+
     user = get_authenticated_user()
 
     if not user:
@@ -23,12 +27,9 @@ def recipes():
 
     if user.type != 'admin':
         return redirect(url_for('user_end_controller.user_page'))
+
     recipes_data = Recipe.query.filter_by(is_deleted=False).order_by(Recipe.recipe_id.desc()).all()
-    response = make_response(render_template('recipes.html', recipes=recipes_data,
-                                                             user=user,
-                                                             added_recipe=added_recipe,
-                                                             deleted_recipe=deleted_recipe,
-                                                             harmful_array=harmful_array))
+    response = make_response(render_template('recipes.html', recipes=recipes_data, user=user, **session_vars))
     response.headers['Cache-Control'] = 'no-cache, no-store, must-revalidate'
     return response
 
@@ -49,28 +50,26 @@ def deleted_recipes():
 
 @dashboard_controller_bp.route('/ingredients')
 def ingredients():
+    # Pop session variables and store them in a dictionary
+    session_vars = {
+        'deleted_ingredients': session.pop('deleted_ingredients', None),
+        'added_ingredients': session.pop('added_ingredients', None),
+        'error': session.pop('error', None),  # from delete controller exception
+        'existing_ingredient': session.pop('existing_ingredient', None),
+        'harmful_array': session.pop('harmful_array', None)
+    }
 
-    deleted_ingredients = session.pop('deleted_ingredients', None)
-    added_ingredients = session.pop('added_ingredients', None)
-    error = session.pop('error', None) #from delete controller exception
-
-    existing_ingredient = session.pop('existing_ingredient', None)
     user = get_authenticated_user()
 
     if not user:
-        flash('Please log in to access ingredients.','error')
+        flash('Please log in to access ingredients.', 'error')
         return redirect(url_for('authentication_controller.login'))
 
     if user.type != 'admin':
         return redirect(url_for('user_end_controller.user_page'))
 
     ingredients_data = Ingredient.query.all()
-    response = make_response(render_template('ingredients.html', ingredients=ingredients_data,
-                                                                 user=user,
-                                                                 deleted_ingredients=deleted_ingredients,
-                                                                 added_ingredients=added_ingredients,
-                                                                 error=error,
-                                                                 existing_ingredient=existing_ingredient))
+    response = make_response(render_template('ingredients.html', ingredients=ingredients_data, user=user, **session_vars))
     response.headers['Cache-Control'] = 'no-cache, no-store, must-revalidate'
     return response
 

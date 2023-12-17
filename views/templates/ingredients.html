@@ -115,6 +115,10 @@
         <script>
             swal("Error", "{{ existing_ingredient }}", "info");
         </script>
+        {% elif harmful_array %}
+        <script>
+            swal("Error", "{{ harmful_array }}", "info");
+        </script>
         {% endif %}
 
     {% endblock %}

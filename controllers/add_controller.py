@@ -122,6 +122,10 @@ def add_ingredient():
         name = request.form.get('name')
         description = request.form.get('description')
 
+        if any(keyword in name for keyword in HARMFUL_KEYWORDS) or any(keyword in description for keyword in HARMFUL_KEYWORDS):
+            session['harmful_array'] = "Ingredient contains inappropriate content and cannot be uploaded."
+            return redirect(url_for('dashboard_controller.ingredients'))
+
         existing_ingredient = Ingredient.query.filter_by(name=name).first()
         if existing_ingredient is None:
             new_ingredient = Ingredient(name=name, description=description)
