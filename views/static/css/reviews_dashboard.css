@@ -119,3 +119,6 @@ tbody tr td a{
     color: red;
     font-size: 50px;
 }
+.table-body td a{
+    text-decoration: none;
+}

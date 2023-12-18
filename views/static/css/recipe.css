@@ -116,6 +116,11 @@ tbody tr:hover{
 .table-body td {
     font-size: 12px; /* adjust as needed */
 }
+.table-body td a{
+    text-decoration: none;
+    color: black;
+}
+
 
 
 /* popup add */
