@@ -171,7 +171,7 @@ def dashboard():
 @dashboard_controller_bp.route('/recipe_preview')
 def recipe_preview():
     recipe_id = request.args.get('recipe_id', None, type=int)
-    recipe = Recipe.query.get(recipe_id)
+    recipe = Recipe.query.filter(Recipe.recipe_id == recipe_id, Recipe.is_deleted == False).first()
 
     user = get_authenticated_user()
 
