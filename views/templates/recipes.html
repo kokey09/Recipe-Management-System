@@ -107,7 +107,11 @@
                         <td>
                             <input type="checkbox" name="checkbox" class="checkbox" id="checkbox-{{ recipe.recipe_id }}">
                         </td>
-                        <td>{{ recipe.recipe_id }}</td>
+                        <td>
+                            <a href="{{url_for('user_end_controller.recipe_instruction', recipe_id=recipe.recipe_id)}}">
+                                {{ recipe.recipe_id }}
+                            </a>
+                        </td>
                         <td>
                             <div style="display: flex; align-items: center;">
                                 <img src="{{ recipe.image_url }}" alt="{{ recipe.name }} Image" loading="lazy" style="margin-right: 10px;">
