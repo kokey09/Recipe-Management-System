@@ -133,7 +133,12 @@ def edit_ingredient(id):
         ingredient.name = request.form.get('name')
         ingredient.description = request.form.get('description')
 
+        if any(keyword in ingredient.name.lower() for keyword in HARMFUL_KEYWORDS) or any(keyword in ingredient.description.lower() for keyword in HARMFUL_KEYWORDS):
+            session['harmful_array'] = "Recipe contains inappropriate content and cannot be updated."
+            return redirect(url_for('dashboard_controller.ingredients'))
+
         db.session.commit()
+        session['notif'] = ("Success","Ingredient updated successfully","success")
         return redirect(url_for('dashboard_controller.ingredients'))
 
     return render_template('edit_ingredients.html', ingredient=ingredient, id=id, user=user)

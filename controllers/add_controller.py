@@ -14,7 +14,7 @@ from datetime import datetime  # Import datetime
 from flask_bcrypt import Bcrypt
 import os
 import logging
-import re
+
 add_controller_bp = Blueprint('add_controller',__name__,template_folder='templates',static_folder='static')
 bcrypt = Bcrypt()
 
@@ -80,7 +80,7 @@ def add_recipe_base(model, redirect_page):
         filename = save_image_file(image_file, 'recipes-img-table') if image_file else None
 
         # Check for harmful keywords in instructions
-        if any(re.search(r'\b' + keyword + r'\b', recipe_name.lower()) for keyword in HARMFUL_KEYWORDS) or any(re.search(r'\b' + keyword + r'\b', instructions.lower()) for keyword in HARMFUL_KEYWORDS):
+        if any(keyword in recipe_name.lower() for keyword in HARMFUL_KEYWORDS) or any(keyword in instructions.lower() for keyword in HARMFUL_KEYWORDS):
             session['harmful_array'] = "Recipe contains inappropriate content and cannot be uploaded."
             return redirect(url_for(redirect_page))
 
@@ -121,8 +121,9 @@ def add_ingredient():
         
         name = request.form.get('name')
         description = request.form.get('description')
+        
 
-        if any(keyword in name for keyword in HARMFUL_KEYWORDS) or any(keyword in description for keyword in HARMFUL_KEYWORDS):
+        if any(keyword in name.lower() for keyword in HARMFUL_KEYWORDS) or any(keyword in description.lower() for keyword in HARMFUL_KEYWORDS):
             session['harmful_array'] = "Ingredient contains inappropriate content and cannot be uploaded."
             return redirect(url_for('dashboard_controller.ingredients'))
 
