@@ -61,6 +61,12 @@ def edit_account(id):
 #            flash("Error updating recipe. Please try again.", "error")
 
 #    return render_template('edit_recipes.html', recipe=recipe, id=id, user=user)
+HARMFUL_KEYWORDS = [
+    'tae', 'lason', 'ewan', 'cyanide', 'mercury', 'lead', 'arsenic', 'raw meat',
+    'rotten eggs', 'moldy cheese', 'spoiled milk', 'uncooked chicken', 'raw pork',
+    'unwashed vegetables', 'expired canned goods', 'contaminated water', 'tainted seafood',
+    'unpasteurized milk', 'unrefrigerated leftovers', 'bobo'
+]
 
 def save_image_file(image_file, directory):
     filename = secure_filename(image_file.filename)
@@ -88,6 +94,11 @@ def user_edit_recipe(id):
     if request.method == 'POST':
         recipe.name = request.form.get('recipe_name')
         recipe.instructions = request.form.get('instructions')
+
+        if any(keyword in recipe.name.lower() for keyword in HARMFUL_KEYWORDS) or any(keyword in recipe.instructions.lower() for keyword in HARMFUL_KEYWORDS):
+            session['harmful_array'] = "Recipe contains inappropriate content and cannot be updated."
+            return redirect(url_for('user_end_controller.shared_recipe'))  # Redirect to an appropriate error page
+
         filename = None  # Initialize filename to None
 
         image_file = request.files.get('image_file')
