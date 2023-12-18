@@ -23,6 +23,7 @@
     {% if not favorites %}
         <h1 class="favo">No favorites available!</h1 class="favo">
     {% endif %}
+    
     <div class="row">
         {% for favorite in favorites if not favorite.is_deleted %}
         <div class="col-md-4">

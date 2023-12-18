@@ -189,7 +189,8 @@ def favorites():
     # Get favorites associated with non-deleted or not soft deletedrecipes
     favorites = Favorite.query.join(Recipe).filter(
         Favorite.account_id == user.id,
-        Recipe.is_deleted == False
+        Recipe.is_deleted == False,
+        Favorite.is_deleted == False
     ).all()
 
     response = make_response (render_template('favorites.html', user=user, favorites=favorites,remove_favorite=remove_favorite))
