@@ -171,7 +171,7 @@ def dashboard():
 @dashboard_controller_bp.route('/recipe_preview')
 def recipe_preview():
     recipe_id = request.args.get('recipe_id', None, type=int)
-    recipe = Recipe.query.filter(Recipe.recipe_id == recipe_id, Recipe.is_deleted == False).first()
+    recipe = Recipe.query.get(recipe_id)
 
     user = get_authenticated_user()
 
@@ -179,11 +179,11 @@ def recipe_preview():
         flash('Please log in to access the dashboard', 'error')
         return redirect(url_for('authentication_controller.login'))
 
-    if user.type == 'normal' and recipe.account_id != user.id:
-        session['error'] = 'You do not have permission to view this recipe.'
-        return redirect(url_for('user_end_controller.shared_recipe'))
+    if recipe is None or (user.type == 'normal' and recipe.account_id != user.id):
+        flash('You do not have permission to view this recipe.', 'error')
+        return render_template('recipe_preview.html', id=recipe_id, recipe=None, user=user)
 
-    return render_template('recipe_preview.html', id=recipe_id, recipe=recipe,user=user)
+    return render_template('recipe_preview.html', id=recipe_id, recipe=recipe, user=user)
 
 def get_authenticated_user():
     if 'user_id' in session:

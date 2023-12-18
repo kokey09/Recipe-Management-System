@@ -21,21 +21,23 @@ $(document).ready(function () {
             selectedIds.push($(this).data("ingredient-id"));
         });
 
-        if (selectedIds.length > 0) {
-            // Perform mass deletion by sending selectedIds to the server
-            $.ajax({
-                type: "POST",
-                url: "/mass_delete_ingredients",
-                data: { ids: selectedIds },
-                success: function (response) {
-                    // Handle success, e.g., refresh the page or update the table
-                    location.reload();
-                },
-                error: function (error) {
-                    console.error("Error during mass deletion:", error);
-                    // Handle error if needed
-                }
-            });
+        if (confirm('Are you sure you want to delete selected items?')) {
+            if (selectedIds.length > 0) {
+                // Perform mass deletion by sending selectedIds to the server
+                $.ajax({
+                    type: "POST",
+                    url: "/mass_delete_ingredients",
+                    data: { ids: selectedIds },
+                    success: function (response) {
+                        // Handle success, e.g., refresh the page or update the table
+                        location.reload();
+                    },
+                    error: function (error) {
+                        console.error("Error during mass deletion:", error);
+                        // Handle error if needed
+                    }
+                });
+            }
         }
     });
 

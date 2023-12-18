@@ -32,11 +32,11 @@
             <input type="hidden" name="new_status" id="new_status" value="">
             <!-- Buttons for changing status -->
             <div class="btn-horizontal">
-                {% if user.type == 'admin' and user.id != recipe.account_id %}
+                {% if user.type == 'admin' and user.id != recipe.account_id and recipe.is_deleted != True %}
                     <button type="button" class="approved" onclick="if(confirm('Are you sure you want to set status to approved?')) { changeStatus('approved'); }">Approved</button>
                     <button type="button" class="pending" onclick="if(confirm('Are you sure you want to set status to pending?')) { changeStatus('pending'); }">Pending</button>
                     <button type="button" class="decline" onclick="if(confirm('Are you sure you want to set status to decline?')) { changeStatus('declined'); }">Decline</button>
-                {% elif user.type == 'admin' %}
+                {% elif user.type == 'admin' and recipe.is_deleted != True %}
                     <h1 class="deleted-mark">You cannot change the status of your own uploaded recipes. Let the other admins review and change the status for you.</h1>
                 {% endif %}
             </div>
