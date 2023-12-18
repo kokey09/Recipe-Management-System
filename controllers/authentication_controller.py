@@ -73,7 +73,7 @@ def verify_email(token):
         session['notif'] = ("Registered", "Account has been registered", "success")
         return redirect(url_for('authentication_controller.login'))
 
-    flash('An error occurred')
+    session['notif'] = ("Error","An error occurred","error")
     return redirect(url_for('authentication_controller.register'))
 
 def send_verification_email(email, token):
@@ -123,6 +123,7 @@ def login():
         if user.type == 'admin':
             return redirect(url_for('dashboard_controller.dashboard'))
         elif user.type == 'normal':
+            session['notif'] = ("Success", f"Welcome back, {user.username}!", "success")
             return redirect(url_for('user_end_controller.user_page'))
 
     notif = session.pop('notif', None)

@@ -12,7 +12,7 @@ user_end_controller_bp = Blueprint('user_end_controller',__name__,template_folde
 
 @user_end_controller_bp.route('/')
 def user_page():
-
+    notif = session.pop('notif', None)
     ingredients = Ingredient.query.all()
     recipes = Recipe.query.filter_by(status='approved', is_deleted=False).order_by(Recipe.status_changed_at.desc()).all()
     
@@ -25,7 +25,8 @@ def user_page():
     response = make_response(render_template('user_page.html', recipes=recipes,
                                                                ingredients=ingredients,
                                                                user=user,
-                                                               recipe_reviews_count=recipe_reviews_count))
+                                                               recipe_reviews_count=recipe_reviews_count,
+                                                               notif=notif))
     response.headers['Cache-Control'] = 'no-cache, no-store, must-revalidate'
     return response
 

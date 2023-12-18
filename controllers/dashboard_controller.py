@@ -21,7 +21,7 @@ def recipes():
     user = get_authenticated_user()
 
     if not user:
-        flash('Please log in to access recipes', 'error')
+        session['notif'] = ("Error","Please log in to access recipes", "error")
         return redirect(url_for('authentication_controller.login'))
 
     if user.type != 'admin':
@@ -58,7 +58,7 @@ def ingredients():
     user = get_authenticated_user()
 
     if not user:
-        flash('Please log in to access ingredients.', 'error')
+        session['notif'] = ("Error","Please log in to access ingredients.", "error")
         return redirect(url_for('authentication_controller.login'))
 
     if user.type != 'admin':
@@ -75,11 +75,10 @@ def recipe_ingredients():
     user = get_authenticated_user()
 
     if not user:
-        flash('Please log in to access recipe ingredients', 'error')
+        session['notif'] = ("Error","Please log in to access recipe ingredients", "error")
         return redirect(url_for('authentication_controller.login'))
 
     if user.type != 'admin':
-        flash('You do not have access to view recipe ingredients', 'error')
         return redirect(url_for('user_end_controller.user_page'))
 
     recipes_data = Recipe.query.all()
@@ -102,7 +101,7 @@ def reviews_dashboard():
     user = get_authenticated_user()
 
     if not user:
-        flash('Please log in to access the dashboard', 'error')
+        session['notif'] = ("Error","Please log in to access the dashboard", "error")
         return redirect(url_for('authentication_controller.login'))
 
     if user.type != 'admin':

@@ -109,7 +109,11 @@
             </div>
         </div>
     </section>
-
+    {% if notif %}
+        <script>
+            swal("{{ notif[0] }}", "{{ notif[1] }}", "{{ notif[2] }}");
+        </script>
+    {% endif %}
 
 
 {% endblock %}
