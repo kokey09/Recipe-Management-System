@@ -9,7 +9,7 @@ from models.recipe import Recipe
 from models.review import Review
 from flask_bcrypt import Bcrypt
 import os
-
+import json
 
 edit_controller_bp = Blueprint('edit_controller',__name__,template_folder='templates',static_folder='static')
 bcrypt = Bcrypt()
@@ -95,6 +95,10 @@ def user_edit_recipe(id):
         recipe.name = request.form.get('recipe_name')
         recipe.instructions = request.form.get('instructions')
 
+        
+        with open('views/static/json/harmful_keywords.json', 'r') as f:
+            HARMFUL_KEYWORDS = json.load(f)
+
         if any(keyword in recipe.name.lower() for keyword in HARMFUL_KEYWORDS) or any(keyword in recipe.instructions.lower() for keyword in HARMFUL_KEYWORDS):
             session['harmful_array'] = "Recipe contains inappropriate content and cannot be updated."
             return redirect(url_for('user_end_controller.shared_recipe'))  # Redirect to an appropriate error page
@@ -132,6 +136,9 @@ def edit_ingredient(id):
         # Update the ingredient's details based on the form data
         ingredient.name = request.form.get('name')
         ingredient.description = request.form.get('description')
+
+        with open('views/static/json/harmful_keywords.json', 'r') as f:
+            HARMFUL_KEYWORDS = json.load(f)
 
         if any(keyword in ingredient.name.lower() for keyword in HARMFUL_KEYWORDS) or any(keyword in ingredient.description.lower() for keyword in HARMFUL_KEYWORDS):
             session['harmful_array'] = "Recipe contains inappropriate content and cannot be updated."

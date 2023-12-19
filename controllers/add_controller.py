@@ -14,6 +14,8 @@ from datetime import datetime  # Import datetime
 from flask_bcrypt import Bcrypt
 import os
 import logging
+import json
+
 
 add_controller_bp = Blueprint('add_controller',__name__,template_folder='templates',static_folder='static')
 bcrypt = Bcrypt()
@@ -59,13 +61,6 @@ def add_review():
     return redirect(url_for('user_end_controller.recipe_instruction', recipe_id=recipe_id))
 
 
-HARMFUL_KEYWORDS = [
-    'tae', 'lason', 'ewan', 'cyanide', 'mercury', 'lead', 'arsenic', 'raw meat',
-    'rotten eggs', 'moldy cheese', 'spoiled milk', 'uncooked chicken', 'raw pork',
-    'unwashed vegetables', 'expired canned goods', 'contaminated water', 'tainted seafood',
-    'unpasteurized milk', 'unrefrigerated leftovers', 'bobo'
-]
-
 def add_recipe_base(model, redirect_page):
     if request.method == 'POST':
 
@@ -78,6 +73,10 @@ def add_recipe_base(model, redirect_page):
         instructions = request.form.get('instructions')
         image_file = request.files.get('image_file')
         filename = save_image_file(image_file, 'recipes-img-table') if image_file else None
+
+        # Load harmful keywords from JSON file
+        with open('views/static/json/harmful_keywords.json', 'r') as f:
+            HARMFUL_KEYWORDS = json.load(f)
 
         # Check for harmful keywords in instructions
         if any(keyword in recipe_name.lower() for keyword in HARMFUL_KEYWORDS) or any(keyword in instructions.lower() for keyword in HARMFUL_KEYWORDS):
@@ -122,7 +121,9 @@ def add_ingredient():
         name = request.form.get('name')
         description = request.form.get('description')
         
-
+        with open('views/static/json/harmful_keywords.json', 'r') as f:
+            HARMFUL_KEYWORDS = json.load(f)
+            
         if any(keyword in name.lower() for keyword in HARMFUL_KEYWORDS) or any(keyword in description.lower() for keyword in HARMFUL_KEYWORDS):
             session['harmful_array'] = "Ingredient contains inappropriate content and cannot be uploaded."
             return redirect(url_for('dashboard_controller.ingredients'))

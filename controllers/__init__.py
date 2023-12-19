@@ -1,10 +1,13 @@
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from flask_mail import Mail
+
+
 import os
 
 db = SQLAlchemy()
 mail = Mail()
+
 
 def create_app():
 
@@ -25,6 +28,7 @@ def create_app():
   
     db.init_app(app)
     mail.init_app(app)
+
 
     from controllers.authentication_controller import authentication_controller_bp
     from controllers.edit_controller import edit_controller_bp
