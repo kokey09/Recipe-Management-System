@@ -165,6 +165,7 @@ def change_status(recipe_id):
         recipe.status_changed_by = user.id
     # Save changes to the database
     db.session.commit()
+    session['notif']  = ("Success","Recipe status updated successfully","success")
     # Redirect back to the deleted recipes page
     return redirect(url_for('dashboard_controller.recipes'))
 
@@ -177,7 +178,7 @@ def recover_recipe(id):
     recipe.is_deleted = False
     recipe.recovered_by = user.id  # Set the recovered_by field
     db.session.commit()
-    session['recover_recipe'] = "Recipe recovered successfully"
+    session['notif'] = ("Recovered","Recipe recovered successfully","success")
     # Return a JSON response indicating success
     return jsonify({"message": "Recipe recovered successfully"})
 
@@ -194,7 +195,7 @@ def mass_recover_recipes():
         recipe.is_deleted = False
         recipe.recovered_by = user.id  # Set the recovered_by field
         db.session.commit()
-        session['recover_recipe'] = "Recipe recovered successfully"
+        session['notif'] = ("Recovered","Recipe recovered successfully","success")
 
     return jsonify({'message': 'Selected recipes recovered successfully'}), 200
 

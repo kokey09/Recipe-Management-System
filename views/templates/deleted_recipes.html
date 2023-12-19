@@ -116,11 +116,12 @@
      </section>
 </main>
 
-    {% if recover_recipe %}
-        <script>
-            swal("Success", "{{ recover_recipe }}", "success");
-        </script>
+    {% if notif %}
+    <script>
+        swal("{{ notif[0] }}", "{{ notif[1] }}", "{{ notif[2] }}");
+    </script>
     {% endif %}
+
     <script type="text/javascript">
         var userId = "{{ session['user_id'] }}";  // Get the user's ID from the session
     </script>
