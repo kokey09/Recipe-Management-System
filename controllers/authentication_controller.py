@@ -57,6 +57,30 @@ def register():
     return render_template('register.html', notif=notif, exprired_token=exprired_token)
 
 
+def generate_verification_token(email):
+    serializer = URLSafeTimedSerializer(current_app.config['SECRET_KEY'])
+    return serializer.dumps(email)
+
+
+def send_verification_email(email, token):
+    msg = Message('Account Verification', sender='your-email@gmail.com', recipients=[email])
+    verify_url = f"{BASE_URL}/verify_email/{token}"
+    msg.body = f'Click the following link to verify your account: {verify_url}'
+    mail.send(msg)
+
+
+def confirm_verification_token(token, expiration=3600):
+    serializer = URLSafeTimedSerializer(current_app.config['SECRET_KEY'])
+    try:
+        email = serializer.loads(
+            token,
+            max_age=expiration
+        )
+    except:
+        return False
+    return email
+
+
 @authentication_controller_bp.route('/verify_email/<token>', methods=['GET', 'POST'])
 def verify_email(token):
     email = confirm_verification_token(token)
@@ -75,27 +99,6 @@ def verify_email(token):
 
     session['notif'] = ("Error","An error occurred","error")
     return redirect(url_for('authentication_controller.register'))
-
-def send_verification_email(email, token):
-    msg = Message('Account Verification', sender='your-email@gmail.com', recipients=[email])
-    verify_url = f"{BASE_URL}/verify_email/{token}"
-    msg.body = f'Click the following link to verify your account: {verify_url}'
-    mail.send(msg)
-
-def generate_verification_token(email):
-    serializer = URLSafeTimedSerializer(current_app.config['SECRET_KEY'])
-    return serializer.dumps(email)
-
-def confirm_verification_token(token, expiration=3600):
-    serializer = URLSafeTimedSerializer(current_app.config['SECRET_KEY'])
-    try:
-        email = serializer.loads(
-            token,
-            max_age=expiration
-        )
-    except:
-        return False
-    return email
 
 
 @authentication_controller_bp.route('/login', methods=['GET', 'POST'])
@@ -168,6 +171,14 @@ def generate_reset_token(email):
     serializer = URLSafeTimedSerializer(current_app.config['SECRET_KEY'])
     return serializer.dumps(email, salt='password-reset-salt')
 
+
+def send_reset_email(email, token):
+    msg = Message('Password Reset Request', sender='your-email@gmail.com', recipients=[email])
+    reset_url = f"{BASE_URL}/reset_password/{token}"
+    msg.body = f'Click the following link to reset your password: {reset_url}'
+    mail.send(msg)
+
+
 def confirm_reset_token(token, expiration=3600):
     serializer = URLSafeTimedSerializer(current_app.config['SECRET_KEY'])
     try:
@@ -175,13 +186,6 @@ def confirm_reset_token(token, expiration=3600):
     except:
         return None
     return email
-
-
-def send_reset_email(email, token):
-    msg = Message('Password Reset Request', sender='your-email@gmail.com', recipients=[email])
-    reset_url = f"{BASE_URL}/reset_password/{token}"
-    msg.body = f'Click the following link to reset your password: {reset_url}'
-    mail.send(msg)
 
 
 @authentication_controller_bp.route('/reset_password/<token>', methods=['GET', 'POST'])
