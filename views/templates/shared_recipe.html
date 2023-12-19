@@ -55,7 +55,7 @@
                                     </a>
                                     {% endif %}
                                 </form>
-                                <a href="{{ url_for('user_end_controller.recipe_instruction', recipe_id=recipe.recipe_id) }}" class="star-new-rating">
+                                <a href="{{ url_for('user_end_controller.recipe_instruction', recipe_id=recipe.recipe_id) }} #reviews-section" class="star-new-rating">
                                     <i class='bx bxs-star' ></i>
                                     Reviews | {{ recipe_reviews_count[recipe.recipe_id] }}
                                     Reviews
