@@ -149,8 +149,12 @@
                         </td>
                         <td>
                             <div style="display: flex; align-items: center; gap: 10px;">
+                                {% if recipe.status_changed_at%}
                                 <p>{{recipe.status_changer.id}}</p>
                                 <p>{{recipe.status_changer.username}}</p>
+                                {% else %}
+                                N/A
+                                {% endif %}
                             </div>
                         </td>
                         <td>
