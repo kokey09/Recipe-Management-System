@@ -130,16 +130,16 @@
                             </div>
                         </td>
                         <td>
-                            <div style="display: flex; align-items: center; gap: 10px;">
-                                <p>{{recipe.account.id}}</p>
+                            <div style="display: flex; flex-direction: column; align-items: center;">
+                                <p>&#40;{{recipe.account.id}}&#41;</p>
                                 <p>{{ recipe.account.username}}</p>
                             </div>
                         </td>
                         <td>{{ recipe.created_at.strftime("%B %d, %Y at %I:%M:%S %p") }}</td>
                         <td>
-                            <div style="display: flex; align-items: center; gap: 10px;">
+                            <div style="display: flex; flex-direction: column; align-items: center; ">
                                 {% if recipe.recovered_at %}
-                                <p>{{recipe.recoverer.id}}</p>
+                                <p>&#40;{{recipe.recoverer.id}}&#41;</p>
                                 <p>{{ recipe.recoverer.username}}</p>
                                 {% else %}
                                 N/A
@@ -159,9 +159,9 @@
                             </p>
                         </td>
                         <td>
-                            <div style="display: flex; align-items: center; gap: 10px;">
+                            <div style="display: flex; flex-direction: column; align-items: center;">
                                 {% if recipe.status_changed_at%}
-                                <p>{{recipe.status_changer.id}}</p>
+                                <p>&#40;{{recipe.status_changer.id}}&#41;</p>
                                 <p>{{recipe.status_changer.username}}</p>
                                 {% else %}
                                 N/A
