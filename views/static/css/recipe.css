@@ -268,6 +268,15 @@ tbody tr:hover{
     align-items: center;
     flex-direction: column;
     justify-content: center;    
+    margin-left: auto;
+    margin-right: auto;
+    
+}
+
+.btn-img div{
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .add-btn button{
@@ -282,9 +291,13 @@ tbody tr:hover{
     margin-top: 10px;
 }
 .btn-img i {
-    font-size: 100px;  /* Adjust as needed */
+    font-size: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;  /* Adjust as needed */
 }
 
 .add-btn button:hover{
     background-color: #86e49d;
 }
+
