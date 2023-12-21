@@ -43,7 +43,10 @@
                     <div class="buttons">
                         <div class="btn-img">
                             <label for="image_file">
-                                <i class='bx bx-image-add'></i>
+                                <div id="image_container">
+                                    <i class='bx bx-image-add'></i>
+                                    <img id="preview" src="" alt="Image preview" style="display: none; width: 100px; height: 100px;">
+                                </div>
                             </label>
 
                             <input type="file" id="image_file" name="image_file" accept="image/*" required style="display: none;">
@@ -55,7 +58,6 @@
                             <div id="file-error" style="display: none; color: red;">
                                 <p>Image file is required.</p>
                             </div>
-
                         </div>
                         
                         <div class="add-btn">  
@@ -222,6 +224,8 @@
     <script type="text/javascript">
         var userId = "{{ session['user_id'] }}";  // Get the user's ID from the session
     </script>
+
+    <script src="{{ url_for('static', filename='js/uploadingImg.js') }}"></script>
 {% endblock %}
 </body>
 
