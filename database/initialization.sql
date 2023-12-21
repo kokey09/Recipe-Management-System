@@ -1,4 +1,3 @@
-
 CREATE USER 'dashboard'@'localhost' IDENTIFIED BY 'dashboard';
 
 GRANT ALL PRIVILEGES ON recipedb.* TO 'dashboard'@'localhost';
@@ -8,7 +7,6 @@ FLUSH PRIVILEGES;
 CREATE DATABASE recipedb;
 
 USE recipedb;
-
 
 CREATE TABLE account (
     id INT AUTO_INCREMENT PRIMARY KEY,
@@ -42,16 +40,11 @@ CREATE TABLE recipes (
   FOREIGN KEY (`status_changed_by`) REFERENCES `account`(`id`)
 );
 
-
-
-
 CREATE TABLE ingredients (
     ingredient_id INT AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(255) NOT NULL UNIQUE,
     description TEXT
 );
-
-
 
 CREATE TABLE recipe_ingredients (
      recipe_id INT(11),
