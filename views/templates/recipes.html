@@ -39,11 +39,22 @@
 
                     <label for="instructions">Instructions:</label>
                     <textarea id="instructions" name="instructions" rows="4" class="text-area-form" required></textarea>
+                    
+                    <div class="buttons">
+                        <div class="btn-img">
+                            <label for="image_file">
+                                <i class='bx bx-image-add'></i>
+                            </label>
+                            <input type="file" id="image_file" name="image_file" accept="image/*" required style="display: none;">
+                            <div>Add Image</div>
+                            <div id="file-error" style="display: none; color: red;">Image file is required.</div>
 
-                    <label for="image_file">Image File:</label>
-                    <input type="file" id="image_file" name="image_file" accept="image/*" required>
-
-                    <button type="submit">Add Recipe</button>
+                        </div>
+                        
+                        <div class="add-btn">  
+                            <button type="submit"  id="submit-button">Add Recipe</button>
+                        </div>  
+                    </div>
                 </form>
                 <div onclick="closePopup()" class="close-btn">
                     <i class='bx bx-x'></i>

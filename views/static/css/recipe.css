@@ -125,12 +125,12 @@ tbody tr:hover{
 
 /* popup add */
 .text-area-form {
-    width: 100%;
+    width: 100%;  /* Fixed width */
     padding: 10px;
     margin-bottom: 10px;
     border: 1px solid #ccc;
     border-radius: 4px;
-    height: 60% ;
+    resize: vertical;  /* Allow vertical resize only */
 }
 .name-form {
     width: 100%;
@@ -152,7 +152,6 @@ tbody tr:hover{
     background-color: rgba(0, 0, 0, 0.7);
 }
 
-
 .Popup {
     display: none;
     position: fixed;
@@ -164,8 +163,10 @@ tbody tr:hover{
     border-radius: 5px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
     z-index: 1;
-    width: 28%;
-    height: 65%;
+    width: 58%;
+    height: auto;  /* Change this */
+    max-height: 90%;  /* Add this */
+    overflow-y: auto;  /* Add this */
 }
 .close-btn{
 	position: absolute;
@@ -260,4 +261,30 @@ tbody tr:hover{
 }
 .checkbox {
     transform: scale(1.5);
+}
+
+.buttons{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;    
+}
+
+.add-btn button{
+    color: white;
+    background-color: #2fc955;
+    border: none;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-right: 20px;
+    padding-left: 20px;
+    border-radius: 10px;
+    margin-top: 10px;
+}
+.btn-img i {
+    font-size: 100px;  /* Adjust as needed */
+}
+
+.add-btn button:hover{
+    background-color: #86e49d;
 }

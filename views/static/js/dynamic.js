@@ -69,6 +69,13 @@ $(document).ready(function () {
 
 // ________________________________________________________________________________________________________________
 
-
-
+// images required recipe.html
+$(document).ready(function() {
+    $('#submit-button').click(function(e) {
+        if ($('#image_file').get(0).files.length === 0) {
+            e.preventDefault();
+            $('#file-error').show();
+        }
+    });
+});
 
