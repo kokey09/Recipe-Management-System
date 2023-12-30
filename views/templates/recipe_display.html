@@ -17,42 +17,36 @@
     {% block title %}Recipes Display{% endblock %}
     {% block content %}
 
-    <div class="logo-link">
-        <img src="{{ url_for('static', filename='recipes-img-table/recipes.png') }}" alt="Your Logo" class="logo-image" loading="lazy">
-    </div>
-
     <input type="text" id="searchInput" class="search-bar" placeholder="Search Recipe">
-
     {% if not recipes %}
         <h1>No Recipes found</h1>
     {% endif %}
 
-    <ul class="recipe-list">
-        {% for recipe in recipes %}
-        <li class="recipe-card">
-            {% if user %}
-            <i class='bx bx-heart-circle favorite-btn' title="add favorites" data-recipe-id="{{ recipe.recipe_id }}"></i>
-            {% else %}
-            <i class='bx bx-heart-circle favorite-btn' title="add favorites" onclick="redirectToLogin()"></i>
-            {% endif %}
-            <img src="{{ recipe.image_url }}" alt="{{ recipe.name }} Image">
-            <div class="recipe-details">
-                <h2>{{ recipe.name }}</h2>
+   
+        <section>
+            {% for recipe in recipes %}
+            <div class="card">
+                {% if user %}
+                <i class='bx bx-heart-circle favorite-btn' title="add favorites" data-recipe-id="{{ recipe.recipe_id }}"></i>
+                {% else %}
+                <i class='bx bx-heart-circle favorite-btn' title="add favorites" onclick="redirectToLogin()"></i>
+                {% endif %}
 
-                <div class="button">
+                <div class="imgbx">
+                    <img src="{{ recipe.image_url }}" alt="{{ recipe.name }} Image" width="250" height="250">
+                </div>
+                <div class="contentbx">
+                    <h3>Fruit Salad</h3>
                     <a href="{{ url_for('user_end_controller.recipe_instruction', recipe_id=recipe.recipe_id) }}" class="view-recipe">
                         View Recipe
                     </a>
-
-                    <a href="{{ url_for('user_end_controller.recipe_instruction', recipe_id=recipe.recipe_id) }} #reviews-section " class="star-rating">
-                        <i class='bx bxs-star'></i> Reviews | {{ recipe_reviews_count[recipe.recipe_id] }} Reviews
+                    <a href="{{ url_for('user_end_controller.recipe_instruction', recipe_id=recipe.recipe_id) }} #reviews-section " class="reviews">
+                         Reviews | {{ recipe_reviews_count[recipe.recipe_id] }} Reviews
                     </a>
                 </div>
-                
-            </div>
-        </li>
-        {% endfor %}
-    </ul>
+            </div> 
+            {% endfor %}
+        </section>
 
     {% endblock %}
 </body>

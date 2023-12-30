@@ -179,13 +179,14 @@ button:hover {
   max-width: 600px;
   width: 100%;
   height: auto;  /* Change this */
-  max-height: 70%;  /* Add this */
+  max-height: 100%;  /* Add this */
   overflow-y: auto;  /* Add this */
   text-align: center;
+  margin-top: 2em;
 }
 
 .reviewPopup h1 {
-    font-size: 1.5em;
+    font-size: 1em;
     margin-bottom: 15px;
 }
 
@@ -297,6 +298,7 @@ button:hover {
   .container{
   margin-top: 100px;
   }
+  
 }
 
 @media (max-width: 576px) {
@@ -307,4 +309,7 @@ button:hover {
   .review-timestamp {
     font-size: 12px; /* Decrease timestamp font size on even smaller screens */
   }
+
+
+
 }

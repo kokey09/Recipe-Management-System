@@ -1,3 +1,7 @@
+html{
+    font-size: 62.5%;
+}
+
 *{
     padding:0;
     margin: 0;
@@ -13,9 +17,9 @@
     --main-color: #ff702a;
     --text-color: #1e1c2a;
     --bg-color:#C0C0C0;
-    --big-font: 5rem;
-    --h2-font:2.25rem;
-    --p-font: 0.9rem;
+    --big-font: 8rem;
+    --h2-font:4.25rem;
+    --p-font: 1.9rem;
 }
 ::selection{
     background: var(--main-color);
@@ -40,14 +44,14 @@ header{
 .logo{
     color: var(--main-color);
     font-weight: 600;
-    font-size: 2.4rem;
+    font-size: 3.9rem;
 }
 .navbar{
     display: flex;
 }
 .navbar a{
     color: var(--text-color);
-    font-size: 1.1rem;
+    font-size: 1.8rem;
     padding: 10px 20px;
     font-weight: 500;
 }
@@ -91,6 +95,7 @@ section{
     background: var(--main-color);
     color: #fff;
     border-radius: 0.5rem;
+    font-size: 2rem;
 }
 .btn:hover{
     transform: scale(1.2) translateY(10px);
@@ -111,6 +116,7 @@ section{
 .about-text span{
     color: var(--main-color);
     font-weight: 600;
+    font-size: 2.2rem;
 }
 .about-text h2{
     font-size: var(--h2-font);
@@ -119,6 +125,7 @@ section{
 .about-text p{
     margin: 0.8rem 0 1.8rem;
     line-height: 1.7 ;
+    font-size: 1.8rem;
 }
 
 .dropdown {
@@ -203,6 +210,8 @@ section{
 .heading span{
     color: var(--main-color);
     font-weight: 600;
+    font-size: 2.2rem;
+
 }
 .heading h2{
     font-size: var(--h2-font);
@@ -254,13 +263,13 @@ section{
 }
 
 .box h2{
-    font-size: 1.3rem;
+    font-size: 2.3rem;
     color: var(--text-color);
 }
 
 .box a {
     color: var(--text-color);
-    font-size: 1rem;
+    font-size: 1.7rem;
     font-weight: 400;
     margin: 4px 0 10px;
     transition: background-color 0.3s ease, color 0.3s ease; 
@@ -285,7 +294,7 @@ section{
 }
 
 .col h4{
-    font-size: 1.2rem;
+    font-size: 2.2rem;
     color: var(--text-color);
     margin-bottom: 25px;
     position: relative;
@@ -306,7 +315,7 @@ section{
 }
 .col ul li a{
     color: #0a0824;
-    font-size: 1.1rem;
+    font-size: 1.7rem;
     display: block;
     text-transform: capitalize;
     transition: .4s;
@@ -332,7 +341,7 @@ section{
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    font-size: 1.5rem;
+    font-size: 2.5rem;
     border-radius: 50%;
     transition: .4s;
 }
