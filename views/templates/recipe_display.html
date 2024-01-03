@@ -9,7 +9,7 @@
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     <script src="{{ url_for('static', filename='js/favorites.js') }}"></script>
     <script src="{{ url_for('static', filename='js/popup.js') }}"></script>
-    <script src="{{ url_for('static', filename='js/search.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/recipeDisplaySearch.js') }}"></script>
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 </head>
 <body>
@@ -22,7 +22,6 @@
         <h1>No Recipes found</h1>
     {% endif %}
 
-   
         <section>
             {% for recipe in recipes %}
             <div class="card">
@@ -36,7 +35,7 @@
                     <img src="{{ recipe.image_url }}" alt="{{ recipe.name }} Image" width="250" height="250">
                 </div>
                 <div class="contentbx">
-                    <h3>Fruit Salad</h3>
+                    <h3>{{ recipe.name}}</h3>
                     <a href="{{ url_for('user_end_controller.recipe_instruction', recipe_id=recipe.recipe_id) }}" class="view-recipe">
                         View Recipe
                     </a>
