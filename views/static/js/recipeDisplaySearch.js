@@ -6,7 +6,8 @@ function handleSearch(searchInputId, cardClass) {
     noDataFoundMessage.textContent = "Data not found";
     noDataFoundMessage.style.display = "none";
     noDataFoundMessage.style.fontSize = "20px"; // Set the font size to 20px
-    document.body.appendChild(noDataFoundMessage);
+    const section = document.querySelector('section'); // Select the section element
+    section.appendChild(noDataFoundMessage); // Append the message to the section
 
     searchInput.addEventListener("input", function() {
         const searchText = searchInput.value.toLowerCase();

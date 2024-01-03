@@ -6,7 +6,10 @@ function handleSearch(searchInputId, listClass) {
     const noDataFoundMessage = document.createElement("p");
     noDataFoundMessage.textContent = "Data not found";
     noDataFoundMessage.style.display = "none";
-    noDataFoundMessage.style.fontSize = "20px"; // Set the font size to 20px
+    noDataFoundMessage.style.fontSize = "20px";
+    noDataFoundMessage.style.textAlign = "center"; 
+    noDataFoundMessage.style.width = "100%"; 
+
     list.appendChild(noDataFoundMessage);
 
     searchInput.addEventListener("input", function() {

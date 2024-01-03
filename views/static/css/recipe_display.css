@@ -4,7 +4,6 @@ html{
 
 body{
     margin: 0;
-    height: 3000px;
     padding-top: 150px;
 }
 /* h1 alert start */
@@ -16,18 +15,15 @@ h1{
 /* h1 alert end */ 
 
 /* recipe card section start*/
-section{
-    height: 100vh;
+section {
     display: flex;
-    align-items: center;
+    align-items: flex-start; 
     justify-content: center;
     gap: 100px;
     flex-wrap: wrap; /* Allow multiple rows */
-    margin-top: 5em;
-
-
 }
-.card{
+
+.card {
     position: relative;
     min-width: 32rem;
     min-height: 42rem;
@@ -46,6 +42,9 @@ section{
     font-size: 50px;
 }
 
+.card i.bx-heart-circle:hover {
+    color: #c0392b;
+}
 .card::before{
     content: '';
     position: absolute;
@@ -141,9 +140,7 @@ section{
     margin-top: 1em;
 }
 /* recipe card section end*/
-.card i.bx-heart-circle:hover {
-    color: #c0392b;
-}
+
 .search-bar {
     display: block;
     margin: 0 auto;
