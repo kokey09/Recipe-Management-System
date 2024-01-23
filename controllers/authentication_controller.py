@@ -12,7 +12,9 @@ from itsdangerous import URLSafeTimedSerializer
 if 'CODESPACES' in os.environ:
     BASE_URL = os.environ['CODESPACE_NAME'] + '-5000.' + os.environ['GITHUB_CODESPACES_PORT_FORWARDING_DOMAIN']
 else:
-    BASE_URL = '127.0.0.1:5000'
+    BASE_URL = 'localhost:5000'
+     #below is for development
+    # BASE_URL = '127.0.0.1:5000'
 
 authentication_controller_bp = Blueprint('authentication_controller',__name__,template_folder='templates',static_folder='static')
 bcrypt = Bcrypt()

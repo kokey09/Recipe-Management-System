@@ -3,3 +3,5 @@ flask_sqlalchemy==3.1.1
 flask_bcrypt==1.0.1
 mysqlclient==2.2.0
 Flask-Mail==0.9.1
+waitress==2.1.2
+
