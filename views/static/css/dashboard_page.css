@@ -18,6 +18,10 @@
 body{
 	background: url('/static/raw-image/Spanish_Chorizo_Stuffed_Chicken_Breast.png') center / cover;
 }
+.wrapper{
+	max-width: 1600px;
+	margin: 0 auto;
+}
 
 main .box-info {
     list-style-type: none; /* This line removes the bullet points */

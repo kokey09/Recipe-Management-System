@@ -5,6 +5,7 @@
     <title>Add Recipes</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     <link rel="icon" href="{{ url_for('static', filename='raw-image/home.png') }}" type="image/x-icon">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
 <body>
 {% extends 'user_profile_dashboard.html' %}
@@ -26,18 +27,34 @@
         </div>
 
         <div class="form-group">
-            <label for="image_file">Image File:</label>
-            <input type="file" class="form-control-file" id="image_file" name="image_file" accept="image/*" required>
+            <label for="image_file">
+                <div id="image_container">
+                    <i class='bx bx-image-add' style='font-size:100px;'></i>
+                    <img id="preview" src="" alt="Image preview" style="display: none; width: 100px; height: 100px;">
+                </div>
+            </label>
+            
+            <input type="file" id="image_file" name="image_file" accept="image/*" required style="display: none;">
+
+            <div>
+                Add Image
+            </div>
+
+            <div id="file-error" style="display: none; color: red;">
+                <p>Image file is required.</p>
+            </div>
         </div>
 
-        <button type="submit" class="btn btn-primary" onclick="return confirm('Are you sure you want to add this recipe?')">Add Recipe</button>
+        <button type="submit" id="submit-button" class="btn btn-primary" onclick="return confirm('Are you sure you want to add this recipe?')">Add Recipe</button>
     </form>
 </div>
 
-
+<script src="{{ url_for('static', filename='js/uploadingImg.js') }}"></script>
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 {% endblock %}
 </body>
 </html>
+
+

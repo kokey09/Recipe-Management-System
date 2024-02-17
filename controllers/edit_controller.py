@@ -10,6 +10,7 @@ from models.review import Review
 from flask_bcrypt import Bcrypt
 import os
 import json
+import cloudinary.uploader
 
 edit_controller_bp = Blueprint('edit_controller',__name__,template_folder='templates',static_folder='static')
 bcrypt = Bcrypt()
@@ -67,14 +68,21 @@ HARMFUL_KEYWORDS = [
     'unwashed vegetables', 'expired canned goods', 'contaminated water', 'tainted seafood',
     'unpasteurized milk', 'unrefrigerated leftovers', 'bobo'
 ]
+# local development
+# def save_image_file(image_file, directory):
+#     filename = secure_filename(image_file.filename)
+#     image_directory = os.path.join(current_app.root_path, '..', 'views', 'static', directory)
+#     os.makedirs(image_directory, exist_ok=True)
+#     image_path = os.path.join(image_directory, filename)
+#     image_file.save(image_path)
+#     return filename
 
+
+# cloudinary save image function
 def save_image_file(image_file, directory):
     filename = secure_filename(image_file.filename)
-    image_directory = os.path.join(current_app.root_path, '..', 'views', 'static', directory)
-    os.makedirs(image_directory, exist_ok=True)
-    image_path = os.path.join(image_directory, filename)
-    image_file.save(image_path)
-    return filename
+    result = cloudinary.uploader.upload(image_file, folder=directory)
+    return result['url']
 
 @edit_controller_bp.route('/user_edit_recipe/<int:id>', methods=['GET', 'POST'])
 def user_edit_recipe(id):
@@ -103,13 +111,10 @@ def user_edit_recipe(id):
             session['harmful_array'] = "Recipe contains inappropriate content and cannot be updated."
             return redirect(url_for('user_end_controller.shared_recipe'))  # Redirect to an appropriate error page
 
-        filename = None  # Initialize filename to None
-
         image_file = request.files.get('image_file')
         if image_file:
-            filename = save_image_file(image_file, 'recipes-img-table')  # Use save_image_file function here
-
-            recipe.image_url = f'static/recipes-img-table/{filename}'
+            image_url = save_image_file(image_file, 'recipes-img-table')  # Use save_image_file function here
+            recipe.image_url = image_url  # Set the image_url to the URL returned by Cloudinary
 
         try:
             db.session.commit()
@@ -120,7 +125,6 @@ def user_edit_recipe(id):
             db.session.rollback()
             flash("Error updating recipe. Please try again.", "error")
     return render_template('user_edit_recipe.html', recipe=recipe, id=id, user=user)
-
 
 @edit_controller_bp.route('/edit_ingredient/<int:id>', methods=['GET', 'POST'])
 def edit_ingredient(id):
@@ -165,6 +169,7 @@ def change_status(recipe_id):
         recipe.status_changed_by = user.id
     # Save changes to the database
     db.session.commit()
+    session['notif']  = ("Success","Recipe status updated successfully","success")
     # Redirect back to the deleted recipes page
     return redirect(url_for('dashboard_controller.recipes'))
 
@@ -177,7 +182,7 @@ def recover_recipe(id):
     recipe.is_deleted = False
     recipe.recovered_by = user.id  # Set the recovered_by field
     db.session.commit()
-    session['recover_recipe'] = "Recipe recovered successfully"
+    session['notif'] = ("Recovered","Recipe recovered successfully","success")
     # Return a JSON response indicating success
     return jsonify({"message": "Recipe recovered successfully"})
 
@@ -194,7 +199,7 @@ def mass_recover_recipes():
         recipe.is_deleted = False
         recipe.recovered_by = user.id  # Set the recovered_by field
         db.session.commit()
-        session['recover_recipe'] = "Recipe recovered successfully"
+        session['notif'] = ("Recovered","Recipe recovered successfully","success")
 
     return jsonify({'message': 'Selected recipes recovered successfully'}), 200
 

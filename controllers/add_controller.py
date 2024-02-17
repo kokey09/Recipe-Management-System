@@ -15,19 +15,29 @@ from flask_bcrypt import Bcrypt
 import os
 import logging
 import json
+import cloudinary.uploader
+
+
 
 
 add_controller_bp = Blueprint('add_controller',__name__,template_folder='templates',static_folder='static')
 bcrypt = Bcrypt()
 
+# local save image function
+# def save_image_file(image_file, directory):
+#     filename = secure_filename(image_file.filename)
+#     image_directory = os.path.join(current_app.root_path, '..', 'views', 'static', directory)
+#     os.makedirs(image_directory, exist_ok=True)
+#     image_path = os.path.join(image_directory, filename)
+#     image_file.save(image_path)
+#     return filename
 
+
+# cloudinary save image function
 def save_image_file(image_file, directory):
     filename = secure_filename(image_file.filename)
-    image_directory = os.path.join(current_app.root_path, '..', 'views', 'static', directory)
-    os.makedirs(image_directory, exist_ok=True)
-    image_path = os.path.join(image_directory, filename)
-    image_file.save(image_path)
-    return filename
+    result = cloudinary.uploader.upload(image_file, folder=directory)
+    return result['url']
 
 
 @add_controller_bp.route('/add_review', methods=['POST'])
@@ -44,14 +54,15 @@ def add_review():
         review_text = request.form.get('review_text')
         rating = request.form.get('rating')
         image_file = request.files.get('image_file')
-        filename = save_image_file(image_file, 'reviews-img-table') if image_file else None
+        # filename = save_image_file(image_file, 'reviews-img-table') if image_file else None # for development
+        image_url = save_image_file(image_file, 'reviews-img-table') if image_file else None # for production
 
         new_review = Review(
             recipe_id=recipe_id,
             account_id=user.id,
             review_text=review_text,
             rating=rating,
-            image_url=f'static/reviews-img-table/{filename}' if filename else None
+            image_url=image_url
         )
 
         db.session.add(new_review)
@@ -72,7 +83,7 @@ def add_recipe_base(model, redirect_page):
         recipe_name = request.form.get('recipe_name')
         instructions = request.form.get('instructions')
         image_file = request.files.get('image_file')
-        filename = save_image_file(image_file, 'recipes-img-table') if image_file else None
+        image_url = save_image_file(image_file, 'recipes-img-table') if image_file else None
 
         # Load harmful keywords from JSON file
         with open('views/static/json/harmful_keywords.json', 'r') as f:
@@ -86,7 +97,7 @@ def add_recipe_base(model, redirect_page):
         new_recipe = Recipe(
             name=recipe_name,
             instructions=instructions,
-            image_url=f'static/recipes-img-table/{filename}' if filename else None,
+            image_url=image_url,
             account_id=user.id,
             status='pending'
         )

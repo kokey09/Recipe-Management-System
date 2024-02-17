@@ -39,11 +39,31 @@
 
                     <label for="instructions">Instructions:</label>
                     <textarea id="instructions" name="instructions" rows="4" class="text-area-form" required></textarea>
+                    
+                    <div class="buttons">
+                        <div class="btn-img">
+                            <label for="image_file">
+                                <div id="image_container">
+                                    <i class='bx bx-image-add'></i>
+                                    <img id="preview" src="" alt="Image preview" style="display: none; width: 100px; height: 100px;">
+                                </div>
+                            </label>
 
-                    <label for="image_file">Image File:</label>
-                    <input type="file" id="image_file" name="image_file" accept="image/*" required>
+                            <input type="file" id="image_file" name="image_file" accept="image/*" required style="display: none;">
+                            
+                            <div>
+                                Add Image
+                            </div>
 
-                    <button type="submit">Add Recipe</button>
+                            <div id="file-error" style="display: none; color: red;">
+                                <p>Image file is required.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="add-btn">  
+                            <button type="submit"  id="submit-button">Add Recipe</button>
+                        </div>  
+                    </div>
                 </form>
                 <div onclick="closePopup()" class="close-btn">
                     <i class='bx bx-x'></i>
@@ -119,16 +139,16 @@
                             </div>
                         </td>
                         <td>
-                            <div style="display: flex; align-items: center; gap: 10px;">
-                                <p>{{recipe.account.id}}</p>
+                            <div style="display: flex; flex-direction: column; align-items: center;">
+                                <p>&#40;{{recipe.account.id}}&#41;</p>
                                 <p>{{ recipe.account.username}}</p>
                             </div>
                         </td>
                         <td>{{ recipe.created_at.strftime("%B %d, %Y at %I:%M:%S %p") }}</td>
                         <td>
-                            <div style="display: flex; align-items: center; gap: 10px;">
+                            <div style="display: flex; flex-direction: column; align-items: center; ">
                                 {% if recipe.recovered_at %}
-                                <p>{{recipe.recoverer.id}}</p>
+                                <p>&#40;{{recipe.recoverer.id}}&#41;</p>
                                 <p>{{ recipe.recoverer.username}}</p>
                                 {% else %}
                                 N/A
@@ -148,9 +168,13 @@
                             </p>
                         </td>
                         <td>
-                            <div style="display: flex; align-items: center; gap: 10px;">
-                                <p>{{recipe.status_changer.id}}</p>
+                            <div style="display: flex; flex-direction: column; align-items: center;">
+                                {% if recipe.status_changed_at%}
+                                <p>&#40;{{recipe.status_changer.id}}&#41;</p>
                                 <p>{{recipe.status_changer.username}}</p>
+                                {% else %}
+                                N/A
+                                {% endif %}
                             </div>
                         </td>
                         <td>
@@ -200,6 +224,8 @@
     <script type="text/javascript">
         var userId = "{{ session['user_id'] }}";  // Get the user's ID from the session
     </script>
+
+    <script src="{{ url_for('static', filename='js/uploadingImg.js') }}"></script>
 {% endblock %}
 </body>
 

@@ -167,22 +167,26 @@ button:hover {
 }
 
 .reviewPopup {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    background: #fff;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    display: none;
-    max-width: 400px;
-    width: 100%;
-    text-align: center;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  display: none;
+  max-width: 600px;
+  width: 100%;
+  height: auto;  /* Change this */
+  max-height: 100%;  /* Add this */
+  overflow-y: auto;  /* Add this */
+  text-align: center;
+  margin-top: 2em;
 }
 
 .reviewPopup h1 {
-    font-size: 1.5em;
+    font-size: 1em;
     margin-bottom: 15px;
 }
 
@@ -231,9 +235,44 @@ button:hover {
     text-align: center;
 }
 
-.review-btn{
-    text-align: center;
+.buttons{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;    
+    margin-left: auto;
+    margin-right: auto;
+    
 }
+
+.btn-img div{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.add-btn button{
+    color: white;
+    background-color: #2fc955;
+    border: none;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-right: 20px;
+    padding-left: 20px;
+    border-radius: 10px;
+    margin-top: 10px;
+}
+.btn-img i {
+    font-size: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;  /* Adjust as needed */
+}
+
+.add-btn button:hover{
+    background-color: #86e49d;
+}
+
 .close-btn{
 	position: absolute;
 	top: 0;
@@ -243,7 +282,14 @@ button:hover {
     font-size: 44px;
 }
 
-
+.review_text {
+  width: 100%;  /* Fixed width */
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  resize: vertical;  /* Allow vertical resize only */
+}
 /* Responsive styles for smaller screens */
 @media (max-width: 768px) {
   .review {
@@ -252,6 +298,7 @@ button:hover {
   .container{
   margin-top: 100px;
   }
+  
 }
 
 @media (max-width: 576px) {
@@ -262,4 +309,7 @@ button:hover {
   .review-timestamp {
     font-size: 12px; /* Decrease timestamp font size on even smaller screens */
   }
+
+
+
 }

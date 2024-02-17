@@ -35,7 +35,8 @@ def recipes():
 
 @dashboard_controller_bp.route('/deleted_recipes')
 def deleted_recipes():
-    recover_recipe = session.pop('recover_recipe', None)
+    notif = session.pop('notif', None)
+    
     user = get_authenticated_user()
 
     if not user or user.type != 'admin':
@@ -44,7 +45,7 @@ def deleted_recipes():
     deleted_recipes_data = Recipe.query.filter_by(is_deleted=True).order_by(Recipe.deleted_at.desc()).all()
     return render_template('deleted_recipes.html', deleted_recipes=deleted_recipes_data,
                                                    user=user,
-                                                   recover_recipe=recover_recipe)
+                                                   notif=notif)
 
 
 @dashboard_controller_bp.route('/ingredients')

@@ -9,6 +9,10 @@
   box-sizing: border-box;
   font-family: "Poppins", sans-serif;
 }
+body{
+  transition: all .3s ease-in-out;
+
+}
 
 .sidebar {
   position: fixed;
