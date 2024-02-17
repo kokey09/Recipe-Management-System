@@ -5,4 +5,4 @@ mysqlclient==2.2.0
 Flask-Mail==0.9.1
 waitress==2.1.2
 cloudinary
-
+python-dotenv
