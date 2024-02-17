@@ -4,10 +4,19 @@ from flask_mail import Mail
 
 
 import os
+import cloudinary
 
 db = SQLAlchemy()
 mail = Mail()
 
+cloudinary.config( 
+  cloud_name = "dye3xqbdn", 
+  api_key = "855798891421539", 
+  api_secret = "j0nWfrODok-6Qf1KNASMcpePdyQ" 
+)
+
+
+print(os.getenv('CLOUDINARY_API_KEY'))
 
 def create_app():
 
